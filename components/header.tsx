@@ -1,0 +1,231 @@
+'use client';
+
+import { useIsMobile } from '@/hooks/use-mobile';
+import { ChevronDown, Menu, X } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
+
+const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+
+  return (
+    <nav
+      className={`bg-background px-4 fixed inset-0 z-50 overscroll-contain pointer-events-none transition-opacity duration-300 ${
+        isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0'
+      }`}
+      role="navigation"
+    >
+      <header className="text-lg mb-3 flex h-[72px] items-center justify-end">
+        <button
+          type="button"
+          className='w-6 h-6 relative inline-flex cursor-pointer items-center justify-center after:absolute after:inset-[-0.5rem] after:content-[""] z-[51] -mr-[0.3rem]'
+          onClick={onClose}
+          aria-label="Close navigation"
+        >
+          <X className="h-full w-full" />
+        </button>
+      </header>
+      <ul className="flex flex-col">
+        <li>
+          <Link
+            href="/features"
+            className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+            onClick={onClose}
+          >
+            Features
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/pricing"
+            className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+            onClick={onClose}
+          >
+            Pricing
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="/enterprise"
+            className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+            onClick={onClose}
+          >
+            Enterprise
+          </Link>
+        </li>
+        <li className="relative">
+          <button
+            className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 flex w-full cursor-pointer items-center"
+            type="button"
+            aria-expanded={resourcesOpen}
+            onClick={() => setResourcesOpen(!resourcesOpen)}
+          >
+            Resources
+            <span className="ml-1" aria-hidden="true">
+              →
+            </span>
+          </button>
+          {resourcesOpen && (
+            <div className="pl-4">
+              <Link
+                href="https://tensr-1.gitbook.io/tensr/"
+                className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+                onClick={onClose}
+              >
+                Documentation
+              </Link>
+              <Link
+                href="/pricing"
+                className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+                onClick={onClose}
+              >
+                Pricing
+              </Link>
+            </div>
+          )}
+        </li>
+      </ul>
+    </nav>
+  );
+};
+
+export const Header = () => {
+  const isMobile = useIsMobile();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [resourcesOpen, setResourcesOpen] = useState(false);
+
+  return (
+    <>
+      <header className="bg-background px-4 fixed top-0 left-0 z-50 w-full">
+        <div className="relative z-[2] max-w-7xl mx-auto grid h-[72px] grid-cols-[1fr_auto_auto] items-center lg:grid-cols-[auto_1fr_auto]">
+          <a
+            href="#main"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-2 focus:py-1 focus:bg-[#26251e] focus:text-white focus:rounded text-sm"
+          >
+            Skip to content
+          </a>
+          <div className="col-start-1 col-end-2 row-start-1 row-end-2">
+            <Link
+              className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 relative top-[0.2rem] left-[-2px] inline-flex"
+              aria-label="Homepage"
+              href="/"
+            >
+              <Image
+                src="/tensr_logo_light.png"
+                alt="Tensr Logo"
+                height={24}
+                width={96}
+                className="w-[95.37px] lg:w-[95.75px]"
+              />
+              <span className="sr-only">Tensr</span>
+            </Link>
+          </div>
+          <div className="hidden lg:block">
+            <nav
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+              role="navigation"
+            >
+              <ul className="flex items-center justify-center">
+                <li>
+                  <Link
+                    href="/features"
+                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+                  >
+                    Features
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/pricing"
+                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+                  >
+                    Pricing
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/enterprise"
+                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+                  >
+                    Enterprise
+                  </Link>
+                </li>
+                <li className="relative">
+                  <button
+                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors flex items-center gap-1"
+                    type="button"
+                    aria-label="Expand Menu"
+                    aria-expanded={resourcesOpen}
+                    onClick={() => setResourcesOpen(!resourcesOpen)}
+                  >
+                    Resources
+                    <ChevronDown
+                      className={`h-3 w-3 transition-transform ${
+                        resourcesOpen ? 'rotate-180' : ''
+                      }`}
+                      aria-hidden="true"
+                    />
+                  </button>
+                  {resourcesOpen && (
+                    <div className="pt-3 absolute top-full left-0">
+                      <div className="bg-white border border-gray-200 rounded-md shadow-lg p-2 text-sm min-w-[8rem]">
+                        <ul className="grid grid-cols-[repeat(2,auto)] gap-x-4">
+                          <li className="min-w-[8rem]">
+                            <Link
+                              href="https://tensr-1.gitbook.io/tensr/"
+                              className="py-2.5 block hover:text-gray-600 transition-colors"
+                            >
+                              Documentation
+                            </Link>
+                          </li>
+                          <li className="min-w-[8rem]">
+                            <Link
+                              href="/pricing"
+                              className="py-2.5 block hover:text-gray-600 transition-colors"
+                            >
+                              Pricing
+                            </Link>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  )}
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <div className="block lg:hidden">
+            <div className="col-start-4 col-end-[-1] row-start-1 row-end-2 flex items-center justify-center">
+              <button
+                type="button"
+                className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 w-6 h-6 relative inline-flex cursor-pointer items-center justify-center after:absolute after:inset-[-0.5rem] after:content-[""] ml-4 -mr-[0.3rem]'
+                aria-label="Open navigation"
+                onClick={() => setIsMobileMenuOpen(true)}
+              >
+                <Menu className="h-full w-full" />
+              </button>
+            </div>
+          </div>
+          <div className="gap-3 col-start-2 col-end-3 row-start-1 row-end-2 flex items-center justify-self-end lg:col-start-3 lg:col-end-[-1]">
+            <Link
+              href="https://app.tensr.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/download"
+              className="hidden sm:inline-block px-4 py-2 text-sm bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors"
+            >
+              Download
+            </Link>
+          </div>
+        </div>
+      </header>
+      <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
+    </>
+  );
+};
