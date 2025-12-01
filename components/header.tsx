@@ -1,6 +1,5 @@
 'use client';
 
-import { useIsMobile } from '@/hooks/use-mobile';
 import { ChevronDown, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -91,7 +90,6 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 };
 
 export const Header = () => {
-  const isMobile = useIsMobile();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
 
@@ -111,13 +109,24 @@ export const Header = () => {
               aria-label="Homepage"
               href="/"
             >
-              <Image
-                src="/tensr_logo_light.png"
-                alt="Tensr Logo"
-                height={24}
-                width={96}
-                className="w-[95.37px] lg:w-[95.75px]"
-              />
+              <picture className="block dark:hidden">
+                <Image
+                  src="/tensr_logo_light.png"
+                  alt="Tensr Logo"
+                  height={24}
+                  width={96}
+                  className="w-[95.37px] lg:w-[95.75px]"
+                />
+              </picture>
+              <picture className="hidden dark:block">
+                <Image
+                  src="/tensr_logo_dark.png"
+                  alt="Tensr Logo"
+                  height={24}
+                  width={96}
+                  className="w-[95.37px] lg:w-[95.75px]"
+                />
+              </picture>
               <span className="sr-only">Tensr</span>
             </Link>
           </div>
