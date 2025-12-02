@@ -9,7 +9,7 @@ export const HomeTemplate = () => {
       id="main"
       data-sanity="id=homepage;type=page;path=pageBuilder;base=http%3A%2F%2Flocalhost%3A3333"
     >
-      <section className="py-12 px-8 bg-background text-font">
+      <section className="py-12 px-4 md:px-8 bg-background text-font">
         <div className="container mx-auto">
           <div className="text-left mb-10 max-w-prose">
             <h1 className="text-2xl md:text-3xl font-normal leading-tight tracking-tight text-balance mb-4">
@@ -85,7 +85,7 @@ export const HomeTemplate = () => {
 
       {/* Logo Garden Section */}
       <section
-        className="py-12 px-8 bg-background text-font pb-6 pt-0"
+        className="py-12 px-4 md:px-8 bg-background text-font pb-6 pt-0"
         id="logo-garden"
         data-sanity="id=homepage;type=page;path=pageBuilder:8f9fe88f4ff9;base=http%3A%2F%2Flocalhost%3A3333"
       >
@@ -346,12 +346,12 @@ export const HomeTemplate = () => {
 
       {/* Feature Sections */}
       <section
-        className="py-12 px-8"
+        className="py-12 px-4 md:px-8"
         data-sanity="id=homepage;type=page;path=pageBuilder:708e87e25e85;base=http%3A%2F%2Flocalhost%3A3333"
       >
         {/* Agent Feature */}
         <section
-          className="py-12 px-8 bg-background text-font"
+          className="py-12 px-4 md:px-8 bg-background text-font"
           data-sanity="id=homepage;type=page;path=pageBuilder:094503c667c5;base=http%3A%2F%2Flocalhost%3A3333"
         >
           <div className="container mx-auto mb-16">
@@ -437,7 +437,7 @@ export const HomeTemplate = () => {
 
         {/* Tab Feature */}
         <section
-          className="py-12 px-8 bg-background text-font"
+          className="py-12 px-4 md:px-8 bg-background text-font"
           data-sanity="id=homepage;type=page;path=pageBuilder:d4245b5f3e89;base=http%3A%2F%2Flocalhost%3A3333"
         >
           <div className="container mx-auto mb-16">
@@ -537,7 +537,7 @@ export const HomeTemplate = () => {
 
         {/* Ecosystem Feature */}
         <section
-          className="py-12 px-8 bg-background text-font"
+          className="py-12 px-4 md:px-8 bg-background text-font"
           data-sanity="id=homepage;type=page;path=pageBuilder:c552548f3a9e;base=http%3A%2F%2Flocalhost%3A3333"
         >
           <div className="container mx-auto">
@@ -623,7 +623,7 @@ export const HomeTemplate = () => {
 
       {/* Testimonials Section */}
       <section
-        className="py-12 px-8 bg-background text-font"
+        className="py-12 px-4 md:px-8 bg-background text-font"
         data-sanity="id=homepage;type=page;path=pageBuilder:529152ecb4a1;base=http%3A%2F%2Flocalhost%3A3333"
       >
         <div className="container mx-auto">
@@ -865,7 +865,7 @@ export const HomeTemplate = () => {
 
       {/* Stay on the Frontier Section */}
       <section
-        className="py-12 px-8 bg-background text-font"
+        className="py-12 px-4 md:px-8 bg-background text-font"
         data-sanity="id=homepage;type=page;path=pageBuilder:b18a7487bc79;base=http%3A%2F%2Flocalhost%3A3333"
       >
         <div className="container mx-auto my-8">
@@ -1269,7 +1269,7 @@ export const HomeTemplate = () => {
 
       {/* Changelog Section */}
       <section
-        className="py-12 px-8 bg-background text-font"
+        className="py-12 px-4 md:px-8 bg-background text-font"
         data-sanity="id=homepage;type=page;path=pageBuilder:ae0d591090d2;base=http%3A%2F%2Flocalhost%3A3333"
       >
         <div className="container mx-auto">
@@ -1359,7 +1359,7 @@ export const HomeTemplate = () => {
 
       {/* Careers Section */}
       <section
-        className="py-12 px-8 bg-background text-font"
+        className="py-12 px-4 md:px-8 bg-background text-font"
         data-sanity="id=homepage;type=page;path=pageBuilder:a860b02b8bfb4f687c23195f5799c0cb;base=http%3A%2F%2Flocalhost%3A3333"
       >
         <div className="container mx-auto">
@@ -1410,7 +1410,7 @@ export const HomeTemplate = () => {
 
       {/* Recent Highlights Section */}
       <section
-        className="mt-12 py-20 px-8 bg-[var(--color-theme-card-hex)] text-[var(--color-theme-text)]"
+        className="mt-12 py-20 px-4 md:px-8 bg-[var(--color-theme-card-hex)] text-[var(--color-theme-text)]"
         data-sanity="id=homepage;type=page;path=pageBuilder:2b649cd7633f;base=http%3A%2F%2Flocalhost%3A3333"
       >
         <div className="container mx-auto">
@@ -1512,7 +1512,7 @@ export const HomeTemplate = () => {
 
       {/* Final CTA Section */}
       <section
-        className="py-32 md:py-48 px-8 bg-background text-font"
+        className="py-32 md:py-48 px-4 md:px-8 bg-background text-font"
         data-sanity="id=homepage;type=page;path=pageBuilder:35bf44e785b0;base=http%3A%2F%2Flocalhost%3A3333"
       >
         <div className="container mx-auto">

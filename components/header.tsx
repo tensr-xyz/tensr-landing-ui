@@ -11,8 +11,8 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 
   return (
     <nav
-      className={`bg-background px-4 fixed inset-0 z-50 overscroll-contain pointer-events-none transition-opacity duration-300 ${
-        isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0'
+      className={`bg-background px-4 fixed inset-0 z-50 overscroll-contain transition-opacity duration-300 ${
+        isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
       }`}
       role="navigation"
     >
@@ -26,11 +26,11 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
           <X className="h-full w-full" />
         </button>
       </header>
-      <ul className="flex flex-col">
+      <ul className="flex flex-col relative z-50">
         <li>
           <Link
             href="/features"
-            className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+            className="text-lg py-3 block hover:opacity-70 transition-opacity cursor-pointer"
             onClick={onClose}
           >
             Features
@@ -39,7 +39,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         <li>
           <Link
             href="/pricing"
-            className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+            className="text-lg py-3 block hover:opacity-70 transition-opacity cursor-pointer"
             onClick={onClose}
           >
             Pricing
@@ -48,7 +48,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         <li>
           <Link
             href="/enterprise"
-            className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+            className="text-lg py-3 block hover:opacity-70 transition-opacity cursor-pointer"
             onClick={onClose}
           >
             Enterprise
@@ -59,7 +59,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             href="https://view.tensr.xyz"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+            className="text-lg py-3 block hover:opacity-70 transition-opacity cursor-pointer"
             onClick={onClose}
           >
             Visualiser
@@ -81,17 +81,10 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             <div className="pl-4">
               <Link
                 href="https://tensr-1.gitbook.io/tensr/"
-                className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+                className="text-lg py-3 block hover:opacity-70 transition-opacity cursor-pointer"
                 onClick={onClose}
               >
                 Documentation
-              </Link>
-              <Link
-                href="/pricing"
-                className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
-                onClick={onClose}
-              >
-                Pricing
               </Link>
             </div>
           )}

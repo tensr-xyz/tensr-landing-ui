@@ -7,7 +7,7 @@ export const FeaturesTemplate = () => {
   return (
     <main id="main">
       {/* Hero Section */}
-      <section className="py-12 px-8 bg-background text-font">
+      <section className="py-12 px-4 md:px-8 bg-background text-font">
         <div className="container mx-auto">
           <div className="text-left mb-4 max-w-prose">
             <small className="text-base text-muted-foreground block mb-2">Features</small>
@@ -871,7 +871,7 @@ export const FeaturesTemplate = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="py-32 md:py-48 px-8 bg-background text-font">
+      <section className="py-32 md:py-48 px-4 md:px-8 bg-background text-font">
         <div className="container mx-auto">
           <div className="text-center mx-auto max-w-4xl">
             <h2 className="text-6xl sm:text-7xl font-normal text-balance mx-auto mb-4">

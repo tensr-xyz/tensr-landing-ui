@@ -15,8 +15,8 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="pt-12 pb-12 md:pb-12 px-4 bg-card relative">
-      <div className="mb-9 max-w-7xl mx-auto">
+    <footer className="pt-12 pb-12 md:pb-12 bg-card relative">
+      <div className="mb-9 max-w-7xl mx-auto px-4 md:px-0">
         <nav>
           <div className="gap-x-4 gap-y-8 grid grid-cols-2 md:grid-cols-5">
             <div>

@@ -59,7 +59,7 @@ export const EnterpriseTemplate = () => {
   return (
     <main className="bg-background text-font">
       {/* Hero Section */}
-      <section className="py-12 px-8 bg-background text-font">
+      <section className="py-12 px-4 md:px-8 bg-background text-font">
         <div className="container mx-auto">
           <div className="text-left mb-4 max-w-prose">
             <small className="text-base text-muted-foreground block mb-2">Enterprise</small>
@@ -80,7 +80,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Logo Garden Section */}
-      <section className="py-12 px-8 bg-background text-font pb-6 pt-0" id="logo-garden">
+      <section className="py-12 px-4 md:px-8 bg-background text-font pb-6 pt-0" id="logo-garden">
         <div className="container mx-auto">
           <div className="flex flex-col text-center">
             <h2 className="text-sm text-muted-foreground mb-8">
@@ -760,7 +760,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Ship better software section */}
-      <section className="py-12 px-8 bg-background text-font pt-0 pb-0">
+      <section className="py-12 px-4 md:px-8 bg-background text-font pt-0 pb-0">
         <div className="container mx-auto mb-16">
           <div className="grid grid-rows-[auto_1fr]">
             <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 grid grid-cols-[repeat(24,minmax(0,1fr))] gap-4 col-span-full row-span-full gap-y-0">
@@ -819,7 +819,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Your engineering knowledge base Section */}
-      <section className="py-12 px-8 bg-background text-font pt-0 pb-0">
+      <section className="py-12 px-4 md:px-8 bg-background text-font pt-0 pb-0">
         <div className="container mx-auto mb-16">
           <div className="grid grid-rows-[auto_1fr]">
             <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 grid grid-cols-[repeat(24,minmax(0,1fr))] gap-4 col-span-full row-span-full gap-y-0">
@@ -881,7 +881,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Loved by developers Section */}
-      <section className="py-12 px-8 bg-background text-font pt-0 pb-0">
+      <section className="py-12 px-4 md:px-8 bg-background text-font pt-0 pb-0">
         <div className="container mx-auto mb-16">
           <div className="grid grid-rows-[auto_1fr]">
             <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 grid grid-cols-[repeat(24,minmax(0,1fr))] gap-4 col-span-full row-span-full gap-y-0">
@@ -943,7 +943,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-12 px-8 bg-background text-font">
+      <section className="py-12 px-4 md:px-8 bg-background text-font">
         <div className="container mx-auto">
           <div className="flex flex-col gap-12">
             <div className="text-center mx-auto mb-8 max-w-[65ch]">
@@ -988,7 +988,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Security Section */}
-      <section className="py-12 px-8" id="enterprise-security">
+      <section className="py-12 px-4 md:px-8" id="enterprise-security">
         <div className="container mx-auto">
           <div className="text-center mx-auto mb-8 max-w-prose">
             <h2 className="text-2xl md:text-3xl text-balance mx-auto font-medium mb-4">
@@ -1001,7 +1001,7 @@ export const EnterpriseTemplate = () => {
             </div>
           </div>
         </div>
-        <section className="py-12 px-8 bg-background text-font pt-0 pb-0">
+        <section className="py-12 px-4 md:px-8 bg-background text-font pt-0 pb-0">
           <div className="container mx-auto my-8">
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch mb-4">
               <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 flex h-full flex-col lg:min-h-[102.4px]">
@@ -1110,7 +1110,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Powerful, yet customizable Section */}
-      <section className="py-12 px-8">
+      <section className="py-12 px-4 md:px-8">
         <div className="container mx-auto">
           <div className="text-left mb-8 max-w-prose">
             <h2 className="text-2xl md:text-3xl text-balance font-medium mb-4">
@@ -1136,7 +1136,7 @@ export const EnterpriseTemplate = () => {
         </div>
 
         {/* Feature Cards */}
-        <section className="py-12 px-8 bg-background text-font pt-0 pb-0">
+        <section className="py-12 px-4 md:px-8 bg-background text-font pt-0 pb-0">
           <div className="container mx-auto my-8">
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch mb-4">
               <Link
@@ -1213,7 +1213,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-12 px-8 bg-background text-font">
+      <section className="py-12 px-4 md:px-8 bg-background text-font">
         <div className="container mx-auto">
           <div className="text-center mx-auto mb-8 max-w-[65ch]">
             <h2 className="text-2xl md:text-3xl text-balance mx-auto font-medium">
@@ -1302,7 +1302,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Latest from Cursor Section */}
-      <section className="py-12 px-8 bg-background text-font">
+      <section className="py-12 px-4 md:px-8 bg-background text-font">
         <div className="container mx-auto">
           <div className="grid grid-cols-[repeat(24,minmax(0,1fr))] gap-0">
             <div className="col-span-full md:col-start-1 md:col-end-7 lg:col-start-1 lg:col-end-9 xl:col-start-1 xl:col-end-7">
@@ -1394,7 +1394,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Q&A Section */}
-      <section className="py-12 px-8 bg-card text-font">
+      <section className="py-12 px-4 md:px-8 bg-card text-font">
         <div className="container mx-auto">
           <div className="grid grid-cols-[repeat(24,minmax(0,1fr))] gap-0">
             <div className="col-span-full lg:col-end-7">
@@ -1412,7 +1412,7 @@ export const EnterpriseTemplate = () => {
       </section>
 
       {/* Final CTA Section */}
-      <section className="py-32 md:py-48 px-8 bg-background text-font">
+      <section className="py-32 md:py-48 px-4 md:px-8 bg-background text-font">
         <div className="container mx-auto">
           <div className="text-center mx-auto">
             <h2 className="text-6xl sm:text-7xl font-normal text-balance mx-auto mb-4">
