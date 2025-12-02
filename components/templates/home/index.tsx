@@ -870,7 +870,7 @@ export const HomeTemplate = () => {
       >
         <div className="container mx-auto my-8">
           <div className="text-left mb-4 max-w-2xl">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal text-balance">
+            <h2 className="text-2xl md:text-3xl font-normal text-balance">
               Powerful analysis capabilities
             </h2>
           </div>
@@ -1273,9 +1273,7 @@ export const HomeTemplate = () => {
         data-sanity="id=homepage;type=page;path=pageBuilder:ae0d591090d2;base=http%3A%2F%2Flocalhost%3A3333"
       >
         <div className="container mx-auto">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal text-font mb-4">
-            Latest updates
-          </h2>
+          <h2 className="text-2xl md:text-3xl font-normal text-font mb-4">Latest updates</h2>
           <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             <article
               data-sanity="id=c31ce8ea-4b7c-41a1-955c-68632aa2b691;type=changelog;path=title;base=%2F"
@@ -1412,14 +1410,14 @@ export const HomeTemplate = () => {
 
       {/* Recent Highlights Section */}
       <section
-        className="py-12 px-8 bg-card text-font"
+        className="mt-12 py-20 px-8 bg-[var(--color-theme-card-hex)] text-[var(--color-theme-text)]"
         data-sanity="id=homepage;type=page;path=pageBuilder:2b649cd7633f;base=http%3A%2F%2Flocalhost%3A3333"
       >
         <div className="container mx-auto">
-          <div className="grid gap-0">
+          <div className="grid grid-cols-[repeat(24,1fr)] gap-4">
             <div className="col-span-full md:col-start-1 md:col-end-7 lg:col-start-1 lg:col-end-9 xl:col-start-1 xl:col-end-7">
-              <h2 className="text-base text-font mb-4 sticky top-[4.5rem] lg:mb-0">
-                Platform highlights
+              <h2 className="text-base text-[var(--color-theme-text)] mb-4 sticky top-[var(--site-header-height)] lg:mb-0 font-normal">
+                Recent highlights
               </h2>
             </div>
             <div className="col-span-full md:col-start-7 md:col-end-25 lg:col-start-9 lg:col-end-25 xl:col-start-7 xl:col-end-19">
@@ -1428,20 +1426,20 @@ export const HomeTemplate = () => {
                 className="flex flex-1 flex-col mb-4"
               >
                 <Link
-                  className="bg-card border border-border rounded-lg p-6 flex-1 grid grid-cols-[1fr_auto] hover:bg-accent transition-colors"
+                  className="bg-[var(--color-theme-card-02-hex,#ebeae5)] rounded-sm p-6 flex-1 grid grid-cols-[1fr_auto] relative before:content-[''] before:pointer-events-none before:rounded-sm before:border before:border-[var(--color-theme-border-01)] before:z-30 before:absolute before:inset-0"
                   href="/blog/2-0"
                 >
                   <div className="flex flex-col">
                     <div className="flex-1">
-                      <p className="text-base text-font text-pretty font-medium mb-2">
+                      <p className="text-base text-[var(--color-theme-text)] text-pretty font-normal">
                         Introducing Cursor 2.0 and Composer
                       </p>
-                      <p className="text-base text-muted-foreground text-pretty">
+                      <p className="text-base text-[var(--color-theme-text-sec)] text-pretty">
                         A new interface and our first coding model, both purpose-built for working
                         with agents.
                       </p>
                     </div>
-                    <div className="mt-4 text-muted-foreground flex shrink-0 items-center">
+                    <div className="mt-4 text-[var(--color-theme-text-sec)] flex shrink-0 items-center">
                       <span className="capitalize">product&nbsp;·&nbsp;</span>
                       <time dateTime="2025-10-29T04:54:48.600Z" className="text-base">
                         Oct 29, 2025
@@ -1455,20 +1453,20 @@ export const HomeTemplate = () => {
                 className="flex flex-1 flex-col mb-4"
               >
                 <Link
-                  className="bg-card border border-border rounded-lg p-6 flex-1 grid grid-cols-[1fr_auto] hover:bg-accent transition-colors"
+                  className="bg-[var(--color-theme-card-02-hex,#ebeae5)] rounded-sm p-6 flex-1 grid grid-cols-[1fr_auto] relative before:content-[''] before:pointer-events-none before:rounded-sm before:border before:border-[var(--color-theme-border-01)] before:z-30 before:absolute before:inset-0"
                   href="/blog/tab-rl"
                 >
                   <div className="flex flex-col">
                     <div className="flex-1">
-                      <p className="text-base text-font text-pretty font-medium mb-2">
+                      <p className="text-base text-[var(--color-theme-text)] text-pretty font-normal">
                         Improving Cursor Tab with online RL
                       </p>
-                      <p className="text-base text-muted-foreground text-pretty">
+                      <p className="text-base text-[var(--color-theme-text-sec)] text-pretty">
                         Our new Tab model makes 21% fewer suggestions while having 28% higher accept
                         rate.
                       </p>
                     </div>
-                    <div className="mt-4 text-muted-foreground flex shrink-0 items-center">
+                    <div className="mt-4 text-[var(--color-theme-text-sec)] flex shrink-0 items-center">
                       <span className="capitalize">research&nbsp;·&nbsp;</span>
                       <time dateTime="2025-09-12T01:16:00.000Z" className="text-base">
                         Sep 12, 2025
@@ -1479,23 +1477,23 @@ export const HomeTemplate = () => {
               </article>
               <article
                 data-sanity="id=9968b97c-6865-47af-970b-c644716aabe2;type=post;path=title;base=%2F"
-                className="flex grow-1 flex-col"
+                className="flex flex-1 flex-col"
               >
                 <Link
-                  className="bg-card border border-border rounded-lg p-6 flex-1 grid grid-cols-[1fr_auto] hover:bg-accent transition-colors"
+                  className="bg-[var(--color-theme-card-02-hex,#ebeae5)] rounded-sm p-6 flex-1 grid grid-cols-[1fr_auto] relative before:content-[''] before:pointer-events-none before:rounded-sm before:border before:border-[var(--color-theme-border-01)] before:z-30 before:absolute before:inset-0"
                   href="/blog/kernels"
                 >
                   <div className="flex flex-col">
                     <div className="flex-1">
-                      <p className="text-base text-font text-pretty font-medium mb-2">
+                      <p className="text-base text-[var(--color-theme-text)] text-pretty font-normal">
                         1.5x faster MoE training with custom MXFP8 kernels
                       </p>
-                      <p className="text-base text-muted-foreground text-pretty">
+                      <p className="text-base text-[var(--color-theme-text-sec)] text-pretty">
                         Achieving a 3.5x MoE layer speedup with a complete rebuild for Blackwell
                         GPUs.
                       </p>
                     </div>
-                    <div className="mt-4 text-muted-foreground flex shrink-0 items-center">
+                    <div className="mt-4 text-[var(--color-theme-text-sec)] flex shrink-0 items-center">
                       <span className="capitalize">research&nbsp;·&nbsp;</span>
                       <time dateTime="2025-08-29T02:55:25.007Z" className="text-base">
                         Aug 29, 2025
@@ -1504,10 +1502,7 @@ export const HomeTemplate = () => {
                   </div>
                 </Link>
               </article>
-              <Link
-                className="text-primary hover:underline mt-4 inline-flex items-center gap-1"
-                href="/blog"
-              >
+              <Link className="mt-4 inline-flex text-primary hover:underline" href="/blog">
                 View more posts →
               </Link>
             </div>
@@ -1517,7 +1512,7 @@ export const HomeTemplate = () => {
 
       {/* Final CTA Section */}
       <section
-        className="py-12 px-8 bg-background text-font"
+        className="py-32 md:py-48 px-8 bg-background text-font"
         data-sanity="id=homepage;type=page;path=pageBuilder:35bf44e785b0;base=http%3A%2F%2Flocalhost%3A3333"
       >
         <div className="container mx-auto">

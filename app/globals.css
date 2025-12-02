@@ -1,5 +1,13 @@
 @import 'tailwindcss';
 
+@media (prefers-color-scheme: dark) {
+  @supports not selector(:has(*)) {
+    html {
+      color-scheme: dark;
+    }
+  }
+}
+
 /* CSS Variables for theming */
 :root {
   --background: 60 20% 96.3%; /* #f7f7f4 */
@@ -15,7 +23,7 @@
   --input: 0 0% 89.8%;
   --card: 48 16% 94%; /* #f2f1ed */
   --card-foreground: 52 4% 13.3%; /* #26251e */
-  --primary: 24 100% 50%;
+  --primary: 250 100% 63%;
   --primary-foreground: 0 0% 100%;
   --secondary: 0 0% 96.1%;
   --secondary-foreground: 52 4% 13.3%; /* #26251e */
@@ -25,8 +33,21 @@
   --destructive-foreground: 0 0% 98%;
   --ring: 0 0% 63.9%;
   --radius: 0.5rem;
-  --site-header-height: 72px;
+  --site-header-height: 56px;
   --black: 52 4% 13.3%; /* #26251e */
+
+  /* Theme-specific variables */
+  --color-theme-fg: #26251e;
+  --color-theme-bg: #f7f7f4;
+  --color-theme-card-hex: #f2f1ed;
+  --color-theme-card-02-hex: #ebeae5;
+  --color-theme-card-03-hex: #e6e5e0;
+  --color-theme-fg-10: rgba(38, 37, 30, 0.1);
+  --color-theme-border-01: rgba(38, 37, 30, 0.024);
+  --color-theme-text: #26251e;
+  --color-theme-text-sec: rgba(38, 37, 30, 0.6);
+  --duration: 200ms;
+  --ease-out-spring: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .dark {
@@ -43,13 +64,24 @@
   --input: 200 4% 23%;
   --card: 220 7% 13%;
   --card-foreground: 0 0% 100%;
-  --primary: 24 100% 50%;
+  --primary: 250 100% 63%;
   --primary-foreground: 0 0% 100%;
   --secondary: 200 4% 28%;
   --secondary-foreground: 0 0% 100%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
   --ring: 200 4% 28%;
+
+  /* Theme-specific variables for dark mode */
+  --color-theme-fg: #ffffff;
+  --color-theme-bg: #1a1d22;
+  --color-theme-card-hex: #24272e;
+  --color-theme-card-02-hex: #2a2d35;
+  --color-theme-card-03-hex: #2d3139;
+  --color-theme-fg-10: rgba(255, 255, 255, 0.1);
+  --color-theme-border-01: rgba(255, 255, 255, 0.024);
+  --color-theme-text: #ffffff;
+  --color-theme-text-sec: rgba(255, 255, 255, 0.6);
 }
 
 @theme inline {
@@ -75,10 +107,6 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-}
-
-* {
-  border-color: hsl(var(--border));
 }
 
 body {

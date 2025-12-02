@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
+import { ThemeProvider } from '@/components/theme-provider';
 
 const structuredData = {
   '@context': 'https://schema.org',
@@ -27,9 +28,11 @@ export const metadata: Metadata = {
   description:
     'Modern statistical analysis platform built for researchers and data scientists. Fast, intuitive, and collaborative with cloud-native architecture.',
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/tensr_icon_light.png',
-    apple: '/tensr_icon_light.png',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/tensr_icon_light.png', sizes: '144x144', type: 'image/png' },
+    ],
+    apple: [{ url: '/tensr_icon_light.png', sizes: '144x144', type: 'image/png' }],
   },
   keywords: [
     'tensr',
@@ -47,6 +50,9 @@ export const metadata: Metadata = {
     'SEM',
     'data visualization',
     'research collaboration',
+    'quantitative research',
+    'statistical methods',
+    'data analytics platform',
   ],
   alternates: {
     canonical: 'https://www.tensr.xyz',
@@ -54,6 +60,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
   openGraph: {
     type: 'website',
@@ -83,6 +96,12 @@ export const metadata: Metadata = {
   },
   category: 'Statistical Analysis Software',
   manifest: '/manifest.json',
+  verification: {
+    google: 'google-site-verification-code-here',
+  },
+  other: {
+    'msapplication-TileColor': '#26251e',
+  },
 };
 
 export default function RootLayout({
@@ -91,7 +110,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
@@ -99,13 +118,20 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        <div className="flex min-h-screen flex-col">
-          <Header />
-          <main id="main" className="flex-1 pt-[72px]">
-            {children}
-          </main>
-          <Footer />
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex min-h-screen flex-col">
+            <Header />
+            <main id="main" className="flex-1 pt-14">
+              {children}
+            </main>
+            <Footer />
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );

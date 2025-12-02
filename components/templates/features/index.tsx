@@ -7,31 +7,21 @@ export const FeaturesTemplate = () => {
   return (
     <main id="main">
       {/* Hero Section */}
-      <section className="w-full p-0 bg-background text-font">
+      <section className="py-12 px-8 bg-background text-font">
         <div className="container mx-auto">
-          <div className="text-left max-w-prose mb-8">
+          <div className="text-left mb-4 max-w-prose">
             <small className="text-base text-muted-foreground block mb-2">Features</small>
-            <h1 className="text-2xl md:text-3xl font-normal text-balance mb-4">
+            <h1 className="text-4xl font-normal text-balance mb-4">
               Powerful tools for statistical analysis and data science.
             </h1>
-            <div className="flex items-center justify-start gap-4">
-              <div className="hidden md:block">
-                <Link
-                  href="https://app.tensr.xyz"
-                  className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
-                >
-                  Get started
-                  <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                </Link>
-              </div>
-              <div className="block md:hidden">
-                <Link
-                  href="https://app.tensr.xyz"
-                  className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
-                >
-                  Get started →
-                </Link>
-              </div>
+            <div className="flex items-center justify-start gap-4 mt-6">
+              <Link
+                className="inline-flex items-center justify-center px-6 py-3 h-11 text-base font-medium rounded-full transition-all bg-[#26251e] border border-[#26251e] text-white hover:opacity-90"
+                href="https://app.tensr.xyz"
+              >
+                Get started
+                <ArrowRight className="h-4 w-4 ml-2" aria-hidden="true" />
+              </Link>
             </div>
           </div>
           <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm overflow-hidden z-10">
@@ -881,19 +871,21 @@ export const FeaturesTemplate = () => {
       </section>
 
       {/* Final CTA */}
-      <section className="w-full p-0 bg-background text-font">
+      <section className="py-32 md:py-48 px-8 bg-background text-font">
         <div className="container mx-auto">
-          <div className="text-left max-w-prose mb-10">
-            <h2 className="text-2xl md:text-3xl font-normal leading-tight tracking-tight text-balance mb-4">
+          <div className="text-center mx-auto max-w-4xl">
+            <h2 className="text-6xl sm:text-7xl font-normal text-balance mx-auto mb-4">
               Get started with Tensr.
             </h2>
-            <Link
-              href="https://app.tensr.xyz"
-              className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
-            >
-              Get started
-              <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-            </Link>
+            <div className="gap-x-4 flex items-center justify-center">
+              <Link
+                href="https://app.tensr.xyz"
+                className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
+              >
+                Get started
+                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+              </Link>
+            </div>
           </div>
         </div>
       </section>

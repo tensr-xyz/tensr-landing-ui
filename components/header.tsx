@@ -15,7 +15,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
       }`}
       role="navigation"
     >
-      <header className="text-lg mb-3 flex h-[72px] items-center justify-end">
+      <header className="text-lg mb-3 flex h-14 items-center justify-end">
         <button
           type="button"
           className='w-6 h-6 relative inline-flex cursor-pointer items-center justify-center after:absolute after:inset-[-0.5rem] after:content-[""] z-[51] -mr-[0.3rem]'
@@ -51,6 +51,17 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
             onClick={onClose}
           >
             Enterprise
+          </Link>
+        </li>
+        <li>
+          <Link
+            href="https://view.tensr.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 py-3 block"
+            onClick={onClose}
+          >
+            Visualiser
           </Link>
         </li>
         <li className="relative">
@@ -96,7 +107,7 @@ export const Header = () => {
   return (
     <>
       <header className="bg-background px-4 fixed top-0 left-0 z-50 w-full">
-        <div className="relative z-[2] max-w-7xl mx-auto grid h-[72px] grid-cols-[1fr_auto_auto] items-center lg:grid-cols-[auto_1fr_auto]">
+        <div className="relative z-[2] max-w-7xl mx-auto grid h-14 grid-cols-[1fr_auto_auto] items-center lg:grid-cols-[auto_1fr_auto]">
           <a
             href="#main"
             className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-2 focus:py-1 focus:bg-[#26251e] focus:text-white focus:rounded text-sm"
@@ -160,6 +171,16 @@ export const Header = () => {
                     Enterprise
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    href="https://view.tensr.xyz"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+                  >
+                    Visualiser
+                  </Link>
+                </li>
                 <li className="relative">
                   <button
                     className="px-4 py-2 text-sm hover:text-gray-600 transition-colors flex items-center gap-1"
@@ -221,15 +242,23 @@ export const Header = () => {
               href="https://app.tensr.xyz"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+              className="px-4 h-9 flex items-center text-sm hover:text-gray-600 transition-colors"
             >
               Sign in
             </Link>
             <Link
               href="/download"
-              className="hidden sm:inline-block px-4 py-2 text-sm bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors"
+              className="hidden sm:inline-flex items-center px-4 h-9 text-sm border border-[#26251e] text-[#26251e] rounded-full hover:opacity-90 transition-colors"
             >
               Download
+            </Link>
+            <Link
+              href="https://app.tensr.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hidden sm:inline-flex items-center px-4 h-9 text-sm bg-[#26251e] border border-[#26251e] text-white rounded-full hover:opacity-90 transition-colors"
+            >
+              Dashboard
             </Link>
           </div>
         </div>

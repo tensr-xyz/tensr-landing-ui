@@ -1,11 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useTheme } from 'next-themes';
+import { Monitor, Sun, Moon } from 'lucide-react';
 
 export const Footer = () => {
-  const [languageOpen, setLanguageOpen] = useState(false);
-  const [theme, setTheme] = useState<'system' | 'light' | 'dark'>('system');
+  const { theme, setTheme, resolvedTheme } = useTheme();
+
+  const getIndicatorPosition = () => {
+    if (theme === 'system') return '2px';
+    if (theme === 'light') return 'calc(2px + 36px)';
+    if (theme === 'dark') return 'calc(2px + 36px + 36px)';
+    return '2px';
+  };
 
   return (
     <footer className="pt-12 pb-12 md:pb-12 px-4 bg-card relative">
@@ -143,77 +150,39 @@ export const Footer = () => {
           </small>
         </div>
         <div className="gap-6 flex items-center">
-          <div className="md:text-sm rounded-full bg-gray-100 relative flex rounded-full text-center p-0.5">
+          <div className="md:text-sm rounded-full bg-[var(--color-theme-card-03-hex,#e6e5e0)] relative flex text-center p-0.5">
             <div
-              className="absolute rounded-full transition-all bg-white border border-gray-200"
+              className="absolute rounded-full transition-all bg-[var(--color-theme-fg-10,#26251e1a)] border border-[var(--color-theme-border-01,rgba(38,37,30,0.024))]"
               style={{
-                left: theme === 'system' ? '2px' : theme === 'light' ? '38px' : '74px',
+                left: getIndicatorPosition(),
                 width: '36px',
                 top: '2px',
                 bottom: '2px',
-                transitionDuration: '200ms',
-                transitionTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                transitionDuration: 'var(--duration, 200ms)',
+                transitionTimingFunction: 'var(--ease-out-spring, cubic-bezier(0.4, 0, 0.2, 1))',
               }}
             />
             <button
-              className="font-size-inherit relative inline-flex cursor-pointer items-center justify-center rounded-full leading-none px-2 py-1 text-sm"
+              className="relative flex cursor-pointer items-center justify-center rounded-full leading-none w-9 h-7 text-sm text-[var(--color-theme-text,#26251e)]"
               aria-label="System theme"
               onClick={() => setTheme('system')}
             >
-              <span aria-hidden="true">🖥</span>
+              <Monitor className="h-4 w-4" aria-hidden="true" />
             </button>
             <button
-              className="font-size-inherit relative inline-flex cursor-pointer items-center justify-center rounded-full leading-none px-2 py-1 text-sm text-gray-600 hover:text-gray-900"
+              className="relative flex cursor-pointer items-center justify-center rounded-full leading-none w-9 h-7 text-sm text-[var(--color-theme-text-sec,rgba(38,37,30,0.6))] hover:text-[var(--color-theme-text,#26251e)]"
               aria-label="Light theme"
               onClick={() => setTheme('light')}
             >
-              <span aria-hidden="true">☉</span>
+              <Sun className="h-4 w-4" aria-hidden="true" />
             </button>
             <button
-              className="font-size-inherit relative inline-flex cursor-pointer items-center justify-center rounded-full leading-none px-2 py-1 text-sm text-gray-600 hover:text-gray-900"
+              className="relative flex cursor-pointer items-center justify-center rounded-full leading-none w-9 h-7 text-sm text-[var(--color-theme-text-sec,rgba(38,37,30,0.6))] hover:text-[var(--color-theme-text,#26251e)]"
               aria-label="Dark theme"
               onClick={() => setTheme('dark')}
             >
-              <span aria-hidden="true">☾</span>
+              <Moon className="h-4 w-4" aria-hidden="true" />
             </button>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="relative">
-              <button
-                className="px-3 py-2 text-sm border border-gray-200 rounded-md cursor-pointer flex items-center gap-2"
-                aria-expanded={languageOpen}
-                aria-controls="language-dropdown"
-                aria-haspopup="listbox"
-                type="button"
-                onClick={() => setLanguageOpen(!languageOpen)}
-              >
-                <span>🌐</span>
-                English
-                <span className="cursor-pointer">↓</span>
-              </button>
-              {languageOpen && (
-                <div
-                  id="language-dropdown"
-                  role="listbox"
-                  className="pt-3 absolute bottom-full left-0 md:left-auto md:right-0 z-50 mb-6"
-                >
-                  <div className="bg-white border border-gray-200 rounded-md shadow-lg px-0 py-3 text-base md:text-sm min-w-[10rem]">
-                    <ul>
-                      <li>
-                        <button
-                          role="option"
-                          aria-selected={true}
-                          className="py-2.5 px-6 relative flex w-full cursor-pointer items-center justify-between hover:bg-gray-50"
-                        >
-                          English
-                          <span className="font-feature-case">✓</span>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              )}
-            </div>
           </div>
         </div>
       </div>
