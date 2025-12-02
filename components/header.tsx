@@ -4,6 +4,7 @@ import { ChevronDown, Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import { useTheme } from 'next-themes';
 
 const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
   const [resourcesOpen, setResourcesOpen] = useState(false);
@@ -103,6 +104,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [resourcesOpen, setResourcesOpen] = useState(false);
+  const { resolvedTheme } = useTheme();
 
   return (
     <>
@@ -110,7 +112,7 @@ export const Header = () => {
         <div className="relative z-[2] max-w-7xl mx-auto grid h-14 grid-cols-[1fr_auto_auto] items-center lg:grid-cols-[auto_1fr_auto]">
           <a
             href="#main"
-            className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-2 focus:py-1 focus:bg-[#26251e] focus:text-white focus:rounded text-sm"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:px-2 focus:py-1 focus:bg-[var(--color-button-primary-bg)] focus:text-[var(--color-button-primary-text)] focus:rounded text-sm"
           >
             Skip to content
           </a>
@@ -120,24 +122,13 @@ export const Header = () => {
               aria-label="Homepage"
               href="/"
             >
-              <picture className="block dark:hidden">
-                <Image
-                  src="/tensr_logo_light.png"
-                  alt="Tensr Logo"
-                  height={24}
-                  width={96}
-                  className="w-[95.37px] lg:w-[95.75px]"
-                />
-              </picture>
-              <picture className="hidden dark:block">
-                <Image
-                  src="/tensr_logo_dark.png"
-                  alt="Tensr Logo"
-                  height={24}
-                  width={96}
-                  className="w-[95.37px] lg:w-[95.75px]"
-                />
-              </picture>
+              <Image
+                src={resolvedTheme === 'dark' ? '/tensr_logo_dark.png' : '/tensr_logo_light.png'}
+                alt="Tensr Logo"
+                height={24}
+                width={96}
+                className="w-[95.37px] lg:w-[95.75px]"
+              />
               <span className="sr-only">Tensr</span>
             </Link>
           </div>
@@ -150,7 +141,7 @@ export const Header = () => {
                 <li>
                   <Link
                     href="/features"
-                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+                    className="px-4 py-2 text-sm hover:text-muted-foreground transition-colors"
                   >
                     Features
                   </Link>
@@ -158,7 +149,7 @@ export const Header = () => {
                 <li>
                   <Link
                     href="/pricing"
-                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+                    className="px-4 py-2 text-sm hover:text-muted-foreground transition-colors"
                   >
                     Pricing
                   </Link>
@@ -166,7 +157,7 @@ export const Header = () => {
                 <li>
                   <Link
                     href="/enterprise"
-                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+                    className="px-4 py-2 text-sm hover:text-muted-foreground transition-colors"
                   >
                     Enterprise
                   </Link>
@@ -176,7 +167,7 @@ export const Header = () => {
                     href="https://view.tensr.xyz"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors"
+                    className="px-4 py-2 text-sm hover:text-muted-foreground transition-colors"
                   >
                     Visualiser
                   </Link>
@@ -199,12 +190,12 @@ export const Header = () => {
                   </button>
                   {resourcesOpen && (
                     <div className="pt-3 absolute top-full left-0">
-                      <div className="bg-white border border-gray-200 rounded-md shadow-lg p-2 text-sm min-w-[8rem]">
+                      <div className="bg-popover border border-border rounded-md shadow-lg p-2 text-sm min-w-[8rem]">
                         <ul className="grid grid-cols-[repeat(2,auto)] gap-x-4">
                           <li className="min-w-[8rem]">
                             <Link
                               href="https://tensr-1.gitbook.io/tensr/"
-                              className="py-2.5 block hover:text-gray-600 transition-colors"
+                              className="py-2.5 block hover:text-muted-foreground transition-colors"
                             >
                               Documentation
                             </Link>
@@ -212,7 +203,7 @@ export const Header = () => {
                           <li className="min-w-[8rem]">
                             <Link
                               href="/pricing"
-                              className="py-2.5 block hover:text-gray-600 transition-colors"
+                              className="py-2.5 block hover:text-muted-foreground transition-colors"
                             >
                               Pricing
                             </Link>
@@ -242,13 +233,13 @@ export const Header = () => {
               href="https://app.tensr.xyz"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 h-9 flex items-center text-sm hover:text-gray-600 transition-colors"
+              className="px-4 h-9 flex items-center text-sm hover:text-muted-foreground transition-colors"
             >
               Sign in
             </Link>
             <Link
               href="/download"
-              className="hidden sm:inline-flex items-center px-4 h-9 text-sm border border-[#26251e] text-[#26251e] rounded-full hover:opacity-90 transition-colors"
+              className="hidden sm:inline-flex items-center px-4 h-9 text-sm border border-[var(--color-button-primary-border)] text-[var(--color-button-primary-bg)] rounded-full hover:opacity-90 transition-colors"
             >
               Download
             </Link>
@@ -256,7 +247,7 @@ export const Header = () => {
               href="https://app.tensr.xyz"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden sm:inline-flex items-center px-4 h-9 text-sm bg-[#26251e] border border-[#26251e] text-white rounded-full hover:opacity-90 transition-colors"
+              className="hidden sm:inline-flex items-center px-4 h-9 text-sm bg-[var(--color-button-primary-bg)] border border-[var(--color-button-primary-border)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors"
             >
               Dashboard
             </Link>

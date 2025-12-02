@@ -48,6 +48,11 @@
   --color-theme-text-sec: rgba(38, 37, 30, 0.6);
   --duration: 200ms;
   --ease-out-spring: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Button colors */
+  --color-button-primary-bg: #26251e;
+  --color-button-primary-text: #ffffff;
+  --color-button-primary-border: #26251e;
 }
 
 .dark {
@@ -82,6 +87,11 @@
   --color-theme-border-01: rgba(255, 255, 255, 0.024);
   --color-theme-text: #ffffff;
   --color-theme-text-sec: rgba(255, 255, 255, 0.6);
+
+  /* Button colors for dark mode */
+  --color-button-primary-bg: #ffffff;
+  --color-button-primary-text: #1a1d22;
+  --color-button-primary-border: #ffffff;
 }
 
 @theme inline {
@@ -107,6 +117,9 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
+  --color-button-primary-bg: var(--color-button-primary-bg);
+  --color-button-primary-text: var(--color-button-primary-text);
+  --color-button-primary-border: var(--color-button-primary-border);
 }
 
 body {

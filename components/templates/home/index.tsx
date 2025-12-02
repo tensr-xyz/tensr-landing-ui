@@ -20,7 +20,7 @@ export const HomeTemplate = () => {
                 <div className="hidden md:block">
                   <Link
                     href="https://app.tensr.xyz"
-                    className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
+                    className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
                   >
                     Get started
                     <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -29,7 +29,7 @@ export const HomeTemplate = () => {
                 <div className="block md:hidden">
                   <Link
                     href="https://app.tensr.xyz"
-                    className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
+                    className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
                   >
                     Get started
                     <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -1525,7 +1525,7 @@ export const HomeTemplate = () => {
                 <div className="hidden md:block">
                   <Link
                     href="https://app.tensr.xyz"
-                    className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
+                    className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
                   >
                     Get started
                     <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -1534,7 +1534,7 @@ export const HomeTemplate = () => {
                 <div className="block md:hidden">
                   <Link
                     href="https://app.tensr.xyz"
-                    className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
+                    className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
                   >
                     Get started
                     <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />

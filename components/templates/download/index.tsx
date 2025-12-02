@@ -163,7 +163,7 @@ export const DownloadTemplate = () => {
                       href="https://app.tensr.xyz"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
+                      className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
                     >
                       Access Web Platform
                       <Download className="ml-2 h-4 w-4" aria-hidden="true" />
@@ -174,7 +174,7 @@ export const DownloadTemplate = () => {
                       href="https://app.tensr.xyz"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
+                      className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
                     >
                       Get Started
                       <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />

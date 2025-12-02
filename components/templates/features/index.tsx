@@ -16,7 +16,7 @@ export const FeaturesTemplate = () => {
             </h1>
             <div className="flex items-center justify-start gap-4 mt-6">
               <Link
-                className="inline-flex items-center justify-center px-6 py-3 h-11 text-base font-medium rounded-full transition-all bg-[#26251e] border border-[#26251e] text-white hover:opacity-90"
+                className="inline-flex items-center justify-center px-6 py-3 h-11 text-base font-medium rounded-full transition-all bg-[var(--color-button-primary-bg)] border border-[var(--color-button-primary-border)] text-[var(--color-button-primary-text)] hover:opacity-90"
                 href="https://app.tensr.xyz"
               >
                 Get started
@@ -880,7 +880,7 @@ export const FeaturesTemplate = () => {
             <div className="gap-x-4 flex items-center justify-center">
               <Link
                 href="https://app.tensr.xyz"
-                className="inline-flex items-center px-6 py-3 bg-[#26251e] text-white rounded-full hover:opacity-90 transition-colors text-sm font-medium"
+                className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
               >
                 Get started
                 <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />

@@ -68,7 +68,7 @@ export const EnterpriseTemplate = () => {
             </h1>
             <div className="flex items-center justify-start gap-4 mt-6">
               <Link
-                className="inline-flex items-center justify-center px-6 py-3 h-11 text-base font-medium rounded-full transition-all bg-[#26251e] border border-[#26251e] text-white hover:opacity-90"
+                className="inline-flex items-center justify-center px-6 py-3 h-11 text-base font-medium rounded-full transition-all bg-[var(--color-button-primary-bg)] border border-[var(--color-button-primary-border)] text-[var(--color-button-primary-text)] hover:opacity-90"
                 href="/contact-sales"
               >
                 Contact sales
@@ -1087,7 +1087,7 @@ export const EnterpriseTemplate = () => {
               <Link
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full transition-all bg-[#26251e] border border-[#26251e] text-white hover:opacity-90"
+                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full transition-all bg-[var(--color-button-primary-bg)] border border-[var(--color-button-primary-border)] text-[var(--color-button-primary-text)] hover:opacity-90"
                 href="https://trust.cursor.com"
               >
                 Visit our Trust Center
@@ -1126,7 +1126,7 @@ export const EnterpriseTemplate = () => {
             </div>
             <div className="flex items-center justify-start gap-4">
               <Link
-                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full transition-all bg-[#26251e] border border-[#26251e] text-white hover:opacity-90"
+                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full transition-all bg-[var(--color-button-primary-bg)] border border-[var(--color-button-primary-border)] text-[var(--color-button-primary-text)] hover:opacity-90"
                 href="/contact-sales"
               >
                 Contact sales
@@ -1290,7 +1290,7 @@ export const EnterpriseTemplate = () => {
           <div className="text-center mx-auto max-w-prose">
             <div className="flex items-center justify-center gap-4 mt-10">
               <Link
-                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full transition-all bg-[#26251e] border border-[#26251e] text-white hover:opacity-90"
+                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full transition-all bg-[var(--color-button-primary-bg)] border border-[var(--color-button-primary-border)] text-[var(--color-button-primary-text)] hover:opacity-90"
                 href="/contact-sales"
               >
                 Bring Tensr to your team
@@ -1420,7 +1420,7 @@ export const EnterpriseTemplate = () => {
             </h2>
             <div className="flex items-center justify-center gap-4">
               <Link
-                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full transition-all bg-[#26251e] border border-[#26251e] text-white hover:opacity-90"
+                className="inline-flex items-center justify-center px-6 py-3 text-base font-medium rounded-full transition-all bg-[var(--color-button-primary-bg)] border border-[var(--color-button-primary-border)] text-[var(--color-button-primary-text)] hover:opacity-90"
                 href="/contact-sales"
               >
                 Contact sales

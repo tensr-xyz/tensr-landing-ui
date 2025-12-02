@@ -20,12 +20,12 @@ export const Footer = () => {
         <nav>
           <div className="gap-x-4 gap-y-8 grid grid-cols-2 md:grid-cols-5">
             <div>
-              <h3 className="text-base md:text-sm text-gray-600 pb-2.5">Product</h3>
+              <h3 className="text-base md:text-sm text-muted-foreground pb-2.5">Product</h3>
               <ul>
                 <li>
                   <Link
                     href="/features"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Features
                   </Link>
@@ -33,7 +33,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/pricing"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Pricing
                   </Link>
@@ -41,7 +41,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="https://tensr-1.gitbook.io/tensr/"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Documentation
                   </Link>
@@ -49,7 +49,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/download"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Download
                   </Link>
@@ -57,14 +57,14 @@ export const Footer = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-base md:text-sm text-gray-600 pb-2.5">Resources</h3>
+              <h3 className="text-base md:text-sm text-muted-foreground pb-2.5">Resources</h3>
               <ul>
                 <li>
                   <Link
                     href="https://tensr-1.gitbook.io/tensr/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Documentation
                     <span className="ml-1">&nbsp;↗</span>
@@ -73,7 +73,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/pricing"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Pricing
                   </Link>
@@ -81,12 +81,12 @@ export const Footer = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-base md:text-sm text-gray-600 pb-2.5">Company</h3>
+              <h3 className="text-base md:text-sm text-muted-foreground pb-2.5">Company</h3>
               <ul>
                 <li>
                   <Link
                     href="/about"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     About
                   </Link>
@@ -94,7 +94,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/careers"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Careers
                   </Link>
@@ -102,12 +102,12 @@ export const Footer = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-base md:text-sm text-gray-600 pb-2.5">Legal</h3>
+              <h3 className="text-base md:text-sm text-muted-foreground pb-2.5">Legal</h3>
               <ul>
                 <li>
                   <Link
                     href="/terms-of-service"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Terms of Service
                   </Link>
@@ -115,7 +115,7 @@ export const Footer = () => {
                 <li>
                   <Link
                     href="/privacy"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Privacy Policy
                   </Link>
@@ -123,14 +123,14 @@ export const Footer = () => {
               </ul>
             </div>
             <div>
-              <h3 className="text-base md:text-sm text-gray-600 pb-2.5">Connect</h3>
+              <h3 className="text-base md:text-sm text-muted-foreground pb-2.5">Connect</h3>
               <ul>
                 <li>
                   <Link
                     href="https://twitter.com/tensrxyz"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-gray-900 transition-colors"
+                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     X<span className="ml-1">&nbsp;↗</span>
                   </Link>
@@ -141,10 +141,10 @@ export const Footer = () => {
         </nav>
       </div>
       <div className="gap-8 max-w-7xl mx-auto flex flex-col items-start justify-between md:flex-row md:items-center">
-        <div className="text-gray-600 gap-6 flex items-center">
+        <div className="text-muted-foreground gap-6 flex items-center">
           <small className="text-base md:text-sm">
             © {new Date().getFullYear()}{' '}
-            <Link href="/" className="hover:text-gray-900 active:text-gray-900">
+            <Link href="/" className="hover:text-font active:text-font">
               Tensr, Inc.
             </Link>
           </small>
