@@ -141,7 +141,7 @@ export const Header = () => {
                 <li>
                   <Link
                     href="/features"
-                    className="px-4 py-2 text-sm hover:text-muted-foreground transition-colors"
+                    className="px-4 py-2 text-sm hover:opacity-70 transition-opacity"
                   >
                     Features
                   </Link>
@@ -149,7 +149,7 @@ export const Header = () => {
                 <li>
                   <Link
                     href="/pricing"
-                    className="px-4 py-2 text-sm hover:text-muted-foreground transition-colors"
+                    className="px-4 py-2 text-sm hover:opacity-70 transition-opacity"
                   >
                     Pricing
                   </Link>
@@ -157,7 +157,7 @@ export const Header = () => {
                 <li>
                   <Link
                     href="/enterprise"
-                    className="px-4 py-2 text-sm hover:text-muted-foreground transition-colors"
+                    className="px-4 py-2 text-sm hover:opacity-70 transition-opacity"
                   >
                     Enterprise
                   </Link>
@@ -167,18 +167,19 @@ export const Header = () => {
                     href="https://view.tensr.xyz"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-4 py-2 text-sm hover:text-muted-foreground transition-colors"
+                    className="px-4 py-2 text-sm hover:opacity-70 transition-opacity"
                   >
                     Visualiser
                   </Link>
                 </li>
-                <li className="relative">
+                <li className="relative group">
                   <button
-                    className="px-4 py-2 text-sm hover:text-gray-600 transition-colors flex items-center gap-1"
+                    className="px-4 py-2 text-sm hover:opacity-70 transition-opacity flex items-center gap-1"
                     type="button"
                     aria-label="Expand Menu"
                     aria-expanded={resourcesOpen}
-                    onClick={() => setResourcesOpen(!resourcesOpen)}
+                    onMouseEnter={() => setResourcesOpen(true)}
+                    onMouseLeave={() => setResourcesOpen(false)}
                   >
                     Resources
                     <ChevronDown
@@ -188,30 +189,24 @@ export const Header = () => {
                       aria-hidden="true"
                     />
                   </button>
-                  {resourcesOpen && (
-                    <div className="pt-3 absolute top-full left-0">
-                      <div className="bg-popover border border-border rounded-md shadow-lg p-2 text-sm min-w-[8rem]">
-                        <ul className="grid grid-cols-[repeat(2,auto)] gap-x-4">
-                          <li className="min-w-[8rem]">
-                            <Link
-                              href="https://tensr-1.gitbook.io/tensr/"
-                              className="py-2.5 block hover:text-muted-foreground transition-colors"
-                            >
-                              Documentation
-                            </Link>
-                          </li>
-                          <li className="min-w-[8rem]">
-                            <Link
-                              href="/pricing"
-                              className="py-2.5 block hover:text-muted-foreground transition-colors"
-                            >
-                              Pricing
-                            </Link>
-                          </li>
-                        </ul>
-                      </div>
+                  <div
+                    className={`pt-1 absolute top-full left-0 transition-all duration-200 ${resourcesOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'}`}
+                    onMouseEnter={() => setResourcesOpen(true)}
+                    onMouseLeave={() => setResourcesOpen(false)}
+                  >
+                    <div className="relative bg-[var(--color-theme-card-hex)] rounded shadow-xl p-3 text-sm before:content-[''] before:pointer-events-none before:rounded before:border before:border-[var(--color-theme-border-01)] before:absolute before:inset-0">
+                      <ul>
+                        <li className="min-w-[8rem]">
+                          <Link
+                            href="https://tensr-1.gitbook.io/tensr/"
+                            className="block hover:opacity-70 transition-opacity"
+                          >
+                            Documentation
+                          </Link>
+                        </li>
+                      </ul>
                     </div>
-                  )}
+                  </div>
                 </li>
               </ul>
             </nav>
@@ -233,7 +228,7 @@ export const Header = () => {
               href="https://app.tensr.xyz"
               target="_blank"
               rel="noopener noreferrer"
-              className="px-4 h-9 flex items-center text-sm hover:text-muted-foreground transition-colors"
+              className="px-4 h-9 flex items-center text-sm hover:opacity-70 transition-opacity"
             >
               Sign in
             </Link>
