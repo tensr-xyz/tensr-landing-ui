@@ -24,21 +24,12 @@ export const metadata: Metadata = {
     description:
       'Choose from Education (Free), Professional (£20/month), Team (£99/month), or Enterprise plans. All plans include complete statistical analysis suite.',
     url: 'https://www.tensr.xyz/pricing',
-    images: [
-      {
-        url: '/tensr_logo_light.png',
-        width: 1200,
-        height: 630,
-        alt: 'Tensr Pricing',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing | Tensr',
     description:
       'Choose from Education (Free), Professional (£20/month), Team (£99/month), or Enterprise plans.',
-    images: ['/tensr_logo_light.png'],
   },
 };
 

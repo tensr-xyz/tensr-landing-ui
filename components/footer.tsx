@@ -85,18 +85,10 @@ export const Footer = () => {
               <ul>
                 <li>
                   <Link
-                    href="/about"
+                    href="mailto:help@tensr.xyz"
                     className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
-                    About
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/careers"
-                    className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
-                  >
-                    Careers
+                    Contact
                   </Link>
                 </li>
               </ul>
@@ -106,7 +98,9 @@ export const Footer = () => {
               <ul>
                 <li>
                   <Link
-                    href="/terms-of-service"
+                    href="https://tensr-1.gitbook.io/tensr/legal-policies/terms-of-service"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Terms of Service
@@ -114,7 +108,9 @@ export const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/privacy"
+                    href="https://tensr-1.gitbook.io/tensr/legal-policies/privacy-policy"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-base md:text-sm py-2.5 inline-block hover:text-font transition-colors"
                   >
                     Privacy Policy

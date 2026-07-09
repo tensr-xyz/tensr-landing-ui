@@ -24,21 +24,12 @@ export const metadata: Metadata = {
     description:
       'Access Tensr web platform, integrate with our API, or use our SDK to build custom plugins. Start your statistical analysis journey today.',
     url: 'https://www.tensr.xyz/download',
-    images: [
-      {
-        url: '/tensr_logo_light.png',
-        width: 1200,
-        height: 630,
-        alt: 'Get Started with Tensr',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Get Started | Tensr',
     description:
       'Access Tensr web platform, integrate with our API, or use our SDK to build custom plugins.',
-    images: ['/tensr_logo_light.png'],
   },
 };
 

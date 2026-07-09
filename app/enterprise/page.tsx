@@ -26,21 +26,12 @@ export const metadata: Metadata = {
     description:
       'Enterprise statistical analysis platform with advanced security, SSO, SCIM, and dedicated support. Built for large research teams and organizations.',
     url: 'https://www.tensr.xyz/enterprise',
-    images: [
-      {
-        url: '/tensr_logo_light.png',
-        width: 1200,
-        height: 630,
-        alt: 'Tensr Enterprise',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Enterprise | Tensr',
     description:
       'Enterprise statistical analysis platform with advanced security, SSO, SCIM, and dedicated support.',
-    images: ['/tensr_logo_light.png'],
   },
 };
 

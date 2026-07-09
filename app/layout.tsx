@@ -30,9 +30,12 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },
-      { url: '/tensr_icon_light.png', sizes: '144x144', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/tensr_icon_light.png', sizes: '560x576', type: 'image/png' },
     ],
-    apple: [{ url: '/tensr_icon_light.png', sizes: '144x144', type: 'image/png' }],
+    apple: [{ url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' }],
+    shortcut: '/favicon.ico',
   },
   keywords: [
     'tensr',
@@ -74,14 +77,6 @@ export const metadata: Metadata = {
     title: 'Tensr | Statistical Analysis Platform',
     description:
       'Modern statistical analysis platform with cloud-native architecture, powerful research tools, and collaborative features for data scientists and researchers.',
-    images: [
-      {
-        url: '/tensr_logo_light.png',
-        width: 1200,
-        height: 630,
-        alt: 'Tensr - Statistical Analysis Platform',
-      },
-    ],
     siteName: 'Tensr',
     locale: 'en_US',
   },
@@ -92,13 +87,9 @@ export const metadata: Metadata = {
     title: 'Tensr | Statistical Analysis Platform',
     description:
       'Modern statistical analysis platform with cloud-native architecture and powerful research tools for data scientists.',
-    images: ['/tensr_logo_light.png'],
   },
   category: 'Statistical Analysis Software',
   manifest: '/manifest.json',
-  verification: {
-    google: 'google-site-verification-code-here',
-  },
   other: {
     'msapplication-TileColor': '#26251e',
   },

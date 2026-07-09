@@ -26,21 +26,12 @@ export const metadata: Metadata = {
     description:
       'Modern statistical analysis platform with cloud-native architecture, powerful research tools, and collaborative features for data scientists and researchers.',
     url: 'https://www.tensr.xyz',
-    images: [
-      {
-        url: '/tensr_logo_light.png',
-        width: 1200,
-        height: 630,
-        alt: 'Tensr - Statistical Analysis Platform',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Tensr | Statistical Analysis Platform',
     description:
       'Modern statistical analysis platform with cloud-native architecture and powerful research tools for data scientists.',
-    images: ['/tensr_logo_light.png'],
   },
 };
 

@@ -56,7 +56,7 @@ const MobileMenu = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void 
         </li>
         <li>
           <Link
-            href="https://view.tensr.xyz"
+            href="https://visualizer.tensr.xyz"
             target="_blank"
             rel="noopener noreferrer"
             className="text-lg py-3 block hover:opacity-70 transition-opacity cursor-pointer"
@@ -157,7 +157,7 @@ export const Header = () => {
                 </li>
                 <li>
                   <Link
-                    href="https://view.tensr.xyz"
+                    href="https://visualizer.tensr.xyz"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="px-4 py-2 text-sm hover:opacity-70 transition-opacity"

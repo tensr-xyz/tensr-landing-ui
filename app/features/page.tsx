@@ -25,21 +25,12 @@ export const metadata: Metadata = {
     description:
       'Complete statistical analysis suite with data preparation tools, SEM, plugin architecture, interactive notebooks, and advanced visualizations.',
     url: 'https://www.tensr.xyz/features',
-    images: [
-      {
-        url: '/tensr_logo_light.png',
-        width: 1200,
-        height: 630,
-        alt: 'Tensr Features',
-      },
-    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Features | Tensr',
     description:
       'Complete statistical analysis suite with data preparation tools, SEM, plugin architecture, and interactive notebooks.',
-    images: ['/tensr_logo_light.png'],
   },
 };
 
