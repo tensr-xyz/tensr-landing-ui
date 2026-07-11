@@ -4,15 +4,13 @@ import PricingTemplate from '@/components/templates/pricing';
 export const metadata: Metadata = {
   title: 'Pricing',
   description:
-    'Tensr pricing plans: Free Education plan, Professional (£20/month), Team (£99/month), and Enterprise (custom). Choose the plan that fits your research needs.',
+    'Tensr pricing: Pro ($20/mo), Pro Plus ($60/mo), and Teams ($40/seat/mo). Annual billing saves 20%. No free tier.',
   keywords: [
     'statistical analysis pricing',
     'research software pricing',
-    'free education plan',
-    'professional plan',
-    'team collaboration pricing',
-    'enterprise pricing',
-    'affordable statistics software',
+    'pro plan',
+    'pro plus',
+    'teams pricing',
     'data analysis subscription',
   ],
   alternates: {
@@ -21,15 +19,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: 'Pricing | Tensr',
-    description:
-      'Choose from Education (Free), Professional (£20/month), Team (£99/month), or Enterprise plans. All plans include complete statistical analysis suite.',
+    description: 'Pro, Pro Plus, and Teams. Annual billing saves 20%. No free or student tier.',
     url: 'https://www.tensr.xyz/pricing',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing | Tensr',
-    description:
-      'Choose from Education (Free), Professional (£20/month), Team (£99/month), or Enterprise plans.',
+    description: 'Pro, Pro Plus, and Teams. Annual billing saves 20%.',
   },
 };
 

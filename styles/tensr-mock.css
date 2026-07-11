@@ -1,0 +1,1105 @@
+/* Scoped product mockups from Tensr-landing/site */
+.tensr-mock {
+  --font-sans: 'SuisseIntl', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+  --font-head: 'SuisseIntl', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --brand-h: 250;
+  --brand-s: 100%;
+  --brand-l: 63%;
+  --brand: hsl(var(--brand-h) var(--brand-s) var(--brand-l));
+  --brand-deep: hsl(254 70% 46%);
+  --brand-soft: hsl(var(--brand-h) 100% 97%);
+  --brand-softer: hsl(var(--brand-h) 100% 98.5%);
+  --brand-line: hsl(var(--brand-h) 80% 91%);
+  --line: hsl(240 12% 91%);
+  --good: hsl(150 58% 40%);
+  --good-bg: hsl(150 55% 95%);
+  --warn: hsl(34 90% 42%);
+  --r-lg: 14px;
+  --sh-xs: 0 1px 2px hsl(240 20% 12% / 0.05);
+  --sh-lg: 0 24px 56px -18px hsl(248 40% 18% / 0.2), 0 8px 20px -10px hsl(240 20% 12% / 0.1);
+  --sh-pop: 0 40px 90px -30px hsl(250 50% 16% / 0.32), 0 16px 40px -16px hsl(248 30% 14% / 0.16);
+  font-family: var(--font-sans);
+  color: hsl(220 10% 12%);
+}
+
+.tensr-mock .hero-mock {
+  height: 460px;
+  display: grid;
+  grid-template-columns: 1fr 300px;
+}
+@media (max-width: 640px) {
+  .tensr-mock .hero-mock {
+    grid-template-columns: 1fr;
+    height: 380px;
+  }
+  .tensr-mock .hero-mock .hero-sheet {
+    display: none;
+  }
+}
+.tensr-mock .hero-sheet {
+  border-right: 1px solid var(--w-line, hsl(40 6% 91%));
+  overflow: hidden;
+  background: #fff;
+}
+.tensr-mock .float-badge {
+  position: absolute;
+  z-index: 3;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--sh-pop);
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.tensr-mock .float-badge .ic {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background: var(--brand);
+}
+.tensr-mock .float-badge .k {
+  font-size: 11px;
+  color: hsl(220 5% 56%);
+}
+.tensr-mock .float-badge .v {
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: -0.01em;
+}
+.tensr-mock .float-badge .mono {
+  font-family: var(--font-mono);
+}
+.tensr-mock .hero-visual {
+  position: relative;
+}
+.tensr-mock .showcase-frame .ws {
+  height: 520px;
+}
+@media (max-width: 760px) {
+  .tensr-mock .showcase-frame .ws {
+    grid-template-columns: 1fr;
+    height: 420px;
+  }
+  .tensr-mock .showcase-frame .ws-rail,
+  .tensr-mock .showcase-frame .ws-agent {
+    display: none;
+  }
+}
+
+.tensr-mock .win {
+  --w-bg: hsl(40 8% 98.5%);
+  --w-surface: #ffffff;
+  --w-surface-2: hsl(40 8% 97%);
+  --w-surface-3: hsl(40 8% 94.5%);
+  --w-inset: hsl(40 8% 96.5%);
+  --w-line: hsl(40 6% 91%);
+  --w-line-strong: hsl(40 6% 85%);
+  --w-fg: hsl(220 10% 12%);
+  --w-fg-2: hsl(220 6% 38%);
+  --w-fg-3: hsl(220 5% 56%);
+  --w-fg-4: hsl(220 5% 72%);
+  background: var(--w-surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--sh-lg);
+  overflow: hidden;
+  color: var(--w-fg);
+  font-size: 13px;
+}
+.tensr-mock .win-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 42px;
+  padding: 0 14px;
+  background: var(--w-surface-2);
+  border-bottom: 1px solid var(--w-line);
+}
+.tensr-mock .win-dots {
+  display: flex;
+  gap: 7px;
+}
+.tensr-mock .win-dots i {
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  background: var(--w-line-strong);
+}
+.tensr-mock .win-dots i:nth-child(1) {
+  background: hsl(4 70% 72%);
+}
+.tensr-mock .win-dots i:nth-child(2) {
+  background: hsl(40 80% 66%);
+}
+.tensr-mock .win-dots i:nth-child(3) {
+  background: hsl(140 45% 62%);
+}
+.tensr-mock .win-omni {
+  flex: 1;
+  max-width: 380px;
+  margin-inline: auto;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  background: var(--w-surface);
+  border: 1px solid var(--w-line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--w-fg-3);
+}
+.tensr-mock .win-omni .lk {
+  width: 11px;
+  height: 11px;
+  color: var(--w-fg-4);
+}
+.tensr-mock .win-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* avatars used across mockups */
+.tensr-mock .av {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  font-family: var(--font-sans);
+}
+.tensr-mock .av.s {
+  width: 22px;
+  height: 22px;
+  font-size: 9px;
+}
+.tensr-mock .av-1 {
+  background: hsl(250 90% 60%);
+}
+.tensr-mock .av-2 {
+  background: hsl(212 80% 48%);
+}
+.tensr-mock .av-3 {
+  background: hsl(150 50% 40%);
+}
+.tensr-mock .av-4 {
+  background: hsl(20 80% 55%);
+}
+.tensr-mock .av-5 {
+  background: hsl(330 60% 52%);
+}
+.tensr-mock .av-stack {
+  display: flex;
+}
+.tensr-mock .av-stack .av {
+  box-shadow: 0 0 0 2px var(--w-surface);
+  margin-left: -7px;
+}
+.tensr-mock .av-stack .av:first-child {
+  margin-left: 0;
+}
+
+/* =========================================================================
+   Tensr logo mark (shared)
+   ========================================================================= */
+.tensr-mock .tmark {
+  display: inline-grid;
+  place-items: center;
+}
+
+/* =========================================================================
+   AGENT panel mock
+   ========================================================================= */
+.tensr-mock .agent {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  background: var(--w-surface);
+}
+.tensr-mock .agent-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--w-line);
+}
+.tensr-mock .agent-head .ico {
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: var(--brand);
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+.tensr-mock .agent-head .t {
+  font-weight: 600;
+  font-size: 14px;
+}
+.tensr-mock .agent-head .s {
+  font-size: 11.5px;
+  color: var(--w-fg-3);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.tensr-mock .agent-head .s .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--good);
+}
+.tensr-mock .agent-body {
+  padding: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.tensr-mock .agent-kicker {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--w-fg-3);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.tensr-mock .agent-kicker .d {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--brand);
+}
+.tensr-mock .agent-msg {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--w-fg);
+}
+.tensr-mock .agent-msg b {
+  font-weight: 600;
+}
+.tensr-mock .agent-msg .hl {
+  color: var(--brand-deep);
+  font-weight: 600;
+}
+.tensr-mock .agent-sub {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--w-fg-4);
+  font-weight: 600;
+}
+.tensr-mock .agent-sugg {
+  padding: 12px 14px;
+  border: 1px solid var(--w-line);
+  border-radius: 10px;
+  background: var(--w-surface-2);
+  font-size: 13px;
+  color: var(--w-fg-2);
+  line-height: 1.45;
+  transition: border-color 140ms;
+}
+.tensr-mock .agent-sugg:hover {
+  border-color: var(--brand-line);
+}
+.tensr-mock .agent-input {
+  margin: 0 16px 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--w-line-strong);
+  border-radius: 12px;
+  background: var(--w-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--sh-xs);
+}
+.tensr-mock .agent-input .ph {
+  font-size: 13px;
+  color: var(--w-fg-4);
+}
+.tensr-mock .agent-input .tools {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--w-fg-4);
+}
+.tensr-mock .agent-input .send {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: var(--brand);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+.tensr-mock .agent-foot {
+  padding: 9px 16px;
+  border-top: 1px solid var(--w-line);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: var(--w-fg-4);
+}
+
+/* table inside agent */
+.tensr-mock .mini-table {
+  border: 1px solid var(--w-line);
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 12px;
+}
+.tensr-mock .mini-table .r {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+}
+.tensr-mock .mini-table .r + .r {
+  border-top: 1px solid var(--w-line);
+}
+.tensr-mock .mini-table .r.h {
+  background: var(--w-surface-2);
+  font-weight: 600;
+  color: var(--w-fg-2);
+}
+.tensr-mock .mini-table .c {
+  padding: 7px 10px;
+}
+.tensr-mock .mini-table .c.num {
+  font-family: var(--font-mono);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* =========================================================================
+   WORKSPACE mock (spreadsheet / tabs)
+   ========================================================================= */
+.tensr-mock .ws {
+  display: grid;
+  grid-template-columns: 188px 1fr 300px;
+  height: 100%;
+  background: var(--w-bg);
+}
+.tensr-mock .ws-rail {
+  border-right: 1px solid var(--w-line);
+  background: var(--w-surface);
+  padding: 14px 12px;
+}
+.tensr-mock .ws-rail .rh {
+  font-size: 10.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--w-fg-4);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.tensr-mock .ws-rail .colrow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 26px;
+  padding: 0 6px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: var(--w-fg-2);
+}
+.tensr-mock .ws-rail .colrow:hover {
+  background: var(--w-surface-2);
+}
+.tensr-mock .ws-rail .colrow .ty {
+  width: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--brand);
+}
+.tensr-mock .ws-rail .colrow .ty.txt {
+  color: var(--w-fg-4);
+}
+
+.tensr-mock .ws-main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.tensr-mock .ws-subtabs {
+  display: flex;
+  gap: 4px;
+  padding: 10px 16px 0;
+  border-bottom: 1px solid var(--w-line);
+  background: var(--w-surface);
+}
+.tensr-mock .ws-subtab {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  padding: 0 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--w-fg-3);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+}
+.tensr-mock .ws-subtab.on {
+  color: var(--w-fg);
+  border-bottom-color: var(--brand);
+}
+.tensr-mock .ws-subtab svg {
+  width: 14px;
+  height: 14px;
+}
+
+.tensr-mock .sheet {
+  flex: 1;
+  overflow: hidden;
+  background: var(--w-surface);
+}
+.tensr-mock .sheet table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+.tensr-mock .sheet th,
+.tensr-mock .sheet td {
+  border-right: 1px solid var(--w-line);
+  border-bottom: 1px solid var(--w-line);
+  padding: 0 12px;
+  height: 32px;
+  text-align: left;
+  white-space: nowrap;
+}
+.tensr-mock .sheet thead th {
+  background: var(--w-surface-2);
+  font-weight: 600;
+  color: var(--w-fg-2);
+  font-size: 11.5px;
+  position: relative;
+}
+.tensr-mock .sheet thead th .ty {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--brand);
+  margin-left: 6px;
+}
+.tensr-mock .sheet thead th .ty.txt {
+  color: var(--w-fg-4);
+}
+.tensr-mock .sheet .idx {
+  width: 36px;
+  text-align: center;
+  color: var(--w-fg-4);
+  background: var(--w-surface-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+.tensr-mock .sheet td.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--w-fg);
+}
+.tensr-mock .sheet tr:hover td {
+  background: var(--w-surface-2);
+}
+.tensr-mock .sheet .sel {
+  box-shadow: inset 0 0 0 2px var(--brand);
+  border-radius: 2px;
+}
+.tensr-mock .sheet .posbadge {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 4px;
+  background: var(--w-surface-3);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--w-fg-2);
+}
+
+.tensr-mock .ws-status {
+  height: 28px;
+  border-top: 1px solid var(--w-line);
+  background: var(--w-surface-2);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 14px;
+  font-size: 11px;
+  color: var(--w-fg-3);
+  font-family: var(--font-mono);
+}
+.tensr-mock .ws-status .ok {
+  color: var(--good);
+}
+
+/* agent rail inside workspace shares .agent but narrower */
+.tensr-mock .ws-agent {
+  border-left: 1px solid var(--w-line);
+}
+
+/* =========================================================================
+   CHARTS mock (scatter)
+   ========================================================================= */
+.tensr-mock .chartwrap {
+  padding: 20px;
+  background: var(--w-surface);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.tensr-mock .chart-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.tensr-mock .chart-head .t {
+  font-weight: 600;
+  font-size: 14px;
+}
+.tensr-mock .scatter {
+  flex: 1;
+  position: relative;
+  border-left: 1.5px solid var(--w-line-strong);
+  border-bottom: 1.5px solid var(--w-line-strong);
+  margin: 8px 0 22px 36px;
+}
+.tensr-mock .scatter .gl {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--w-line);
+}
+.tensr-mock .scatter .gv {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--w-line);
+}
+.tensr-mock .scatter .pt {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  transform: translate(-50%, 50%);
+  opacity: 0.9;
+}
+.tensr-mock .scatter .reg {
+  position: absolute;
+  height: 2px;
+  background: var(--brand);
+  border-radius: 2px;
+  transform-origin: left center;
+  opacity: 0.85;
+}
+.tensr-mock .chart-legend {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 11.5px;
+  color: var(--w-fg-3);
+}
+.tensr-mock .chart-legend .lg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.tensr-mock .chart-legend .lg .sw {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+}
+
+/* =========================================================================
+   ANALYSIS REPORT mock
+   ========================================================================= */
+.tensr-mock .report {
+  background: var(--w-bg);
+  height: 100%;
+  overflow: hidden;
+}
+.tensr-mock .report-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 22px;
+  background: var(--w-surface);
+  border-bottom: 1px solid var(--w-line);
+}
+.tensr-mock .report-top .t {
+  font-weight: 600;
+  font-size: 14.5px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.tensr-mock .report-top .kind {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+  font-weight: 600;
+}
+.tensr-mock .report-body {
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.tensr-mock .report-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  border: 1px solid var(--w-line);
+  border-radius: 9px;
+  overflow: hidden;
+  background: var(--w-surface);
+}
+.tensr-mock .report-meta .m {
+  padding: 10px 16px;
+  border-right: 1px solid var(--w-line);
+}
+.tensr-mock .report-meta .m .k {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--w-fg-4);
+  font-weight: 600;
+}
+.tensr-mock .report-meta .m .v {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--w-fg);
+  margin-top: 3px;
+  font-weight: 500;
+}
+
+.tensr-mock .block {
+  background: var(--w-surface);
+  border: 1px solid var(--w-line);
+  border-radius: 11px;
+  overflow: hidden;
+}
+.tensr-mock .block-h {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 18px;
+  border-bottom: 1px solid var(--w-line);
+}
+.tensr-mock .block-h .ix {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--w-fg);
+  color: var(--w-surface);
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+}
+.tensr-mock .block-h .bt {
+  font-weight: 600;
+  font-size: 13.5px;
+}
+.tensr-mock .block-h .kind {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: var(--w-surface-3);
+  color: var(--w-fg-2);
+  font-weight: 600;
+}
+.tensr-mock .block-body {
+  padding: 16px 18px;
+}
+
+.tensr-mock .stat-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+.tensr-mock .stat-table th,
+.tensr-mock .stat-table td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--w-line);
+  text-align: right;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+.tensr-mock .stat-table th {
+  font-weight: 600;
+  color: var(--w-fg-2);
+  text-align: right;
+  font-size: 10.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.tensr-mock .stat-table td:first-child,
+.tensr-mock .stat-table th:first-child {
+  text-align: left;
+  font-family: var(--font-sans);
+  color: var(--w-fg);
+}
+.tensr-mock .stat-table .sig {
+  color: var(--brand-deep);
+  font-weight: 700;
+}
+.tensr-mock .stat-table tr.hot td {
+  background: var(--brand-softer);
+}
+
+.tensr-mock .interp {
+  display: flex;
+  gap: 11px;
+  padding: 13px 15px;
+  border-radius: 9px;
+  background: var(--brand-softer);
+  border: 1px solid var(--brand-line);
+  margin-top: 14px;
+}
+.tensr-mock .interp .ai {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--brand);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+.tensr-mock .interp .x {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--w-fg-2);
+}
+.tensr-mock .interp .x b {
+  color: var(--w-fg);
+}
+
+/* assumption checks */
+.tensr-mock .checks {
+  display: grid;
+  gap: 8px;
+}
+.tensr-mock .check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid var(--w-line);
+  border-radius: 8px;
+  font-size: 12.5px;
+}
+.tensr-mock .check .badge {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 20px;
+  padding: 0 9px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.tensr-mock .check .badge.pass {
+  background: var(--good-bg);
+  color: var(--good);
+}
+.tensr-mock .check .badge.warn {
+  background: hsl(34 92% 95%);
+  color: var(--warn);
+}
+.tensr-mock .check .name {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--w-fg-2);
+}
+
+/* boxplot figure */
+.tensr-mock .boxfig {
+  display: flex;
+  align-items: flex-end;
+  gap: 22px;
+  height: 120px;
+  padding: 12px 18px 0;
+  border: 1px solid var(--w-line);
+  border-radius: 9px;
+  background: var(--w-surface-2);
+}
+.tensr-mock .boxcol {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+  justify-content: flex-end;
+}
+.tensr-mock .boxcol .whisk {
+  width: 1px;
+  background: var(--w-fg-4);
+}
+.tensr-mock .boxcol .bx {
+  width: 70%;
+  border: 1.5px solid var(--brand);
+  background: var(--brand-soft);
+  border-radius: 3px;
+  position: relative;
+}
+.tensr-mock .boxcol .bx .med {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: var(--brand);
+}
+.tensr-mock .boxcol .lbl {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--w-fg-3);
+}
+
+/* correlation heat */
+.tensr-mock .heatgrid {
+  display: grid;
+  gap: 3px;
+}
+.tensr-mock .heatgrid .hr {
+  display: grid;
+  gap: 3px;
+}
+.tensr-mock .heatcell {
+  aspect-ratio: 1;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* =========================================================================
+   NOTEBOOK mock
+   ========================================================================= */
+.tensr-mock .nb {
+  background: var(--w-surface);
+  height: 100%;
+  padding: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.tensr-mock .nb-cell {
+  border: 1px solid var(--w-line);
+  border-radius: 9px;
+  overflow: hidden;
+}
+.tensr-mock .nb-cell .gutter {
+  width: 54px;
+  flex: none;
+  background: var(--w-surface-2);
+  border-right: 1px solid var(--w-line);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--w-fg-4);
+  padding: 9px 8px;
+  text-align: right;
+}
+.tensr-mock .nb-code {
+  display: flex;
+}
+.tensr-mock .nb-code pre {
+  margin: 0;
+  padding: 9px 12px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--w-fg);
+  overflow: hidden;
+  flex: 1;
+}
+.tensr-mock .nb-code .kw {
+  color: hsl(280 60% 50%);
+}
+.tensr-mock .nb-code .fn {
+  color: hsl(212 70% 48%);
+}
+.tensr-mock .nb-code .st {
+  color: hsl(150 45% 38%);
+}
+.tensr-mock .nb-code .cm {
+  color: var(--w-fg-4);
+}
+.tensr-mock .nb-out {
+  border-top: 1px solid var(--w-line);
+  padding: 10px 12px;
+  background: var(--w-surface-2);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--w-fg-2);
+  line-height: 1.6;
+}
+.tensr-mock .nb-md {
+  padding: 4px 2px;
+}
+.tensr-mock .nb-md h4 {
+  font-family: var(--font-head);
+  font-size: 15px;
+  margin: 0 0 4px;
+}
+.tensr-mock .nb-md p {
+  font-size: 12.5px;
+  color: var(--w-fg-2);
+}
+
+/* =========================================================================
+   PLUGINS / marketplace mock
+   ========================================================================= */
+.tensr-mock .plug-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 18px;
+}
+@media (max-width: 560px) {
+  .tensr-mock .plug-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.tensr-mock .plug-card {
+  background: var(--w-surface);
+  border: 1px solid var(--w-line);
+  border-radius: 11px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.tensr-mock .plug-card .ic {
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+}
+.tensr-mock .plug-card .nm {
+  font-weight: 600;
+  font-size: 13.5px;
+}
+.tensr-mock .plug-card .au {
+  font-size: 11.5px;
+  color: var(--w-fg-3);
+}
+.tensr-mock .plug-card .meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+  font-size: 11px;
+  color: var(--w-fg-3);
+}
+.tensr-mock .plug-card .lang {
+  font-family: var(--font-mono);
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: var(--w-surface-3);
+  color: var(--w-fg-2);
+  font-size: 10px;
+}
+.tensr-mock .plug-card .get {
+  height: 28px;
+  border-radius: 7px;
+  border: 1px solid var(--w-line-strong);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--w-fg);
+  display: grid;
+  place-items: center;
+}
+.tensr-mock .plug-card .get.brand {
+  background: var(--brand);
+  color: #fff;
+  border-color: var(--brand);
+}
+.tensr-mock .plug-card .stars {
+  color: hsl(40 90% 52%);
+}
+
+/* presence / collaboration mock */
+.tensr-mock .collab {
+  padding: 22px;
+  background: var(--w-surface);
+  height: 100%;
+}
+.tensr-mock .collab-doc {
+  border: 1px solid var(--w-line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.tensr-mock .collab-rows {
+  padding: 14px;
+}
+.tensr-mock .collab-line {
+  height: 9px;
+  border-radius: 5px;
+  background: var(--w-surface-3);
+  margin-bottom: 9px;
+}
+.tensr-mock .cursor-flag {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 7px;
+  border-radius: 4px 4px 4px 0;
+  font-size: 10px;
+  font-weight: 600;
+  color: #fff;
+  transform: translateY(-100%);
+  white-space: nowrap;
+}
+.tensr-mock .comment-bub {
+  display: flex;
+  gap: 9px;
+  padding: 11px 13px;
+  border: 1px solid var(--w-line);
+  border-radius: 9px;
+  background: var(--w-surface);
+  margin-top: 10px;
+}
+.tensr-mock .comment-bub .x {
+  font-size: 12px;
+  color: var(--w-fg-2);
+  line-height: 1.45;
+}
+.tensr-mock .comment-bub .nm {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--w-fg);
+}
+
+/* generic faint placeholder line */
+.tensr-mock .pl {
+  height: 10px;
+  border-radius: 5px;
+  background: var(--w-surface-3);
+}

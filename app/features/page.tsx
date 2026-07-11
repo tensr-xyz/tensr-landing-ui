@@ -2,35 +2,33 @@ import type { Metadata } from 'next';
 import FeaturesTemplate from '@/components/templates/features';
 
 export const metadata: Metadata = {
-  title: 'Features',
+  title: 'Product',
   description:
-    'Explore Tensr features: complete statistical analysis suite, data preparation tools, Structural Equation Modeling, plugin architecture, interactive notebooks, and advanced visualizations.',
+    'From raw data to a result you can defend. Tensr Agent, analysis reports, tri‑modal workspace, live collaboration, and a plugin marketplace — SPSS‑parity stats in one place.',
   keywords: [
-    'statistical analysis features',
-    'data preparation',
-    'structural equation modeling',
-    'SEM software',
-    'statistical plugins',
-    'interactive notebooks',
-    'data visualization tools',
-    'statistical computing',
-    'research tools',
+    'statistical analysis software',
+    'AI data analysis',
+    'ANOVA report',
+    'collaborative statistics',
+    'SPSS alternative',
+    'research workspace',
+    'plugin marketplace',
   ],
   alternates: {
     canonical: 'https://www.tensr.xyz/features',
   },
   openGraph: {
     type: 'website',
-    title: 'Features | Tensr',
+    title: 'Product | Tensr',
     description:
-      'Complete statistical analysis suite with data preparation tools, SEM, plugin architecture, interactive notebooks, and advanced visualizations.',
+      'Five capabilities, one workspace: AI agent, report view, tri‑modal canvas, live collaboration, and plugins.',
     url: 'https://www.tensr.xyz/features',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Features | Tensr',
+    title: 'Product | Tensr',
     description:
-      'Complete statistical analysis suite with data preparation tools, SEM, plugin architecture, and interactive notebooks.',
+      'Five capabilities, one workspace: AI agent, report view, tri‑modal canvas, live collaboration, and plugins.',
   },
 };
 

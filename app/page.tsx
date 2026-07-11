@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import HomeTemplate from '@/components/templates/home';
 
 export const metadata: Metadata = {
-  title: 'Tensr | Statistical Analysis Platform',
+  title: 'Ship research that never stalls › Tensr',
   description:
-    'Modern statistical analysis platform built for researchers and data scientists. Complete suite of statistical methods, data preparation tools, and collaborative features.',
+    'Tensr empowers researchers, analysts and data scientists with a collaborative statistical workspace — spreadsheets, tests, charts, and an AI agent in one place.',
   keywords: [
     'tensr',
     'statistical analysis',
@@ -22,16 +22,16 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    title: 'Tensr | Statistical Analysis Platform',
+    title: 'Ship research that never stalls › Tensr',
     description:
-      'Modern statistical analysis platform with cloud-native architecture, powerful research tools, and collaborative features for data scientists and researchers.',
+      'Tensr empowers researchers, analysts and data scientists with a collaborative statistical workspace — spreadsheets, tests, charts, and an AI agent in one place.',
     url: 'https://www.tensr.xyz',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tensr | Statistical Analysis Platform',
+    title: 'Ship research that never stalls › Tensr',
     description:
-      'Modern statistical analysis platform with cloud-native architecture and powerful research tools for data scientists.',
+      'Tensr empowers researchers, analysts and data scientists with a collaborative statistical workspace.',
   },
 };
 

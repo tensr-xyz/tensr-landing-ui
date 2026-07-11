@@ -1,895 +1,287 @@
 'use client';
 
 import Link from 'next/link';
-import { ArrowRight } from 'lucide-react';
+import { Check } from 'lucide-react';
+import {
+  AgentProductMock,
+  ReportProductMock,
+  ChartsProductMock,
+  CollabProductMock,
+  PluginsProductMock,
+} from '@/components/product-mocks';
+
+const CheckIcon = () => (
+  <span className="mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-[var(--component)] text-text-primary">
+    <Check className="h-2.5 w-2.5" strokeWidth={3} aria-hidden="true" />
+  </span>
+);
+
+const moments = [
+  {
+    id: 'agent',
+    num: '01 — Tensr Agent',
+    title: 'An analyst that reads your data first.',
+    lead: 'The agent loads your dataset, understands its shape, and suggests the right test before you ask. Pose a question in plain English — it runs the analysis and hands back a table, the exact code, and one‑click next steps.',
+    bullets: [
+      'Suggests tests from the data — not a generic menu',
+      'Returns results as tables, code, and follow‑up actions',
+      '80+ tests with full feature parity with SPSS',
+    ],
+    mock: 'agent' as const,
+  },
+  {
+    id: 'report',
+    num: '02 — Analysis report',
+    title: 'Output you can put in a paper.',
+    lead: 'Every analysis opens as a structured report — descriptives, the test table, assumption checks, effect sizes, and post‑hoc, each with the exact function call recorded. Plain‑language AI interpretation sits alongside, and APA citations export in a click.',
+    bullets: [
+      'ANOVA, correlation matrix, regression — fully formatted',
+      'Shapiro–Wilk, Levene & independence checks, pass / fail',
+      'Export PDF, CSV, Markdown, or copy APA 7 citation',
+    ],
+    mock: 'report' as const,
+  },
+  {
+    id: 'workspace',
+    num: '03 — The workspace',
+    title: 'Spreadsheet, charts, and notebook — one file.',
+    lead: 'Switch between a typed data grid, interactive charts, and a Jupyter‑style notebook without ever leaving the analysis. Plot a regression, drop the figure into the notebook, and keep one source of truth across all three.',
+    bullets: [
+      'Sortable, typed grid with sticky headers and % formatting',
+      'Interactive scatter, colour‑by, regression overlay, export PNG',
+      'Notebook cells with live numpy / scipy output',
+    ],
+    mock: 'charts' as const,
+  },
+  {
+    id: 'collaboration',
+    num: '04 — Collaboration',
+    title: 'Review an analysis together, live.',
+    lead: 'Multiplayer presence, live cursors, and inline comments mean your team works in the same file — not in a chain of exported PDFs. Leave a note on a result, tag a collaborator, and resolve it without leaving the workspace.',
+    bullets: [
+      'Live cursors and presence in the title bar',
+      'Comment on any result, cell, or notebook cell',
+      'Share a workspace with a link — viewer or editor',
+    ],
+    mock: 'collab' as const,
+  },
+  {
+    id: 'plugins',
+    num: '05 — Plugin marketplace',
+    title: 'Extend the agent with a click.',
+    lead: 'An app store for analysis. Add Bayesian inference, time‑series, geospatial, or survey toolkits — written in Python, R, JS, or TypeScript — and they become available to the agent and command palette. Build your own and publish to the community.',
+    bullets: [
+      'Curated, rated, and versioned plugins',
+      'Free and subscription toolkits — installed per workspace',
+      'Publish & monetise — a path for community authors',
+    ],
+    mock: 'plugins' as const,
+  },
+];
+
+const engineTests = [
+  'Descriptive statistics',
+  'Frequencies',
+  'One‑sample t‑test',
+  'Independent t‑test',
+  'Paired t‑test',
+  'One‑way ANOVA',
+  'Factorial ANOVA',
+  'Repeated‑measures ANOVA',
+  'ANCOVA',
+  'Pearson correlation',
+  'Spearman ρ',
+  'Partial correlation',
+  'Linear regression OLS',
+  'Logistic regression',
+  'Mann–Whitney U',
+  'Wilcoxon signed‑rank',
+  'Kruskal–Wallis',
+  'Chi‑square',
+  "Cronbach's α",
+];
+
+const miniFeats = [
+  {
+    title: 'Command palette ⌘K',
+    description:
+      'Every test, transform, and plugin one search away — run an analysis without touching a menu.',
+  },
+  {
+    title: 'Integrated terminal ⌘`',
+    description: 'A resizable Python REPL — numpy, scipy, statsmodels — right beside your data.',
+  },
+  {
+    title: 'Provenance on everything',
+    description:
+      'Each result footer shows the exact function call — re‑run, annotate, or audit in a click.',
+  },
+];
+
+function MomentMock({ type }: { type: (typeof moments)[number]['mock'] }) {
+  switch (type) {
+    case 'agent':
+      return <AgentProductMock />;
+    case 'report':
+      return <ReportProductMock />;
+    case 'charts':
+      return <ChartsProductMock />;
+    case 'collab':
+      return <CollabProductMock />;
+    case 'plugins':
+      return <PluginsProductMock />;
+  }
+}
 
 export const FeaturesTemplate = () => {
   return (
-    <main id="main">
-      {/* Hero Section */}
-      <section className="py-12 px-4 md:px-8 bg-background text-font">
-        <div className="container mx-auto">
-          <div className="text-left mb-4 max-w-prose">
-            <small className="text-base text-muted-foreground block mb-2">Features</small>
-            <h1 className="text-4xl font-normal text-balance mb-4">
-              Powerful tools for statistical analysis and data science.
-            </h1>
-            <div className="flex items-center justify-start gap-4 mt-6">
-              <Link
-                className="inline-flex items-center justify-center px-6 py-3 h-11 text-base font-medium rounded-full transition-all bg-[var(--color-button-primary-bg)] border border-[var(--color-button-primary-border)] text-[var(--color-button-primary-text)] hover:opacity-90"
-                href="https://app.tensr.xyz"
+    <div className="flex flex-1 flex-col bg-page text-text-primary">
+      {/* Hero */}
+      <section className="relative overflow-hidden border-b border-border-default pb-14 pt-12 md:pb-20 md:pt-16">
+        <div className="hero-glow" aria-hidden="true" />
+        <div className="relative mx-auto max-w-[var(--max-width)] page-pad text-center">
+          <span className="pill-label">Product</span>
+          <h1 className="mx-auto mt-5 max-w-[18ch] text-[2.5rem] leading-[1.08] tracking-tight text-text-primary sm:text-5xl md:text-[3.25rem]">
+            From raw data to a result you can <span className="font-serif-italic">defend</span>
+          </h1>
+          <p className="mx-auto mt-5 max-w-[56ch] text-[15px] leading-relaxed text-text-secondary md:text-base">
+            Five capabilities, one workspace. An AI agent that does the analysis, a report view
+            built for rigour, a tri‑modal canvas, live collaboration, and a marketplace to extend it
+            all.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="https://app.tensr.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full bg-inverted px-5 py-2.5 text-sm font-medium text-[var(--inverted-fg)] transition-opacity hover:opacity-90"
+            >
+              Get started
+            </Link>
+            <Link
+              href="/pricing"
+              className="inline-flex items-center rounded-full bg-component px-5 py-2.5 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
+            >
+              See pricing →
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Feature moments */}
+      {moments.map((moment, index) => (
+        <section
+          key={moment.id}
+          id={moment.id}
+          className={`overflow-x-clip py-16 md:py-24 ${
+            index < moments.length - 1 ? 'border-b border-border-default' : ''
+          }`}
+        >
+          <div className="mx-auto max-w-[var(--max-width)] page-pad">
+            <div
+              className={`grid items-center gap-10 md:gap-14 ${
+                index % 2 === 1 ? 'md:grid-cols-[1.15fr_0.85fr]' : 'md:grid-cols-[0.85fr_1.15fr]'
+              }`}
+            >
+              <div className={index % 2 === 1 ? 'md:order-2' : ''}>
+                <div className="mb-3 text-sm text-text-muted">{moment.num}</div>
+                <h2 className="mb-4 text-2xl tracking-tight text-text-primary md:text-3xl">
+                  {moment.title}
+                </h2>
+                <p className="mb-6 max-w-md text-[15px] leading-relaxed text-text-secondary">
+                  {moment.lead}
+                </p>
+                <ul className="flex max-w-md flex-col gap-3">
+                  {moment.bullets.map(bullet => (
+                    <li
+                      key={bullet}
+                      className="flex gap-2.5 text-sm leading-snug text-text-secondary"
+                    >
+                      <CheckIcon />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className={index % 2 === 1 ? 'md:order-1' : ''}>
+                <MomentMock type={moment.mock} />
+              </div>
+            </div>
+          </div>
+        </section>
+      ))}
+
+      {/* Engine */}
+      <section className="border-y border-border-default bg-[var(--surface-muted,transparent)] py-16 md:py-24">
+        <div className="mx-auto max-w-[var(--max-width)] page-pad">
+          <div className="mb-3 text-xs tracking-wider text-text-muted uppercase">The engine</div>
+          <h2 className="mb-4 max-w-2xl text-2xl tracking-tight text-text-primary md:text-4xl">
+            Feature parity with SPSS — without the SPSS.
+          </h2>
+          <p className="mb-10 max-w-[54ch] text-[15px] leading-relaxed text-text-secondary md:text-base">
+            Over 80 tests, from t‑tests and ANOVA to regression, non‑parametrics, and reliability
+            analysis — ready the moment your data loads, and reproducible every time.
+          </p>
+
+          <p className="mb-4 text-xs tracking-wider text-text-muted uppercase">
+            80+ tests, ready to run
+          </p>
+          <div className="mb-14 flex flex-wrap gap-2">
+            {engineTests.map(test => (
+              <span
+                key={test}
+                className="rounded-full border border-border-default bg-page px-3 py-1.5 text-xs text-text-secondary"
               >
-                Get started
-                <ArrowRight className="h-4 w-4 ml-2" aria-hidden="true" />
-              </Link>
-            </div>
+                {test}
+              </span>
+            ))}
+            <span className="rounded-full border border-[var(--brand-line,#c4b5fd)] bg-[var(--brand-soft,#f5f3ff)] px-3 py-1.5 text-xs font-medium text-[var(--brand-deep,#5b21b6)]">
+              + 60 more
+            </span>
           </div>
-          <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm overflow-hidden z-10">
-            <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-              <picture className="absolute inset-0 brightness-90">
-                <source
-                  media="(min-width: 901px)"
-                  srcSet="https://cdn.sanity.io/images/2hv88549/production/cc24ca462279ca23250c6953612a9e3fd9838355-6360x4240.jpg?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/cc24ca462279ca23250c6953612a9e3fd9838355-6360x4240.jpg?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/cc24ca462279ca23250c6953612a9e3fd9838355-6360x4240.jpg?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/cc24ca462279ca23250c6953612a9e3fd9838355-6360x4240.jpg?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/cc24ca462279ca23250c6953612a9e3fd9838355-6360x4240.jpg?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/cc24ca462279ca23250c6953612a9e3fd9838355-6360x4240.jpg?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/cc24ca462279ca23250c6953612a9e3fd9838355-6360x4240.jpg?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/cc24ca462279ca23250c6953612a9e3fd9838355-6360x4240.jpg?auto=format&w=3840 3840w"
-                />
-                <img
-                  className="object-cover h-full w-full"
-                  alt="Tensr statistical analysis platform"
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                  src="https://cdn.sanity.io/images/2hv88549/production/cc24ca462279ca23250c6953612a9e3fd9838355-6360x4240.jpg?auto=format"
-                />
-              </picture>
-            </div>
-            <div className="z-20 col-span-full row-span-full">
-              <div
-                className="relative w-full overflow-hidden select-none border border-border rounded-sm"
-                style={{
-                  height: 'min(780px, 70vh)',
-                  minHeight: '680px',
-                }}
-              >
-                <div className="absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-full max-[767px]:pointer-events-none max-[767px]:opacity-0 transition-opacity duration-150">
-                  <div className="sr-only" aria-live="polite">
-                    This element contains an interactive demo for sighted users showing Tensr&apos;s
-                    statistical analysis platform with data visualization and analysis tools.
-                  </div>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-muted-foreground text-sm">
-                      Interactive demo placeholder
-                    </div>
-                  </div>
-                </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {miniFeats.map(feat => (
+              <div key={feat.title}>
+                <h3 className="mb-2 text-base tracking-tight text-text-primary">{feat.title}</h3>
+                <p className="text-sm leading-relaxed text-text-secondary">{feat.description}</p>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Statistical Analysis Section */}
-      <section className="w-full p-0 bg-background text-font" id="statistical-analysis">
-        <div className="container mx-auto mb-16">
-          <div className="grid grid-rows-[auto_1fr] gap-4">
-            <Link
-              className="relative bg-card border border-border rounded-sm p-6 sm:p-7 grid lg:grid-cols-2 gap-4 col-span-full row-span-full"
-              href="#statistical-analysis"
-            >
-              <div className="lg:flex lg:items-center">
-                <div className="max-w-prose w-full">
-                  <div className="text-base flex-1">
-                    <h2 className="text-base md:text-lg font-normal text-pretty">
-                      Statistical Analysis Suite
-                    </h2>
-                    <div className="text-base md:text-lg text-muted-foreground text-pretty">
-                      <p>
-                        Complete suite of statistical methods from descriptive statistics to
-                        advanced techniques like Structural Equation Modeling.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <span className="text-primary hover:underline inline-flex items-center gap-1">
-                      Learn more →
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="hidden lg:block"></div>
-            </Link>
-            <div className="p-7 grid lg:grid-cols-2 gap-4 col-span-full row-span-full">
-              <div className="hidden lg:block"></div>
-              <div>
-                <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm">
-                  <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                    <picture className="absolute inset-0 scale-[1.1] transform brightness-90">
-                      <source
-                        media="(min-width: 901px)"
-                        srcSet="https://cdn.sanity.io/images/2hv88549/production/1ffde036387b7242c29496bd7b1009f2218bce43-3266x2324.jpg?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/1ffde036387b7242c29496bd7b1009f2218bce43-3266x2324.jpg?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/1ffde036387b7242c29496bd7b1009f2218bce43-3266x2324.jpg?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/1ffde036387b7242c29496bd7b1009f2218bce43-3266x2324.jpg?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/1ffde036387b7242c29496bd7b1009f2218bce43-3266x2324.jpg?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/1ffde036387b7242c29496bd7b1009f2218bce43-3266x2324.jpg?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/1ffde036387b7242c29496bd7b1009f2218bce43-3266x2324.jpg?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/1ffde036387b7242c29496bd7b1009f2218bce43-3266x2324.jpg?auto=format&w=3840 3840w"
-                      />
-                      <img
-                        className="object-cover h-full w-full"
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority="auto"
-                        src="https://cdn.sanity.io/images/2hv88549/production/1ffde036387b7242c29496bd7b1009f2218bce43-3266x2324.jpg?auto=format"
-                      />
-                    </picture>
-                  </div>
-                  <div className="z-20 col-span-full row-span-full">
-                    <div
-                      className="relative w-full overflow-hidden select-none border border-border rounded-sm"
-                      style={{
-                        height: 'min(780px, 70vh)',
-                        minHeight: '650px',
-                      }}
-                    >
-                      <div className="absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-full max-[767px]:pointer-events-none max-[767px]:opacity-0 transition-opacity duration-150">
-                        <div className="sr-only" aria-live="polite">
-                          This element contains an interactive demo for sighted users showing
-                          Tensr&apos;s statistical analysis interface.
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-muted-foreground text-sm">
-                            Interactive demo placeholder
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Data Transformation Feature */}
-      <section className="w-full p-0 bg-background text-font" id="data-transformation">
-        <div className="container mx-auto mb-16">
-          <div className="grid grid-rows-[auto_1fr] gap-4">
-            <Link
-              className="relative bg-card border border-border rounded-sm p-6 sm:p-7 grid lg:grid-cols-2 gap-4 col-span-full row-span-full"
-              href="#data-transformation"
-            >
-              <div className="hidden lg:block"></div>
-              <div className="lg:flex lg:items-center lg:justify-end">
-                <div className="max-w-prose w-full">
-                  <div className="text-base flex-1">
-                    <h2 className="text-base md:text-lg font-normal text-pretty">
-                      Data Preparation & Cleaning
-                    </h2>
-                    <div className="text-base md:text-lg text-muted-foreground text-pretty">
-                      <p>
-                        Intuitive tools to clean, transform, and prepare your data for analysis with
-                        advanced data transformation capabilities.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-4">
-                    <span className="text-primary hover:underline inline-flex items-center gap-1">
-                      Learn more →
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </Link>
-            <div className="p-7 grid lg:grid-cols-2 gap-4 col-span-full row-span-full">
-              <div>
-                <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm">
-                  <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                    <picture className="absolute inset-0 scale-[1.1] transform brightness-90">
-                      <source
-                        media="(min-width: 901px)"
-                        srcSet="https://cdn.sanity.io/images/2hv88549/production/6a23c94721e22f5c31f2ef72ccd7cdf9fecd9e12-1995x1330.jpg?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/6a23c94721e22f5c31f2ef72ccd7cdf9fecd9e12-1995x1330.jpg?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/6a23c94721e22f5c31f2ef72ccd7cdf9fecd9e12-1995x1330.jpg?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/6a23c94721e22f5c31f2ef72ccd7cdf9fecd9e12-1995x1330.jpg?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/6a23c94721e22f5c31f2ef72ccd7cdf9fecd9e12-1995x1330.jpg?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/6a23c94721e22f5c31f2ef72ccd7cdf9fecd9e12-1995x1330.jpg?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/6a23c94721e22f5c31f2ef72ccd7cdf9fecd9e12-1995x1330.jpg?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/6a23c94721e22f5c31f2ef72ccd7cdf9fecd9e12-1995x1330.jpg?auto=format&w=3840 3840w"
-                      />
-                      <img
-                        className="object-cover h-full w-full"
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority="auto"
-                        src="https://cdn.sanity.io/images/2hv88549/production/6a23c94721e22f5c31f2ef72ccd7cdf9fecd9e12-1995x1330.jpg?auto=format"
-                      />
-                    </picture>
-                  </div>
-                  <div className="z-20 col-span-full row-span-full">
-                    <div
-                      className="relative w-full overflow-hidden select-none border border-border rounded-sm"
-                      style={{
-                        height: 'min(780px, 70vh)',
-                        minHeight: '650px',
-                      }}
-                    >
-                      <div className="absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-full max-[767px]:pointer-events-none max-[767px]:opacity-0 transition-opacity duration-150">
-                        <div className="sr-only" aria-live="polite">
-                          This element contains an interactive demo for sighted users showing
-                          Tensr&apos;s data transformation and cleaning tools.
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-muted-foreground text-sm">
-                            Interactive demo placeholder
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="hidden lg:block"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Three-Column Feature Row: Data Quality, Advanced Visualizations, Structural Equation Modeling */}
-      <section className="w-full p-0 bg-background text-font">
-        <div className="container mx-auto my-8 mb-16">
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch mb-4">
-            <div className="h-full">
-              <div className="bg-card border border-border rounded-sm flex h-full flex-col p-6">
-                <div className="text-base flex max-w-prose flex-1 flex-col justify-between">
-                  <div>
-                    <h2 className="text-base md:text-lg font-normal mb-3">
-                      Data Quality & Understanding
-                    </h2>
-                    <div className="text-muted-foreground text-pretty">
-                      <p className="text-base">
-                        Advanced data quality checks and understanding tools to ensure your analysis
-                        starts with clean, validated data.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <figure className="pt-7">
-                  <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm">
-                    <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 dark:hidden">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 hidden dark:block">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                    </div>
-                    <div className="z-20 col-span-full row-span-full">
-                      <div
-                        className="aspect-square md:aspect-square"
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          height: '378px',
-                          backgroundColor: 'transparent',
-                        }}
-                      >
-                        <div className="absolute inset-0 flex items-center justify-center"></div>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
-            <div className="h-full">
-              <div className="bg-card border border-border rounded-sm flex h-full flex-col p-6">
-                <div className="text-base flex max-w-prose flex-1 flex-col justify-between">
-                  <div>
-                    <h2 className="text-base md:text-lg font-normal mb-3">
-                      Advanced Visualizations
-                    </h2>
-                    <div className="text-muted-foreground text-pretty">
-                      <p className="text-base">
-                        Create rich, interactive visualizations and charts to explore and present
-                        your data insights.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <figure className="pt-7">
-                  <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm">
-                    <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 dark:hidden">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/0e44f2d6b59d6d3ab8ea68a301f92e079d0e7e89-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/0e44f2d6b59d6d3ab8ea68a301f92e079d0e7e89-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/0e44f2d6b59d6d3ab8ea68a301f92e079d0e7e89-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/0e44f2d6b59d6d3ab8ea68a301f92e079d0e7e89-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/0e44f2d6b59d6d3ab8ea68a301f92e079d0e7e89-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/0e44f2d6b59d6d3ab8ea68a301f92e079d0e7e89-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/0e44f2d6b59d6d3ab8ea68a301f92e079d0e7e89-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/0e44f2d6b59d6d3ab8ea68a301f92e079d0e7e89-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/0e44f2d6b59d6d3ab8ea68a301f92e079d0e7e89-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 hidden dark:block">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/23cfd8adb1efe8a6cd2f77479efbbee8b6fd7ad3-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/23cfd8adb1efe8a6cd2f77479efbbee8b6fd7ad3-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/23cfd8adb1efe8a6cd2f77479efbbee8b6fd7ad3-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/23cfd8adb1efe8a6cd2f77479efbbee8b6fd7ad3-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/23cfd8adb1efe8a6cd2f77479efbbee8b6fd7ad3-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/23cfd8adb1efe8a6cd2f77479efbbee8b6fd7ad3-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/23cfd8adb1efe8a6cd2f77479efbbee8b6fd7ad3-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/23cfd8adb1efe8a6cd2f77479efbbee8b6fd7ad3-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/23cfd8adb1efe8a6cd2f77479efbbee8b6fd7ad3-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                    </div>
-                    <div className="z-20 col-span-full row-span-full">
-                      <div
-                        className="aspect-square md:aspect-square"
-                        style={{
-                          position: 'relative',
-                          width: '100%',
-                          backgroundColor: 'transparent',
-                          height: '378px',
-                        }}
-                      >
-                        <div className="absolute inset-0 flex items-center justify-center"></div>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
-            <div className="h-full">
-              <div className="bg-card border border-border rounded-sm flex h-full flex-col p-6">
-                <div className="text-base flex max-w-prose flex-1 flex-col justify-between">
-                  <div>
-                    <h2 className="text-base md:text-lg font-normal mb-3">
-                      Structural Equation Modeling
-                    </h2>
-                    <div className="text-muted-foreground text-pretty">
-                      <p className="text-base">
-                        Test complex hypotheses and analyze relationships between variables with
-                        powerful SEM capabilities.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <figure className="pt-7">
-                  <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm">
-                    <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 dark:hidden">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/214fe44b44ebb3a38c3c7e6bde246a032d1bdc57-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/214fe44b44ebb3a38c3c7e6bde246a032d1bdc57-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/214fe44b44ebb3a38c3c7e6bde246a032d1bdc57-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/214fe44b44ebb3a38c3c7e6bde246a032d1bdc57-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/214fe44b44ebb3a38c3c7e6bde246a032d1bdc57-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/214fe44b44ebb3a38c3c7e6bde246a032d1bdc57-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/214fe44b44ebb3a38c3c7e6bde246a032d1bdc57-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/214fe44b44ebb3a38c3c7e6bde246a032d1bdc57-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/214fe44b44ebb3a38c3c7e6bde246a032d1bdc57-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 hidden dark:block">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/e7193be5129e61392f38b191266ecafa2410bb3d-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/e7193be5129e61392f38b191266ecafa2410bb3d-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/e7193be5129e61392f38b191266ecafa2410bb3d-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/e7193be5129e61392f38b191266ecafa2410bb3d-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/e7193be5129e61392f38b191266ecafa2410bb3d-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/e7193be5129e61392f38b191266ecafa2410bb3d-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/e7193be5129e61392f38b191266ecafa2410bb3d-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/e7193be5129e61392f38b191266ecafa2410bb3d-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/e7193be5129e61392f38b191266ecafa2410bb3d-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                    </div>
-                    <div className="z-20 col-span-full row-span-full">
-                      <div
-                        className="relative w-full overflow-hidden select-none border border-border rounded-sm"
-                        style={{ height: '378px' }}
-                      >
-                        <div
-                          className="absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-full max-[767px]:pointer-events-none max-[767px]:opacity-0 transition-opacity duration-150"
-                          style={{ opacity: 1 }}
-                        >
-                          <div className="sr-only" aria-live="polite">
-                            Interactive demo showing Tensr&apos;s statistical analysis features and
-                            visualizations.
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 z-20"></div>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Three-Column Feature Row: Plugins, Notebooks, Version Control */}
-      <section className="w-full p-0 bg-background text-font">
-        <div className="container mx-auto my-8 mb-16">
-          <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch mb-4">
-            <div className="h-full">
-              <div className="bg-card border border-border rounded-sm flex h-full flex-col p-6">
-                <div className="text-base flex max-w-prose flex-1 flex-col justify-between">
-                  <div>
-                    <h2 className="text-base md:text-lg font-normal mb-3">Plugins & Extensions</h2>
-                    <div className="text-muted-foreground text-pretty">
-                      <p className="text-base">
-                        Extend Tensr with custom plugins and integrate with external services
-                        through our plugin architecture.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <figure className="pt-7">
-                  <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm">
-                    <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 dark:hidden">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 hidden dark:block">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                    </div>
-                    <div className="z-20 col-span-full row-span-full">
-                      <div
-                        className="relative w-full overflow-hidden select-none border border-border rounded-sm"
-                        style={{ height: '378px' }}
-                      >
-                        <div
-                          className="absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-full max-[767px]:pointer-events-none max-[767px]:opacity-0 transition-opacity duration-150"
-                          style={{ opacity: 1 }}
-                        >
-                          <div className="sr-only" aria-live="polite">
-                            Interactive demo showing Tensr&apos;s statistical analysis features and
-                            visualizations.
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 z-20"></div>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
-            <div className="h-full">
-              <div className="bg-card border border-border rounded-sm flex h-full flex-col p-6">
-                <div className="text-base flex max-w-prose flex-1 flex-col justify-between">
-                  <div>
-                    <h2 className="text-base md:text-lg font-normal mb-3">Interactive Notebooks</h2>
-                    <div className="text-muted-foreground text-pretty">
-                      <p className="text-base">
-                        Create interactive documents with code, visuals, and text perfect for
-                        research and collaboration.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <figure className="pt-7">
-                  <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm">
-                    <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 dark:hidden">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 hidden dark:block">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                    </div>
-                    <div className="z-20 col-span-full row-span-full">
-                      <div
-                        className="relative w-full overflow-hidden select-none border border-border rounded-sm"
-                        style={{ height: '378px' }}
-                      >
-                        <div
-                          className="absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-full max-[767px]:pointer-events-none max-[767px]:opacity-0 transition-opacity duration-150"
-                          style={{ opacity: 1 }}
-                        >
-                          <div className="sr-only" aria-live="polite">
-                            Interactive demo showing Tensr&apos;s statistical analysis features and
-                            visualizations.
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 z-20"></div>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
-            <div className="h-full">
-              <div className="bg-card border border-border rounded-sm flex h-full flex-col p-6">
-                <div className="text-base flex max-w-prose flex-1 flex-col justify-between">
-                  <div>
-                    <h2 className="text-base md:text-lg font-normal mb-3">Version Control</h2>
-                    <div className="text-muted-foreground text-pretty">
-                      <p className="text-base">
-                        Track changes in your analyses and collaborate with team members using
-                        advanced version control features.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <figure className="pt-7">
-                  <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm">
-                    <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 dark:hidden">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/fd9b3b4cd7d670f9f7d89ef54a9d83eedc7eb8cc-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                      <picture className="absolute inset-0 scale-[1.1] transform brightness-90 hidden dark:block">
-                        <source
-                          media="(min-width: 901px)"
-                          srcSet="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=3840 3840w"
-                        />
-                        <img
-                          className="object-cover h-full w-full"
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                          fetchPriority="auto"
-                          src="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format"
-                        />
-                      </picture>
-                    </div>
-                    <div className="z-20 col-span-full row-span-full">
-                      <div
-                        className="relative w-full overflow-hidden select-none border border-border rounded-sm"
-                        style={{ height: '378px' }}
-                      >
-                        <div
-                          className="absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-full max-[767px]:pointer-events-none max-[767px]:opacity-0 transition-opacity duration-150"
-                          style={{ opacity: 1 }}
-                        >
-                          <div className="sr-only" aria-live="polite">
-                            Interactive demo showing Tensr&apos;s statistical analysis features and
-                            visualizations.
-                          </div>
-                        </div>
-                        <div className="pointer-events-none absolute inset-0 z-20"></div>
-                      </div>
-                    </div>
-                  </div>
-                </figure>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Plugin Architecture & Extensibility */}
-      <section className="w-full p-0 bg-background text-font" id="plugins">
-        <div className="container mx-auto mb-16">
-          <div className="grid grid-rows-[auto_1fr] gap-4">
-            <Link
-              className="relative bg-card border border-border rounded-sm p-6 sm:p-7 grid lg:grid-cols-2 gap-4 col-span-full row-span-full"
-              href="/features#plugins"
-            >
-              <div className="lg:flex lg:items-center">
-                <div className="max-w-prose w-full">
-                  <div className="text-base flex-1">
-                    <h2 className="text-base md:text-lg font-normal text-pretty">
-                      Plugin architecture and extensibility
-                    </h2>
-                    <div className="text-base md:text-lg text-muted-foreground text-pretty">
-                      <p>
-                        Build custom tools with our SDK or use community plugins. Extend Tensr to
-                        fit your specific research and analysis needs.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-2">
-                    <span className="text-primary hover:underline inline-flex items-center gap-1">
-                      Learn about plugins →
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="hidden lg:block"></div>
-            </Link>
-            <div className="p-7 grid lg:grid-cols-2 gap-4 col-span-full row-span-full">
-              <div className="hidden lg:block"></div>
-              <div>
-                <div className="relative grid grid-cols-1 grid-rows-1 bg-muted rounded-sm">
-                  <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                    <picture className="absolute inset-0 scale-[1.1] transform brightness-90">
-                      <source
-                        media="(min-width: 901px)"
-                        srcSet="https://cdn.sanity.io/images/2hv88549/production/00a586c62c8782e65c0affe6363a43ed6bdbc1fd-3139x2093.jpg?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/00a586c62c8782e65c0affe6363a43ed6bdbc1fd-3139x2093.jpg?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/00a586c62c8782e65c0affe6363a43ed6bdbc1fd-3139x2093.jpg?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/00a586c62c8782e65c0affe6363a43ed6bdbc1fd-3139x2093.jpg?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/00a586c62c8782e65c0affe6363a43ed6bdbc1fd-3139x2093.jpg?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/00a586c62c8782e65c0affe6363a43ed6bdbc1fd-3139x2093.jpg?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/00a586c62c8782e65c0affe6363a43ed6bdbc1fd-3139x2093.jpg?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/00a586c62c8782e65c0affe6363a43ed6bdbc1fd-3139x2093.jpg?auto=format&w=3840 3840w"
-                      />
-                      <img
-                        className="object-cover h-full w-full"
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority="auto"
-                        src="https://cdn.sanity.io/images/2hv88549/production/00a586c62c8782e65c0affe6363a43ed6bdbc1fd-3139x2093.jpg?auto=format"
-                      />
-                    </picture>
-                  </div>
-                  <div className="z-20 col-span-full row-span-full">
-                    <div
-                      className="relative w-full overflow-hidden select-none border border-border rounded-sm"
-                      style={{
-                        height: 'min(780px, 70vh)',
-                        minHeight: '650px',
-                      }}
-                    >
-                      <div className="absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-full max-[767px]:pointer-events-none max-[767px]:opacity-0 transition-opacity duration-150">
-                        <div className="sr-only" aria-live="polite">
-                          This element contains an interactive demo showing Tensr&apos;s plugin
-                          architecture and extensibility.
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div className="text-muted-foreground text-sm">
-                            Interactive demo placeholder
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Three-Column Feature Row: Notebooks, Visualizations, Collaboration */}
-      <section className="w-full p-0 bg-background text-font">
-        <div className="container mx-auto mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="bg-card border border-border rounded-sm p-6 flex flex-col">
-              <h3 className="text-base md:text-lg font-normal text-pretty mb-3">
-                Interactive Notebooks
-              </h3>
-              <p className="text-base text-muted-foreground mb-4 flex-1">
-                Create interactive documents with code, visuals, and text for research and
-                collaboration.
-              </p>
-              <div className="relative">
-                <img
-                  src="https://cdn.sanity.io/images/2hv88549/production/ide.jpg?auto=format"
-                  alt="Interactive Notebooks"
-                  className="w-full h-auto rounded-sm"
-                />
-              </div>
-            </div>
-            <div className="bg-card border border-border rounded-sm p-6 flex flex-col">
-              <h3 className="text-base md:text-lg font-normal text-pretty mb-3">
-                Data Visualizations
-              </h3>
-              <p className="text-base text-muted-foreground mb-4 flex-1">
-                Advanced visualization tools to explore and present your data insights with
-                beautiful charts and graphs.
-              </p>
-              <div className="relative">
-                <img
-                  src="https://cdn.sanity.io/images/2hv88549/production/cli.jpg?auto=format"
-                  alt="Data Visualizations"
-                  className="w-full h-auto rounded-sm"
-                />
-              </div>
-            </div>
-            <Link
-              href="/features#collaboration"
-              className="bg-card border border-border rounded-sm p-6 flex flex-col hover:opacity-90 transition-opacity"
-            >
-              <div className="text-base flex max-w-prose flex-1 flex-col justify-between">
-                <div>
-                  <h2 className="text-base md:text-lg font-normal mb-3">Team Collaboration</h2>
-                  <div className="text-muted-foreground text-pretty">
-                    <p className="text-base">
-                      Work together on analyses with shared workspaces and real-time collaboration.
-                    </p>
-                  </div>
-                </div>
-                <div className="mt-2">
-                  <span className="text-primary hover:underline inline-flex items-center gap-1">
-                    Learn more →
-                  </span>
-                </div>
-              </div>
-              <figure className="pt-7">
-                <div className="relative grid grid-cols-1 grid-rows-1 bg-card rounded-sm">
-                  <div className="relative z-10 col-span-full row-span-full overflow-hidden">
-                    <picture className="absolute inset-0 scale-[1.1] transform brightness-90 dark:hidden">
-                      <source
-                        media="(min-width: 901px)"
-                        srcSet="https://cdn.sanity.io/images/2hv88549/production/e6375f83012e4a76ff15411ce87937362c411153-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/e6375f83012e4a76ff15411ce87937362c411153-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/e6375f83012e4a76ff15411ce87937362c411153-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/e6375f83012e4a76ff15411ce87937362c411153-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/e6375f83012e4a76ff15411ce87937362c411153-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/e6375f83012e4a76ff15411ce87937362c411153-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/e6375f83012e4a76ff15411ce87937362c411153-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/e6375f83012e4a76ff15411ce87937362c411153-2560x1440.png?auto=format&w=3840 3840w"
-                      />
-                      <img
-                        className="object-cover h-full w-full"
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority="auto"
-                        src="https://cdn.sanity.io/images/2hv88549/production/e6375f83012e4a76ff15411ce87937362c411153-2560x1440.png?auto=format"
-                      />
-                    </picture>
-                    <picture className="absolute inset-0 scale-[1.1] transform brightness-90 hidden dark:block">
-                      <source
-                        media="(min-width: 901px)"
-                        srcSet="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=640 640w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=750 750w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=828 828w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1080 1080w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1200 1200w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=1920 1920w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=2048 2048w, https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format&w=3840 3840w"
-                      />
-                      <img
-                        className="object-cover h-full w-full"
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        fetchPriority="auto"
-                        src="https://cdn.sanity.io/images/2hv88549/production/3cb319c263fd5a76115b6196b916ce8767daec13-2560x1440.png?auto=format"
-                      />
-                    </picture>
-                  </div>
-                  <div className="z-20 col-span-full row-span-full">
-                    <div
-                      className="relative w-full overflow-hidden select-none border border-border rounded-sm"
-                      style={{ height: '378px' }}
-                    >
-                      <div
-                        className="absolute top-0 right-0 bottom-0 left-0 z-10 h-full w-full max-[767px]:pointer-events-none max-[767px]:opacity-0 transition-opacity duration-150"
-                        style={{ opacity: 1 }}
-                      >
-                        <div className="sr-only" aria-live="polite">
-                          This element contains an interactive demo for sighted users showing
-                          Tensr&apos;s collaboration features and team workspaces.
-                        </div>
-                      </div>
-                      <div className="pointer-events-none absolute inset-0 z-20"></div>
-                    </div>
-                  </div>
-                </div>
-              </figure>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Cloud-native and accessible */}
-      <section className="w-full p-0 bg-background text-font">
-        <div className="container mx-auto mb-16">
-          <div className="text-center mb-8">
-            <h2 className="text-base md:text-lg font-normal text-pretty mb-4">
-              Cloud-native and accessible
+      {/* CTA */}
+      <section className="py-16 md:py-24">
+        <div className="mx-auto max-w-[var(--max-width)] page-pad">
+          <div className="rounded-2xl border border-border-default bg-inverted px-8 py-14 text-center text-[var(--inverted-fg)] md:px-16 md:py-16">
+            <span className="text-xs tracking-wider uppercase opacity-60">Get started</span>
+            <h2 className="mx-auto mt-4 max-w-lg text-2xl tracking-tight md:text-4xl">
+              See it on your own data.
             </h2>
-            <p className="text-base text-muted-foreground mb-6">
-              Access Tensr from anywhere, collaborate with your team, and scale your analysis
-              workflow.
+            <p className="mx-auto mt-4 max-w-[46ch] text-[15px] leading-relaxed opacity-70">
+              Upload a CSV and let the agent take the first look. Nothing to install.
             </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            <div className="bg-card border border-border rounded-sm flex flex-col items-center justify-center p-8">
-              <div className="mb-4">
-                <div className="h-12 w-12 bg-primary rounded flex items-center justify-center">
-                  <span className="text-white text-xl">☁️</span>
-                </div>
-              </div>
-              <h3 className="text-base font-normal mb-2">Cloud-native architecture</h3>
-              <p className="text-base text-muted-foreground text-center">
-                Built for the cloud with scalable infrastructure and seamless access from any
-                device.
-              </p>
-            </div>
-            <div className="bg-card border border-border rounded-sm flex flex-col items-center justify-center p-8">
-              <div className="mb-4 flex items-center justify-center gap-4">
-                <div className="h-8 w-8 bg-primary rounded flex items-center justify-center">
-                  <span className="text-white text-sm">🔌</span>
-                </div>
-                <div className="h-8 w-8 bg-primary rounded flex items-center justify-center">
-                  <span className="text-white text-sm">📊</span>
-                </div>
-                <div className="h-8 w-8 bg-primary rounded flex items-center justify-center">
-                  <span className="text-white text-sm">🔗</span>
-                </div>
-                <div className="h-8 w-8 bg-primary rounded flex items-center justify-center">
-                  <span className="text-white text-sm">⚙️</span>
-                </div>
-              </div>
-              <h3 className="text-base font-normal mb-2">Integrations & Plugins</h3>
-              <p className="text-base text-muted-foreground text-center">
-                Connect with external data sources and extend functionality with our plugin SDK.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-32 md:py-48 px-4 md:px-8 bg-background text-font">
-        <div className="container mx-auto">
-          <div className="text-center mx-auto max-w-4xl">
-            <h2 className="text-6xl sm:text-7xl font-normal text-balance mx-auto mb-4">
-              Get started with Tensr.
-            </h2>
-            <div className="gap-x-4 flex items-center justify-center">
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="https://app.tensr.xyz"
-                className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition-opacity hover:opacity-90"
               >
                 Get started
-                <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link
+                href="/pricing"
+                className="inline-flex items-center rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:bg-white/10"
+              >
+                See pricing →
               </Link>
             </div>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 };
 

@@ -1,615 +1,395 @@
 'use client';
 
 import Link from 'next/link';
-import { FrequencyToggle } from '@/components/frequency-toggle';
+import { Check } from 'lucide-react';
+import { Fragment, useState } from 'react';
 import { Accordion } from '@/components/accordion';
-import { useState } from 'react';
+
+const plans = [
+  {
+    id: 'pro',
+    name: 'Pro',
+    subtitle: 'For individual analysts running real tests on real data.',
+    monthly: 20,
+    annualMonthly: 16,
+    annualTotal: 192,
+    note: 'Per user · cancel any time',
+    cta: 'Get started',
+    href: 'https://app.tensr.xyz',
+    featured: false,
+    features: [
+      'Full tri‑modal workspace',
+      'Sheet, charts & notebook',
+      'All 80+ statistical tests + report view',
+      'Tensr Agent — 1,200 runs / month',
+      '300 AI reports / month',
+      'APA, PDF, CSV & Markdown export',
+    ],
+  },
+  {
+    id: 'pro_plus',
+    name: 'Pro Plus',
+    subtitle: 'For power users who live in the agent and ship more analyses.',
+    monthly: 60,
+    annualMonthly: 48,
+    annualTotal: 576,
+    note: 'Per user · cancel any time',
+    cta: 'Get started',
+    href: 'https://app.tensr.xyz',
+    featured: true,
+    features: [
+      'Everything in Pro, plus',
+      'Tensr Agent — 5,000 runs / month',
+      '1,200 AI reports / month',
+      'Higher assistant cost budget',
+      'Priority support',
+      'Early access to new analysis tools',
+    ],
+  },
+  {
+    id: 'teams',
+    name: 'Teams',
+    subtitle: 'For research groups and analytics teams working in one place.',
+    monthly: 40,
+    annualMonthly: 32,
+    annualTotal: 384,
+    note: 'Per seat · billed to your organisation',
+    cta: 'Get started',
+    href: 'https://app.tensr.xyz',
+    featured: false,
+    perSeat: true,
+    features: [
+      'Everything in Pro Plus, plus',
+      'Organisation billing & shared seats',
+      'Real‑time collaboration & presence',
+      'Tensr Agent — 10,000 runs / month',
+      '3,000 AI reports / month',
+      'Shared workspaces & plugin library',
+    ],
+  },
+];
+
+const comparison = [
+  {
+    group: 'Workspace',
+    rows: [
+      { feature: 'Spreadsheet, charts & notebook', pro: true, proPlus: true, teams: true },
+      { feature: 'All 80+ statistical tests', pro: true, proPlus: true, teams: true },
+      { feature: 'Report view & APA export', pro: true, proPlus: true, teams: true },
+    ],
+  },
+  {
+    group: 'AI & limits',
+    rows: [
+      {
+        feature: 'Tensr Agent runs / month',
+        pro: '1,200',
+        proPlus: '5,000',
+        teams: '10,000',
+      },
+      {
+        feature: 'AI reports / month',
+        pro: '300',
+        proPlus: '1,200',
+        teams: '3,000',
+      },
+      {
+        feature: 'Assistant cost budget',
+        pro: '$4 / mo',
+        proPlus: '$15 / mo',
+        teams: '$10 / mo',
+      },
+    ],
+  },
+  {
+    group: 'Collaboration',
+    rows: [
+      {
+        feature: 'Organisation / shared seats',
+        pro: false,
+        proPlus: false,
+        teams: true,
+      },
+      {
+        feature: 'Real‑time presence & comments',
+        pro: false,
+        proPlus: false,
+        teams: true,
+      },
+      {
+        feature: 'Shared plugin library',
+        pro: false,
+        proPlus: false,
+        teams: true,
+      },
+    ],
+  },
+  {
+    group: 'Support',
+    rows: [
+      {
+        feature: 'Support',
+        pro: 'Standard',
+        proPlus: 'Priority',
+        teams: 'Priority',
+      },
+    ],
+  },
+];
+
+const faqItems = [
+  {
+    id: 'free',
+    question: 'Is there a free plan?',
+    answer:
+      "Tensr is a paid product built for people doing serious analysis — there's no permanent free or student tier. Pick the plan that fits your work, and you can change or cancel it at any time.",
+  },
+  {
+    id: 'agent',
+    question: 'What counts as a Tensr Agent run?',
+    answer:
+      'A run is one analysis the agent executes on your behalf — a test, a transform, or an interpretation. Browsing data, editing sheets, and writing your own notebook code never count toward your monthly limit.',
+  },
+  {
+    id: 'billing',
+    question: 'Can I switch between monthly and annual?',
+    answer:
+      'Yes. Annual billing saves 20% versus monthly. Upgrades take effect immediately and are prorated; downgrades apply at the start of your next cycle.',
+  },
+  {
+    id: 'teams',
+    question: 'How does Teams seat pricing work?',
+    answer:
+      'Teams is billed per seat to your organisation. Add or remove seats as your group changes — billing adjusts automatically. Shared workspaces and collaboration features are included.',
+  },
+  {
+    id: 'security',
+    question: 'Where does my data live, and is it secure?',
+    answer:
+      'Datasets are encrypted at rest and in transit. Your data is never used to train models. Contact us if you need SSO, audit logs, or a signed DPA.',
+  },
+  {
+    id: 'academic',
+    question: 'Do you offer academic or non‑profit pricing?',
+    answer:
+      "We offer discounted Teams pricing for accredited research labs and registered non‑profits. Reach out with your institution details and we'll set you up.",
+  },
+];
+
+function CellValue({ value }: { value: boolean | string }) {
+  if (value === true) {
+    return <span className="text-text-primary">●</span>;
+  }
+  if (value === false) {
+    return <span className="text-text-faint">—</span>;
+  }
+  return <span className="text-text-secondary">{value}</span>;
+}
 
 export const PricingTemplate = () => {
-  const [frequency, setFrequency] = useState<'monthly' | 'yearly'>('monthly');
-
-  const qaItems = [
-    {
-      id: 'q1',
-      question: 'Who qualifies for the Education plan?',
-      answer:
-        'The Education plan is available free of charge to anyone with a valid university email address.',
-    },
-    {
-      id: 'q2',
-      question: "What's included in the base statistical package?",
-      answer:
-        'The base package includes all standard analysis functionality including descriptive statistics, regression analysis, factor analysis, and basic visualization tools.',
-    },
-    {
-      id: 'q3',
-      question: 'How does the Team plan work?',
-      answer:
-        'The Team plan supports up to 5 users with full collaboration features, shared workspaces, and version control. Perfect for small research teams or departments.',
-    },
-    {
-      id: 'q4',
-      question: 'Do I get access to new features automatically?',
-      answer:
-        "Yes! Paid plans (Professional, Team, and Enterprise) automatically get access to new features as they're released.",
-    },
-    {
-      id: 'q5',
-      question: 'Can I upgrade from Education to a paid plan?',
-      answer:
-        'Yes, you can upgrade from an Education plan to any paid plan at any time while keeping all your existing analyses and data.',
-    },
-    {
-      id: 'q6',
-      question: 'Is there a limit on dataset size?',
-      answer:
-        "No, there are no artificial limits on dataset size. Performance will depend on your computer's specifications as this is a cloud-native application.",
-    },
-    {
-      id: 'q7',
-      question: 'What happens to my analyses if I downgrade?',
-      answer:
-        "You'll maintain access to all your existing analyses, but features specific to higher tiers will become unavailable.",
-    },
-    {
-      id: 'q8',
-      question: 'Do you offer training and onboarding?',
-      answer:
-        'Yes, we offer basic training resources for all users, with additional custom training options for Team and Enterprise plans.',
-    },
-  ];
+  const [frequency, setFrequency] = useState<'monthly' | 'yearly'>('yearly');
 
   return (
-    <>
-      <section
-        className="py-12 bg-background text-font mb-4"
-        data-sanity="id=9da2f560-301e-4713-8113-bbaa85c4b14c;type=pricingPage;path=pageBuilder;base=http%3A%2F%2Flocalhost%3A3333"
-      >
-        <div className="container mx-auto">
-          <h1 className="text-4xl text-center">Pricing</h1>
-          <div className="mt-4 flex justify-center">
-            <FrequencyToggle value={frequency} onChange={setFrequency} />
-          </div>
-
-          {/* Individual Plans */}
-          <div className="mt-12 space-y-8">
-            <h2 id="individual" className="text-xl font-medium">
-              <a href="#individual" className="hover:opacity-90">
-                Individual Plans
-              </a>
-            </h2>
-            <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-              {/* Education */}
-              <Link
-                className="block bg-card border border-border rounded-sm transition-all hover:bg-hover p-6 md:aspect-video lg:aspect-[4/5]"
-                href="https://app.tensr.xyz"
+    <div className="bg-page text-text-primary">
+      <section className="page-pad mx-auto max-w-[var(--max-width)] pb-8 pt-14 md:pt-20">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="mb-3 text-xs tracking-wider text-text-muted uppercase">Pricing</p>
+          <h1 className="text-3xl tracking-tight md:text-5xl">
+            Pricing that scales with your research.
+          </h1>
+          <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-text-secondary md:text-base">
+            Pro, Pro Plus, and Teams — upgrade when you need more agent capacity and collaboration.
+            No free tier — a serious tool for serious work.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <div className="inline-flex items-center gap-1 rounded-full border border-border-default bg-standout p-1">
+              <button
+                type="button"
+                onClick={() => setFrequency('monthly')}
+                className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+                  frequency === 'monthly'
+                    ? 'bg-page text-text-primary shadow-sm'
+                    : 'text-text-muted hover:text-text-primary'
+                }`}
               >
-                <div className="col-span-full row-span-full flex flex-col justify-between h-full">
-                  <div>
-                    <div className="flex items-baseline gap-x-2">
-                      <h3 className="text-lg" id="tier-0-0">
-                        Education
-                      </h3>
-                    </div>
-                    <p className="flex items-baseline">
-                      <span className="text-lg text-muted-foreground">Free</span>
-                    </p>
-                    <p className="text-muted-foreground mt-3">Includes:</p>
-                    <ul role="list" className="mt-3 space-y-0.5">
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Complete statistical analysis suite</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Data preparation and cleaning tools</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Basic research methods package</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>100 operations/month</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>100 MB data processed</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Single user license</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="mt-6">
-                    <span className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full transition-all border-none cursor-pointer bg-secondary text-secondary-foreground hover:opacity-90">
-                      Get started
-                    </span>
-                  </div>
-                </div>
-              </Link>
-
-              {/* Professional */}
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-card border border-border rounded-sm transition-all hover:bg-hover p-6 md:aspect-video lg:aspect-[4/5]"
-                href="https://app.tensr.xyz"
+                Monthly
+              </button>
+              <button
+                type="button"
+                onClick={() => setFrequency('yearly')}
+                className={`rounded-full px-4 py-1.5 text-sm transition-colors ${
+                  frequency === 'yearly'
+                    ? 'bg-page text-text-primary shadow-sm'
+                    : 'text-text-muted hover:text-text-primary'
+                }`}
               >
-                <div className="col-span-full row-span-full flex flex-col justify-between h-full">
-                  <div>
-                    <div className="flex items-baseline gap-x-2">
-                      <h3 className="text-lg" id="tier-0-1">
-                        Professional
-                      </h3>
-                    </div>
-                    <p className="flex items-baseline">
-                      <span className="text-lg text-muted-foreground">
-                        £{frequency === 'monthly' ? '20' : '200'}
-                      </span>
-                      <span className="text-muted-foreground text-sm">
-                        {' '}
-                        / {frequency === 'monthly' ? 'mo.' : 'yr.'}
-                      </span>
-                    </p>
-                    <p className="text-muted-foreground mt-3">Everything in Education, plus:</p>
-                    <ul role="list" className="mt-3 space-y-0.5">
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Advanced statistical methods</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Enhanced visualization capabilities</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Advanced data transformation</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>1,000 operations/month</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>1 GB data processed</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>3 concurrent users</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>API integrations</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>7-day free trial</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="mt-6">
-                    <span className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full transition-all border-none cursor-pointer bg-secondary text-secondary-foreground hover:opacity-90">
-                      Get Professional
-                    </span>
-                  </div>
-                </div>
-              </Link>
-
-              {/* Team - Recommended */}
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-card border border-border rounded-sm transition-all hover:bg-hover p-6 md:aspect-video lg:aspect-[4/5]"
-                href="https://app.tensr.xyz"
-              >
-                <div className="col-span-full row-span-full flex flex-col justify-between h-full">
-                  <div>
-                    <div className="flex items-baseline gap-x-2">
-                      <h3 className="text-lg" id="tier-0-2">
-                        Team
-                      </h3>
-                      <p className="text-primary">Recommended</p>
-                    </div>
-                    <p className="flex items-baseline">
-                      <span className="text-lg text-muted-foreground">
-                        £{frequency === 'monthly' ? '99' : '990'}
-                      </span>
-                      <span className="text-muted-foreground text-sm">
-                        {' '}
-                        / {frequency === 'monthly' ? 'mo.' : 'yr.'}
-                      </span>
-                    </p>
-                    <p className="text-muted-foreground mt-3">Everything in Professional, plus:</p>
-                    <ul role="list" className="mt-3 space-y-0.5">
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Team collaboration (up to 5 users)</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Shared workspaces</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Version control</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>10,000 operations/month</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>10 GB data processed</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>10 concurrent users</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Real-time collaboration</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>7-day free trial</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="mt-6">
-                    <span className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full transition-all border-none cursor-pointer bg-primary text-primary-foreground hover:opacity-90">
-                      Get Team
-                    </span>
-                  </div>
-                </div>
-              </Link>
-
-              {/* Enterprise */}
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-card border border-border rounded-sm transition-all hover:bg-hover p-6 md:aspect-video lg:aspect-[4/5]"
-                href="/enterprise"
-              >
-                <div className="col-span-full row-span-full flex flex-col justify-between h-full">
-                  <div>
-                    <div className="flex items-baseline gap-x-2">
-                      <h3 className="text-lg" id="tier-0-3">
-                        Enterprise
-                      </h3>
-                    </div>
-                    <p className="flex items-baseline">
-                      <span className="text-lg text-muted-foreground">Custom</span>
-                    </p>
-                    <p className="text-muted-foreground mt-3">Everything in Team, plus:</p>
-                    <ul role="list" className="mt-3 space-y-0.5">
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Unlimited team size</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Enhanced security features</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>100,000 operations/month</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>100 GB data processed</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>100 concurrent users</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Custom API integrations</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>Custom deployment options</span>
-                      </li>
-                      <li className="gap-x-3 flex">
-                        <span>✓</span>
-                        <span>14-day free trial</span>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="mt-6">
-                    <span className="inline-flex items-center justify-center px-4 py-2 text-sm font-medium rounded-full transition-all border-none cursor-pointer bg-secondary text-secondary-foreground hover:opacity-90">
-                      Contact Sales
-                    </span>
-                  </div>
-                </div>
-              </Link>
+                Annual <span className="ml-1 text-xs text-emerald-600">−20%</span>
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Logo Garden Section */}
-      <section
-        className="py-12 bg-background text-font pb-6 pt-0"
-        id="logo-garden"
-        data-sanity="id=9da2f560-301e-4713-8113-bbaa85c4b14c;type=pricingPage;path=pageBuilder:16f82dbb1e74;base=http%3A%2F%2Flocalhost%3A3333"
-      >
-        <div className="flex flex-col container mx-auto text-center">
-          <h2 className="text-sm mb-4">Trusted by researchers and data scientists worldwide.</h2>
-          <div className="grid grid-cols-4 md:grid-cols-8 gap-4">
-            {/* Stripe */}
-            <div className="relative flex items-center justify-center">
-              <div className="bg-card border border-border h-[4rem] sm:h-[4.5rem] md:h-[6.25rem] px-3 flex w-full items-center justify-center rounded">
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain block dark:hidden">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/d2404e7ff9893d2ff70751b73bde5cf5ff77a2eb-130x85.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Stripe logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="130"
-                    height="85"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/d2404e7ff9893d2ff70751b73bde5cf5ff77a2eb-130x85.svg?auto=format"
-                  />
-                </picture>
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain hidden dark:block">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/beae7a1f5d7eb381a8729ea50e240ab0238d8b50-130x85.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Stripe logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="130"
-                    height="85"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/beae7a1f5d7eb381a8729ea50e240ab0238d8b50-130x85.svg?auto=format"
-                  />
-                </picture>
+      <section className="page-pad mx-auto max-w-[var(--max-width)] pb-16">
+        <div className="grid gap-4 md:grid-cols-3">
+          {plans.map(plan => {
+            const price = frequency === 'yearly' ? plan.annualMonthly : plan.monthly;
+            const period = plan.perSeat
+              ? frequency === 'yearly'
+                ? '/seat/mo · billed annually'
+                : '/seat/mo'
+              : frequency === 'yearly'
+                ? '/mo · billed annually'
+                : '/mo';
+
+            return (
+              <div
+                key={plan.id}
+                className={`relative flex flex-col rounded-2xl border p-6 md:p-7 ${
+                  plan.featured
+                    ? 'border-text-primary bg-page shadow-[0_0_0_1px_var(--text-primary)]'
+                    : 'border-border-default bg-page'
+                }`}
+              >
+                {plan.featured && (
+                  <span className="absolute -top-3 left-6 rounded-full bg-inverted px-3 py-0.5 text-xs font-medium text-[var(--inverted-fg)]">
+                    Most popular
+                  </span>
+                )}
+                <h2 className="text-lg font-medium tracking-tight">{plan.name}</h2>
+                <p className="mt-2 min-h-[44px] text-sm leading-relaxed text-text-secondary">
+                  {plan.subtitle}
+                </p>
+                <div className="mt-6 flex items-baseline gap-1">
+                  <span className="text-lg text-text-muted">$</span>
+                  <span className="text-4xl tracking-tight">{price}</span>
+                  <span className="text-sm text-text-muted">{period}</span>
+                </div>
+                {frequency === 'yearly' && (
+                  <p className="mt-1 text-xs text-text-faint">
+                    ${plan.annualTotal}
+                    {plan.perSeat ? ' / seat' : ''} billed yearly
+                  </p>
+                )}
+                <p className="mt-2 text-xs text-text-faint">{plan.note}</p>
+                <Link
+                  href={plan.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`mt-6 inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-medium transition-opacity hover:opacity-90 ${
+                    plan.featured
+                      ? 'bg-inverted text-[var(--inverted-fg)]'
+                      : 'border border-border-default bg-component text-text-primary'
+                  }`}
+                >
+                  {plan.cta}
+                </Link>
+                <ul className="mt-8 space-y-3 border-t border-border-default pt-6">
+                  {plan.features.map((feature, i) => (
+                    <li key={feature} className="flex gap-3 text-sm text-text-secondary">
+                      <Check className="mt-0.5 h-4 w-4 shrink-0 text-text-primary" />
+                      <span className={i === 0 ? 'font-medium text-text-primary' : ''}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-            </div>
-            {/* OpenAI */}
-            <div className="relative flex items-center justify-center">
-              <div className="bg-card border border-border h-[4rem] sm:h-[4.5rem] md:h-[6.25rem] px-3 flex w-full items-center justify-center rounded">
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain block dark:hidden">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/a733e7c0b6d2a19f7769d1d327781dc74f577f49-159x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="OpenAI Logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="159"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/a733e7c0b6d2a19f7769d1d327781dc74f577f49-159x84.svg?auto=format"
-                  />
-                </picture>
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain hidden dark:block">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/53062f7690ae5b0cdbed3ea686fcea9da8b0b0b6-159x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="OpenAI Logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="159"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/53062f7690ae5b0cdbed3ea686fcea9da8b0b0b6-159x84.svg?auto=format"
-                  />
-                </picture>
-              </div>
-            </div>
-            {/* Linear */}
-            <div className="relative flex items-center justify-center">
-              <div className="bg-card border border-border h-[4rem] sm:h-[4.5rem] md:h-[6.25rem] px-3 flex w-full items-center justify-center rounded">
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain block dark:hidden">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/6f626e50f09b9272363eb3067f871533eaf116ed-188x85.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Linear logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="188"
-                    height="85"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/6f626e50f09b9272363eb3067f871533eaf116ed-188x85.svg?auto=format"
-                  />
-                </picture>
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain hidden dark:block">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/eb9e0a5931092d4db1ddda33106d16b7ef6b0829-188x85.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Linear logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="188"
-                    height="85"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/eb9e0a5931092d4db1ddda33106d16b7ef6b0829-188x85.svg?auto=format"
-                  />
-                </picture>
-              </div>
-            </div>
-            {/* Datadog */}
-            <div className="relative flex items-center justify-center">
-              <div className="bg-card border border-border h-[4rem] sm:h-[4.5rem] md:h-[6.25rem] px-3 flex w-full items-center justify-center rounded">
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain block dark:hidden">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/f44dd77a6265aa8b77768cddfa25bb4a60cd13c9-201x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Datadog logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="201"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/f44dd77a6265aa8b77768cddfa25bb4a60cd13c9-201x84.svg?auto=format"
-                  />
-                </picture>
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain hidden dark:block">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/da55192921531e5fd2ba00701f4bf6ffd8b1781d-196x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Datadog logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="201"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/da55192921531e5fd2ba00701f4bf6ffd8b1781d-196x84.svg?auto=format"
-                  />
-                </picture>
-              </div>
-            </div>
-            {/* Rippling */}
-            <div className="relative flex items-center justify-center">
-              <div className="bg-card border border-border h-[4rem] sm:h-[4.5rem] md:h-[6.25rem] px-3 flex w-full items-center justify-center rounded">
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain block dark:hidden">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/440e543f9a7e5b9d196a9b3662a9e0e895362f05-232x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Rippling logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="232"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/440e543f9a7e5b9d196a9b3662a9e0e895362f05-232x84.svg?auto=format"
-                  />
-                </picture>
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain hidden dark:block">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/a51bba3a29e4471cb49ec7c9692990e69bffcb0d-232x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Rippling logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="232"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/a51bba3a29e4471cb49ec7c9692990e69bffcb0d-232x84.svg?auto=format"
-                  />
-                </picture>
-              </div>
-            </div>
-            {/* Figma */}
-            <div className="relative flex items-center justify-center">
-              <div className="bg-card border border-border h-[4rem] sm:h-[4.5rem] md:h-[6.25rem] px-3 flex w-full items-center justify-center rounded">
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain block dark:hidden">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/9f025cabdfa3dc225311f8b515349b7373316d20-128x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Figma logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="128"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/9f025cabdfa3dc225311f8b515349b7373316d20-128x84.svg?auto=format"
-                  />
-                </picture>
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain hidden dark:block">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/105275382af564c3ab7ce401f92b3bcda4376bea-128x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Figma logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="128"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/105275382af564c3ab7ce401f92b3bcda4376bea-128x84.svg?auto=format"
-                  />
-                </picture>
-              </div>
-            </div>
-            {/* Ramp */}
-            <div className="relative flex items-center justify-center">
-              <div className="bg-card border border-border h-[4rem] sm:h-[4.5rem] md:h-[6.25rem] px-3 flex w-full items-center justify-center rounded">
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain block dark:hidden">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/a07ff518beeee9fc023aeeb9028cf1236fe3763e-174x85.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Ramp logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="174"
-                    height="85"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/a07ff518beeee9fc023aeeb9028cf1236fe3763e-174x85.svg?auto=format"
-                  />
-                </picture>
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain hidden dark:block">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/cf60827b1c3f341d19ef660f367bca517b0e74b9-174x85.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Ramp logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="174"
-                    height="85"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/cf60827b1c3f341d19ef660f367bca517b0e74b9-174x85.svg?auto=format"
-                  />
-                </picture>
-              </div>
-            </div>
-            {/* Adobe */}
-            <div className="relative flex items-center justify-center">
-              <div className="bg-card border border-border h-[4rem] sm:h-[4.5rem] md:h-[6.25rem] px-3 flex w-full items-center justify-center rounded">
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain block dark:hidden">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/bdc0f1bd4dfe8115422533f560f9f3eef7f23ac7-149x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Adobe logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="149"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/bdc0f1bd4dfe8115422533f560f9f3eef7f23ac7-149x84.svg?auto=format"
-                  />
-                </picture>
-                <picture className="h-[2rem] sm:h-[2.25rem] md:h-[2.5rem] w-auto object-contain hidden dark:block">
-                  <source srcSet="https://cdn.sanity.io/images/2hv88549/production/37d2d1a1edcce15ca38c6021e882b6a7fff77ebb-149x84.svg?auto=format" />
-                  <img
-                    className="object-contain h-full w-full"
-                    alt="Adobe logo"
-                    loading="lazy"
-                    decoding="async"
-                    width="149"
-                    height="84"
-                    fetchPriority="auto"
-                    src="https://cdn.sanity.io/images/2hv88549/production/37d2d1a1edcce15ca38c6021e882b6a7fff77ebb-149x84.svg?auto=format"
-                  />
-                </picture>
-              </div>
-            </div>
+            );
+          })}
+        </div>
+        <p className="mt-8 text-center text-sm text-text-muted">
+          Change or cancel your plan at any time · no long‑term lock‑in
+        </p>
+      </section>
+
+      <section className="border-y border-border-default py-16 md:py-20">
+        <div className="page-pad mx-auto max-w-[var(--max-width)]">
+          <div className="mb-10 text-center">
+            <p className="mb-3 text-xs tracking-wider text-text-muted uppercase">Compare plans</p>
+            <h2 className="text-2xl tracking-tight md:text-3xl">Every detail, side by side.</h2>
+          </div>
+          <div className="overflow-x-auto rounded-xl border border-border-default">
+            <table className="w-full min-w-[640px] text-left text-sm">
+              <thead>
+                <tr className="border-b border-border-default bg-standout/60">
+                  <th className="px-4 py-3 font-medium text-text-primary md:w-[40%]">Feature</th>
+                  <th className="px-4 py-3 font-medium text-text-primary">Pro</th>
+                  <th className="bg-standout px-4 py-3 font-medium text-text-primary">Pro Plus</th>
+                  <th className="px-4 py-3 font-medium text-text-primary">Teams</th>
+                </tr>
+              </thead>
+              <tbody>
+                {comparison.map(section => (
+                  <Fragment key={section.group}>
+                    <tr className="border-b border-border-default bg-standout/40">
+                      <td
+                        colSpan={4}
+                        className="px-4 py-2 text-xs font-medium tracking-wide text-text-muted uppercase"
+                      >
+                        {section.group}
+                      </td>
+                    </tr>
+                    {section.rows.map(row => (
+                      <tr
+                        key={row.feature}
+                        className="border-b border-border-default last:border-0"
+                      >
+                        <th className="px-4 py-3 font-normal text-text-primary">{row.feature}</th>
+                        <td className="px-4 py-3">
+                          <CellValue value={row.pro} />
+                        </td>
+                        <td className="bg-standout/30 px-4 py-3">
+                          <CellValue value={row.proPlus} />
+                        </td>
+                        <td className="px-4 py-3">
+                          <CellValue value={row.teams} />
+                        </td>
+                      </tr>
+                    ))}
+                  </Fragment>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </section>
 
-      {/* Q&A Section */}
-      <section
-        className="py-12 bg-background text-font"
-        data-sanity="id=9da2f560-301e-4713-8113-bbaa85c4b14c;type=pricingPage;path=pageBuilder:35c039ef7ea4;base=http%3A%2F%2Flocalhost%3A3333"
-      >
-        <div className="container mx-auto">
-          <div className="grid grid-cols-12 gap-4 gap-0">
-            <div className="col-span-full lg:col-end-7">
-              <div className="sticky top-[72px] max-lg:mb-8">
-                <h2 className="text-2xl text-pretty">Questions & Answers</h2>
-              </div>
-            </div>
-            <div className="col-span-full lg:col-start-7 lg:col-end-[-1]">
-              <Accordion items={qaItems} />
-            </div>
+      <section className="py-16 md:py-20">
+        <div className="page-pad mx-auto max-w-3xl">
+          <div className="mb-10 text-center">
+            <p className="mb-3 text-xs tracking-wider text-text-muted uppercase">FAQ</p>
+            <h2 className="text-2xl tracking-tight md:text-3xl">Questions, answered.</h2>
+          </div>
+          <Accordion items={faqItems} />
+        </div>
+      </section>
+
+      <section className="border-t border-border-default py-16 md:py-20">
+        <div className="page-pad mx-auto max-w-[var(--max-width)] text-center">
+          <h2 className="text-2xl tracking-tight md:text-3xl">Start analysing today.</h2>
+          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-text-secondary md:text-base">
+            Pick a plan, bring your data, and run your first real analysis in minutes.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+            <Link
+              href="https://app.tensr.xyz"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center rounded-full bg-inverted px-5 py-2.5 text-sm font-medium text-[var(--inverted-fg)] transition-opacity hover:opacity-90"
+            >
+              Get started
+            </Link>
+            <Link
+              href="mailto:help@tensr.xyz"
+              className="inline-flex items-center rounded-full border border-border-default bg-component px-5 py-2.5 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
+            >
+              Talk to sales →
+            </Link>
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
