@@ -303,6 +303,7 @@ export const PricingTemplate = () => {
         </p>
       </section>
 
+      {/* Compare plans table — temporarily hidden
       <section className="border-y border-border-default py-16 md:py-20">
         <div className="page-pad mx-auto max-w-[var(--max-width)]">
           <div className="mb-10 text-center">
@@ -354,6 +355,7 @@ export const PricingTemplate = () => {
           </div>
         </div>
       </section>
+      */}
 
       <section className="py-16 md:py-20">
         <div className="page-pad mx-auto max-w-3xl">
@@ -362,31 +364,6 @@ export const PricingTemplate = () => {
             <h2 className="text-2xl tracking-tight md:text-3xl">Questions, answered.</h2>
           </div>
           <Accordion items={faqItems} />
-        </div>
-      </section>
-
-      <section className="border-t border-border-default py-16 md:py-20">
-        <div className="page-pad mx-auto max-w-[var(--max-width)] text-center">
-          <h2 className="text-2xl tracking-tight md:text-3xl">Start analysing today.</h2>
-          <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-text-secondary md:text-base">
-            Pick a plan, bring your data, and run your first real analysis in minutes.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="https://app.tensr.xyz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center rounded-full bg-inverted px-5 py-2.5 text-sm font-medium text-[var(--inverted-fg)] transition-opacity hover:opacity-90"
-            >
-              Get started
-            </Link>
-            <Link
-              href="mailto:help@tensr.xyz"
-              className="inline-flex items-center rounded-full border border-border-default bg-component px-5 py-2.5 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
-            >
-              Talk to sales →
-            </Link>
-          </div>
         </div>
       </section>
     </div>

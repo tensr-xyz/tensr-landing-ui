@@ -2,6 +2,7 @@
 
 import Link from 'next/link';
 import { Check } from 'lucide-react';
+import type { CSSProperties } from 'react';
 import {
   AgentProductMock,
   ReportProductMock,
@@ -133,37 +134,210 @@ function MomentMock({ type }: { type: (typeof moments)[number]['mock'] }) {
   }
 }
 
+function ProductHeroChip({
+  label,
+  style,
+  short,
+}: {
+  label: string;
+  style: CSSProperties;
+  short?: string;
+}) {
+  return (
+    <div className="product-hero-chip group" style={style}>
+      <span className="product-hero-chip-glow" aria-hidden="true" />
+      <p className="relative tracking-[0.5px]">
+        <span className="hidden sm:inline">{label}</span>
+        <span className="sm:hidden">{short ?? label}</span>
+      </p>
+    </div>
+  );
+}
+
+function ProductHeroVisual() {
+  return (
+    <div className="relative z-10 flex w-full items-center justify-center px-4 py-10 sm:px-6 lg:px-8">
+      <div className="product-hero-diagram relative aspect-square w-[min(640px,calc(100vw-48px))] select-none lg:w-[min(640px,calc(50vw-48px))]">
+        <svg
+          className="absolute inset-0 size-full"
+          fill="none"
+          preserveAspectRatio="none"
+          role="presentation"
+          viewBox="0 0 700 669"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <radialGradient
+              id="tensr-flow-up"
+              cx="350"
+              cy="359.5"
+              r="340"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0" stopColor="var(--text-primary)" />
+              <stop offset="0.8" stopColor="rgba(38,37,30,0.18)" />
+              <stop offset="1" stopColor="rgba(38,37,30,0.08)" />
+            </radialGradient>
+            <radialGradient
+              id="tensr-flow-down"
+              cx="350"
+              cy="359.5"
+              r="250"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop offset="0" stopColor="var(--text-primary)" />
+              <stop offset="0.8" stopColor="rgba(38,37,30,0.18)" />
+              <stop offset="1" stopColor="rgba(38,37,30,0.08)" />
+            </radialGradient>
+          </defs>
+          <path
+            className="product-hero-flow"
+            d="M350 109.5L350 359.5"
+            stroke="url(#tensr-flow-up)"
+            strokeDasharray="2 3"
+          />
+          <path
+            className="product-hero-flow"
+            d="M245 59.5L245 179.5Q245 209.5 275 209.5L320 209.5Q350 209.5 350 239.5L350 239.5"
+            stroke="url(#tensr-flow-up)"
+            strokeDasharray="2 3"
+          />
+          <path
+            className="product-hero-flow"
+            d="M455 59.5L455 179.5Q455 209.5 425 209.5L380 209.5Q350 209.5 350 239.5L350 239.5"
+            stroke="url(#tensr-flow-up)"
+            strokeDasharray="2 3"
+          />
+          <path
+            className="product-hero-flow"
+            d="M157.5 134.5L205 134.5Q245 134.5 245 174.5L245 174.5"
+            stroke="url(#tensr-flow-up)"
+            strokeDasharray="2 3"
+          />
+          <path
+            className="product-hero-flow"
+            d="M542.5 134.5L495 134.5Q455 134.5 455 174.5L455 174.5"
+            stroke="url(#tensr-flow-up)"
+            strokeDasharray="2 3"
+          />
+          <path
+            className="product-hero-flow"
+            d="M210 209.5L275 209.5"
+            stroke="url(#tensr-flow-up)"
+            strokeDasharray="2 3"
+          />
+          <path
+            className="product-hero-flow"
+            d="M490 209.5L425 209.5"
+            stroke="url(#tensr-flow-up)"
+            strokeDasharray="2 3"
+          />
+          <path
+            className="product-hero-flow"
+            d="M350 359.5L350 609.5"
+            stroke="url(#tensr-flow-down)"
+            strokeDasharray="2 3"
+          />
+          <path
+            className="product-hero-flow"
+            d="M350 424.5L350 424.5Q350 459.5 315 459.5L280 459.5Q245 459.5 245 494.5L245 509.5"
+            stroke="url(#tensr-flow-down)"
+            strokeDasharray="2 3"
+          />
+          <path
+            className="product-hero-flow"
+            d="M350 424.5L350 424.5Q350 459.5 385 459.5L420 459.5Q455 459.5 455 494.5L455 509.5"
+            stroke="url(#tensr-flow-down)"
+            strokeDasharray="2 3"
+          />
+        </svg>
+
+        <ProductHeroChip label="Dataset" short="Data" style={{ left: '35%', top: '8.9%' }} />
+        <ProductHeroChip label="Import" style={{ left: '65%', top: '8.9%' }} />
+        <ProductHeroChip label="Sheet" style={{ left: '50%', top: '16.4%' }} />
+        <ProductHeroChip
+          label="Charts"
+          style={{ left: '22.5%', top: '20.1%', transform: 'translate(-100%, -50%)' }}
+        />
+        <ProductHeroChip
+          label="Notebook"
+          short="Code"
+          style={{ left: '77.5%', top: '20.1%', transform: 'translateY(-50%)' }}
+        />
+        <ProductHeroChip
+          label="Tests"
+          style={{ left: '30%', top: '31.3%', transform: 'translate(-100%, -50%)' }}
+        />
+        <ProductHeroChip
+          label="Agent"
+          style={{ left: '70%', top: '31.3%', transform: 'translateY(-50%)' }}
+        />
+        <ProductHeroChip label="Report" style={{ left: '35%', top: '76.2%' }} />
+        <ProductHeroChip label="APA export" short="APA" style={{ left: '65%', top: '76.2%' }} />
+        <ProductHeroChip
+          label="Publication-ready"
+          short="Publish"
+          style={{ left: '50%', top: '91.1%' }}
+        />
+
+        <div className="product-hero-core" style={{ left: '50%', top: '53.7%' }}>
+          <div className="product-hero-core-glow" aria-hidden="true" />
+          <div className="product-hero-core-glow-hot" aria-hidden="true" />
+          <div className="product-hero-core-face">
+            <div className="product-hero-core-inner">
+              <span className="product-hero-core-mark">T</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export const FeaturesTemplate = () => {
   return (
     <div className="flex flex-1 flex-col bg-page text-text-primary">
-      {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border-default pb-14 pt-12 md:pb-20 md:pt-16">
-        <div className="hero-glow" aria-hidden="true" />
-        <div className="relative mx-auto max-w-[var(--max-width)] page-pad text-center">
-          <span className="pill-label">Product</span>
-          <h1 className="mx-auto mt-5 max-w-[18ch] text-[2.5rem] leading-[1.08] tracking-tight text-text-primary sm:text-5xl md:text-[3.25rem]">
-            From raw data to a result you can <span className="font-serif-italic">defend</span>
-          </h1>
-          <p className="mx-auto mt-5 max-w-[56ch] text-[15px] leading-relaxed text-text-secondary md:text-base">
-            Five capabilities, one workspace. An AI agent that does the analysis, a report view
-            built for rigour, a tri‑modal canvas, live collaboration, and a marketplace to extend it
-            all.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="https://app.tensr.xyz"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center rounded-full bg-inverted px-5 py-2.5 text-sm font-medium text-[var(--inverted-fg)] transition-opacity hover:opacity-90"
-            >
-              Get started
-            </Link>
-            <Link
-              href="/pricing"
-              className="inline-flex items-center rounded-full bg-component px-5 py-2.5 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
-            >
-              See pricing →
-            </Link>
+      {/* Hero — Interfere-style split panel */}
+      <section className="product-hero relative overflow-hidden">
+        <div className="absolute inset-x-0 bottom-0 h-px bg-border-default" />
+        <div className="product-hero-bloom" aria-hidden="true" />
+
+        <div className="product-hero-shell">
+          <div className="product-hero-grid relative grid grid-cols-1 items-center border-border-default border-dashed sm:border-x lg:grid-cols-2">
+            <div className="relative z-10 flex flex-col items-start justify-center gap-6 px-6 pb-10 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:aspect-square xl:px-16">
+              <span className="text-sm font-medium text-text-muted">Product</span>
+              <h1 className="max-w-[14ch] text-[2.5rem] leading-none font-medium tracking-tight text-text-primary text-pretty sm:text-5xl md:text-[3.5rem]">
+                From raw data to a result you can <span className="font-serif-italic">defend</span>
+              </h1>
+              <p className="max-w-md text-[15px] leading-relaxed text-pretty text-text-secondary md:text-base">
+                An AI agent that runs the analysis, a report view built for rigour, and a tri‑modal
+                workspace — sheet, charts, and notebook in one place.
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <Link
+                  href="https://app.tensr.xyz"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center rounded-full bg-component px-5 py-3 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
+                >
+                  Get started
+                </Link>
+                <Link
+                  href="mailto:help@tensr.xyz?subject=Demo%20request"
+                  className="inline-flex items-center rounded-full bg-inverted px-5 py-3 text-sm font-medium text-[var(--inverted-fg)] transition-opacity hover:opacity-90"
+                >
+                  Request a demo
+                </Link>
+              </div>
+            </div>
+
+            <div className="product-hero-visual relative z-20 flex aspect-square items-center justify-center border-t border-dashed border-border-default lg:aspect-auto lg:self-stretch lg:border-t-0 lg:border-l">
+              <div
+                className="product-hero-crosshair pointer-events-none absolute inset-0"
+                aria-hidden="true"
+              />
+              <ProductHeroVisual />
+            </div>
           </div>
         </div>
       </section>
@@ -204,7 +378,9 @@ export const FeaturesTemplate = () => {
                 </ul>
               </div>
               <div className={index % 2 === 1 ? 'md:order-1' : ''}>
-                <MomentMock type={moment.mock} />
+                <div className="product-frame">
+                  <MomentMock type={moment.mock} />
+                </div>
               </div>
             </div>
           </div>
@@ -247,37 +423,6 @@ export const FeaturesTemplate = () => {
                 <p className="text-sm leading-relaxed text-text-secondary">{feat.description}</p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 md:py-24">
-        <div className="mx-auto max-w-[var(--max-width)] page-pad">
-          <div className="rounded-2xl border border-border-default bg-inverted px-8 py-14 text-center text-[var(--inverted-fg)] md:px-16 md:py-16">
-            <span className="text-xs tracking-wider uppercase opacity-60">Get started</span>
-            <h2 className="mx-auto mt-4 max-w-lg text-2xl tracking-tight md:text-4xl">
-              See it on your own data.
-            </h2>
-            <p className="mx-auto mt-4 max-w-[46ch] text-[15px] leading-relaxed opacity-70">
-              Upload a CSV and let the agent take the first look. Nothing to install.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <Link
-                href="https://app.tensr.xyz"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center rounded-full bg-white px-5 py-2.5 text-sm font-medium text-black transition-opacity hover:opacity-90"
-              >
-                Get started
-              </Link>
-              <Link
-                href="/pricing"
-                className="inline-flex items-center rounded-full border border-white/25 px-5 py-2.5 text-sm text-white transition-colors hover:bg-white/10"
-              >
-                See pricing →
-              </Link>
-            </div>
           </div>
         </div>
       </section>

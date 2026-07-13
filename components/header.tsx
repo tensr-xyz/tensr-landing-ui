@@ -19,8 +19,8 @@ export const Header = () => {
       if (e.key.toLowerCase() === 'l' && !e.metaKey && !e.ctrlKey) {
         window.open('https://app.tensr.xyz', '_blank');
       }
-      if (e.key.toLowerCase() === 'g' && !e.metaKey && !e.ctrlKey) {
-        window.open('https://app.tensr.xyz', '_blank');
+      if (e.key.toLowerCase() === 'd' && !e.metaKey && !e.ctrlKey) {
+        window.location.href = 'mailto:help@tensr.xyz?subject=Demo%20request';
       }
     };
     window.addEventListener('keydown', onKey);
@@ -70,13 +70,11 @@ export const Header = () => {
               <span className="kbd">L</span>
             </Link>
             <Link
-              href="https://app.tensr.xyz"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="mailto:help@tensr.xyz?subject=Demo%20request"
               className="hidden items-center gap-2 rounded-full bg-component px-4 py-1.5 text-[13px] text-text-primary transition-colors hover:bg-[var(--component-hover)] sm:inline-flex"
             >
-              Get started
-              <span className="kbd">G</span>
+              Request a demo
+              <span className="kbd">D</span>
             </Link>
             <button
               type="button"
@@ -145,13 +143,11 @@ export const Header = () => {
             </li>
             <li className="pt-4">
               <Link
-                href="https://app.tensr.xyz"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:help@tensr.xyz?subject=Demo%20request"
                 className="inline-flex rounded-full bg-inverted px-5 py-2.5 text-sm font-medium text-[var(--inverted-fg)]"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
-                Get started
+                Request a demo
               </Link>
             </li>
           </ul>

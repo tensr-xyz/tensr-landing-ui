@@ -78,13 +78,28 @@
 .tensr-mock .hero-visual {
   position: relative;
 }
+.tensr-mock .showcase-frame {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  height: 100%;
+}
 .tensr-mock .showcase-frame .ws {
-  height: 520px;
+  flex: 1;
+  min-height: 0;
+  height: auto;
+}
+.tensr-mock .showcase-frame .report-layout,
+.tensr-mock .showcase-frame .collab-layout,
+.tensr-mock .showcase-frame .agent-solo {
+  flex: 1;
+  min-height: 0;
+  height: auto !important;
 }
 @media (max-width: 760px) {
   .tensr-mock .showcase-frame .ws {
     grid-template-columns: 1fr;
-    height: 420px;
+    min-height: 420px;
   }
   .tensr-mock .showcase-frame .ws-rail,
   .tensr-mock .showcase-frame .ws-agent {
@@ -390,29 +405,79 @@
 }
 .tensr-mock .ws-rail {
   border-right: 1px solid var(--w-line);
-  background: var(--w-surface);
-  padding: 14px 12px;
+  background: hsl(240 10% 98%);
+  padding: 14px 10px 8px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
 }
 .tensr-mock .ws-rail .rh {
-  font-size: 10.5px;
+  font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--w-fg-4);
   font-weight: 600;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
+  padding: 0 6px;
+}
+.tensr-mock .ws-rail .rail-counts {
+  display: flex;
+  gap: 10px;
+  padding: 0 6px 10px;
+  font-size: 11px;
+  color: var(--w-fg-3);
+}
+.tensr-mock .ws-rail .rail-counts .dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  margin-right: 4px;
+  vertical-align: middle;
+}
+.tensr-mock .ws-rail .rail-counts .dot.brand {
+  background: var(--brand);
+}
+.tensr-mock .ws-rail .rail-counts .dot.muted {
+  background: var(--w-fg-4);
 }
 .tensr-mock .ws-rail .colrow {
   display: flex;
   align-items: center;
   gap: 8px;
-  height: 26px;
+  height: 28px;
   padding: 0 6px;
   border-radius: 6px;
   font-size: 12.5px;
   color: var(--w-fg-2);
 }
 .tensr-mock .ws-rail .colrow:hover {
-  background: var(--w-surface-2);
+  background: var(--w-surface);
+}
+.tensr-mock .ws-rail .colrow .eye {
+  color: var(--w-fg-4);
+  display: grid;
+  place-items: center;
+}
+.tensr-mock .ws-rail .colrow .colname {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tensr-mock .ws-rail .colrow .chev {
+  color: var(--w-fg-4);
+  font-size: 10px;
+}
+.tensr-mock .ws-rail .rail-foot {
+  margin-top: auto;
+  padding: 8px 6px 4px;
+  border-top: 1px solid var(--w-line);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--w-fg-3);
 }
 .tensr-mock .ws-rail .colrow .ty {
   width: 14px;
@@ -422,6 +487,408 @@
 }
 .tensr-mock .ws-rail .colrow .ty.txt {
   color: var(--w-fg-4);
+}
+
+/* App titlebar (matches platform document tabs) */
+.tensr-mock .app-titlebar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 14px;
+  background: var(--w-surface);
+  border-bottom: 1px solid var(--w-line);
+}
+.tensr-mock .doc-tabs {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  flex: 1;
+}
+.tensr-mock .doc-tab {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 280px;
+  height: 32px;
+  padding: 0 12px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  color: var(--w-fg-2);
+  background: var(--w-surface-2);
+}
+.tensr-mock .doc-tab.on {
+  color: var(--w-fg);
+  box-shadow: inset 0 2px 0 0 var(--brand);
+  background: var(--w-surface);
+  border: 1px solid var(--w-line);
+}
+.tensr-mock .doc-kind {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--brand);
+  background: var(--brand-soft);
+  border: 1px solid var(--brand-line);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+.tensr-mock .doc-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tensr-mock .titlebar-search {
+  height: 30px;
+  min-width: 180px;
+  max-width: 240px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--w-line);
+  background: var(--w-surface-2);
+  font-size: 12px;
+  color: var(--w-fg-4);
+}
+
+.tensr-mock .agent-new {
+  margin-left: auto;
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 7px;
+  border: 1px solid var(--w-line);
+  background: var(--w-surface);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--w-fg-2);
+  cursor: default;
+}
+.tensr-mock .chat-user {
+  align-self: flex-end;
+  max-width: 85%;
+  background: var(--brand);
+  color: #fff;
+  padding: 9px 13px;
+  border-radius: 12px 12px 4px 12px;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.tensr-mock .agent-thinking {
+  font-size: 12.5px;
+  color: var(--w-fg-3);
+}
+.tensr-mock .agent-solo {
+  height: 100%;
+  min-height: 520px;
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+}
+
+/* Report v2 — matches analysis-report-view */
+.tensr-mock .report-layout {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  height: 100%;
+  min-height: 520px;
+  background:
+    radial-gradient(90% 70% at 15% 0%, hsl(250 100% 96% / 0.9) 0%, transparent 55%),
+    radial-gradient(70% 50% at 90% 100%, hsl(280 80% 96% / 0.7) 0%, transparent 50%),
+    hsl(240 10% 97%);
+  overflow: hidden;
+}
+.tensr-mock .report-v2 {
+  padding: 22px 26px;
+  overflow: hidden;
+  height: auto;
+  background: transparent;
+}
+.tensr-mock .report-hero {
+  margin-bottom: 16px;
+}
+.tensr-mock .report-kicker {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--brand);
+  margin-bottom: 6px;
+}
+.tensr-mock .report-title {
+  font-size: 22px;
+  font-weight: 500;
+  letter-spacing: -0.018em;
+  margin: 0;
+  color: var(--w-fg);
+}
+.tensr-mock .report-sub {
+  margin: 4px 0 12px;
+  font-size: 13px;
+  color: var(--w-fg-3);
+}
+.tensr-mock .report-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tensr-mock .rchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.55);
+  font-size: 11.5px;
+  color: var(--w-fg-2);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+.tensr-mock .rchip b {
+  font-weight: 500;
+  color: var(--w-fg-3);
+}
+.tensr-mock .report-card {
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 1px 2px rgba(38, 37, 30, 0.04),
+    0 8px 24px rgba(38, 37, 30, 0.04);
+}
+.tensr-mock .report-card-h {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--w-line);
+}
+.tensr-mock .kind-badge {
+  display: inline-flex;
+  align-items: center;
+  height: 18px;
+  padding: 0 6px;
+  border-radius: 4px;
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.tensr-mock .card-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--w-fg);
+}
+.tensr-mock .card-action {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--w-fg-3);
+}
+.tensr-mock .stat-table.emphasized thead tr {
+  background: var(--w-fg);
+  color: #fff;
+}
+.tensr-mock .stat-table.emphasized thead th {
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.tensr-mock .stat-table.emphasized tbody tr.hot {
+  background: hsl(var(--brand-h) 100% 97% / 0.7);
+}
+.tensr-mock .sig-pill {
+  display: inline-block;
+  margin-left: 4px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  vertical-align: middle;
+}
+.tensr-mock .interp-v2 {
+  margin: 14px 16px 16px;
+  padding: 12px 14px;
+  border-radius: 0 8px 8px 0;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  border-left: 3px solid var(--brand);
+  background: linear-gradient(
+    to bottom,
+    hsl(var(--brand-h) 100% 97% / 0.55),
+    rgba(255, 255, 255, 0.35)
+  );
+}
+.tensr-mock .interp-v2 .interp-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand);
+}
+.tensr-mock .interp-v2 .ai {
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: var(--brand);
+  color: #fff;
+  display: grid;
+  place-items: center;
+}
+.tensr-mock .interp-v2 p {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.55;
+  color: var(--w-fg);
+}
+.tensr-mock .checks-v2 {
+  padding: 10px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.tensr-mock .check-row {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.45);
+  font-size: 12.5px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+.tensr-mock .check-row .name {
+  font-weight: 600;
+  color: var(--w-fg);
+}
+.tensr-mock .check-row .desc {
+  color: var(--w-fg-3);
+}
+.tensr-mock .report-rail {
+  border-left: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.4);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.tensr-mock .report-rail .rh,
+.tensr-mock .collab-rail .rh {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--w-fg-4);
+  margin-bottom: 8px;
+}
+.tensr-mock .rail-link {
+  padding: 7px 8px;
+  border-radius: 6px;
+  font-size: 12.5px;
+  color: var(--w-fg-2);
+}
+.tensr-mock .rail-link.on {
+  background: var(--brand-soft);
+  color: var(--brand-deep);
+  font-weight: 500;
+}
+.tensr-mock .rail-btn {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  border: 1px solid var(--w-line);
+  background: var(--w-surface-2);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--w-fg-2);
+  margin-bottom: 6px;
+}
+
+/* Collab layout */
+.tensr-mock .collab-layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  height: 100%;
+  min-height: 520px;
+  background: var(--w-bg);
+  overflow: hidden;
+}
+.tensr-mock .collab-main {
+  padding: 16px 20px;
+  overflow: hidden;
+}
+.tensr-mock .collab-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.tensr-mock .collab-toolbar .muted {
+  font-size: 12px;
+  color: var(--w-fg-3);
+}
+.tensr-mock .apa-preview {
+  margin: 12px 14px 14px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--brand-soft);
+  border: 1px solid var(--brand-line);
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--brand-deep);
+  font-weight: 500;
+  line-height: 1.45;
+}
+.tensr-mock .collab-rail {
+  border-left: 1px solid var(--w-line);
+  background: var(--w-surface);
+  padding: 16px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow: hidden;
+}
+.tensr-mock .comment-compose {
+  margin-top: auto;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  border-radius: 8px;
+  border: 1px solid var(--w-line);
+  background: var(--w-surface-2);
+  font-size: 12.5px;
+  color: var(--w-fg-4);
+}
+
+@media (max-width: 760px) {
+  .tensr-mock .report-layout,
+  .tensr-mock .collab-layout {
+    grid-template-columns: 1fr;
+  }
+  .tensr-mock .report-rail,
+  .tensr-mock .collab-rail {
+    display: none;
+  }
 }
 
 .tensr-mock .ws-main {

@@ -187,21 +187,84 @@ const WORKSPACE_ROWS = [
   ['8', 'Jose Alvarado', 'PG', '25', '21.7', '.435', '2.3', '3.6', '7.1'],
   ['9', 'Kyle Anderson', 'PF', '30', '22.9', '.461', '4.3', '4.2', '6.4'],
   ['10', 'Giannis Antetokounmpo', 'PF', '29', '35.2', '.611', '11.5', '6.5', '30.4'],
+  ['11', 'OG Anunoby', 'SF', '26', '34.1', '.492', '4.2', '2.1', '14.7'],
+  ['12', 'Deni Avdija', 'SF', '23', '30.1', '.489', '7.2', '3.8', '14.7'],
+  ['13', 'Deandre Ayton', 'C', '25', '32.4', '.570', '11.1', '1.6', '16.7'],
+  ['14', 'Marvin Bagley III', 'PF', '24', '21.1', '.586', '6.3', '1.0', '11.7'],
+  ['15', 'LaMelo Ball', 'PG', '22', '32.3', '.433', '5.1', '8.0', '23.9'],
+  ['16', 'Paolo Banchero', 'PF', '21', '35.0', '.455', '6.9', '5.4', '22.6'],
+  ['17', 'Desmond Bane', 'SG', '25', '34.4', '.464', '4.4', '5.5', '24.0'],
+  ['18', 'Scottie Barnes', 'SF', '22', '34.9', '.475', '8.2', '6.1', '19.9'],
+  ['19', 'RJ Barrett', 'SG', '23', '31.7', '.495', '5.4', '3.3', '21.8'],
+  ['20', 'Nicolas Batum', 'SF', '35', '25.5', '.453', '3.8', '2.1', '5.3'],
 ];
 
-const COLUMNS = [
-  { ty: 'txt', name: 'Player' },
-  { ty: 'txt', name: 'Pos' },
-  { ty: '', name: 'Age' },
-  { ty: '', name: 'Tm' },
-  { ty: '', name: 'G' },
-  { ty: '', name: 'MP' },
-  { ty: '', name: 'FG%' },
-  { ty: '', name: '3P' },
-  { ty: '', name: 'TRB' },
-  { ty: '', name: 'AST' },
-  { ty: '', name: 'PTS' },
+const FILTER_COLS = [
+  'Player',
+  'Pos',
+  'Age',
+  'Tm',
+  'G',
+  'GS',
+  'MP',
+  'FG',
+  'FGA',
+  'FG%',
+  '3P',
+  'TRB',
+  'AST',
+  'PTS',
 ];
+
+function EyeIcon() {
+  return (
+    <svg
+      width="13"
+      height="13"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.7"
+    >
+      <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  );
+}
+
+function SparkIcon({ size = 13 }: { size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+    >
+      <path d="M12 3v6M12 15v6M3 12h6M15 12h6" />
+    </svg>
+  );
+}
+
+function AppTitlebar({ doc = "NBA Per-Game Stats ('23-24).csv" }: { doc?: string }) {
+  return (
+    <div className="app-titlebar">
+      <div className="doc-tabs">
+        <div className="doc-tab on">
+          <span className="doc-kind">She</span>
+          <span className="doc-name">{doc}</span>
+        </div>
+      </div>
+      <div className="titlebar-search">Search analyses &amp; plugins…</div>
+      <div className="win-right av-stack">
+        <span className="av s av-1">OL</span>
+        <span className="av s av-2">MR</span>
+        <span className="av s av-3">JP</span>
+      </div>
+    </div>
+  );
+}
 
 export function WorkspaceProductMock() {
   return (
@@ -209,20 +272,31 @@ export function WorkspaceProductMock() {
       <div
         className="win showcase-frame"
         role="img"
-        aria-label="Tensr full workspace with columns, spreadsheet, and AI agent"
+        aria-label="Tensr full workspace with column filters, spreadsheet, and AI agent"
       >
         <WinChrome />
+        <AppTitlebar />
         <div className="ws">
           <div className="ws-rail">
-            <div className="rh">14 numeric · 1 text</div>
-            {COLUMNS.map(col => (
-              <div key={col.name} className="colrow">
-                <span className={`ty${col.ty === 'txt' ? ' txt' : ''}`}>
-                  {col.ty === 'txt' ? 'abc' : '#'}
+            <div className="rh">Column filters</div>
+            <div className="rail-counts">
+              <span>
+                <i className="dot brand" /> 14 numeric
+              </span>
+              <span>
+                <i className="dot muted" /> 1 text
+              </span>
+            </div>
+            {FILTER_COLS.map(name => (
+              <div key={name} className="colrow">
+                <span className="eye" aria-hidden="true">
+                  <EyeIcon />
                 </span>
-                {col.name}
+                <span className="colname">{name}</span>
+                <span className="chev">▾</span>
               </div>
             ))}
+            <div className="rail-foot">Visible 14/15 cols</div>
           </div>
           <div className="ws-main">
             <div className="ws-subtabs">
@@ -232,15 +306,6 @@ export function WorkspaceProductMock() {
                   <path d="M3 9h18M9 3v18" />
                 </svg>
                 Sheet
-              </div>
-              <div className="ws-subtab">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
-                  <path d="M4 20h16" />
-                  <circle cx="8" cy="14" r="1.4" fill="currentColor" />
-                  <circle cx="13" cy="10" r="1.4" fill="currentColor" />
-                  <circle cx="17" cy="7" r="1.4" fill="currentColor" />
-                </svg>
-                Charts
               </div>
               <div className="ws-subtab">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -255,30 +320,14 @@ export function WorkspaceProductMock() {
                 <thead>
                   <tr>
                     <th className="idx">#</th>
-                    <th>
-                      Player <span className="ty txt">abc</span>
-                    </th>
-                    <th>
-                      Pos <span className="ty txt">abc</span>
-                    </th>
-                    <th>
-                      Age <span className="ty">#</span>
-                    </th>
-                    <th>
-                      MP <span className="ty">#</span>
-                    </th>
-                    <th>
-                      FG% <span className="ty">#</span>
-                    </th>
-                    <th>
-                      TRB <span className="ty">#</span>
-                    </th>
-                    <th>
-                      AST <span className="ty">#</span>
-                    </th>
-                    <th>
-                      PTS <span className="ty">#</span>
-                    </th>
+                    <th>Player</th>
+                    <th>Pos</th>
+                    <th>Age</th>
+                    <th>MP</th>
+                    <th>FG%</th>
+                    <th>TRB</th>
+                    <th>AST</th>
+                    <th>PTS</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -302,33 +351,25 @@ export function WorkspaceProductMock() {
             </div>
             <div className="ws-status">
               <span className="ok">● Saved</span>
-              <span>505 rows · 15 cols</span>
+              <span>Total rows: 505</span>
               <span>Player1</span>
-              <span style={{ marginLeft: 'auto' }}>⌘K · Terminal ⌘`</span>
+              <span style={{ marginLeft: 'auto' }}>Terminal ⌘`</span>
             </div>
           </div>
           <div className="agent ws-agent">
             <div className="agent-head">
               <span className="ico">
-                <svg
-                  width="17"
-                  height="17"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M12 3v6M12 15v6M3 12h6M15 12h6" />
-                </svg>
+                <SparkIcon size={15} />
               </span>
               <div>
                 <div className="t">Tensr Agent</div>
                 <div className="s">
-                  <span className="dot" /> Connected · 24 ops
+                  <span className="dot" /> Connected
                 </div>
               </div>
+              <button type="button" className="agent-new" tabIndex={-1}>
+                + New chat
+              </button>
             </div>
             <div className="agent-body">
               <div className="agent-msg" style={{ fontSize: 13 }}>
@@ -360,16 +401,7 @@ export function WorkspaceProductMock() {
               </div>
               <div className="interp" style={{ marginTop: 0 }}>
                 <span className="ai">
-                  <svg
-                    width="13"
-                    height="13"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                  >
-                    <path d="M12 3v6M3 12h6" />
-                  </svg>
+                  <SparkIcon />
                 </span>
                 <span className="x">
                   <b>Strong positive correlation.</b> Players who log more minutes score
@@ -380,16 +412,6 @@ export function WorkspaceProductMock() {
             <div className="agent-input">
               <div className="ph">Ask about your data…</div>
               <div className="tools">
-                <svg
-                  width="15"
-                  height="15"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                >
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
                 <span className="send">
                   <svg
                     width="14"
@@ -416,52 +438,26 @@ export function WorkspaceProductMock() {
 export function AgentProductMock() {
   return (
     <div className="tensr-mock">
-      <div className="win" role="img" aria-label="Tensr Agent running ANOVA">
+      <div className="win showcase-frame" role="img" aria-label="Tensr Agent running ANOVA">
         <WinChrome url="Tensr Agent" />
-        <div className="agent" style={{ height: 440 }}>
+        <div className="agent agent-solo">
           <div className="agent-head">
             <span className="ico">
-              <svg
-                width="17"
-                height="17"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M12 3v6M12 15v6M3 12h6M15 12h6" />
-              </svg>
+              <SparkIcon size={15} />
             </span>
             <div>
               <div className="t">Tensr Agent</div>
               <div className="s">
-                <span className="dot" /> Connected · 31 ops
+                <span className="dot" /> Connected · claude-haiku
               </div>
             </div>
+            <button type="button" className="agent-new" tabIndex={-1}>
+              + New chat
+            </button>
           </div>
           <div className="agent-body" style={{ overflow: 'hidden' }}>
-            <div
-              style={{
-                alignSelf: 'flex-end',
-                maxWidth: '85%',
-                display: 'flex',
-                justifyContent: 'flex-end',
-              }}
-            >
-              <div
-                style={{
-                  background: 'var(--brand)',
-                  color: '#fff',
-                  padding: '9px 13px',
-                  borderRadius: '13px 13px 4px 13px',
-                  fontSize: 13,
-                }}
-              >
-                Is scoring different across positions?
-              </div>
-            </div>
+            <div className="chat-user">Is scoring different across positions?</div>
+            <div className="agent-thinking">Planning one-way ANOVA · PTS by Pos…</div>
             <div className="agent-msg" style={{ fontSize: 13 }}>
               Running a one‑way ANOVA of <b>PTS</b> by <b>position</b> (5 groups, n=505):
             </div>
@@ -470,6 +466,7 @@ export function AgentProductMock() {
                 <span className="c">Source</span>
                 <span className="c num">F</span>
                 <span className="c num">p</span>
+                <span className="c num">η²</span>
               </div>
               <div className="r">
                 <span className="c">Position</span>
@@ -477,25 +474,12 @@ export function AgentProductMock() {
                 <span className="c num" style={{ color: 'var(--brand-deep)', fontWeight: 600 }}>
                   &lt;.001
                 </span>
-              </div>
-              <div className="r">
-                <span className="c">η²</span>
-                <span className="c num">0.063</span>
-                <span className="c num">—</span>
+                <span className="c num">.063</span>
               </div>
             </div>
             <div className="interp" style={{ marginTop: 0 }}>
               <span className="ai">
-                <svg
-                  width="13"
-                  height="13"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M12 3v6M3 12h6" />
-                </svg>
+                <SparkIcon />
               </span>
               <span className="x">
                 <b>Significant difference.</b> Position explains ~6% of variance in scoring. Centers
@@ -514,7 +498,26 @@ export function AgentProductMock() {
               </span>
             </div>
           </div>
-          <div className="agent-foot">claude‑haiku · stats‑pack v0.4 · 31 ops</div>
+          <div className="agent-input">
+            <div className="ph">Ask about your data…</div>
+            <div className="tools">
+              <span className="send">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="1.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="m5 12 14-7-7 14-2-5-5-2Z" />
+                </svg>
+              </span>
+            </div>
+          </div>
+          <div className="agent-foot">↵ send · ⇧↵ newline</div>
         </div>
       </div>
     </div>
@@ -524,117 +527,127 @@ export function AgentProductMock() {
 export function ReportProductMock() {
   return (
     <div className="tensr-mock">
-      <div className="win" role="img" aria-label="Tensr ANOVA analysis report">
+      <div className="win showcase-frame" role="img" aria-label="Tensr ANOVA analysis report">
         <WinChrome url="app.tensr.xyz/w/nba-2024/report" />
-        <div className="report" style={{ height: 470, overflow: 'hidden' }}>
-          <div className="report-top">
-            <span className="t">
-              <span className="kind">One‑way ANOVA</span> Points scored by position
-            </span>
-          </div>
-          <div className="report-body">
-            <div className="report-meta">
-              <div className="m">
-                <div className="k">DV</div>
-                <div className="v">PTS</div>
-              </div>
-              <div className="m">
-                <div className="k">Factor</div>
-                <div className="v">Pos</div>
-              </div>
-              <div className="m">
-                <div className="k">Groups</div>
-                <div className="v">5</div>
-              </div>
-              <div className="m">
-                <div className="k">n</div>
-                <div className="v">505</div>
-              </div>
-              <div className="m" style={{ borderRight: 0 }}>
-                <div className="k">Engine</div>
-                <div className="v">scipy</div>
+        <div className="report-layout">
+          <div className="report report-v2">
+            <div className="report-hero">
+              <div className="report-kicker">Analysis report</div>
+              <h3 className="report-title">Points scored by position</h3>
+              <p className="report-sub">PTS · Pos · one-way ANOVA</p>
+              <div className="report-chips">
+                <span className="rchip backdrop-blur-md">
+                  <b>DV</b> PTS
+                </span>
+                <span className="rchip backdrop-blur-md">
+                  <b>Factor</b> Pos
+                </span>
+                <span className="rchip backdrop-blur-md">
+                  <b>Groups</b> 5
+                </span>
+                <span className="rchip backdrop-blur-md">
+                  <b>n</b> 505
+                </span>
+                <span className="rchip backdrop-blur-md">
+                  <b>Engine</b> scipy
+                </span>
               </div>
             </div>
-            <div className="block">
-              <div className="block-h">
-                <span className="ix">1</span>
-                <span className="bt">ANOVA table</span>
-                <span className="kind">f_oneway</span>
+
+            <div className="report-card backdrop-blur-xl backdrop-saturate-150">
+              <div className="report-card-h">
+                <span className="kind-badge">One way ANOVA</span>
+                <span className="card-title">ANOVA table</span>
+                <span className="card-action">Copy</span>
               </div>
-              <div className="block-body">
-                <table className="stat-table">
-                  <thead>
-                    <tr>
-                      <th>Source</th>
-                      <th>SS</th>
-                      <th>df</th>
-                      <th>MS</th>
-                      <th>F</th>
-                      <th>p</th>
-                      <th>η²</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="hot">
-                      <td>Position</td>
-                      <td>1842.6</td>
-                      <td>4</td>
-                      <td>460.7</td>
-                      <td>8.41</td>
-                      <td className="sig">&lt;.001</td>
-                      <td>.063</td>
-                    </tr>
-                    <tr>
-                      <td>Residual</td>
-                      <td>27384.1</td>
-                      <td>500</td>
-                      <td>54.8</td>
-                      <td>—</td>
-                      <td>—</td>
-                      <td>—</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className="interp">
+              <table className="stat-table emphasized">
+                <thead>
+                  <tr>
+                    <th>Source</th>
+                    <th>SS</th>
+                    <th>df</th>
+                    <th>MS</th>
+                    <th>F</th>
+                    <th>p</th>
+                    <th>η²</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="hot">
+                    <td>Position</td>
+                    <td>1842.6</td>
+                    <td>4</td>
+                    <td>460.7</td>
+                    <td>8.41</td>
+                    <td className="sig">
+                      &lt;.001 <span className="sig-pill">sig</span>
+                    </td>
+                    <td>.063</td>
+                  </tr>
+                  <tr>
+                    <td>Residual</td>
+                    <td>27384.1</td>
+                    <td>500</td>
+                    <td>54.8</td>
+                    <td>—</td>
+                    <td>—</td>
+                    <td>—</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="interp-v2">
+                <div className="interp-label">
                   <span className="ai">
-                    <svg
-                      width="13"
-                      height="13"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                    >
-                      <path d="M12 3v6M3 12h6" />
-                    </svg>
+                    <SparkIcon size={11} />
                   </span>
-                  <span className="x">
-                    <b>Scoring differs significantly by position,</b> F(4, 500) = 8.41, p &lt; .001.
-                    The effect is small‑to‑moderate (η² = .063).
-                  </span>
+                  Interpretation · AI generated
                 </div>
+                <p>
+                  <b>Scoring differs significantly by position,</b> F(4, 500) = 8.41, p &lt; .001.
+                  The effect is small‑to‑moderate (η² = .063).
+                </p>
               </div>
             </div>
-            <div className="block">
-              <div className="block-h">
-                <span className="ix">2</span>
-                <span className="bt">Assumption checks</span>
-                <span className="kind">3 tests</span>
+
+            <div className="report-card backdrop-blur-xl backdrop-saturate-150">
+              <div className="report-card-h">
+                <span className="kind-badge">Assumptions</span>
+                <span className="card-title">Assumption checks</span>
               </div>
-              <div className="block-body">
-                <div className="checks">
-                  <div className="check">
-                    <span className="name">Shapiro–Wilk</span> Normality of residuals{' '}
-                    <span className="badge pass">✓ Pass · p=.21</span>
-                  </div>
-                  <div className="check">
-                    <span className="name">Levene</span> Homogeneity of variance{' '}
-                    <span className="badge warn">! Check · p=.04</span>
-                  </div>
+              <div className="checks-v2">
+                <div className="check-row">
+                  <span className="name">Shapiro–Wilk</span>
+                  <span className="desc">Normality of residuals</span>
+                  <span className="badge pass">✓ Pass · p=.21</span>
+                </div>
+                <div className="check-row">
+                  <span className="name">Levene</span>
+                  <span className="desc">Homogeneity of variance</span>
+                  <span className="badge warn">! Check · p=.04</span>
+                </div>
+                <div className="check-row">
+                  <span className="name">Independence</span>
+                  <span className="desc">Observations</span>
+                  <span className="badge pass">✓ Pass</span>
                 </div>
               </div>
             </div>
           </div>
+
+          <aside className="report-rail backdrop-blur-xl backdrop-saturate-150">
+            <div className="rail-sec">
+              <div className="rh">Outline</div>
+              <div className="rail-link on">ANOVA table</div>
+              <div className="rail-link">Assumption checks</div>
+              <div className="rail-link">Post‑hoc</div>
+              <div className="rail-link">APA citation</div>
+            </div>
+            <div className="rail-sec">
+              <div className="rh">Export</div>
+              <div className="rail-btn">Copy APA</div>
+              <div className="rail-btn">Download PDF</div>
+            </div>
+          </aside>
         </div>
       </div>
     </div>
@@ -748,81 +761,87 @@ export function ChartsProductMock() {
 export function CollabProductMock() {
   return (
     <div className="tensr-mock">
-      <div className="win" role="img" aria-label="Tensr collaboration with live comments">
-        <div className="win-bar">
-          <div className="win-dots">
-            <i />
-            <i />
-            <i />
-          </div>
-          <div className="win-omni">
-            <svg
-              className="lk"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-            >
-              <rect x="4" y="4" width="16" height="16" rx="3" />
-            </svg>
-            app.tensr.xyz/w/nba-2024
-          </div>
-          <div className="win-right av-stack">
-            <span className="av s av-1">OL</span>
-            <span className="av s av-2">MR</span>
-            <span className="av s av-3">JP</span>
-            <span className="av s" style={{ background: 'var(--w-fg-3)' }}>
-              +2
-            </span>
-          </div>
-        </div>
-        <div className="collab" style={{ height: 440, position: 'relative' }}>
-          <div className="nb-md" style={{ marginBottom: 12 }}>
-            <h4>Discussion — scoring by position</h4>
-            <p>Shared notebook · last edited 2 min ago</p>
-          </div>
-          <div className="collab-doc">
-            <div className="block-h" style={{ borderBottom: '1px solid var(--w-line)' }}>
-              <span className="ix">2</span>
-              <span className="bt">Correlation matrix</span>
-              <span className="kind">heatmap</span>
-            </div>
-            <div className="collab-rows" style={{ position: 'relative' }}>
-              <div
-                className="cursor-flag"
-                style={{ left: '32%', top: 6, background: 'hsl(212 80% 48%)' }}
-              >
-                Maria
+      <div
+        className="win showcase-frame"
+        role="img"
+        aria-label="Tensr collaboration with live comments"
+      >
+        <WinChrome />
+        <AppTitlebar doc="Discussion — scoring by position" />
+        <div className="collab-layout">
+          <div className="collab-main">
+            <div className="collab-toolbar">
+              <span className="kind-badge">Shared notebook</span>
+              <span className="muted">Last edited 2 min ago</span>
+              <div className="av-stack" style={{ marginLeft: 'auto' }}>
+                <span className="av s av-1">OL</span>
+                <span className="av s av-2">MR</span>
+                <span className="av s av-3">JP</span>
+                <span className="av s" style={{ background: 'var(--w-fg-3)' }}>
+                  +2
+                </span>
               </div>
-              <div
-                className="cursor-flag"
-                style={{ left: '64%', top: 42, background: 'hsl(150 50% 40%)' }}
-              >
-                Jordan
+            </div>
+            <div className="collab-doc">
+              <div className="block-h" style={{ borderBottom: '1px solid var(--w-line)' }}>
+                <span className="ix">2</span>
+                <span className="bt">Correlation matrix</span>
+                <span className="kind">heatmap</span>
               </div>
-              <div className="collab-line" style={{ width: '88%' }} />
-              <div className="collab-line" style={{ width: '74%' }} />
-              <div
-                className="collab-line"
-                style={{ width: '81%', background: 'var(--brand-soft)' }}
-              />
-              <div className="collab-line" style={{ width: '60%' }} />
+              <div className="collab-rows" style={{ position: 'relative' }}>
+                <div
+                  className="cursor-flag"
+                  style={{ left: '32%', top: 6, background: 'hsl(212 80% 48%)' }}
+                >
+                  Maria
+                </div>
+                <div
+                  className="cursor-flag"
+                  style={{ left: '64%', top: 42, background: 'hsl(150 50% 40%)' }}
+                >
+                  Jordan
+                </div>
+                <div className="collab-line" style={{ width: '88%' }} />
+                <div className="collab-line" style={{ width: '74%' }} />
+                <div
+                  className="collab-line"
+                  style={{ width: '81%', background: 'var(--brand-soft)' }}
+                />
+                <div className="collab-line" style={{ width: '60%' }} />
+                <div className="collab-line" style={{ width: '70%' }} />
+              </div>
+            </div>
+            <div className="collab-doc" style={{ marginTop: 14 }}>
+              <div className="block-h" style={{ borderBottom: '1px solid var(--w-line)' }}>
+                <span className="ix">3</span>
+                <span className="bt">APA write‑up</span>
+                <span className="kind">export</span>
+              </div>
+              <div className="apa-preview">
+                Scoring differs significantly by position, F(4, 500) = 8.41, p &lt; .001, η² = .063.
+              </div>
             </div>
           </div>
-          <div className="comment-bub">
-            <span className="av s av-2">MR</span>
-            <span className="x">
-              <span className="nm">Maria Rivas</span> Should we report ω² here instead? It&apos;s
-              the more conservative estimate for this n.{' '}
-              <span style={{ color: 'var(--brand-deep)', fontWeight: 600 }}>@Jordan</span>
-            </span>
-          </div>
-          <div className="comment-bub" style={{ marginLeft: 28 }}>
-            <span className="av s av-3">JP</span>
-            <span className="x">
-              <span className="nm">Jordan Park</span> Agreed — added both to the report block. ✓
-            </span>
-          </div>
+          <aside className="collab-rail">
+            <div className="rh">Comments</div>
+            <div className="comment-bub">
+              <span className="av s av-2">MR</span>
+              <span className="x">
+                <span className="nm">Maria Rivas</span> Should we report ω² here instead? It&apos;s
+                the more conservative estimate for this n.{' '}
+                <span style={{ color: 'var(--brand-deep)', fontWeight: 600 }}>@Jordan</span>
+              </span>
+            </div>
+            <div className="comment-bub">
+              <span className="av s av-3">JP</span>
+              <span className="x">
+                <span className="nm">Jordan Park</span> Agreed — added both to the report block. ✓
+              </span>
+            </div>
+            <div className="comment-compose">
+              <div className="ph">Add a comment…</div>
+            </div>
+          </aside>
         </div>
       </div>
     </div>
