@@ -98,9 +98,9 @@ function DeepMock({ type }: { type: 'workspace' | 'report' | 'collab' }) {
 
 export const HomeTemplate = () => {
   return (
-    <div className="flex flex-1 flex-col bg-page text-text-primary">
+    <div className="flex flex-1 flex-col overflow-x-clip bg-page text-text-primary">
       {/* Hero */}
-      <section className="relative pb-8 pt-10 md:pb-12 md:pt-14 lg:pt-28">
+      <section className="relative overflow-x-clip pb-8 pt-10 md:pb-12 md:pt-14 lg:pt-28">
         <div className="relative mx-auto max-w-[var(--max-width)] page-pad">
           <div className="mb-10 flex flex-col items-start justify-between gap-6 md:mb-12 lg:flex-row lg:items-end lg:gap-0">
             <h1 className="max-w-xl text-[2.75rem] leading-none font-medium tracking-tight text-text-primary sm:text-5xl md:text-[3.5rem] lg:text-[3.5rem]">
