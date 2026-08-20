@@ -194,7 +194,7 @@ export const PricingTemplate = () => {
       <section className="page-pad mx-auto max-w-[var(--max-width)] pb-8 pt-14 md:pt-20">
         <div className="mx-auto max-w-2xl text-center">
           <p className="mb-3 text-xs tracking-wider text-text-muted uppercase">Pricing</p>
-          <h1 className="text-3xl tracking-tight md:text-5xl">
+          <h1 className="text-3xl font-medium tracking-tight md:text-5xl">
             Pricing that scales with your research.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-text-secondary md:text-base">
@@ -308,7 +308,9 @@ export const PricingTemplate = () => {
         <div className="page-pad mx-auto max-w-[var(--max-width)]">
           <div className="mb-10 text-center">
             <p className="mb-3 text-xs tracking-wider text-text-muted uppercase">Compare plans</p>
-            <h2 className="text-2xl tracking-tight md:text-3xl">Every detail, side by side.</h2>
+            <h2 className="text-2xl font-medium tracking-tight md:text-3xl">
+              Every detail, side by side.
+            </h2>
           </div>
           <div className="overflow-x-auto rounded-xl border border-border-default">
             <table className="w-full min-w-[640px] text-left text-sm">
@@ -361,7 +363,9 @@ export const PricingTemplate = () => {
         <div className="page-pad mx-auto max-w-3xl">
           <div className="mb-10 text-center">
             <p className="mb-3 text-xs tracking-wider text-text-muted uppercase">FAQ</p>
-            <h2 className="text-2xl tracking-tight md:text-3xl">Questions, answered.</h2>
+            <h2 className="text-2xl font-medium tracking-tight md:text-3xl">
+              Questions, answered.
+            </h2>
           </div>
           <Accordion items={faqItems} />
         </div>

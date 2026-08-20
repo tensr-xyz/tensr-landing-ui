@@ -359,7 +359,7 @@ export const FeaturesTemplate = () => {
             >
               <div className={index % 2 === 1 ? 'md:order-2' : ''}>
                 <div className="mb-3 text-sm text-text-muted">{moment.num}</div>
-                <h2 className="mb-4 text-2xl tracking-tight text-text-primary md:text-3xl">
+                <h2 className="mb-4 text-2xl font-medium tracking-tight text-text-primary md:text-3xl">
                   {moment.title}
                 </h2>
                 <p className="mb-6 max-w-md text-[15px] leading-relaxed text-text-secondary">
@@ -391,7 +391,7 @@ export const FeaturesTemplate = () => {
       <section className="border-y border-border-default bg-[var(--surface-muted,transparent)] py-16 md:py-24">
         <div className="mx-auto max-w-[var(--max-width)] page-pad">
           <div className="mb-3 text-xs tracking-wider text-text-muted uppercase">The engine</div>
-          <h2 className="mb-4 max-w-2xl text-2xl tracking-tight text-text-primary md:text-4xl">
+          <h2 className="mb-4 max-w-2xl text-2xl font-medium tracking-tight text-text-primary md:text-4xl">
             Feature parity with SPSS — without the SPSS.
           </h2>
           <p className="mb-10 max-w-[54ch] text-[15px] leading-relaxed text-text-secondary md:text-base">
@@ -419,7 +419,9 @@ export const FeaturesTemplate = () => {
           <div className="grid gap-8 md:grid-cols-3">
             {miniFeats.map(feat => (
               <div key={feat.title}>
-                <h3 className="mb-2 text-base tracking-tight text-text-primary">{feat.title}</h3>
+                <h3 className="mb-2 text-base font-medium tracking-tight text-text-primary">
+                  {feat.title}
+                </h3>
                 <p className="text-sm leading-relaxed text-text-secondary">{feat.description}</p>
               </div>
             ))}

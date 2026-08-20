@@ -181,7 +181,7 @@ export const HomeTemplate = () => {
       {/* Value prop + 3 steps (static — GSAP later) */}
       <section className="relative overflow-hidden py-16 md:py-28">
         <div className="relative mx-auto max-w-[var(--max-width)] page-pad">
-          <h2 className="mb-12 max-w-4xl text-left text-2xl leading-snug tracking-tight text-text-primary md:mb-16 md:text-[2.5rem] md:leading-snug">
+          <h2 className="mb-12 max-w-4xl text-left text-2xl font-medium leading-snug tracking-tight text-text-primary md:mb-16 md:text-[2.5rem] md:leading-snug">
             Tensr{' '}
             <span className="step-chip step-chip-muted mx-0.5">
               finds
