@@ -4,7 +4,7 @@ import PricingTemplate from '@/components/templates/pricing';
 export const metadata: Metadata = {
   title: 'Pricing',
   description:
-    'Tensr pricing: Pro ($20/mo), Pro Plus ($60/mo), and Teams ($40/seat/mo). Annual billing saves 20%. No free tier.',
+    '30-day trial, no card. Everything unlocked. Day 31 the account is read-only and your data stays. Then Pro, Pro Plus, and Teams.',
   keywords: [
     'statistical analysis pricing',
     'research software pricing',
@@ -19,13 +19,13 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: 'Pricing | Tensr',
-    description: 'Pro, Pro Plus, and Teams. Annual billing saves 20%. No free or student tier.',
+    description: '30-day trial, no card, everything unlocked. Day 31 is read-only. Pay to resume.',
     url: 'https://www.tensr.xyz/pricing',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing | Tensr',
-    description: 'Pro, Pro Plus, and Teams. Annual billing saves 20%.',
+    description: '30-day trial, no card. Data retained after day 31. Pay to resume writes.',
   },
 };
 

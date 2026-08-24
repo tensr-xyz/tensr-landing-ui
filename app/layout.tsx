@@ -57,7 +57,7 @@ export const metadata: Metadata = {
     'statistical analysis',
     'data analysis',
     'research software',
-    'SPSS alternative',
+    'Displayr alternative',
     'statistics platform',
     'research statistics',
     'data science',
