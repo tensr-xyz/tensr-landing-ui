@@ -4,13 +4,13 @@ import FeaturesTemplate from '@/components/templates/features';
 export const metadata: Metadata = {
   title: 'Product',
   description:
-    'From raw data to a result you can defend. Tensr Agent, analysis reports, tri‑modal workspace, live collaboration, and a plugin marketplace — SPSS‑parity stats in one place.',
+    'Weighted banner tables for research agencies. Significance-tested, Excel and PowerPoint, every number traced to the original respondents.',
   keywords: [
     'statistical analysis software',
     'AI data analysis',
     'ANOVA report',
     'collaborative statistics',
-    'SPSS alternative',
+    'Displayr alternative',
     'research workspace',
     'plugin marketplace',
   ],

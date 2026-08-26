@@ -2,36 +2,36 @@ import type { Metadata } from 'next';
 import HomeTemplate from '@/components/templates/home';
 
 export const metadata: Metadata = {
-  title: 'Ship research that never stalls › Tensr',
+  title: 'Banner tables that trace to the respondents › Tensr',
   description:
-    'Tensr empowers researchers, analysts and data scientists with a collaborative statistical workspace — spreadsheets, tests, charts, and an AI agent in one place.',
+    'Weighted crosstabs and banner tables for research agencies — significance-tested, delivered as Excel and PowerPoint, every number traced to the original respondents.',
   keywords: [
     'tensr',
-    'statistical analysis',
-    'data analysis platform',
-    'research software',
-    'SPSS alternative',
-    'statistical computing',
-    'data science tools',
-    'research statistics',
-    'quantitative analysis',
-    'SEM software',
+    'banner tables',
+    'weighted crosstabs',
+    'survey research software',
+    'Displayr alternative',
+    'Q alternative',
+    'significance testing',
+    'rim weighting',
+    'market research tables',
+    'provenance',
   ],
   alternates: {
     canonical: 'https://www.tensr.xyz',
   },
   openGraph: {
     type: 'website',
-    title: 'Ship research that never stalls › Tensr',
+    title: 'Banner tables that trace to the respondents › Tensr',
     description:
-      'Tensr empowers researchers, analysts and data scientists with a collaborative statistical workspace — spreadsheets, tests, charts, and an AI agent in one place.',
+      'Weighted crosstabs and banner tables for research agencies — significance-tested, Excel and PowerPoint, every number traced to the respondents.',
     url: 'https://www.tensr.xyz',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ship research that never stalls › Tensr',
+    title: 'Banner tables that trace to the respondents › Tensr',
     description:
-      'Tensr empowers researchers, analysts and data scientists with a collaborative statistical workspace.',
+      'Weighted crosstabs and banner tables for research agencies. Every number traces to the respondents.',
   },
 };
 

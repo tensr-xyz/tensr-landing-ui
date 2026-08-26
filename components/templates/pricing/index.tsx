@@ -9,32 +9,32 @@ const plans = [
   {
     id: 'pro',
     name: 'Pro',
-    subtitle: 'For individual analysts running real tests on real data.',
+    subtitle: 'For a data processor running their own file and shipping the book.',
     monthly: 20,
     annualMonthly: 16,
     annualTotal: 192,
     note: 'Per user · cancel any time',
-    cta: 'Get started',
+    cta: 'Start free trial',
     href: 'https://app.tensr.xyz',
     featured: false,
     features: [
-      'Full tri‑modal workspace',
-      'Sheet, charts & notebook',
-      'All 80+ statistical tests + report view',
+      'Weighted banners & nested stubs',
+      'Rim weighting & significance letters',
+      'Excel and PowerPoint export',
+      'Respondent-level provenance',
       'Tensr Agent — 1,200 runs / month',
-      '300 AI reports / month',
-      'APA, PDF, CSV & Markdown export',
+      '.sav / .dta / CSV import',
     ],
   },
   {
     id: 'pro_plus',
     name: 'Pro Plus',
-    subtitle: 'For power users who live in the agent and ship more analyses.',
+    subtitle: 'For shops that live in the agent and turn more tables.',
     monthly: 60,
     annualMonthly: 48,
     annualTotal: 576,
     note: 'Per user · cancel any time',
-    cta: 'Get started',
+    cta: 'Start free trial',
     href: 'https://app.tensr.xyz',
     featured: true,
     features: [
@@ -49,12 +49,12 @@ const plans = [
   {
     id: 'teams',
     name: 'Teams',
-    subtitle: 'For research groups and analytics teams working in one place.',
+    subtitle: 'For agencies that share a book across a processing team.',
     monthly: 40,
     annualMonthly: 32,
     annualTotal: 384,
     note: 'Per seat · billed to your organisation',
-    cta: 'Get started',
+    cta: 'Start free trial',
     href: 'https://app.tensr.xyz',
     featured: false,
     perSeat: true,
@@ -73,9 +73,14 @@ const comparison = [
   {
     group: 'Workspace',
     rows: [
-      { feature: 'Spreadsheet, charts & notebook', pro: true, proPlus: true, teams: true },
-      { feature: 'All 80+ statistical tests', pro: true, proPlus: true, teams: true },
-      { feature: 'Report view & APA export', pro: true, proPlus: true, teams: true },
+      {
+        feature: 'Weighted banners, rim weights, significance letters',
+        pro: true,
+        proPlus: true,
+        teams: true,
+      },
+      { feature: 'Excel & PowerPoint export', pro: true, proPlus: true, teams: true },
+      { feature: 'Respondent-level provenance', pro: true, proPlus: true, teams: true },
     ],
   },
   {
@@ -139,10 +144,16 @@ const comparison = [
 
 const faqItems = [
   {
+    id: 'day31',
+    question: 'What happens on day 31?',
+    answer:
+      'The account becomes read-only. Datasets, TableSpecs, tables, and stored exports stay viewable indefinitely. We do not delete or expire them. Checkout restores write access to the same data. Re-downloading a stored Excel, PowerPoint, Word, or .sav file is a read. Generating a new export is a write and stays blocked until you pay.',
+  },
+  {
     id: 'free',
     question: 'Is there a free plan?',
     answer:
-      "Tensr is a paid product built for people doing serious analysis — there's no permanent free or student tier. Pick the plan that fits your work, and you can change or cancel it at any time.",
+      'There is a 30-day trial with no card. Everything is unlocked: .sav/.dta/CSV, rim weighting, nested banners, significance letters, provenance, Excel and PowerPoint, and the assistant. Allowances are 5 datasets (100,000 rows each), 150 tables, and 150 agent runs (8/hour). On day 31 the account becomes read-only. Data, TableSpecs, tables, and stored exports are kept. Re-downloading a stored export is a read; generating a new one is a write. Pay to resume writes. There is no permanent free tier.',
   },
   {
     id: 'agent',
@@ -195,11 +206,12 @@ export const PricingTemplate = () => {
         <div className="mx-auto max-w-2xl text-center">
           <p className="mb-3 text-xs tracking-wider text-text-muted uppercase">Pricing</p>
           <h1 className="text-3xl font-medium tracking-tight md:text-5xl">
-            Pricing that scales with your research.
+            Thirty days on your own file. Then pay to keep writing.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-text-secondary md:text-base">
-            Pro, Pro Plus, and Teams — upgrade when you need more agent capacity and collaboration.
-            No free tier — a serious tool for serious work.
+            Sign up with no card. Weighting, banners, significance, Excel, PowerPoint, and the
+            assistant are all on. Day 31 the account is read-only — data stays, nothing is deleted.
+            Resume writes when you subscribe.
           </p>
           <div className="mt-8 flex justify-center">
             <div className="inline-flex items-center gap-1 rounded-full border border-border-default bg-standout p-1">
@@ -227,6 +239,31 @@ export const PricingTemplate = () => {
               </button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="page-pad mx-auto max-w-[var(--max-width)] pb-10">
+        <div className="mx-auto max-w-3xl rounded-2xl border border-border-default bg-standout p-6 md:p-8">
+          <p className="text-xs tracking-wider text-text-muted uppercase">Trial — no card</p>
+          <h2 className="mt-2 text-xl font-medium tracking-tight">30 days, everything unlocked</h2>
+          <ul className="mt-4 grid gap-2 text-sm text-text-secondary md:grid-cols-2">
+            <li>5 datasets · 100,000 rows each</li>
+            <li>150 tables · 150 agent runs · 8 / hour</li>
+            <li>.sav / .dta / CSV, rim weighting, nested banners</li>
+            <li>Significance letters, provenance, Excel &amp; PowerPoint</li>
+          </ul>
+          <p className="mt-4 text-sm text-text-secondary">
+            Day 31: read-only. Data, TableSpecs, and tables stay. Pay to resume writes. Nothing is
+            deleted.
+          </p>
+          <Link
+            href="https://app.tensr.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 inline-flex items-center rounded-full bg-inverted px-4 py-2.5 text-sm font-medium text-[var(--inverted-fg)]"
+          >
+            Sign up into the trial
+          </Link>
         </div>
       </section>
 
