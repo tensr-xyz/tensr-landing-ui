@@ -4,7 +4,7 @@ import PricingTemplate from '@/components/templates/pricing';
 export const metadata: Metadata = {
   title: 'Pricing',
   description:
-    '30-day trial, no card. Everything unlocked. Day 31 the account is read-only and your data stays. Then Pro, Pro Plus, and Teams.',
+    'Pro, Pro Plus, and Teams for statistical analysis. Same tools on every plan — more agent capacity and collaboration as you grow. Annual billing saves 20%.',
   keywords: [
     'statistical analysis pricing',
     'research software pricing',
@@ -19,13 +19,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     title: 'Pricing | Tensr',
-    description: '30-day trial, no card, everything unlocked. Day 31 is read-only. Pay to resume.',
+    description:
+      'Pro, Pro Plus, and Teams. Same statistical tools on every plan — more agent capacity and collaboration as you grow.',
     url: 'https://www.tensr.xyz/pricing',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Pricing | Tensr',
-    description: '30-day trial, no card. Data retained after day 31. Pay to resume writes.',
+    description: 'Pro, Pro Plus, and Teams for statistical analysis. Annual billing saves 20%.',
   },
 };
 
