@@ -7,6 +7,27 @@ import { Accordion } from '@/components/accordion';
 
 const plans = [
   {
+    id: 'trial',
+    name: 'Trial',
+    subtitle: '30 days of the full product. No credit card.',
+    monthly: 0,
+    annualMonthly: 0,
+    annualTotal: 0,
+    note: 'No card required',
+    cta: 'Start free trial',
+    href: 'https://app.tensr.xyz',
+    featured: false,
+    trial: true,
+    features: [
+      'Full product for 30 days',
+      '5 datasets · 100,000 rows each',
+      '150 analyses · 150 agent runs · 8 / hour',
+      '.sav / .dta / CSV import',
+      'Spreadsheet, charts, and notebook',
+      'Excel, PDF, and PowerPoint export',
+    ],
+  },
+  {
     id: 'pro',
     name: 'Pro',
     subtitle: 'For individual analysts running real tests on real data.',
@@ -18,18 +39,18 @@ const plans = [
     href: 'https://app.tensr.xyz',
     featured: false,
     features: [
-      'Full tri‑modal workspace',
-      'Sheet, charts & notebook',
-      'All 80+ statistical tests + report view',
+      'Spreadsheet, charts, and notebook',
+      'Weighted analysis and significance tests',
+      'Excel, PDF, and PowerPoint export',
+      'Full data provenance',
       'Tensr Agent — 1,200 runs / month',
-      '300 AI reports / month',
-      'APA, PDF, CSV & Markdown export',
+      '.sav / .dta / CSV import',
     ],
   },
   {
     id: 'pro_plus',
     name: 'Pro Plus',
-    subtitle: 'For power users who live in the agent and ship more analyses.',
+    subtitle: 'For analysts who live in the agent and run more work.',
     monthly: 60,
     annualMonthly: 48,
     annualTotal: 576,
@@ -49,7 +70,7 @@ const plans = [
   {
     id: 'teams',
     name: 'Teams',
-    subtitle: 'For research groups and analytics teams working in one place.',
+    subtitle: 'For research groups working in one workspace.',
     monthly: 40,
     annualMonthly: 32,
     annualTotal: 384,
@@ -73,9 +94,14 @@ const comparison = [
   {
     group: 'Workspace',
     rows: [
-      { feature: 'Spreadsheet, charts & notebook', pro: true, proPlus: true, teams: true },
-      { feature: 'All 80+ statistical tests', pro: true, proPlus: true, teams: true },
-      { feature: 'Report view & APA export', pro: true, proPlus: true, teams: true },
+      {
+        feature: 'Weighted banners, rim weights, significance letters',
+        pro: true,
+        proPlus: true,
+        teams: true,
+      },
+      { feature: 'Excel & PowerPoint export', pro: true, proPlus: true, teams: true },
+      { feature: 'Respondent-level provenance', pro: true, proPlus: true, teams: true },
     ],
   },
   {
@@ -139,10 +165,10 @@ const comparison = [
 
 const faqItems = [
   {
-    id: 'free',
-    question: 'Is there a free plan?',
+    id: 'plans',
+    question: 'What is the difference between Pro, Pro Plus, and Teams?',
     answer:
-      "Tensr is a paid product built for people doing serious analysis — there's no permanent free or student tier. Pick the plan that fits your work, and you can change or cancel it at any time.",
+      'Pro is for individual analysts. Pro Plus is the same product with more Tensr Agent runs, AI reports, and priority support. Teams is billed per seat and adds shared workspaces and collaboration.',
   },
   {
     id: 'agent',
@@ -154,13 +180,19 @@ const faqItems = [
     id: 'billing',
     question: 'Can I switch between monthly and annual?',
     answer:
-      'Yes. Annual billing saves 20% versus monthly. Upgrades take effect immediately and are prorated; downgrades apply at the start of your next cycle.',
+      'Yes. Annual billing saves 20% versus monthly. Upgrades take effect immediately and are prorated; downgrades apply at the start of your next cycle. Checkout is handled by Stripe — we do not take a card until you subscribe.',
   },
   {
     id: 'teams',
     question: 'How does Teams seat pricing work?',
     answer:
       'Teams is billed per seat to your organisation. Add or remove seats as your group changes — billing adjusts automatically. Shared workspaces and collaboration features are included.',
+  },
+  {
+    id: 'trial',
+    question: 'Is there a free plan?',
+    answer:
+      'No permanent free tier. New accounts get a 30-day trial with no card and no Stripe signup — you create a Tensr account and start working. After 30 days the account is read-only: data, tables, and stored exports stay; new writes need a paid plan. Subscribe to Pro, Pro Plus, or Teams through Stripe when you are ready.',
   },
   {
     id: 'security',
@@ -195,11 +227,11 @@ export const PricingTemplate = () => {
         <div className="mx-auto max-w-2xl text-center">
           <p className="mb-3 text-xs tracking-wider text-text-muted uppercase">Pricing</p>
           <h1 className="text-3xl font-medium tracking-tight md:text-5xl">
-            Pricing that scales with your research.
+            Pricing that scales with your analysis.
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-[15px] leading-relaxed text-text-secondary md:text-base">
-            Pro, Pro Plus, and Teams — upgrade when you need more agent capacity and collaboration.
-            No free tier — a serious tool for serious work.
+            Pro, Pro Plus, and Teams. Same statistical tools on every plan — more agent capacity and
+            collaboration as you grow. Annual billing saves 20%.
           </p>
           <div className="mt-8 flex justify-center">
             <div className="inline-flex items-center gap-1 rounded-full border border-border-default bg-standout p-1">
@@ -231,16 +263,19 @@ export const PricingTemplate = () => {
       </section>
 
       <section className="page-pad mx-auto max-w-[var(--max-width)] pb-16">
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
           {plans.map(plan => {
-            const price = frequency === 'yearly' ? plan.annualMonthly : plan.monthly;
-            const period = plan.perSeat
-              ? frequency === 'yearly'
-                ? '/seat/mo · billed annually'
-                : '/seat/mo'
-              : frequency === 'yearly'
-                ? '/mo · billed annually'
-                : '/mo';
+            const isTrial = plan.id === 'trial';
+            const price = isTrial ? 0 : frequency === 'yearly' ? plan.annualMonthly : plan.monthly;
+            const period = isTrial
+              ? 'for 30 days'
+              : plan.perSeat
+                ? frequency === 'yearly'
+                  ? '/seat/mo · billed annually'
+                  : '/seat/mo'
+                : frequency === 'yearly'
+                  ? '/mo · billed annually'
+                  : '/mo';
 
             return (
               <div
@@ -265,7 +300,7 @@ export const PricingTemplate = () => {
                   <span className="text-4xl tracking-tight">{price}</span>
                   <span className="text-sm text-text-muted">{period}</span>
                 </div>
-                {frequency === 'yearly' && (
+                {frequency === 'yearly' && !isTrial && (
                   <p className="mt-1 text-xs text-text-faint">
                     ${plan.annualTotal}
                     {plan.perSeat ? ' / seat' : ''} billed yearly

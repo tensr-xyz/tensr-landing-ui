@@ -8,28 +8,28 @@ import {
   WorkspaceProductMock,
 } from '@/components/product-mocks';
 
-const trustedLogos = ['Universities', 'Research labs', 'Data teams', 'Analysts', 'Scientists'];
+const trustedLogos = ['Research agencies', 'Survey teams', 'Data processing', 'Insights groups'];
 
 const featureCards = [
   {
     num: '01',
-    title: 'Learn from your data before you guess',
+    title: 'Build the banner, not a test menu',
     description:
-      'Tensr continuously surfaces patterns, distributions, and anomalies so you notice what matters before conclusions go wrong.',
+      'Weighted crosstabs and nested banners with significance letters — the book a mid-size agency already delivers, not a list of 80 procedures.',
     visual: 'detect' as const,
   },
   {
     num: '02',
-    title: "Understand what's in your data",
+    title: 'Every number traces to the respondents',
     description:
-      'Go beyond spreadsheets and charts. Tensr finds the right tests, explains assumptions, and shows who and what your results impact.',
+      'Cell counts, weights, and significance sit on the original row identities. When a client asks where a letter came from, you can show them.',
     visual: 'understand' as const,
   },
   {
     num: '03',
-    title: 'Ship analyses with confidence',
+    title: 'Excel and PowerPoint are the deliverable',
     description:
-      'Turn insight into action with AI-assisted interpretation, report-grade output, and collaboration — you stay in control.',
+      'Export the same tables you signed off in the grid. Compare our book against the one you already ship — that is the trial.',
     visual: 'resolve' as const,
   },
 ];
@@ -37,43 +37,43 @@ const featureCards = [
 const deepFeatures = [
   {
     num: '01',
-    title: 'Learn from your data before you guess',
+    title: 'Build the banner, not a test menu',
     description:
-      'Tensr continuously surfaces patterns, distributions, and anomalies so you notice what matters before conclusions go wrong.',
+      'Weighted crosstabs and nested banners with significance letters — the book a mid-size agency already delivers.',
     mock: 'workspace' as const,
-    label: 'Full-stack workspace',
+    label: 'Banner engine',
     chips: [
-      'Sheet & charts',
-      'Notebook cells',
-      'Column filters',
-      'Project templates',
-      'Activity feed',
-      'Data import',
+      '.sav / .dta / CSV',
+      'Rim weighting',
+      'Nested banners',
+      'Significance letters',
+      'Low-base flags',
+      'Provenance',
     ],
   },
   {
     num: '02',
-    title: "Understand what's in your data",
+    title: 'Every number traces to the respondents',
     description:
-      'Go beyond spreadsheets and charts. Tensr finds the right tests, explains assumptions, and shows who and what your results impact.',
+      'Cell counts, weights, and significance sit on the original row identities. When a client asks where a letter came from, you can show them.',
     mock: 'report' as const,
-    label: 'Zero-friction analysis',
+    label: 'Provenance, not a black box',
     chips: [
-      'Test selection',
-      'Assumption checks',
-      'Effect sizes',
-      'ANOVA & regression',
-      'AI interpretation',
-      'APA-ready export',
+      'Row-level provenance',
+      'Weight vectors',
+      'Column letters',
+      'Excel export',
+      'PowerPoint export',
+      'Methodology appendix',
     ],
   },
   {
     num: '03',
-    title: 'Ship analyses with confidence',
+    title: 'Ship the book your client already expects',
     description:
-      "Turn insight into action by suggesting next steps, linking results to your notebook, and tracking progress until you're done. You're always in control.",
+      'Compare Tensr against Displayr or Q on a live job. Upload your .sav, build one banner, export the deck. That is the first table that matters.',
     mock: 'collab' as const,
-    label: 'Built for teams of any size',
+    label: 'Built for agency delivery',
     chips: [
       'Multiplayer presence',
       'Comments & annotations',
@@ -104,14 +104,14 @@ export const HomeTemplate = () => {
         <div className="relative mx-auto max-w-[var(--max-width)] page-pad">
           <div className="mb-10 flex flex-col items-start justify-between gap-6 md:mb-12 lg:flex-row lg:items-end lg:gap-0">
             <h1 className="max-w-xl text-[2.75rem] leading-none font-medium tracking-tight text-text-primary sm:text-5xl md:text-[3.5rem] lg:text-[3.5rem]">
-              Ship research that
+              Banner tables that
               <br />
-              never <span className="font-serif-italic">stalls</span>
+              trace to the <span className="font-serif-italic">respondents</span>
             </h1>
             <div className="relative z-10 flex flex-col items-start gap-4 lg:items-end">
               <p className="max-w-lg text-balance text-[15px] leading-relaxed text-text-secondary lg:text-right md:text-base">
-                Tensr empowers researchers, analysts and data scientists with a collaborative
-                statistical workspace — spreadsheets, tests, charts, and an AI agent in one place.
+                Weighted crosstabs, nested banners, significance letters, Excel and PowerPoint — for
+                mid-size research agencies comparing Tensr to Displayr and Q, not IBM.
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <Link
@@ -120,7 +120,7 @@ export const HomeTemplate = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center rounded-full bg-component px-4 py-2.5 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
                 >
-                  Get started
+                  Start 30-day trial
                 </Link>
                 <Link
                   href="mailto:help@tensr.xyz?subject=Demo%20request"
@@ -152,7 +152,7 @@ export const HomeTemplate = () => {
         <div className="mx-auto max-w-[var(--max-width)] page-pad">
           <div className="flex flex-col items-center gap-8 md:flex-row">
             <div className="flex h-8 shrink-0 items-center justify-center rounded-md border border-border-default px-3 text-sm text-text-faint">
-              Trusted by teams who ship research
+              Trusted by teams who ship banner books
             </div>
             <div
               className="trusted-marquee flex h-14 w-full items-center overflow-hidden"

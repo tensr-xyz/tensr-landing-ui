@@ -26,7 +26,7 @@ const moments = [
     bullets: [
       'Suggests tests from the data — not a generic menu',
       'Returns results as tables, code, and follow‑up actions',
-      '80+ tests with full feature parity with SPSS',
+      'Weighted banners, significance letters, and provenance on every cell',
     ],
     mock: 'agent' as const,
   },
@@ -307,11 +307,11 @@ export const FeaturesTemplate = () => {
             <div className="relative z-10 flex flex-col items-start justify-center gap-6 px-6 pb-10 pt-10 sm:px-8 sm:pb-16 sm:pt-14 lg:aspect-square xl:px-16">
               <span className="text-sm font-medium text-text-muted">Product</span>
               <h1 className="max-w-[14ch] text-[2.5rem] leading-none font-medium tracking-tight text-text-primary text-pretty sm:text-5xl md:text-[3.5rem]">
-                From raw data to a result you can <span className="font-serif-italic">defend</span>
+                Banner tables you can <span className="font-serif-italic">trace</span>
               </h1>
               <p className="max-w-md text-[15px] leading-relaxed text-pretty text-text-secondary md:text-base">
-                An AI agent that runs the analysis, a report view built for rigour, and a tri‑modal
-                workspace — sheet, charts, and notebook in one place.
+                Weighted crosstabs, significance letters, Excel and PowerPoint. Every number sits on
+                the original respondents — that is the comparison against Displayr and Q.
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <Link
@@ -320,7 +320,7 @@ export const FeaturesTemplate = () => {
                   rel="noopener noreferrer"
                   className="inline-flex items-center rounded-full bg-component px-5 py-3 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
                 >
-                  Get started
+                  Start 30-day trial
                 </Link>
                 <Link
                   href="mailto:help@tensr.xyz?subject=Demo%20request"
@@ -392,15 +392,16 @@ export const FeaturesTemplate = () => {
         <div className="mx-auto max-w-[var(--max-width)] page-pad">
           <div className="mb-3 text-xs tracking-wider text-text-muted uppercase">The engine</div>
           <h2 className="mb-4 max-w-2xl text-2xl font-medium tracking-tight text-text-primary md:text-4xl">
-            Feature parity with SPSS — without the SPSS.
+            The job is the banner book — not a procedure count.
           </h2>
           <p className="mb-10 max-w-[54ch] text-[15px] leading-relaxed text-text-secondary md:text-base">
-            Over 80 tests, from t‑tests and ANOVA to regression, non‑parametrics, and reliability
-            analysis — ready the moment your data loads, and reproducible every time.
+            Displayr lists hundreds of analyses. Breadth is not why a DP switches. Tensr is a
+            weighted crosstab and banner engine: significance-tested tables, Excel and PowerPoint,
+            every number traced to the original respondents.
           </p>
 
           <p className="mb-4 text-xs tracking-wider text-text-muted uppercase">
-            80+ tests, ready to run
+            What a comparison actually uses
           </p>
           <div className="mb-14 flex flex-wrap gap-2">
             {engineTests.map(test => (
@@ -412,7 +413,7 @@ export const FeaturesTemplate = () => {
               </span>
             ))}
             <span className="rounded-full border border-[var(--brand-line,#c4b5fd)] bg-[var(--brand-soft,#f5f3ff)] px-3 py-1.5 text-xs font-medium text-[var(--brand-deep,#5b21b6)]">
-              + 60 more
+              Weighted banners &amp; provenance
             </span>
           </div>
 
