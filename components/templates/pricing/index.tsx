@@ -31,9 +31,9 @@ const plans = [
     id: 'pro',
     name: 'Pro',
     subtitle: 'For individual analysts running real tests on real data.',
-    monthly: 20,
-    annualMonthly: 16,
-    annualTotal: 192,
+    monthly: 79,
+    annualMonthly: 63,
+    annualTotal: 756,
     note: 'Per user · cancel any time',
     cta: 'Get started',
     href: 'https://app.tensr.xyz',
@@ -51,9 +51,9 @@ const plans = [
     id: 'pro_plus',
     name: 'Pro Plus',
     subtitle: 'For analysts who live in the agent and run more work.',
-    monthly: 60,
-    annualMonthly: 48,
-    annualTotal: 576,
+    monthly: 149,
+    annualMonthly: 119,
+    annualTotal: 1428,
     note: 'Per user · cancel any time',
     cta: 'Get started',
     href: 'https://app.tensr.xyz',
@@ -71,10 +71,10 @@ const plans = [
     id: 'teams',
     name: 'Teams',
     subtitle: 'For research groups working in one workspace.',
-    monthly: 40,
-    annualMonthly: 32,
-    annualTotal: 384,
-    note: 'Per seat · billed to your organisation',
+    monthly: 119,
+    annualMonthly: 95,
+    annualTotal: 1140,
+    note: 'Per seat · 3 seats minimum · billed to your organisation',
     cta: 'Get started',
     href: 'https://app.tensr.xyz',
     featured: false,
@@ -186,7 +186,7 @@ const faqItems = [
     id: 'teams',
     question: 'How does Teams seat pricing work?',
     answer:
-      'Teams is billed per seat to your organisation. Add or remove seats as your group changes — billing adjusts automatically. Shared workspaces and collaboration features are included.',
+      'Teams is billed per seat to your organisation, with a three-seat minimum. Add or remove seats as your group changes — billing adjusts automatically. Shared workspaces and collaboration features are included.',
   },
   {
     id: 'trial',
@@ -296,13 +296,13 @@ export const PricingTemplate = () => {
                   {plan.subtitle}
                 </p>
                 <div className="mt-6 flex items-baseline gap-1">
-                  <span className="text-lg text-text-muted">$</span>
+                  <span className="text-lg text-text-muted">£</span>
                   <span className="text-4xl tracking-tight">{price}</span>
                   <span className="text-sm text-text-muted">{period}</span>
                 </div>
                 {frequency === 'yearly' && !isTrial && (
                   <p className="mt-1 text-xs text-text-faint">
-                    ${plan.annualTotal}
+                    £{plan.annualTotal}
                     {plan.perSeat ? ' / seat' : ''} billed yearly
                   </p>
                 )}
