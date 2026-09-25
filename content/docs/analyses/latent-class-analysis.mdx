@@ -1,0 +1,80 @@
+---
+title: Latent class analysis
+description: Find groups of people who share a response pattern.
+category: Reliability & factor analysis
+---
+
+## When to use it
+
+Use latent class analysis when you think the sample is a mixture of a few types, and you only see their answers. Each person gets a probability of belonging to each class. The class profiles say what a typical member answered.
+
+## Assumptions
+
+Indicators are numeric. On 0/1 items Tensr fits a binary measurement model. On other numbers it treats the indicators as continuous. Rows with a missing indicator are dropped. You need at least five rows per class. The fit uses a fixed random seed, so the same data and the same class count give the same solution. If a class ends up empty, the run stops instead of printing a zero-size class.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Multivariate → Latent Class Analysis. In chat: “Two latent classes from these three items.”</Step>
+<Step>Select the indicators. Set the number of classes from 2 to 10. The default is 2.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    indicators: {
+      type: 'string[]',
+      description: 'Items that define the classes. At least one.',
+    },
+    n_classes: {
+      type: 'integer',
+      description: 'How many classes to fit.',
+      default: '2',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch. Includes a profile chart.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Sixty people and three yes/no items. The first 30 people answered 1 on every item. The other 30 answered 0 on the first two items, and half of them answered 1 on the third. Two classes.
+
+| Class | n | % |
+| --- | ---: | ---: |
+| 1 | 30 | 50 |
+| 2 | 30 | 50 |
+
+| Item | Class 1 | Class 2 |
+| --- | ---: | ---: |
+| a | 0.000 | 1.000 |
+| b | 0.000 | 1.000 |
+| c | 0.500 | 1.000 |
+
+| AIC | BIC | Entropy |
+| ---: | ---: | ---: |
+| 138.766 | 153.427 | 0.000 |
+
+Class 2 is the “yes to everything” group. Class 1 said no to the first two items and was split on the third. Entropy near 0 means the membership probabilities are almost 0 or 1: people are not sitting on the boundary between classes. AIC and BIC are for comparing this class count with another count on the same items. Lower is better.
+
+## Reporting (APA 7)
+
+A two-class model of three binary items (N = 60) split the sample evenly. One class endorsed every item. The other endorsed none of the first two items (AIC = 138.77, BIC = 153.43).
+
+## Coming from SPSS
+
+The product menu is Multivariate → Latent Class Analysis. SPSS does not ship this under Analyze. The profile chart is one bar group per class.

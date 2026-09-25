@@ -15,62 +15,70 @@ Inventory of every statistical procedure Tensr actually runs.
 
 ## Status
 
-| Analysis                     | Slug                         | Status       |
-| ---------------------------- | ---------------------------- | ------------ |
-| Descriptives                 | descriptives                 | needs-review |
-| One-sample t-test            | ttest-one-sample             | drafted      |
-| Independent-samples t-test   | ttest-independent            | drafted      |
-| Paired-samples t-test        | ttest-paired                 | drafted      |
-| One-way ANOVA                | anova-oneway                 | needs-review |
-| Two-way ANOVA                | anova-twoway                 | drafted      |
-| Three-way ANOVA              | anova-threeway               | drafted      |
-| Repeated-measures ANOVA      | anova-repeated               | drafted      |
-| Mixed ANOVA                  | anova-mixed                  | needs-review |
-| ANCOVA                       | ancova                       | drafted      |
-| MANOVA                       | manova                       | drafted      |
-| Hotelling’s T²               | hotelling-t2                 | drafted      |
-| Bivariate correlation        | correlation                  | needs-review |
-| Partial correlation          | partial-correlation          | drafted      |
-| Linear regression            | linear-regression            | needs-review |
-| Hierarchical regression      | hierarchical-regression      | drafted      |
-| Logistic regression          | logistic-regression          | drafted      |
-| Probit regression            | probit-regression            | drafted      |
-| Poisson regression           | poisson-regression           | drafted      |
-| Negative binomial regression | negative-binomial-regression | needs-review |
-| Ordinal regression           | ordinal-regression           | drafted      |
-| Moderation                   | moderation-analysis          | drafted      |
-| Canonical correlation        | canonical-correlation        | drafted      |
-| Discriminant analysis        | discriminant-analysis        | drafted      |
-| Mann–Whitney U               | mann-whitney-u               | drafted      |
-| Kruskal–Wallis H             | kruskal-wallis               | drafted      |
-| Wilcoxon signed-rank         | wilcoxon-signed-rank         | drafted      |
-| Sign test                    | sign-test                    | drafted      |
-| Friedman                     | friedman                     | drafted      |
-| Median test                  | median-test                  | drafted      |
-| Jonckheere–Terpstra          | jonckheere-terpstra          | drafted      |
-| Moses test                   | moses-test                   | drafted      |
-| Runs test                    | runs-test                    | drafted      |
-| Cochran’s Q                  | cochrans-q                   | drafted      |
-| Kolmogorov–Smirnov           | kolmogorov-smirnov           | drafted      |
-| Shapiro–Wilk                 | shapiro-wilk                 | drafted      |
-| Lilliefors K-S               | lilliefors-ks                | drafted      |
-| Chi-square                   | chi-square                   | drafted      |
-| Fisher’s exact               | fishers-exact                | drafted      |
-| Odds ratio                   | odds-ratio                   | drafted      |
-| Relative risk                | relative-risk                | drafted      |
-| McNemar                      | mcnemar                      | drafted      |
-| Cohen’s kappa                | cohens-kappa                 | needs-review |
-| Weighted kappa               | weighted-kappa               | needs-review |
-| Fleiss’ kappa                | fleiss-kappa                 | drafted      |
-| Kendall’s W                  | kendalls-w                   | needs-review |
-| Goodman–Kruskal gamma        | goodman-kruskal-gamma        | drafted      |
-| Somers’ d                    | somers-d                     | drafted      |
-| Goodman–Kruskal lambda       | goodman-kruskal-lambda       | drafted      |
-| Mantel–Haenszel              | mantel-haenszel              | drafted      |
-| Cochran–Armitage             | cochran-armitage             | drafted      |
-| Loglinear                    | loglinear                    | drafted      |
-| Correspondence               | correspondence               | drafted      |
-| Everything else in this file |                              | todo         |
+| Analysis                      | Slug                          | Status       |
+| ----------------------------- | ----------------------------- | ------------ |
+| Descriptives                  | descriptives                  | needs-review |
+| One-sample t-test             | ttest-one-sample              | drafted      |
+| Independent-samples t-test    | ttest-independent             | drafted      |
+| Paired-samples t-test         | ttest-paired                  | drafted      |
+| One-way ANOVA                 | anova-oneway                  | needs-review |
+| Two-way ANOVA                 | anova-twoway                  | drafted      |
+| Three-way ANOVA               | anova-threeway                | drafted      |
+| Repeated-measures ANOVA       | anova-repeated                | drafted      |
+| Mixed ANOVA                   | anova-mixed                   | needs-review |
+| ANCOVA                        | ancova                        | drafted      |
+| MANOVA                        | manova                        | drafted      |
+| Hotelling’s T²                | hotelling-t2                  | drafted      |
+| Bivariate correlation         | correlation                   | needs-review |
+| Partial correlation           | partial-correlation           | drafted      |
+| Linear regression             | linear-regression             | needs-review |
+| Hierarchical regression       | hierarchical-regression       | drafted      |
+| Logistic regression           | logistic-regression           | drafted      |
+| Probit regression             | probit-regression             | drafted      |
+| Poisson regression            | poisson-regression            | drafted      |
+| Negative binomial regression  | negative-binomial-regression  | needs-review |
+| Ordinal regression            | ordinal-regression            | drafted      |
+| Moderation                    | moderation-analysis           | drafted      |
+| Canonical correlation         | canonical-correlation         | drafted      |
+| Discriminant analysis         | discriminant-analysis         | drafted      |
+| Mann–Whitney U                | mann-whitney-u                | drafted      |
+| Kruskal–Wallis H              | kruskal-wallis                | drafted      |
+| Wilcoxon signed-rank          | wilcoxon-signed-rank          | drafted      |
+| Sign test                     | sign-test                     | drafted      |
+| Friedman                      | friedman                      | drafted      |
+| Median test                   | median-test                   | drafted      |
+| Jonckheere–Terpstra           | jonckheere-terpstra           | drafted      |
+| Moses test                    | moses-test                    | drafted      |
+| Runs test                     | runs-test                     | drafted      |
+| Cochran’s Q                   | cochrans-q                    | drafted      |
+| Kolmogorov–Smirnov            | kolmogorov-smirnov            | drafted      |
+| Shapiro–Wilk                  | shapiro-wilk                  | drafted      |
+| Lilliefors K-S                | lilliefors-ks                 | drafted      |
+| Chi-square                    | chi-square                    | drafted      |
+| Fisher’s exact                | fishers-exact                 | drafted      |
+| Odds ratio                    | odds-ratio                    | drafted      |
+| Relative risk                 | relative-risk                 | drafted      |
+| McNemar                       | mcnemar                       | drafted      |
+| Cohen’s kappa                 | cohens-kappa                  | needs-review |
+| Weighted kappa                | weighted-kappa                | needs-review |
+| Fleiss’ kappa                 | fleiss-kappa                  | drafted      |
+| Kendall’s W                   | kendalls-w                    | needs-review |
+| Goodman–Kruskal gamma         | goodman-kruskal-gamma         | drafted      |
+| Somers’ d                     | somers-d                      | drafted      |
+| Goodman–Kruskal lambda        | goodman-kruskal-lambda        | drafted      |
+| Mantel–Haenszel               | mantel-haenszel               | drafted      |
+| Cochran–Armitage              | cochran-armitage              | drafted      |
+| Loglinear                     | loglinear                     | drafted      |
+| Correspondence                | correspondence                | drafted      |
+| Cronbach’s alpha              | cronbachs-alpha               | drafted      |
+| PCA                           | pca                           | drafted      |
+| Exploratory factor analysis   | efa                           | drafted      |
+| Confirmatory factor analysis  | confirmatory-factor-analysis  | drafted      |
+| Structural equation modelling | structural-equation-modelling | drafted      |
+| Multidimensional scaling      | multidimensional-scaling      | drafted      |
+| Latent class analysis         | latent-class-analysis         | drafted      |
+| Network centrality            | network                       | drafted      |
+| Everything else in this file  |                               | todo         |
 
 ## Tech debt (alias keys)
 
@@ -106,7 +114,7 @@ Same formatter problems on other analyses (listed, not fixed):
 
 `star_for_p` is only used by the one-way Multiple Comparisons block. Correlation stars are a separate helper.
 
-Request fields the dispatcher does not pass through (listed, not fixed): partial correlation `method` (the run stays Pearson); logistic `classification_cutoff`, `max_iter`, `include_constant`, and `hosmer_lemeshow`; probit and ordinal `include_constant`.
+Request fields the dispatcher does not pass through (listed, not fixed): partial correlation `method` (the run stays Pearson); logistic `classification_cutoff`, `max_iter`, `include_constant`, and `hosmer_lemeshow`; probit and ordinal `include_constant`; cluster analysis `standardize` (the body defaults to true and the dispatcher never forwards it, so a request that sets it to false still standardizes).
 
 Sources:
 
@@ -643,7 +651,7 @@ Tukey is not its own analysis. `coerce_tukey_analysis_type` turns a Tukey reques
 - **Sources:** `ClusterBody`
 - **Options:** `columns` ≥ 1. `method` `kmeans` (`hierarchical`). `n_clusters` `3` (2–50). `standardize` `true`.
 - **Output:** Cluster sizes and, for k-means, centroids.
-- **Placed here** because the product groups it with dimension reduction. Say if it should sit under Machine learning instead.
+- **Docs page** will be written under Machine learning, not in this section.
 
 ### Latent class analysis — `latent_class_analysis`
 

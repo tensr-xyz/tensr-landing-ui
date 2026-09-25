@@ -1,0 +1,86 @@
+---
+title: Structural equation modelling
+description: Fit a path model that can include latent factors.
+category: Reliability & factor analysis
+---
+
+## When to use it
+
+Use structural equation modelling when the claim is a set of paths, not only a measurement model. Factors are defined with `=~`. Regressions between factors or observed variables use `~`. A measurement-only model is [confirmatory factor analysis](/docs/analyses/confirmatory-factor-analysis).
+
+## Assumptions
+
+Observed variables in the spec must be numeric columns. Rows with a missing value on those columns are dropped. Each factor needs enough indicators to be identified, and the first loading on a factor is fixed at 1. A model that is not identified, or that names a column that is not in the data, fails with an error rather than a blank table.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Multivariate → SEM. In chat: “SEM with F2 predicted by F1.”</Step>
+<Step>Write the model, up to 8000 characters.</Step>
+<Step>Optionally list the columns. If you leave them out, Tensr reads observed names out of the spec.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    model_spec: {
+      type: 'string',
+      description: 'Model syntax, up to 8000 characters. Factors use =~. Regressions use ~.',
+    },
+    columns: {
+      type: 'string[]',
+      description: 'Observed columns. Optional when every observed name appears in the spec.',
+      default: 'null',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch. Includes the path diagram.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eighty people. q1–q3 measure F1. q4–q6 measure F2. F2 was generated partly from F1. The spec is:
+
+```
+F1 =~ q1 + q2 + q3
+F2 =~ q4 + q5 + q6
+F2 ~ F1
+```
+
+| χ² | df | CFI | RMSEA | SRMR |
+| ---: | ---: | ---: | ---: | ---: |
+| 14.186 | 8 | 0.985 | 0.099 | 0.042 |
+
+| Left | Op | Right | Estimate | SE | p |
+| --- | --- | --- | ---: | ---: | --- |
+| F2 | ~ | F1 | 0.546 | 0.091 | < .001 |
+| F1 | =~ | q1 | 1 | — | — |
+| F1 | =~ | q2 | 1.040 | 0.078 | < .001 |
+| F1 | =~ | q3 | 0.978 | 0.083 | < .001 |
+| F2 | =~ | q4 | 1 | — | — |
+| F2 | =~ | q5 | 1.107 | 0.099 | < .001 |
+| F2 | =~ | q6 | 1.049 | 0.106 | < .001 |
+
+CFI is .985 and SRMR is .042, which is a comfortable measurement fit. RMSEA is .099, around the usual .10 line where people start to worry, so this is acceptable rather than excellent. The structural path from F1 to F2 is 0.546, p < .001. Fixed loadings of 1 have no standard error.
+
+## Reporting (APA 7)
+
+The structural model (N = 80) was acceptable, χ²(8) = 14.19, CFI = .985, RMSEA = .099, SRMR = .042. F1 predicted F2, b = 0.55, SE = 0.09, p < .001.
+
+## Coming from SPSS
+
+The product menu is Multivariate → SEM. SPSS fits path models in Amos. `=~` defines a factor and `~` defines a regression, as in lavaan.

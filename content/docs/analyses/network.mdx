@@ -1,0 +1,88 @@
+---
+title: Network centrality
+description: Summarise a graph of nodes and the links between them.
+category: Reliability & factor analysis
+---
+
+## When to use it
+
+Use this when the rows are relationships, not people-by-variable scores. An edge list has a source column and a target column. An adjacency block is a square set of columns, one per node. The result is who is central, how dense the graph is, and how it splits into communities.
+
+## Assumptions
+
+Give either an edge list or adjacency columns, not a vague mix. Node names are read as text. An optional weight column is numeric. A graph with no nodes is an error. Centrality uses an undirected reading of the links.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Network → Centrality. In chat: “Centrality for this edge list.”</Step>
+<Step>For an edge list, set source and target. Weight is optional.</Step>
+<Step>Or set adjacency columns for a square matrix and leave source and target empty.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    source: {
+      type: 'string',
+      description: 'Edge-list column for the start of a link.',
+      default: 'null',
+    },
+    target: {
+      type: 'string',
+      description: 'Edge-list column for the end of a link.',
+      default: 'null',
+    },
+    weight: {
+      type: 'string',
+      description: 'Optional numeric column of link strength.',
+      default: 'null',
+    },
+    adjacency_columns: {
+      type: 'string[]',
+      description: 'Square adjacency block. Use this instead of source and target.',
+      default: 'null',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch. Includes a spring layout.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Five links among A, B, C, and D. One link from A to C has weight 2. The others have weight 1. A also links back from D, so the component is a single loop with an extra chord.
+
+| Nodes | Edges | Density | Components | Communities | Modularity |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 4 | 5 | 0.833 | 1 | 1 | 0.000 |
+
+| Node | Degree | Betweenness | Closeness | Eigenvector |
+| --- | ---: | ---: | ---: | ---: |
+| A | 1.000 | 0.167 | 1.000 | 0.602 |
+| B | 0.667 | 0.111 | 0.750 | 0.372 |
+| C | 1.000 | 0.167 | 1.000 | 0.602 |
+| D | 0.667 | 0.111 | 0.750 | 0.372 |
+
+Density .833 means most possible pairs are linked. One component and modularity 0 mean the algorithm did not find a split: A and C are the more central nodes, and B and D are equivalent to each other. Degree, betweenness, and closeness ignore the idea of a directed arrow. Eigenvector centrality uses the weights, so the heavier A–C link shows up there.
+
+## Reporting (APA 7)
+
+The four-node network had 5 edges (density = .83) and did not split into separate communities (modularity = 0). A and C had the highest degree and eigenvector centrality.
+
+## Coming from SPSS
+
+The product menu is Analyze → Network → Centrality. SPSS does not have this dialog. The spring layout is a scatter of nodes, with a fixed seed so the picture does not jump between runs.

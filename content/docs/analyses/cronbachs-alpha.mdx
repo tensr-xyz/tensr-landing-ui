@@ -1,0 +1,73 @@
+---
+title: Cronbach’s alpha
+description: Internal consistency of a set of items that should measure one thing.
+category: Reliability & factor analysis
+---
+
+## When to use it
+
+Use Cronbach’s alpha when several items are supposed to measure the same construct, such as four questions on the same attitude. Alpha near 1 means the items rise and fall together. Alpha near 0 means they do not.
+
+## Assumptions
+
+Items are numeric and scored in the same direction. A reverse-worded item that was not reversed pulls alpha down and can make an item–total correlation negative. Rows with any missing item are dropped. Alpha is undefined if the total score does not vary.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Scale → Reliability Analysis. In chat: “Cronbach’s alpha for q1 to q4.”</Step>
+<Step>Select at least two item columns.</Step>
+</Steps>
+
+The menu key is `reliability_cronbach`. The alias `reliability` computes the same alpha and also flags an item whose correlation with the total is negative.
+
+## Options
+
+<TypeTable
+  type={{
+    columns: {
+      type: 'string[]',
+      description: 'Item columns. At least two.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eighty people, four items that share one underlying score plus a little noise.
+
+| α | N | Items |
+| ---: | ---: | ---: |
+| 0.929 | 80 | 4 |
+
+| Item | Item–total r | α if deleted |
+| --- | ---: | ---: |
+| q1 | 0.831 | 0.908 |
+| q2 | 0.853 | 0.901 |
+| q3 | 0.856 | 0.899 |
+| q4 | 0.796 | 0.920 |
+
+Alpha is .929, which is high for a four-item scale. Deleting any one item lowers alpha, so none of these items is a drag on the scale. Item–total correlations are each item with the sum of the others.
+
+## Reporting (APA 7)
+
+The four-item scale had good internal consistency, Cronbach’s α = .93 (N = 80).
+
+## Coming from SPSS
+
+Analyze → Scale → Reliability Analysis, model Alpha. SPSS also prints the item statistics. Tensr stores alpha, the item–total correlation, and alpha if that item is deleted. There is no split-half or Guttman model on this request.

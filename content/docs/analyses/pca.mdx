@@ -1,0 +1,81 @@
+---
+title: Principal component analysis
+description: Compress correlated variables into a smaller set of components.
+category: Reliability & factor analysis
+---
+
+## When to use it
+
+Use PCA when you have several correlated scores and want a few components that keep as much of the variance as possible. It is a compression of the variables, not a test that a particular factor model is true. For a stated factor model, use [confirmatory factor analysis](/docs/analyses/confirmatory-factor-analysis).
+
+## Assumptions
+
+Variables are numeric. Tensr standardizes them first, so the analysis is on the correlation matrix, not the covariance matrix. Rows with any missing value are dropped. There is no KMO or Bartlett test on this request.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Dimension Reduction → PCA. In chat: “PCA of these six items, two components.”</Step>
+<Step>Select at least two columns. Leave components empty to keep every component that fits, or set a number from 1 to 50.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    columns: {
+      type: 'string[]',
+      description: 'Variables to compress. At least two.',
+    },
+    n_components: {
+      type: 'integer',
+      description: 'How many components to keep. Empty means as many as the data allow, up to the number of variables.',
+      default: 'null',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+The wizard may send an empty string for the component count. That has to become null before it reaches the API. A blank field means “let the server decide.”
+
+## Reading the output
+
+Eighty people and six items. The first four share one source of variation. The last two share another. The request asks for two components.
+
+| Component | Eigenvalue | Variance | Cumulative |
+| --- | ---: | ---: | ---: |
+| PC1 | 3.370 | 0.555 | 0.555 |
+| PC2 | 1.825 | 0.300 | 0.855 |
+
+| Variable | PC1 | PC2 |
+| --- | ---: | ---: |
+| q1 | 0.496 | 0.040 |
+| q2 | 0.506 | 0.022 |
+| q3 | 0.502 | 0.079 |
+| q4 | 0.479 | 0.096 |
+| q5 | −0.050 | 0.708 |
+| q6 | −0.118 | 0.694 |
+
+The first component takes 55.5% of the standardized variance, the second another 30.0%. Together they keep 85.5%. q1 to q4 load on the first component. q5 and q6 load on the second. There is no rotation step.
+
+## Reporting (APA 7)
+
+Principal component analysis of the six standardized items (N = 80) kept two components, which together accounted for 85.5% of the variance. The first component (eigenvalue 3.37, 55.5%) was defined by q1–q4. The second (eigenvalue 1.83, 30.0%) was defined by q5 and q6.
+
+## Coming from SPSS
+
+Analyze → Dimension Reduction → Factor, Extraction: Principal components. SPSS can also print KMO and Bartlett’s test. This request does not.

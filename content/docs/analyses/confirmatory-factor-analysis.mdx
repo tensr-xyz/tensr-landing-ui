@@ -1,0 +1,76 @@
+---
+title: Confirmatory factor analysis
+description: Test a factor model you specified in advance.
+category: Reliability & factor analysis
+---
+
+## When to use it
+
+Use confirmatory factor analysis when you already claim that certain items measure a named factor. The model is a sentence such as `F1 =~ q1 + q2 + q3 + q4`. Fit indices say whether that claim is tolerable. To hunt for a structure, use [exploratory factor analysis](/docs/analyses/efa).
+
+## Assumptions
+
+Indicators are numeric. Rows with a missing indicator are dropped. The model has to be identified: a factor with a single indicator, or too few indicators for the number of free loadings, will not fit. The first loading on a factor is fixed at 1 so the factor has a scale. Tensr does not offer an estimator menu.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Multivariate → CFA. In chat: “CFA with F1 measured by q1, q2, q3, and q4.”</Step>
+<Step>List the indicator columns, at least two.</Step>
+<Step>Write the model. Example: F1 =~ q1 + q2 + q3 + q4.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    indicators: {
+      type: 'string[]',
+      description: 'Observed items in the model. At least two.',
+    },
+    model_spec: {
+      type: 'string',
+      description: 'Model syntax, up to 8000 characters. A factor is written Factor =~ item1 + item2.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch. Includes the path diagram.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eighty people. Four items generated from one common score. Model: `F1 =~ q1 + q2 + q3 + q4`.
+
+| χ² | df | CFI | RMSEA | SRMR |
+| ---: | ---: | ---: | ---: | ---: |
+| 1.692 | 2 | 1.001 | 0.000 | 0.014 |
+
+| Indicator | Factor | Loading | SE | p |
+| --- | --- | ---: | ---: | --- |
+| q1 | F1 | 1 | — | — |
+| q2 | F1 | 1.054 | 0.093 | < .001 |
+| q3 | F1 | 1.091 | 0.097 | < .001 |
+| q4 | F1 | 1.015 | 0.104 | < .001 |
+
+χ²(2) = 1.69 is small for the degrees of freedom, RMSEA is 0, and SRMR is .014, so this one-factor model fits. CFI can print slightly above 1 when the model fits as well as, or a touch better than, the independence baseline on this estimator. The first loading is fixed at 1 and has no standard error. The other loadings are free and all differ from 0.
+
+## Reporting (APA 7)
+
+A one-factor CFA (N = 80) fit the four items well, χ²(2) = 1.69, CFI = 1.00, RMSEA = .00, SRMR = .014. Free loadings ranged from 1.02 to 1.09, each p < .001.
+
+## Coming from SPSS
+
+The product menu is Multivariate → CFA. SPSS itself fits this kind of model in Amos, not in the Analyze menu. The syntax is the same shape as lavaan: `F1 =~ q1 + q2 + q3 + q4`.
