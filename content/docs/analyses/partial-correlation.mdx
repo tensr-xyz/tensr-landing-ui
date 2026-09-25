@@ -1,0 +1,94 @@
+---
+title: Partial correlation
+description: Correlation between two columns after holding other columns constant.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use a partial correlation when two columns might only look related because they both follow a third column. For example: are study hours and exam score still related once anxiety is held constant?
+
+## Assumptions
+
+The Pearson path assumes straight-line relationships among the two columns and the controls. Tensr does not test that here. Outliers still matter.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Partial. In chat: “Partial correlation of hours and score, controlling for anxiety.”</Step>
+<Step>Column X and column Y are the pair. Control columns are the variables held constant. An empty control list leaves an ordinary correlation of the two columns.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_x: {
+      type: 'string',
+      description: 'First column in the pair.',
+    },
+    column_y: {
+      type: 'string',
+      description: 'Second column in the pair.',
+    },
+    control_columns: {
+      type: 'string[]',
+      description: 'Columns held constant. Default is an empty list.',
+      default: '[]',
+    },
+    method: {
+      type: 'string',
+      description: 'The request accepts pearson, spearman, or kendall. The analyze dispatcher currently calls the Pearson path only.',
+      default: 'pearson',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same 24 students as bivariate correlation. Partial correlation of `hours` and `score`, controlling for `anxiety`.
+
+| Metric | Value |
+| --- | ---: |
+| Partial r | 0.904 |
+| p-value | < .001 |
+| df | 21 |
+| t statistic | 9.686 |
+| 95% CI | 0.788 to 0.958 |
+| Method | pearson |
+| Control variables | anxiety |
+
+Partial r is the correlation of the two columns after each has had the control columns subtracted out. df is N − 2 − (number of controls), here 24 − 2 − 1 = 21. p < .001 means the remaining relationship is not a plausible zero. The interval 0.788 to 0.958 is for the partial r, and it excludes 0.
+
+The summary says hours and score remain significantly positively correlated (r = 0.904, p < .001) after controlling for anxiety.
+
+## Reporting (APA 7)
+
+Study hours and exam score stayed positively related after anxiety was held constant, r(21) = .90, p < .001, 95% CI [.79, .96], N = 24.
+
+APA drops the leading zero on a correlation. The metrics table prints 0.904.
+
+## Coming from SPSS
+
+Analyze → Correlate → Partial.
+
+SPSS lets you choose Pearson, Spearman, or Kendall in that dialog. Tensr’s request body has the same method field. The dispatcher does not pass it on, so this run is Pearson.
+
+## Related
+
+The uncontrolled relationships are on [bivariate correlation](/docs/analyses/correlation). A regression with both hours and anxiety as predictors is [linear regression](/docs/analyses/linear-regression).

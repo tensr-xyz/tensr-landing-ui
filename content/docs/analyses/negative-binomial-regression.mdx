@@ -1,0 +1,104 @@
+---
+title: Negative binomial regression
+description: Predict an over-dispersed count with an extra dispersion parameter.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use negative binomial regression for counts when the variance is larger than a Poisson model allows. The table still reports an incidence rate ratio. The extra piece is the dispersion parameter α.
+
+## Assumptions
+
+The outcome is a non-negative count. Rows are independent. This fit uses a default dispersion when the model does not estimate one. Read the α line before you treat the model as a checked over-dispersion fit.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Regression → Negative Binomial. In chat: “Negative binomial regression of absences on anxiety.”</Step>
+<Step>Dependent is the count. Independents need at least one predictor.</Step>
+<Step>Confidence level starts at 0.95. Include constant starts on.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Count outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Predictors. At least one.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for the coefficient interval.',
+      default: '0.95',
+    },
+    include_constant: {
+      type: 'boolean',
+      description: 'Fit an intercept.',
+      default: 'true',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Twenty-four students. `absences` is a count. `anxiety` is the predictor. The fit warned that α was not set and used the default 1.0.
+
+| Term | Estimate | 95% CI | IRR | p-value |
+| --- | ---: | --- | ---: | ---: |
+| const | 2.736 | [1.419, 4.053] | 15.425 | < .001 |
+| anxiety | -0.271 | [-0.497, -0.044] | 0.763 | .019 |
+
+The anxiety IRR is 0.763, so the expected count is smaller at higher anxiety. p = .019.
+
+Metrics on this run:
+
+| Metric | Value |
+| --- | ---: |
+| Dispersion α | 1 |
+| α SE | — |
+| LR vs Poisson χ² | 0 |
+| LR vs Poisson p | > .999 |
+| AIC | 116.478 |
+| Deviance | 0.613 |
+| Observations | 24 |
+
+{/* TODO: regenerate after fix */}
+
+α SE is blank, and the likelihood-ratio chi-square against Poisson printed as 0. Those two cells are not a finished comparison of the two count models. The coefficient table above is what this run returned for the slopes.
+
+## Reporting (APA 7)
+
+{/* TODO: regenerate after fix */}
+
+Do not quote the blank α standard error or the chi-square of 0 as a test that the negative binomial fits better than the Poisson. The anxiety IRR on this run was 0.76, p = .019, N = 24.
+
+## Coming from SPSS
+
+Analyze → Regression → Negative Binomial.
+
+SPSS negative binomial estimates the dispersion. This run kept α at the default of 1 and left its standard error blank.
+
+## Related
+
+A Poisson model of a count is [Poisson regression](/docs/analyses/poisson-regression).

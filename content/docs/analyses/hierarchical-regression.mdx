@@ -1,0 +1,95 @@
+---
+title: Hierarchical regression
+description: Add predictors in blocks and see how much R² changes.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use hierarchical regression when you, not an algorithm, decide the order. For example: enter study hours first, then ask whether anxiety still explains exam score after hours are already in the model.
+
+## Assumptions
+
+Same straight-line model as [linear regression](/docs/analyses/linear-regression). Tensr does not add residual plots or a collinearity table on this procedure.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Regression → Linear → Hierarchical. In chat: “Hierarchical regression of score, hours in block 1, hours and anxiety in block 2.”</Step>
+<Step>Dependent is the outcome. Blocks is a list of predictor lists, at least one block.</Step>
+<Step>Method is enter only. Confidence level starts at 0.95.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    blocks: {
+      type: 'string[][]',
+      description: 'Each inner list is the predictor set for that block. At least one block.',
+    },
+    method: {
+      type: 'string',
+      description: 'Only enter is accepted.',
+      default: 'enter',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for the final coefficients.',
+      default: '0.95',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same 24 students. Block 1 is `hours`. Block 2 is `hours` and `anxiety`. Outcome `score`.
+
+| Block | Predictors | R² | Adj R² | ΔR² | F-change | p-change |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | hours | 0.965 | 0.964 | — | — | — |
+| 2 | hours, anxiety | 0.988 | 0.987 | 0.023 | 20.035 | < .001 |
+
+The first block has no previous model, so change in R², F-change, and p-change are em dashes. ΔR² on block 2 is how much R² rose when anxiety was added. p-change < .001 means that rise is not a plausible zero.
+
+Final model coefficients:
+
+| Variable | B | SE | β | 95% CI | p-value |
+| --- | ---: | ---: | ---: | --- | ---: |
+| hours | 3.367 | 0.348 | 0.612 | [2.644, 4.09] | < .001 |
+| anxiety | -1.97 | 0.311 | -0.4 | [-2.618, -1.323] | < .001 |
+
+B is the raw slope. SE is its standard error. β is the standardized slope. Metrics are Final R² 0.988, Adj R² 0.987, and N 24.
+
+## Reporting (APA 7)
+
+Study hours alone accounted for R² = .97 of exam-score variance (N = 24). Adding anxiety increased R² by .02, F-change = 20.04, p < .001. In the final model, B = 3.37 for hours, 95% CI [2.64, 4.09], and B = −1.97 for anxiety, 95% CI [−2.62, −1.32].
+
+## Coming from SPSS
+
+Analyze → Regression → Linear → Hierarchical.
+
+SPSS hierarchical regression is the Block button in Linear Regression: you assign predictors to Block 1 of 1, then the next block. Tensr takes those blocks as a list.
+
+## Related
+
+Letting the software pick the order is the Stepwise regression section of [linear regression](/docs/analyses/linear-regression). A single block is that same page with method enter.

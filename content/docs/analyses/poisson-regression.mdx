@@ -1,0 +1,88 @@
+---
+title: Poisson regression
+description: Predict a count, and read slopes as incidence rate ratios.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use Poisson regression when the outcome is a count: absences, errors, visits. The slope is on the log-count scale. The incidence rate ratio (IRR) says how many times larger the expected count is for a one-unit increase in the predictor.
+
+## Assumptions
+
+Counts are non-negative. The mean and the variance of the count are similar. If the variance is much larger than the mean, a [negative binomial regression](/docs/analyses/negative-binomial-regression) is the usual next model. Tensr does not choose that for you.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Regression → Poisson. In chat: “Poisson regression of absences on anxiety.”</Step>
+<Step>Dependent is the count. Independents need at least one predictor.</Step>
+<Step>Confidence level starts at 0.95. Include constant starts on.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Count outcome. Negative values are rejected.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Predictors. At least one.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for the coefficient interval.',
+      default: '0.95',
+    },
+    include_constant: {
+      type: 'boolean',
+      description: 'Fit an intercept.',
+      default: 'true',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Twenty-four students. `absences` is a count from 0 to 7. `anxiety` runs from 2 to 9.
+
+| Term | Coef | 95% CI | IRR | p-value |
+| --- | ---: | --- | ---: | ---: |
+| const | 2.761 | [2.174, 3.348] | 15.816 | < .001 |
+| anxiety | -0.348 | [-0.473, -0.223] | 0.706 | < .001 |
+
+The anxiety coefficient is negative, so higher anxiety goes with fewer absences in this toy set. The IRR of 0.706 means the expected count is about 0.71 times as large per extra anxiety point. The interval excludes 1.
+
+Fit metrics: AIC 72.187, deviance 7.61, Pearson χ² 5.461, deviance/df 0.346, N 24. Deviance/df well below 1 means the counts vary less than a Poisson model expects. That is under-dispersion, the opposite of the usual reason to switch to a negative binomial.
+
+## Reporting (APA 7)
+
+A Poisson regression predicted absences from anxiety (N = 24). Higher anxiety was associated with a lower expected count, IRR = 0.71, p < .001. The printed interval is for the log coefficient, [−0.473, −0.223], not for the IRR.
+
+## Coming from SPSS
+
+Analyze → Regression → Poisson.
+
+SPSS Generalized Linear Models is the usual menu for a Poisson log link. Tensr’s menu path is Analyze → Regression → Poisson.
+
+## Related
+
+If the count variance is larger than the mean, see [negative binomial regression](/docs/analyses/negative-binomial-regression).

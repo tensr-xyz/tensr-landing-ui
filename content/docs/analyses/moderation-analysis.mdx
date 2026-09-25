@@ -1,0 +1,102 @@
+---
+title: Moderation
+description: Test whether one predictor’s slope depends on a second predictor.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use moderation when you think the slope of X changes across levels of M. For example: does an extra study hour buy more exam points when anxiety is low than when anxiety is high? The test is the product term, hours × anxiety.
+
+## Assumptions
+
+Same straight-line model as [linear regression](/docs/analyses/linear-regression), plus the product term. Tensr centers the predictors by default before building that product, so the hours slope is the slope at average anxiety.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Regression → Moderation. In chat: “Does anxiety moderate the effect of hours on score?”</Step>
+<Step>Outcome, predictor, and moderator are three numeric columns.</Step>
+<Step>Center variables starts on. Confidence level starts at 0.95.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    outcome_column: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    predictor_column: {
+      type: 'string',
+      description: 'The slope you care about (X).',
+    },
+    moderator_column: {
+      type: 'string',
+      description: 'The column that might change that slope (M).',
+    },
+    center_variables: {
+      type: 'boolean',
+      description: 'Subtract the mean from X and M before multiplying them.',
+      default: 'true',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Accepted on the request. The coefficient table prints B, SE, and p.',
+      default: '0.95',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same 24 students. Outcome `score`, predictor `hours`, moderator `anxiety`. Centering on.
+
+| Term | B | SE | p |
+| --- | ---: | ---: | ---: |
+| Intercept | 73.892 | 0.317 | < .001 |
+| hours | 3.315 | 0.328 | < .001 |
+| anxiety | -2.047 | 0.295 | < .001 |
+| hours × anxiety | 0.124 | 0.064 | .065 |
+
+The interaction p is .065, which is not below .05. The summary says the interaction is not statistically significant at the 95% level, so moderation is not supported. R² is 0.99, adjusted R² is 0.988, model F is 656.483, and the model p is < .001. The model as a whole fits. The product term does not clear .05.
+
+Simple slopes of hours:
+
+| Moderator level | Slope |
+| --- | ---: |
+| Low M (−1 SD) | 3.054 |
+| Mean M | 3.315 |
+| High M (+1 SD) | 3.575 |
+
+These are the hours slopes at low, average, and high anxiety. They are close together, which matches an interaction that did not reach .05.
+
+## Reporting (APA 7)
+
+Exam score was regressed on study hours, anxiety, and their product (N = 24), with hours and anxiety centered. The interaction was not significant, B = 0.12, SE = 0.06, p = .065. The hours slope at average anxiety was 3.32, p < .001.
+
+## Coming from SPSS
+
+Analyze → Regression → Moderation.
+
+SPSS does not ship a single Moderation dialog in the base menus. The usual path is Linear Regression with a computed product term. Tensr builds that product and the simple slopes.
+
+## Related
+
+Entering hours and anxiety without a product term is [linear regression](/docs/analyses/linear-regression).

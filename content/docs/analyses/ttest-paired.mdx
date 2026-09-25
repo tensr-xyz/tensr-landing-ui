@@ -1,0 +1,91 @@
+---
+title: Paired-samples t-test
+description: Compare two measurements from the same people.
+category: Compare means
+nonparametric_alternative: Wilcoxon signed-rank test
+---
+
+## When to use it
+
+Use this when each row is one person measured twice, and you want to know whether the average change is different from zero. For example: did anxiety scores fall from before a workshop to after it?
+
+The independent-samples test is the wrong tool here, because the two scores are not from separate people.
+
+## Assumptions
+
+The two columns are numeric, and each row is a matched pair. The test assumes the differences are roughly normal.
+
+Tensr calculates a Jarque–Bera test on those differences and stores it on the result as `diagnostics.jarque_bera_statistic` and `diagnostics.jarque_bera_p_value`. The Paired Differences table does not print it, and there is no assumption note of the kind the independent-samples test shows. A Jarque–Bera p below .05 means the differences look non-normal. Use the [Wilcoxon signed-rank test](/docs/analyses/wilcoxon-signed-rank), or the [sign test](/docs/analyses/sign-test) if you only care about the direction of the change.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Compare Means → Paired-Samples T Test. In chat: “Paired t-test of before and after.”</Step>
+<Step>Put the first measurement in before column and the second in after column. The difference Tensr tests is before minus after.</Step>
+<Step>Confidence level starts at 0.95. There is no equal-variance option, because there is only one set of differences.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    before_column: {
+      type: 'string',
+      description: 'First measurement. The tested difference is this column minus after column.',
+    },
+    after_column: {
+      type: 'string',
+      description: 'Second measurement from the same cases.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for the mean difference.',
+      default: '0.95',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style tables.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Draws a box plot titled “after vs before.”',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eight people, scored before and after a short session. Difference = before − after, so a negative mean means scores went up.
+
+| | Mean | SD | SE | 95% CI low | 95% CI high | t | df | p |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| before - after | -1.625 | 0.916 | 0.324 | -2.391 | -0.859 | -5.017 | 7 | .002 |
+
+The mean is the average change. SD is the spread of those changes. SE is the standard error of that mean (SD divided by the square root of the number of pairs). df is N − 1, here 7.
+
+p = .002 is below .05, so the mean change is significant. The 95% CI runs from −2.391 to −0.859 and does not include 0, which says the same thing.
+
+Cohen’s dz is the mean difference divided by the SD of the differences. Tensr reports it as a metric: −1.774. It is not a column in the table. The usual .2 / .5 / .8 guide is for this version of d as well. This toy set changes in almost the same direction for everyone, so dz is large.
+
+On this run Jarque–Bera was 0.276, p = .871, so the differences do not look skewed. That number is on the result, not in the table above.
+
+## Reporting (APA 7)
+
+Scores increased from before the session to after it. The mean change (before − after) was −1.63 (SD = 0.92). A paired-samples t test was significant, t(7) = −5.02, p = .002, 95% CI [−2.39, −0.86], dz = −1.77.
+
+## Coming from SPSS
+
+Analyze → Compare Means → Paired-Samples T Test.
+
+SPSS also prints the correlation between the two columns. Tensr’s Paired Differences table does not. SPSS does not print Cohen’s dz unless you ask for an effect size. Tensr always reports dz in the metrics.
+
+## Related
+
+[Wilcoxon signed-rank](/docs/analyses/wilcoxon-signed-rank) and the [sign test](/docs/analyses/sign-test) are the rank alternatives. Three or more repeated measurements belong on [repeated-measures ANOVA](/docs/analyses/anova-repeated).

@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@import 'fumadocs-ui/css/preset.css';
 
 @font-face {
   font-family: 'SuisseIntl';
@@ -104,6 +105,43 @@
   --color-theme-border-01: rgba(38, 37, 30, 0.024);
   --color-theme-text: #26251e;
   --color-theme-text-sec: rgba(38, 37, 30, 0.6);
+
+  /* Fumadocs colors, mapped onto the landing tokens. `.dark` swaps them. */
+  --fd-bg: var(--page);
+  --fd-fg: var(--text-primary);
+  --fd-muted: var(--standout);
+  --fd-muted-fg: var(--text-muted);
+  --fd-card: var(--page);
+  --fd-card-fg: var(--text-primary);
+  --fd-popover: var(--page);
+  --fd-popover-fg: var(--text-primary);
+  --fd-border: var(--border-default);
+  --fd-primary: var(--inverted);
+  --fd-primary-fg: var(--inverted-fg);
+  --fd-secondary: var(--component);
+  --fd-secondary-fg: var(--text-primary);
+  --fd-accent: var(--component-hover);
+  --fd-accent-fg: var(--text-primary);
+  --fd-ring: var(--brand);
+}
+
+.dark {
+  --fd-bg: #111110;
+  --fd-fg: #f4f4f2;
+  --fd-muted: #1c1c1a;
+  --fd-muted-fg: rgba(244, 244, 242, 0.64);
+  --fd-card: #161614;
+  --fd-card-fg: #f4f4f2;
+  --fd-popover: #1c1c1a;
+  --fd-popover-fg: #f4f4f2;
+  --fd-border: rgba(255, 255, 255, 0.1);
+  --fd-primary: #f4f4f2;
+  --fd-primary-fg: #111110;
+  --fd-secondary: rgba(255, 255, 255, 0.06);
+  --fd-secondary-fg: #f4f4f2;
+  --fd-accent: rgba(255, 255, 255, 0.08);
+  --fd-accent-fg: #f4f4f2;
+  --fd-ring: #60a5fa;
 }
 
 @theme inline {
@@ -132,6 +170,33 @@
   --font-sans: 'SuisseIntl', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-serif: var(--font-instrument), Georgia, serif;
   --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --color-fd-background: var(--fd-bg);
+  --color-fd-foreground: var(--fd-fg);
+  --color-fd-muted: var(--fd-muted);
+  --color-fd-muted-foreground: var(--fd-muted-fg);
+  --color-fd-popover: var(--fd-popover);
+  --color-fd-popover-foreground: var(--fd-popover-fg);
+  --color-fd-card: var(--fd-card);
+  --color-fd-card-foreground: var(--fd-card-fg);
+  --color-fd-border: var(--fd-border);
+  --color-fd-primary: var(--fd-primary);
+  --color-fd-primary-foreground: var(--fd-primary-fg);
+  --color-fd-secondary: var(--fd-secondary);
+  --color-fd-secondary-foreground: var(--fd-secondary-fg);
+  --color-fd-accent: var(--fd-accent);
+  --color-fd-accent-foreground: var(--fd-accent-fg);
+  --color-fd-ring: var(--fd-ring);
+  --color-fd-overlay: rgba(38, 37, 30, 0.2);
+  --color-fd-info: #3b82f6;
+  --color-fd-warning: #d97706;
+  --color-fd-error: #dc2626;
+  --color-fd-success: #16a34a;
+  --color-fd-idea: #ca8a04;
+  --color-fd-diff-remove: rgba(200, 10, 100, 0.12);
+  --color-fd-diff-remove-symbol: rgb(230, 10, 100);
+  --color-fd-diff-add: rgba(14, 180, 100, 0.1);
+  --color-fd-diff-add-symbol: rgb(10, 200, 100);
 }
 
 * {
@@ -1608,4 +1673,43 @@ body {
   :root {
     --page-px: 1rem;
   }
+}
+
+/* Docs layout: shadcn-style sidebar, narrow column, right-hand TOC. */
+#nd-docs-layout {
+  --fd-layout-width: 76rem;
+  background-color: var(--fd-bg);
+  color: var(--fd-fg);
+  font-family: var(--font-sans);
+}
+
+#nd-page {
+  max-width: 42rem;
+}
+
+html.dark #nd-docs-layout {
+  color-scheme: dark;
+}
+
+/* Changelog stays on the landing palette even when docs are in dark mode. */
+.light-content {
+  --fd-bg: var(--page);
+  --fd-fg: var(--text-primary);
+  --fd-muted: var(--standout);
+  --fd-muted-fg: var(--text-muted);
+  --fd-card: var(--page);
+  --fd-card-fg: var(--text-primary);
+  --fd-popover: var(--page);
+  --fd-popover-fg: var(--text-primary);
+  --fd-border: var(--border-default);
+  --fd-primary: var(--inverted);
+  --fd-primary-fg: var(--inverted-fg);
+  --fd-secondary: var(--component);
+  --fd-secondary-fg: var(--text-primary);
+  --fd-accent: var(--component-hover);
+  --fd-accent-fg: var(--text-primary);
+  --fd-ring: var(--brand);
+  color: var(--text-primary);
+  background: var(--page);
+  color-scheme: light;
 }

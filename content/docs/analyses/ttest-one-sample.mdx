@@ -1,0 +1,84 @@
+---
+title: One-sample t-test
+description: Compare a sample mean with a number you chose in advance.
+category: Compare means
+---
+
+## When to use it
+
+Use this when you have one numeric column and a fixed comparison value, not two groups. For example: is the mean anxiety score in this sample different from the scale’s neutral point of 10?
+
+## Assumptions
+
+The scores are numeric, and the sample mean is a fair summary (no extreme outliers doing all the work). The test assumes the scores are roughly normal, or that the sample is large.
+
+Tensr does not run Shapiro–Wilk or any other normality check inside this procedure. Run [Shapiro–Wilk](/docs/analyses/shapiro-wilk) yourself if you need it. There is no effect-size field and no Cohen’s d on the result.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Compare Means → One-Sample T Test. In chat: “One-sample t-test of anxiety against 10.”</Step>
+<Step>Put the numeric column in value column.</Step>
+<Step>Type the comparison value in hypothesized mean. The API requires it. The dialog starts that box at 0, which is a poor default for a 0–20 anxiety scale. Confidence level starts at 0.95.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    value_column: {
+      type: 'string',
+      description: 'Numeric column to test.',
+    },
+    hypothesized_mean: {
+      type: 'number',
+      description: 'The comparison value, μ₀. Required. The dialog prefills 0.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for the interval around the sample mean.',
+      default: '0.95',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style tables.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Draws a histogram titled “Distribution of” the outcome.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Ten anxiety scores: 12, 15, 11, 14, 13, 16, 12, 10, 14, 13. The comparison value is 10.
+
+| | t | df | p | Mean diff | 95% CI low | 95% CI high |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| anxiety | 5.196 | 9 | < .001 | 3 | 1.694 | 4.306 |
+
+The metrics next to that table are the sample mean (13), the standard error of the mean (0.577), μ₀ (10), and a 95% CI for the mean itself, [11.694, 14.306]. The CI in the table is for the difference from 10, which is the mean CI shifted by μ₀.
+
+df is N − 1. p < .001 means the mean is not a plausible match for 10 at the .05 level. The difference CI excludes 0, so the same conclusion shows up there. Mean diff is sample mean minus μ₀ (13 − 10 = 3).
+
+## Reporting (APA 7)
+
+Anxiety scores (N = 10, M = 13.00, SE = 0.58) were higher than the scale midpoint of 10. A one-sample t test was significant, t(9) = 5.20, p < .001, 95% CI of the difference [1.69, 4.31].
+
+## Coming from SPSS
+
+Analyze → Compare Means → One-Sample T Test.
+
+SPSS prints Cohen’s d when effect sizes are requested. Tensr does not compute one for this test.
+
+## Related
+
+Two groups use the [independent-samples t-test](/docs/analyses/ttest-independent). A before-and-after design uses the [paired-samples t-test](/docs/analyses/ttest-paired). Check the shape of the scores with [Shapiro–Wilk](/docs/analyses/shapiro-wilk) or [descriptives](/docs/analyses/descriptives).

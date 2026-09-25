@@ -1,0 +1,92 @@
+---
+title: Ordinal regression
+description: Predict an ordered category, such as a 1-to-4 rating.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use ordinal regression when the outcome has ordered categories and the gaps between them are not equal scores. A 1-to-4 rating is the usual case. The model has one slope per predictor and a threshold between each pair of adjacent categories.
+
+## Assumptions
+
+The outcome is ordered. The proportional-odds idea is that one slope works at every threshold. Tensr does not test that assumption.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Regression → Ordinal. In chat: “Ordinal regression of rating on practice.”</Step>
+<Step>Dependent is the ordered outcome. Independents need at least one predictor.</Step>
+<Step>Confidence level starts at 0.95. Include constant is on the request. The dispatcher does not pass it through.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Ordered outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Predictors. At least one.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Accepted on the request. The coefficient table prints the estimate and p.',
+      default: '0.95',
+    },
+    include_constant: {
+      type: 'boolean',
+      description: 'The request accepts this. The analyze dispatcher does not pass it through, so the fit uses the function default.',
+      default: 'true',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Twenty-four students. `rating` is 1, 2, 3, or 4 and rises with `practice`. This run did not return usable p-values.
+
+| Term | Estimate | p-value |
+| --- | ---: | ---: |
+| practice | 47.314 | — |
+| 0.0/1.0 | 130.987 | — |
+| 1.0/2.0 | 4.292 | — |
+| 2.0/3.0 | 4.678 | — |
+
+The practice row is the slope. The `0.0/1.0` style rows are thresholds between adjacent rating codes. Metrics were AIC 8 and log-likelihood −7.142e-05. A log-likelihood that close to zero, with a slope in the tens, means this particular sample separated the ratings too cleanly for a stable fit.
+
+{/* TODO: regenerate after fix */}
+
+## Reporting (APA 7)
+
+{/* TODO: regenerate after fix */}
+
+Do not copy an APA sentence from the blank p-values in this example.
+
+## Coming from SPSS
+
+Analyze → Regression → Ordinal.
+
+SPSS PLUM prints thresholds and a slope, with standard errors and Wald tests. Tensr’s table uses Term, Estimate, and p-value. On this run the p-value column was blank.
+
+## Related
+
+A numeric score uses [linear regression](/docs/analyses/linear-regression). Two categories use [logistic regression](/docs/analyses/logistic-regression).

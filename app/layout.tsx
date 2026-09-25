@@ -2,9 +2,9 @@ import type { Metadata } from 'next';
 import { Instrument_Serif, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
-import { Header } from '@/components/header';
-import { Footer } from '@/components/footer';
+import { SiteChrome } from '@/components/site-chrome';
 import { ThemeProvider } from '@/components/theme-provider';
+import { RootProvider } from 'fumadocs-ui/provider/next';
 
 const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
@@ -132,17 +132,12 @@ export default function RootLayout({
         <ThemeProvider
           attribute="class"
           defaultTheme="light"
-          forcedTheme="light"
           enableSystem={false}
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col bg-page">
-            <Header />
-            <main id="main" className="flex-1 pt-[var(--header-height)]">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <RootProvider theme={{ enabled: false, hotKey: false }}>
+            <SiteChrome>{children}</SiteChrome>
+          </RootProvider>
         </ThemeProvider>
         <Analytics />
       </body>

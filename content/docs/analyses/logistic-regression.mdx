@@ -1,0 +1,89 @@
+---
+title: Logistic regression
+description: Predict a yes-or-no outcome and read the result as an odds ratio.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use logistic regression when the outcome is two categories, not a score. For example: does more practice make a pass more likely? The slope is on the log-odds scale. The odds ratio is the easier number: how many times larger the odds of passing are for one extra unit of the predictor.
+
+## Assumptions
+
+The outcome is binary. The log-odds of the outcome are a straight line in the predictors. Rows are independent. A predictor that almost perfectly separates pass from fail makes the odds ratio and its interval unusable. Tensr does not run a separation check for you.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Regression → Binary Logistic. In chat: “Logistic regression of passed on practice.”</Step>
+<Step>Dependent is the 0/1 outcome. Independents are the predictors. At least one predictor is required.</Step>
+<Step>Confidence level starts at 0.95. A column named with “hour” can pull in a canned timing sentence. Name the predictor for what it is.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Binary outcome. Optional when derive_binary_from builds one.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Predictors. At least one.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for the odds-ratio interval.',
+      default: '0.95',
+    },
+    derive_binary_from: {
+      type: 'object',
+      description: 'Optional rule that builds the 0/1 outcome from another column.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+The request also accepts `classification_cutoff` (0.5), `max_iter` (20), `include_constant` (true), and `hosmer_lemeshow` (false). The analyze dispatcher does not pass those four through, so they do not change the fit. `cluster_by`, `reference_levels`, `interactions`, `scales`, `predict_at`, `others_at`, and `derive_hours_since_group_min` are forwarded for advanced runs.
+
+## Reading the output
+
+Twenty-four students. `practice` runs from 1 to 7. `passed` is 0 or 1, with both outcomes in the low and high practice rows.
+
+| Term | Estimate | Odds ratio | 95% CI (OR) | p-value |
+| --- | ---: | ---: | --- | ---: |
+| Intercept | -6.435 | 0.002 | [0.000, 0.260] | .013 |
+| practice | 1.606 | 4.981 | [1.447, 17.145] | .011 |
+
+The estimate is the log-odds slope. The odds ratio of 4.981 means the odds of passing are about five times larger per extra practice unit in this toy set. The interval excludes 1, and p = .011 is below .05. Pseudo R² is 0.533. N is 24. The summary names the inferential test as Wald z.
+
+This run did not print a classification table.
+
+## Reporting (APA 7)
+
+A logistic regression predicted passing from practice (N = 24). More practice was associated with higher odds of passing, odds ratio = 4.98, 95% CI [1.45, 17.15], p = .011.
+
+## Coming from SPSS
+
+Analyze → Regression → Binary Logistic.
+
+SPSS prints a classification table and can print Hosmer–Lemeshow from Options. Tensr’s report for this run printed coefficients, odds ratios, and pseudo R².
+
+## Related
+
+A straight-line model for a numeric score is [linear regression](/docs/analyses/linear-regression). The same binary outcome with a probit link is [probit regression](/docs/analyses/probit-regression).

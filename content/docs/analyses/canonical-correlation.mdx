@@ -1,0 +1,97 @@
+---
+title: Canonical correlation
+description: Relate two sets of columns, not just one pair.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use canonical correlation when each side has more than one column. For example: how does the set of study hours and anxiety line up with the set of recall and confidence? Bivariate correlation only looks at one pair at a time. This finds a weighted combination on each side that correlates as strongly as possible, then a second combination, and so on.
+
+## Assumptions
+
+The columns are numeric. The first canonical correlation is the one to read. Later functions are leftover association after the first is removed. Tensr does not test multivariate normality.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Canonical. In chat: “Canonical correlation of hours and anxiety with recall and confidence.”</Step>
+<Step>Set A and set B each need at least one column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    set_a: {
+      type: 'string[]',
+      description: 'First set of numeric columns. At least one.',
+    },
+    set_b: {
+      type: 'string[]',
+      description: 'Second set of numeric columns. At least one.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Twenty-four students. Set A is `hours` and `anxiety`. Set B is `recall` and `confidence`.
+
+Metrics: canonical r1 = 0.581, canonical r2 = 0.118. The summary says function 1 accounts for 33.7% of the shared variance between the two sets. That percentage is the square of the first canonical correlation.
+
+Wilks’ lambda:
+
+| Function | Wilks' Λ | F | df | p-value |
+| --- | ---: | ---: | ---: | ---: |
+| Function 1 | 0.653 | 7.4 | 4 | < .001 |
+| Function 2 | 0.986 | 0.302 | 1 | .588 |
+
+Function 1 is the test that the sets are related at all. p < .001. Function 2 is what remains, and p = .588 does not support a second relationship. df is printed as a single number.
+
+Structure coefficients, set A:
+
+| Variable | Function 1 | Function 2 |
+| --- | ---: | ---: |
+| hours | -0.871 | 0.492 |
+| anxiety | 0.992 | -0.127 |
+
+Structure coefficients, set B:
+
+| Variable | Function 1 | Function 2 |
+| --- | ---: | ---: |
+| recall | -0.979 | 0.204 |
+| confidence | -0.862 | 0.507 |
+
+A structure coefficient is the correlation between a column and the canonical function on its own side. Anxiety and recall load most strongly on function 1. The sign pattern says higher anxiety goes with lower recall on that function.
+
+Canonical loadings are a second table for each set. On this run, set A loadings were hours 0.25 and 0.968, anxiety 0.968 and −0.25. Set B loadings were recall −0.928 and 0.373, confidence 0.373 and 0.928.
+
+## Reporting (APA 7)
+
+Canonical correlation related study hours and anxiety to recall and confidence (N = 24). The first canonical correlation was .58, Wilks’ Λ = .65, F = 7.40, p < .001. The second was not significant, r = .12, p = .588.
+
+## Coming from SPSS
+
+Analyze → Correlate → Canonical.
+
+SPSS canonical correlation is a macro in many installations rather than a base dialog. Tensr’s menu path is Analyze → Correlate → Canonical.
+
+## Related
+
+One pair of columns is [bivariate correlation](/docs/analyses/correlation). Grouping people from several scores is [discriminant analysis](/docs/analyses/discriminant-analysis).

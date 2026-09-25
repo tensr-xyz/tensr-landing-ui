@@ -1,0 +1,93 @@
+---
+title: MANOVA
+description: Compare groups on two or more numeric outcomes in one test.
+category: Compare means
+---
+
+## When to use it
+
+Use MANOVA when groups might differ on several related outcomes, and you want one test of the set before you look at each outcome alone. For example: do lecture and workshop students differ on recall and confidence together?
+
+Running a separate t-test on every outcome inflates the chance of a false positive. MANOVA asks first whether the group difference shows up in the combination. A significant multivariate test does not name which outcome did the work. Tensr follows it with a one-way ANOVA per outcome.
+
+## Assumptions
+
+Each outcome is numeric. Observations are independent. The outcomes should be roughly multivariate normal, and the pattern of variances and correlations should be similar in each group.
+
+Tensr does not test those assumptions. There is no Box’s M, no Shapiro–Wilk, and no effect-size column on the MANOVA table.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → General Linear Model → Multivariate ANOVA. In chat: “MANOVA of recall and confidence by method.”</Step>
+<Step>Group column is the grouping variable, with at least two categories. Dependent columns are the numeric outcomes, at least two.</Step>
+<Step>There is no post-hoc option and no choice of multivariate statistic. The table uses Pillai’s trace.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: {
+      type: 'string',
+      description: 'Grouping factor. At least two categories.',
+    },
+    dependent_columns: {
+      type: 'string[]',
+      description: 'Numeric outcomes tested together. At least two.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style tables.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. This procedure does not add its own chart.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Sixteen students, eight Lecture and eight Workshop, with recall and confidence scores.
+
+| Effect | Test | Value | F | df | p-value |
+| --- | --- | ---: | ---: | --- | ---: |
+| Intercept | Pillai's trace | 0.98 | 312.65 | 2,13 | < .001 |
+| method | Pillai's trace | 0.737 | 18.2 | 2,13 | < .001 |
+
+The intercept row tests whether the combined mean is zero. You can ignore it for a teaching comparison. The method row is the group test. Pillai’s trace runs from 0 toward 1. Larger means the groups are further apart in the outcome space. p < .001 means the groups differ on the combination of recall and confidence. df is 2 and 13: number of outcomes, and N minus groups minus outcomes plus 1.
+
+Metrics: Groups 2, Cases 16.
+
+The summary sentence on this run was: a significant multivariate effect of method on the combined outcome of recall and confidence (Pillai's trace = 0.737, F = 18.2, p < .001). It then said the effect was driven by both recall and confidence.
+
+Univariate follow-up is an ordinary one-way ANOVA for each outcome. These p-values are not corrected for running two tests.
+
+| Dependent variable | F | p-value |
+| --- | ---: | ---: |
+| recall | 28 | < .001 |
+| confidence | 38.957 | < .001 |
+
+Both outcomes differ by teaching method in this toy set.
+
+## Reporting (APA 7)
+
+A one-way MANOVA compared lecture and workshop students (n = 8 each) on recall and confidence. The multivariate effect of teaching method was significant, Pillai’s trace = .74, F(2, 13) = 18.20, p < .001. Follow-up univariate tests were significant for recall, F = 28.00, p < .001, and for confidence, F = 38.96, p < .001.
+
+## Coming from SPSS
+
+Analyze → General Linear Model → Multivariate.
+
+SPSS prints Pillai’s trace, Wilks’ lambda, Hotelling’s trace, and Roy’s largest root. Tensr prints Pillai’s trace only. SPSS also offers post-hoc tests and effect sizes. Tensr’s follow-up is the uncorrected univariate F and p.
+
+## Related
+
+One outcome: [one-way ANOVA](/docs/analyses/anova-oneway). Two groups and several outcomes is also what [Hotelling’s T²](/docs/analyses/hotelling-t2) tests. A covariate: [ANCOVA](/docs/analyses/ancova), which takes one outcome.

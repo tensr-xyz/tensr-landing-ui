@@ -1,0 +1,103 @@
+---
+title: Discriminant analysis
+description: Predict which group a person is in from several numeric scores.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use discriminant analysis when the outcome is a group and the predictors are numeric. For example: can recall and confidence tell lecture students from workshop students? Logistic regression answers a similar question for two groups. Discriminant analysis reports a function, group centroids, and a classification table.
+
+## Assumptions
+
+Predictors are numeric. The groups have similar covariance. Tensr does not test that. With two groups there is one discriminant function.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Classify → Discriminant. In chat: “Discriminant analysis of method from recall and confidence.”</Step>
+<Step>Group column is the category. Columns are the numeric predictors. At least one predictor is required.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: {
+      type: 'string',
+      description: 'Grouping variable.',
+    },
+    columns: {
+      type: 'string[]',
+      description: 'Numeric predictors. At least one. The dispatcher also accepts feature_columns as an alias of this list.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Twenty-four students, 12 Lecture and 12 Workshop. Predictors `recall` and `confidence`.
+
+Metrics: classification accuracy 91.7%, groups 2, cases 24, chance accuracy 50%. Chance accuracy is the rate from always guessing the largest group. Here the groups are equal, so chance is 50%. 91.7% is above that.
+
+Group centroids on the discriminant function:
+
+| Group | LD1 |
+| --- | ---: |
+| Lecture | -1.442 |
+| Workshop | 1.442 |
+
+The groups sit on opposite sides of the function. Wilks’ lambda for that function:
+
+| Functions | Wilks' λ | χ² | df | p-value |
+| --- | ---: | ---: | ---: | ---: |
+| 1 | 0.325 | 25.118 | 2 | < .001 |
+
+p < .001 means the predictors separate the groups beyond chance in this sample.
+
+Classification results:
+
+| Actual | Predicted Lecture | Predicted Workshop | % Correct |
+| --- | ---: | ---: | ---: |
+| Lecture | 10 | 2 | 83.3% |
+| Workshop | 0 | 12 | 100.0% |
+
+Two lecture students were classified as workshop. Every workshop student was classified correctly.
+
+Coefficients:
+
+| Variable | Coefficient |
+| --- | ---: |
+| recall | -0.498 |
+| confidence | 3.555 |
+
+Confidence has the larger weight, so it does more of the separating on this function.
+
+## Reporting (APA 7)
+
+A discriminant analysis predicted teaching method from recall and confidence (N = 24). The function was significant, Wilks’ Λ = .33, χ²(2) = 25.12, p < .001. Classification accuracy was 91.7%, against a chance rate of 50%.
+
+## Coming from SPSS
+
+Analyze → Classify → Discriminant.
+
+SPSS prints eigenvalues, Wilks’ lambda, standardized coefficients, and a classification table. Tensr prints centroids, Wilks’ lambda, the classification counts, and the coefficients.
+
+## Related
+
+A yes-or-no outcome with odds ratios is [logistic regression](/docs/analyses/logistic-regression). Several outcomes at once, rather than a group, is [MANOVA](/docs/analyses/manova).

@@ -1,0 +1,123 @@
+---
+title: Independent-samples t-test
+description: Compare the mean of a numeric outcome between two separate groups.
+category: Compare means
+nonparametric_alternative: Mann-Whitney U
+---
+
+## When to use it
+
+Use this when each person is in only one of two groups and you want to know whether the group means differ. For example: do exam scores differ between students taught by lecture and students taught by workshop?
+
+If you have three or more groups, use [one-way ANOVA](/docs/analyses/anova-oneway). If the same people were measured twice, use the [paired-samples t-test](/docs/analyses/ttest-paired).
+
+## Assumptions
+
+The outcome is numeric. The groups are separate. The test compares means, so extreme scores can pull the result.
+
+Tensr checks two things and prints them under assumption notes:
+
+- Shapiro–Wilk inside each group. A p-value below .05 means that group’s scores are an uneasy fit to a normal curve. The note then points you to the [Mann–Whitney U test](/docs/analyses/mann-whitney-u).
+- Levene’s test (centred at the median) for equal spread. If Levene’s p is .05 or higher, the report uses the equal-variances row. If it is below .05, the report uses the unequal-variances row (Welch).
+
+There is no switch to turn those checks off.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Compare Means → Independent-Samples T Test. In chat: “Independent t-test of score by method.”</Step>
+<Step>Put the grouping variable in the group column and the numeric outcome in the value column. The group column must have exactly two values, unless you list two labels in group values.</Step>
+<Step>Leave the hypothesised difference at 0 unless you are testing a specific gap. Confidence level starts at 0.95, and missing values start as listwise (a row is dropped if either column is missing).</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: {
+      type: 'string',
+      description: 'Categorical column that defines the two groups.',
+    },
+    value_column: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for the interval around the mean difference.',
+      default: '0.95',
+    },
+    hypothesized_difference: {
+      type: 'number',
+      description: 'Difference you are testing against. Zero means “no difference.”',
+      default: '0',
+    },
+    missing_values: {
+      type: 'listwise | pairwise',
+      description: 'How incomplete rows are dropped.',
+      default: 'listwise',
+    },
+    group_values: {
+      type: 'string[]',
+      description: 'Optional. Exactly two group labels to keep when the column has more than two.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style tables.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Draws a box plot of the outcome by group.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Sixteen of the exam-score rows: eight Lecture and eight Workshop. Lecture was the first group in the file, so the mean difference is Lecture minus Workshop.
+
+Group Statistics:
+
+| score | N | Mean | Std. Deviation |
+| --- | ---: | ---: | ---: |
+| Lecture | 8 | 66.875 | 3.137 |
+| Workshop | 8 | 79.5 | 2.878 |
+
+Assumption notes on this run:
+
+- Shapiro–Wilk, Lecture: W = 0.966, p = .865
+- Shapiro–Wilk, Workshop: W = 0.998, p > .999
+- Levene’s test: equal variances assumed (F = 0.251, p = .624). The equal-variances row was used.
+
+Independent Samples Test:
+
+| | t | df | Sig. (2-tailed) | Mean Difference | Cohen's d | 95% CI |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Equal variances assumed | -8.388 | 14 | < .001 | -12.625 | -4.194 | -15.856 to -9.394 |
+
+Sig. (2-tailed) is the p-value. Tensr treats p < .05 as significant and prints p < .001 when the value is smaller than that. A 95% CI that does not contain 0 matches that decision for a difference of zero.
+
+Cohen’s d is the mean difference divided by the pooled standard deviation. Tensr always calculates it. Around 0.2 is small, 0.5 medium, and 0.8 large. Here d is enormous because the two made-up groups do not overlap. Do not expect that in a real class.
+
+The metric row above the tables is labelled Welch even when Levene says variances are equal. On this run the Welch t matches the equal-variances t (−8.388) and the Welch df is 13.898. A second table, Group summaries, repeats N and the mean without the standard deviation.
+
+## Reporting (APA 7)
+
+An independent-samples t test compared exam scores after lecture (n = 8, M = 66.88, SD = 3.14) and workshop teaching (n = 8, M = 79.50, SD = 2.88). Levene’s test was not significant, F = 0.25, p = .624, so equal variances were assumed. Workshop scores were higher, t(14) = −8.39, p < .001, 95% CI [−15.86, −9.39], d = −4.19. The sign is Lecture minus Workshop.
+
+## Coming from SPSS
+
+Analyze → Compare Means → Independent-Samples T Test.
+
+SPSS prints both the equal-variances row and the Welch row. Tensr’s Independent Samples Test table prints only the row Levene selected. The metric chips stay labelled Welch.
+
+## Related
+
+If normality fails, use the [Mann–Whitney U test](/docs/analyses/mann-whitney-u). Three or more groups belong on [one-way ANOVA](/docs/analyses/anova-oneway). The same people measured twice belong on the [paired-samples t-test](/docs/analyses/ttest-paired).
