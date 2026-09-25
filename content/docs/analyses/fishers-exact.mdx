@@ -1,0 +1,69 @@
+---
+title: Fisher’s exact test
+description: Exact test of association for a 2×2 table.
+category: Categorical
+---
+
+## When to use it
+
+Use Fisher’s exact test on a 2×2 table when expected counts are small. It asks the same question as chi-square: are the two binary variables associated?
+
+## Assumptions
+
+Both columns have exactly two levels. The test conditions on the row and column totals.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Crosstabs → Exact. In chat: “Fisher’s exact test of group by outcome.”</Step>
+<Step>Column A and column B must each have two levels.</Step>
+<Step>The same test runs if you turn on Fisher’s exact inside chi-square.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'First binary variable.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Second binary variable.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same 60-person table as chi-square. Levels are sorted alphabetically, so the odds ratio is the odds of `event` versus `none` for `exposed` versus `unexposed`.
+
+| Odds ratio | 95% CI | Two-tailed p |
+| ---: | --- | --- |
+| 4.125 | [1.387, 12.270] | .018 |
+
+The odds of the event are about four times higher in the exposed group. The interval does not include 1, and p = .018.
+
+## Reporting (APA 7)
+
+Fisher’s exact test indicated an association between group and outcome, p = .018, OR = 4.13, 95% CI [1.39, 12.27].
+
+## Coming from SPSS
+
+Crosstabs → Exact → Fisher’s exact test. SPSS also prints a one-sided p. Tensr stores both `p_value_two_tailed` and `p_value_one_tailed`.

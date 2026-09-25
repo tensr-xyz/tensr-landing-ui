@@ -1,0 +1,72 @@
+---
+title: Kolmogorov–Smirnov test
+description: Compare two samples, or ask whether one sample matches a normal curve.
+category: Non-parametric
+---
+
+## When to use it
+
+The two-sample test asks whether two numeric columns could come from the same distribution. The normality option is an assumption check. On that option Tensr runs Shapiro–Wilk and labels the result `normality_shapiro`. For the Lilliefors correction, use [Lilliefors K-S](/docs/analyses/lilliefors-ks). For Shapiro–Wilk by name, use [Shapiro–Wilk](/docs/analyses/shapiro-wilk).
+
+## Assumptions
+
+Two-sample mode needs two numeric columns. Normality mode needs one numeric column with at least three values and at most 5000.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → K-S. In chat: “Kolmogorov–Smirnov test of lecture versus workshop.”</Step>
+<Step>Test type starts at two_sample. Set it to normality to check one column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    test_type: {
+      type: 'two_sample | normality',
+      description: 'Two-sample compares two columns. Normality runs Shapiro–Wilk on column A.',
+      default: 'two_sample',
+    },
+    column_a: { type: 'string', description: 'First sample, or the only column in normality mode.' },
+    column_b: {
+      type: 'string',
+      description: 'Second sample. Required for two_sample.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eight lecture scores and eight workshop scores, entered as two columns.
+
+| D | p | n |
+| ---: | --- | ---: |
+| 0.750 | .019 | 8 and 8 |
+
+D = 0.75 means the largest gap between the two empirical distributions is three quarters of the sample. p = .019, so the two score columns do not look like the same distribution.
+
+The normality option on the twelve-score column used for Shapiro–Wilk returned W = 0.941, p = .512, the same figures as that test.
+
+## Reporting (APA 7)
+
+A two-sample Kolmogorov–Smirnov test showed that the lecture and workshop scores differed, D = .75, p = .019.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → 1-Sample K-S, or 2 Independent Samples with the K-S box. SPSS’s one-sample K-S against a normal distribution uses the Lilliefors correction when the mean and SD are estimated from the data. Tensr’s normality option does not. Use Lilliefors K-S for that check.

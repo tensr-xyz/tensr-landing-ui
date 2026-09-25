@@ -1,0 +1,62 @@
+---
+title: Sign test
+description: Test whether paired scores change direction, ignoring how large the change is.
+category: Non-parametric
+---
+
+## When to use it
+
+Use the sign test when you only care whether each pair went up or down. It is the simpler alternative to the [Wilcoxon signed-rank test](/docs/analyses/wilcoxon-signed-rank) and the [paired t-test](/docs/analyses/ttest-paired).
+
+## Assumptions
+
+Each row is one pair. Ties (no change) are counted and then set aside.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → Related Samples. In chat: “Sign test of before and after.”</Step>
+<Step>Before column and after column are the two measurements.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    before_column: { type: 'string', description: 'First measurement.' },
+    after_column: { type: 'string', description: 'Second measurement from the same cases.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same eight pairs as the Wilcoxon example. A positive difference is before higher than after.
+
+| Positive | Negative | Ties | Statistic | p |
+| ---: | ---: | ---: | ---: | --- |
+| 0 | 6 | 2 | 0 | .031 |
+
+The statistic is the smaller of the two change counts, so 0 means every non-tied pair moved the same way. p = .031.
+
+## Reporting (APA 7)
+
+A sign test found a consistent drop from before to after, 6 decreases, 0 increases, 2 ties, p = .031.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → Related Samples.

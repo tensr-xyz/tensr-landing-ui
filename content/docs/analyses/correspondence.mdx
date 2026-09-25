@@ -1,0 +1,73 @@
+---
+title: Correspondence analysis
+description: Map the rows and columns of a contingency table into a shared space.
+category: Categorical
+---
+
+## When to use it
+
+Use correspondence analysis when a crosstab is too large to read cell by cell. It places row categories and column categories on the same axes so categories that occur together sit near each other.
+
+## Assumptions
+
+Both columns are categorical. The table cannot be empty. Two components are requested by default. A 2×2 table has only one dimension of association, so the second singular value can be zero.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Survey techniques → Correspondence Analysis. In chat: “Correspondence analysis of brand by attribute.”</Step>
+<Step>Row column and column column are the two categorical variables.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    row_column: {
+      type: 'string',
+      description: 'Categories that become the rows of the map.',
+    },
+    column_column: {
+      type: 'string',
+      description: 'Categories that become the columns of the map.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Twelve people. Brand A is mostly taste, brand B is mostly price, brand C is mostly quality.
+
+| | Axis 1 | Axis 2 |
+| --- | ---: | ---: |
+| Brand A | −0.934 | −0.054 |
+| Brand B | 0.569 | −0.586 |
+| Brand C | 0.406 | 0.394 |
+| price | 0.230 | −0.534 |
+| quality | 0.673 | 0.383 |
+| taste | −0.903 | 0.150 |
+
+Singular values were 0.663 and 0.389. Taste sits near brand A. Quality sits near brand C. Price sits nearer brand B on the second axis. The result flags `biplot` and `perceptual_map`.
+
+## Reporting (APA 7)
+
+Correspondence analysis of brand by attribute placed taste with brand A and quality with brand C (first singular value = .66).
+
+## Coming from SPSS
+
+SPSS has correspondence analysis under Dimension Reduction. Tensr lists it under Survey techniques.

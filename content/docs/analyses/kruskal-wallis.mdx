@@ -1,0 +1,68 @@
+---
+title: Kruskal–Wallis H test
+description: Compare three or more independent groups by their ranks.
+category: Non-parametric
+---
+
+## When to use it
+
+Use Kruskal–Wallis instead of a [one-way ANOVA](/docs/analyses/anova-oneway) when you have three or more groups and the scores are ordinal or skewed.
+
+## Assumptions
+
+Groups are independent. The outcome is at least ordinal. The test does not tell you which groups differ until you turn on post hoc.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → K Independent Samples. In chat: “Kruskal–Wallis of score by method.”</Step>
+<Step>Group column and value column are required. Post hoc starts off.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: { type: 'string', description: 'Three or more groups.' },
+    value_column: { type: 'string', description: 'Score to rank.' },
+    post_hoc: {
+      type: 'boolean',
+      description: 'Pairwise Mann–Whitney tests with a Bonferroni adjustment.',
+      default: 'false',
+    },
+    confidence_level: { type: 'number', description: 'Accepted on the request.', default: '0.95' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Six people in lecture, online, and workshop. Scores rise across those three labels.
+
+| H | p | Groups |
+| ---: | --- | ---: |
+| 15.158 | < .001 | 3 |
+
+p < .001, so the rank distributions differ. There is no epsilon-squared field. With post hoc on, Tensr adds pairwise Mann–Whitney tests and stores `p-adj`.
+
+## Reporting (APA 7)
+
+A Kruskal–Wallis test showed that scores differed by teaching method, H(2) = 15.16, p < .001.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → K Independent Samples.

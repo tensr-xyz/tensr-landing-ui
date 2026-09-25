@@ -1,0 +1,62 @@
+---
+title: Cochran–Armitage trend test
+description: Test a linear trend in proportions across ordered groups.
+category: Categorical
+---
+
+## When to use it
+
+Use Cochran–Armitage when the outcome is binary and the groups have an order. It is the z-test cousin of the Mantel–Haenszel trend test.
+
+## Assumptions
+
+The group column must sort into the intended order. The outcome has two levels.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Cochran-Armitage Trend. In chat: “Cochran–Armitage trend of dose by illness.”</Step>
+<Step>Group column is ordered. Outcome column is binary.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: { type: 'string', description: 'Ordered groups.' },
+    outcome_column: { type: 'string', description: 'Binary outcome.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same twelve-person dose and illness table.
+
+| z | Two-tailed p | Direction |
+| ---: | --- | --- |
+| 4.899 | < .001 | increasing |
+
+The stored direction is increasing, and the two-tailed p is below .001. One-tailed p is also stored. On this small table the z is large because the counts line up almost perfectly. Read it as a demonstration of the statistic, not as a stable effect size.
+
+## Reporting (APA 7)
+
+A Cochran–Armitage test showed an increasing trend in illness across dose, z = 4.90, p < .001.
+
+## Coming from SPSS
+
+Analyze → Correlate → Cochran-Armitage Trend.

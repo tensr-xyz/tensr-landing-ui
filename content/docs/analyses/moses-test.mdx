@@ -1,0 +1,67 @@
+---
+title: Moses test of extreme reactions
+description: Compare how spread out two groups are after trimming extremes.
+category: Non-parametric
+---
+
+## When to use it
+
+Use the Moses test when you care about the range of scores in two groups, not the typical score. It trims a fraction of each group’s extremes and then compares the spans.
+
+## Assumptions
+
+Exactly two groups. Each group needs at least two scores. Trim fraction starts at 0.05 and must sit between 0 and 0.25.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → Moses. In chat: “Moses test of score by method.”</Step>
+<Step>Group column must have two levels. Value column is the score.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: { type: 'string', description: 'Exactly two groups.' },
+    value_column: { type: 'string', description: 'Score whose range is compared.' },
+    trim_fraction: {
+      type: 'number',
+      description: 'Fraction of extremes trimmed from each group.',
+      default: '0.05',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eight lecture scores and eight workshop scores. Groups are sorted alphabetically, so group 1 is lecture.
+
+| Range, group 1 | Range, group 2 | Range ratio | n per group |
+| ---: | ---: | ---: | ---: |
+| 5 | 4 | 1.25 | 8 |
+
+The lecture span is a bit wider. This result does not include a p-value.
+
+## Reporting (APA 7)
+
+After trimming, the lecture range was 5 and the workshop range was 4 (ratio 1.25).
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → Moses. SPSS prints a significance for the span. Tensr currently reports the ranges and the ratio.

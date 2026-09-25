@@ -1,6 +1,6 @@
 ---
 title: Ordinal regression
-description: Predict an ordered category, such as a 1-to-4 rating.
+description: Predict an ordered category, such as a 1-to-5 rating.
 category: Correlation & regression
 ---
 
@@ -62,30 +62,27 @@ The outcome is ordered. The proportional-odds idea is that one slope works at ev
 
 ## Reading the output
 
-Twenty-four students. `rating` is 1, 2, 3, or 4 and rises with `practice`. This run did not return usable p-values.
+One hundred and eighty people. `rating` is 1 through 5. `practice` is a noisy predictor, not a clean step up the scale. Counts were 31, 48, 35, 40, and 26.
 
 | Term | Estimate | p-value |
 | --- | ---: | ---: |
-| practice | 47.314 | — |
-| 0.0/1.0 | 130.987 | — |
-| 1.0/2.0 | 4.292 | — |
-| 2.0/3.0 | 4.678 | — |
+| practice | 0.228 | .138 |
+| 0.0/1.0 | −1.614 | < .001 |
+| 1.0/2.0 | 0.291 | .028 |
+| 2.0/3.0 | −0.228 | .144 |
+| 3.0/4.0 | 0.212 | .153 |
 
-The practice row is the slope. The `0.0/1.0` style rows are thresholds between adjacent rating codes. Metrics were AIC 8 and log-likelihood −7.142e-05. A log-likelihood that close to zero, with a slope in the tens, means this particular sample separated the ratings too cleanly for a stable fit.
-
-{/* TODO: regenerate after fix */}
+The practice row is the slope. It is not significant here (p = .138). The other rows are thresholds between adjacent rating codes. AIC was 579.306 and the log-likelihood was −284.653.
 
 ## Reporting (APA 7)
 
-{/* TODO: regenerate after fix */}
-
-Do not copy an APA sentence from the blank p-values in this example.
+An ordinal regression did not show that practice predicted rating, B = 0.23, p = .14. N = 180.
 
 ## Coming from SPSS
 
 Analyze → Regression → Ordinal.
 
-SPSS PLUM prints thresholds and a slope, with standard errors and Wald tests. Tensr’s table uses Term, Estimate, and p-value. On this run the p-value column was blank.
+SPSS PLUM prints thresholds and a slope, with standard errors and Wald tests. Tensr’s table uses Term, Estimate, and p-value.
 
 ## Related
 

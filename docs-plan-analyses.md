@@ -8,7 +8,7 @@ Inventory of every statistical procedure Tensr actually runs.
 - One page per analysis. Alias keys are tech debt, not user-facing pages.
 - Stepwise regression is a Method option on linear regression, with its own H2. Not its own page.
 - Banner tables: one page, under Survey techniques, moved from `/docs/banners`, with a redirect. Not started.
-- Brand funnel: document the procedure that runs (`funnel`). See bugs.
+- Brand funnel: document the procedure that runs (`funnel`). A dispatcher alias for `brand_funnel` is not needed. Web PR 12 stores `analysisOp: funnel`, and the agent alias map already sends `brand_funnel` to `funnel`.
 - Verbatim coding and the choice simulator are feature pages, later. No analysis page.
 - Cluster analysis sits under Machine learning.
 - Descriptives are **not** computed on a 250-row preview. See bugs. Do not document that label as intended behaviour.
@@ -37,10 +37,39 @@ Inventory of every statistical procedure Tensr actually runs.
 | Probit regression            | probit-regression            | drafted      |
 | Poisson regression           | poisson-regression           | drafted      |
 | Negative binomial regression | negative-binomial-regression | needs-review |
-| Ordinal regression           | ordinal-regression           | needs-review |
+| Ordinal regression           | ordinal-regression           | drafted      |
 | Moderation                   | moderation-analysis          | drafted      |
 | Canonical correlation        | canonical-correlation        | drafted      |
 | Discriminant analysis        | discriminant-analysis        | drafted      |
+| Mann–Whitney U               | mann-whitney-u               | drafted      |
+| Kruskal–Wallis H             | kruskal-wallis               | drafted      |
+| Wilcoxon signed-rank         | wilcoxon-signed-rank         | drafted      |
+| Sign test                    | sign-test                    | drafted      |
+| Friedman                     | friedman                     | drafted      |
+| Median test                  | median-test                  | drafted      |
+| Jonckheere–Terpstra          | jonckheere-terpstra          | drafted      |
+| Moses test                   | moses-test                   | drafted      |
+| Runs test                    | runs-test                    | drafted      |
+| Cochran’s Q                  | cochrans-q                   | drafted      |
+| Kolmogorov–Smirnov           | kolmogorov-smirnov           | drafted      |
+| Shapiro–Wilk                 | shapiro-wilk                 | drafted      |
+| Lilliefors K-S               | lilliefors-ks                | drafted      |
+| Chi-square                   | chi-square                   | drafted      |
+| Fisher’s exact               | fishers-exact                | drafted      |
+| Odds ratio                   | odds-ratio                   | drafted      |
+| Relative risk                | relative-risk                | drafted      |
+| McNemar                      | mcnemar                      | drafted      |
+| Cohen’s kappa                | cohens-kappa                 | needs-review |
+| Weighted kappa               | weighted-kappa               | needs-review |
+| Fleiss’ kappa                | fleiss-kappa                 | drafted      |
+| Kendall’s W                  | kendalls-w                   | needs-review |
+| Goodman–Kruskal gamma        | goodman-kruskal-gamma        | drafted      |
+| Somers’ d                    | somers-d                     | drafted      |
+| Goodman–Kruskal lambda       | goodman-kruskal-lambda       | drafted      |
+| Mantel–Haenszel              | mantel-haenszel              | drafted      |
+| Cochran–Armitage             | cochran-armitage             | drafted      |
+| Loglinear                    | loglinear                    | drafted      |
+| Correspondence               | correspondence               | drafted      |
 | Everything else in this file |                              | todo         |
 
 ## Tech debt (alias keys)
@@ -62,7 +91,7 @@ These are duplicate API keys for one user-facing procedure. Docs use the menu pr
 ## Bugs found while drafting batch 1
 
 1. **250-row preview is a label, not the computation.** `analysis-dialog-shell.tsx` prints “250-row preview”, and `analysis-wizard-tooltips.ts` says descriptives (and chi-square) use a 250-row preview. `run_descriptives` and `load_df_authorized` run on the full dataframe. The setup dialog’s local preview slice is 500 rows (`analysis-setup-provider.tsx`) and is not what gets posted. Likely a stale label.
-2. **`brand_funnel` is not aliased in the dispatcher.** `analyze_dispatch.py` only matches `analysis_key == "funnel"`. `Q_ANALYSIS_TYPE_ALIASES` maps `brand_funnel` → `funnel`, and `normalize_analysis_type` applies that for the agent, but the dispatcher itself does not. The survey dialog posts to `/datasets/{id}/techniques/funnel` (`TECHNIQUE_CONFIGS.route`) while storing `analysisOp: "brand_funnel"` on the result tab. A direct `/analyze/brand_funnel` call is not registered and would not run.
+2. **`brand_funnel` dispatcher alias — not needed.** Web PR 12 stores `analysisOp: funnel` on the Brand Funnel dialog, and `Q_ANALYSIS_TYPE_ALIASES` already maps `brand_funnel` → `funnel` for the agent. The dialog posts to `/datasets/{id}/techniques/funnel`. Do not add an `analyze_dispatch` branch for `brand_funnel`.
 3. **Descriptives statistic checkboxes do not land in the Descriptive statistics table.** `DataFrame.to_json()` is column-oriented (`{column: {stat: value}}`). The statistics filter in `run_descriptives` keeps keys named `mean`, `std`, `min`, `max`, `50%`, `count`, so a wizard request for those stats drops the column entries. Extra stats such as `range` are stored the other way around (`{range: {column: value}}`). The Statistics block from `run_frequencies_output` always shows N, mean, and SD, and it ignores the statistics list.
 4. **Mixed ANOVA within-subjects rows are incomplete.** On two real samples, the condition row had `sum_sq` 0 while F and p were filled, and `group × condition` had `sum_sq` and `F` null with a p-value still set. Two within levels also returned Mauchly’s W. On the 8-person example Mauchly’s p was .073, so the report did not add Greenhouse–Geisser columns, but it still printed W. Sphericity is not a test with only two levels. A second sample set `sphericity_violated: true` with epsilon 1.0.
 5. **One-way ANOVA Multiple Comparisons drops cells.** On the Tukey example, that SPSS-style block left Std. Error blank for every pair, and left Sig. blank for Lecture versus Workshop, whose adjusted p was stored as 0. The pairwise table on the same run printed p < .001 and Reject H₀ true. The Sig. cell that did print used `< .001***`, with stars glued to the p-value.
@@ -806,7 +835,7 @@ Registered from `Q_AGENT_ANALYSIS_TYPES` onto `POST /datasets/{id}/analyze/{op}`
 
 ### Brand funnel — catalog key `funnel`
 
-- **UI `analysisOp` is `brand_funnel`**, and `analyze_dispatch.py` only branches on `funnel`. The dialog may not hit the agent route. See questions.
+- **Catalog key `funnel`.** The dialog stores `analysisOp: funnel` (web PR 12). A dispatcher alias for `brand_funnel` is not needed.
 - **UI fields:** `stages`.
 
 ### MaxDiff counting — `maxdiff_count`
@@ -878,7 +907,7 @@ Registered from `Q_AGENT_ANALYSIS_TYPES` onto `POST /datasets/{id}/analyze/{op}`
    - `linear_mixed_model`, `mixed_model`, and `multilevel_modelling`
 3. **Stepwise.** Separate page, or only the Method option on linear regression?
 4. **Banner tables.** New analyses page, or only the existing `/docs/banners` page?
-5. **`funnel` vs `brand_funnel`.** Which key should the page document? The dispatcher implements `funnel`. The dialog sends `brand_funnel`.
+5. **`funnel` vs `brand_funnel`.** Resolved: document `funnel`. The dispatcher alias is not needed.
 6. **Verbatim coding and choice simulator.** Skip both?
 7. **Descriptives sample.** Is the 250-row preview note in the wizard tooltip still accurate?
 8. **Cluster analysis category.** Reliability & factor analysis, or Machine learning?

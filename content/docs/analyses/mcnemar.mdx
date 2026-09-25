@@ -1,0 +1,68 @@
+---
+title: McNemar test
+description: Test a change in a binary measure on the same cases.
+category: Categorical
+---
+
+## When to use it
+
+Use McNemar when the same people are measured twice on a yes/no variable. Only the people who changed contribute to the test. For example: did more people pass after a workshop than before it?
+
+## Assumptions
+
+Each row is one pair. Both columns are binary. Concordant pairs (no change) do not enter the statistic.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Crosstabs. In chat: “McNemar test of before by after.”</Step>
+<Step>Column A is the first measure and column B is the second.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'First binary measure.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Second binary measure on the same cases.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eight pairs. Three changed from no to yes, and one changed from yes to no.
+
+| n pairs | no → yes | yes → no | Statistic | p |
+| ---: | ---: | ---: | ---: | --- |
+| 8 | 3 | 1 | 1.000 | .625 |
+
+p = .625 is above .05. With only four discordant pairs, the test does not show a change.
+
+## Reporting (APA 7)
+
+A McNemar test found no significant change from before to after, p = .63. Three pairs changed from no to yes and one changed from yes to no.
+
+## Coming from SPSS
+
+Crosstabs → Statistics → McNemar. The menu label is still on the Analyze menu even though an older retired-label list still names McNemar.

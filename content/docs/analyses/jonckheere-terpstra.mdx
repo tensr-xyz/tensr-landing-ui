@@ -1,0 +1,66 @@
+---
+title: Jonckheere–Terpstra test
+description: Test whether scores rise across an ordered set of groups.
+category: Non-parametric
+---
+
+## When to use it
+
+Use Jonckheere–Terpstra instead of Kruskal–Wallis when the groups have an order and you expect the scores to rise or fall along that order.
+
+## Assumptions
+
+Groups are independent. Pass `group_order` when the label sort is not the order you mean. Otherwise numeric labels sort numerically and other labels sort alphabetically.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → Jonckheere–Terpstra. In chat: “Jonckheere–Terpstra test of score by method.”</Step>
+<Step>Set group order to lecture, online, workshop when those names should be the sequence.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: { type: 'string', description: 'Ordered groups.' },
+    value_column: { type: 'string', description: 'Score to rank.' },
+    group_order: {
+      type: 'string[]',
+      description: 'Optional order of the group labels.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Six people in each of lecture, online, and workshop, ordered in that sequence. Scores increase along the order.
+
+| J | Expected J | z | p |
+| ---: | ---: | ---: | --- |
+| 108 | 54 | 4.548 | < .001 |
+
+J is well above the value expected if the groups were exchangeable. The p-value is one-tailed for the ordered trend.
+
+## Reporting (APA 7)
+
+A Jonckheere–Terpstra test showed that scores increased from lecture to online to workshop, J = 108, z = 4.55, p < .001.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → Jonckheere–Terpstra.

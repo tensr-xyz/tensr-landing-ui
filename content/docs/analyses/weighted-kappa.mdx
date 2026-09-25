@@ -1,0 +1,73 @@
+---
+title: Weighted kappa
+description: Agreement that treats nearby categories as partial agreement.
+category: Categorical
+---
+
+## When to use it
+
+Use weighted kappa when two raters use ordered categories and a near miss should count more than a complete miss. Linear weights treat each step the same. Quadratic weights punish larger misses more.
+
+## Assumptions
+
+Both columns are ordered categories. Tensr sorts the level names alphabetically and then treats that order as the scale, so name levels so alphabetical order is the real order (`1`, `2`, `3`, or `low`, `mid`, `high` does not sort as low-mid-high).
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Scale → Weighted Kappa. In chat: “Weighted kappa for rater A and rater B.”</Step>
+<Step>Weights start at linear. Quadratic is the other choice.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'First rater.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Second rater.',
+    },
+    weights: {
+      type: 'linear | quadratic',
+      description: 'How far apart a disagreement is.',
+      default: 'linear',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eight cases, categories high, low, and mid, linear weights. The kappa figures come from the weighted and unweighted scores. The standard error, z, p, and confidence interval were empty on this run.
+
+| Weighted kappa | Unweighted kappa | SE | p |
+| ---: | ---: | --- | --- |
+| 0.286 | 0.429 | — | — |
+
+{/* TODO: regenerate after fix */}
+
+## Reporting (APA 7)
+
+Report weighted kappa with its standard error and p once those cells are filled.
+
+## Coming from SPSS
+
+Analyze → Scale → Weighted Kappa. SPSS asks for linear or quadratic weights.

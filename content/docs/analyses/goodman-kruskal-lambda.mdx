@@ -1,0 +1,62 @@
+---
+title: Goodman–Kruskal lambda
+description: How much knowing one category reduces errors about another.
+category: Categorical
+---
+
+## When to use it
+
+Use lambda when both variables are categories, ordered or not, and you want the reduction in prediction errors. Lambda is 0 when the extra variable does not help, and 1 when it predicts the other variable perfectly.
+
+## Assumptions
+
+Both columns are categorical. Lambda can be zero even when chi-square is significant, because it asks a stricter prediction question.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Lambda. In chat: “Lambda for dose and response.”</Step>
+<Step>Column A and column B are the two categorical variables.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: { type: 'string', description: 'First categorical variable.' },
+    column_b: { type: 'string', description: 'Second categorical variable.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same ten-case table.
+
+| Symmetric λ | A dependent | B dependent | SE | z | p |
+| ---: | ---: | ---: | ---: | ---: | --- |
+| 0.500 | 0.571 | 0.429 | 0.158 | 3.162 | .002 |
+
+Symmetric lambda is .50, p = .002. Knowing one variable cuts prediction errors about in half on this tiny table. With only ten cases, treat the size as fragile even though the p-value is small.
+
+## Reporting (APA 7)
+
+Goodman–Kruskal lambda was .50, p = .002.
+
+## Coming from SPSS
+
+Analyze → Correlate → Lambda.

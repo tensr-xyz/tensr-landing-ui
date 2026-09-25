@@ -1,0 +1,61 @@
+---
+title: Shapiro–Wilk test
+description: Test whether one numeric column looks normally distributed.
+category: Non-parametric
+---
+
+## When to use it
+
+Use Shapiro–Wilk before a t-test or ANOVA when you want a direct check of normality. A small p-value means the column does not look normal. A large p-value does not prove normality. It means this sample did not show a clear departure.
+
+## Assumptions
+
+The column is numeric, with at least three values and at most 5000. The test is sensitive in large samples, so a tiny departure can be “significant” when N is big.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → Normality. In chat: “Shapiro–Wilk test of score.”</Step>
+<Step>Select one numeric column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column: { type: 'string', description: 'Numeric column to check.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Twelve exam scores.
+
+| W | p | n |
+| ---: | --- | ---: |
+| 0.941 | .512 | 12 |
+
+p = .512. These scores do not show a clear departure from a normal curve. The same column’s [Lilliefors test](/docs/analyses/lilliefors-ks) was significant, so the two checks do not always agree.
+
+## Reporting (APA 7)
+
+Shapiro–Wilk did not indicate that the scores departed from normality, W(12) = .94, p = .51.
+
+## Coming from SPSS
+
+Analyze → Descriptive Statistics → Explore → Plots → Normality plots with tests. SPSS also prints Kolmogorov–Smirnov with the Lilliefors correction.

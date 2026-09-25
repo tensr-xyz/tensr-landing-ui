@@ -1,0 +1,66 @@
+---
+title: Runs test
+description: Test whether a sequence alternates more or less than chance.
+category: Non-parametric
+---
+
+## When to use it
+
+Use the runs test when the order of the rows matters. A run is a streak of values on the same side of a cutoff. Too few runs means the series clumps. Too many means it flips back and forth.
+
+## Assumptions
+
+The column is numeric. The cutoff starts as the median. Mean is the other choice. The test uses the order of the rows as the sequence.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → Runs. In chat: “Runs test of this column.”</Step>
+<Step>Leave the cutoff at median unless you want the mean.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column: { type: 'string', description: 'Sequence, in row order.' },
+    cutoff: {
+      type: 'median | mean',
+      description: 'Split point for a run.',
+      default: 'median',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Sixteen values, mostly small, with two large spikes. Cutoff was the median, stored as 2.
+
+| Runs | Expected runs | n above | n below | z | p |
+| ---: | ---: | ---: | ---: | ---: | --- |
+| 5 | 4.5 | 2 | 14 | 0.655 | .513 |
+
+p = .513. The number of runs is close to what a random order would produce.
+
+## Reporting (APA 7)
+
+A runs test did not show that the sequence was clumped or alternating, 5 runs, z = 0.65, p = .51.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → Runs.

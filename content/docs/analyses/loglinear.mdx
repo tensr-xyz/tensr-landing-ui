@@ -1,0 +1,75 @@
+---
+title: Loglinear analysis
+description: Model the counts in a contingency table.
+category: Categorical
+---
+
+## When to use it
+
+Use loglinear analysis when you have two or more categorical variables and you want a model of the cell counts, not a single chi-square. A saturated model fits every cell. An independence model says the variables are unrelated.
+
+## Assumptions
+
+Cells should not be mostly empty. Tensr stores `sparse_cell_fraction`. The saturated model has no residual degrees of freedom, so its likelihood-ratio chi-square is 0 and its comparison p is empty.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Loglinear → General. In chat: “Loglinear model of gender by region.”</Step>
+<Step>Select at least two categorical columns. Model starts at saturated.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    columns: {
+      type: 'string[]',
+      description: 'Categorical variables. At least two.',
+    },
+    model: {
+      type: 'saturated | custom',
+      description: 'Saturated fits every cell.',
+      default: 'saturated',
+    },
+    max_iterations: {
+      type: 'number',
+      description: 'Iteration cap for the fit.',
+      default: '20',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Twenty-four people, gender F or M, region N or S, six people in every cell. Saturated model.
+
+| Model | LR χ² | df | p |
+| --- | ---: | ---: | --- |
+| Independence | 0.000 | 1 | > .999 |
+| Saturated | 0.000 | 0 | — |
+
+The saturated likelihood-ratio chi-square is 0 because the model reproduces the cells. The independence comparison is also about 0 here, p > .999, because the table is uniform. Pearson chi-square on the saturated fit was about 0, and the goodness-of-fit p was > .999. An empty p on the saturated row is df = 0, not a missing calculation.
+
+## Reporting (APA 7)
+
+A saturated loglinear model reproduced the gender by region counts. The independence model also fit, LR χ²(1) ≈ 0, p > .999.
+
+## Coming from SPSS
+
+Analyze → Loglinear → General. The route is on the Analyze menu.

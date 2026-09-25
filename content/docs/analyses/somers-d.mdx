@@ -1,0 +1,62 @@
+---
+title: Somers’ d
+description: Ordered association that picks one variable as the outcome.
+category: Categorical
+---
+
+## When to use it
+
+Use Somers’ d when both variables are ordered and one of them is the outcome. Unlike gamma, d is asymmetric: predicting B from A is not the same number as predicting A from B.
+
+## Assumptions
+
+Both columns are ordered categories. Level names are sorted alphabetically.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Somers D. In chat: “Somers’ d for dose and response.”</Step>
+<Step>Column A and column B are the two ordered variables.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: { type: 'string', description: 'First ordered variable.' },
+    column_b: { type: 'string', description: 'Second ordered variable.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same ten-case dose and response table as gamma.
+
+| d (B from A) | d (A from B) | SE | z | p |
+| ---: | ---: | ---: | ---: | --- |
+| 0.138 | 0.121 | 0.355 | 0.389 | .698 |
+
+`somers_d_yx` is the first number and `somers_d_xy` is the second. Both are near zero, and p = .698.
+
+## Reporting (APA 7)
+
+Somers’ d was .14, p = .70.
+
+## Coming from SPSS
+
+Analyze → Correlate → Somers’ d. SPSS asks which variable is the dependent.

@@ -1,0 +1,64 @@
+---
+title: Cohen’s kappa
+description: Agreement between two raters, corrected for chance.
+category: Categorical
+---
+
+## When to use it
+
+Use Cohen’s kappa when two raters assign the same cases to categories and you want agreement beyond what chance would produce.
+
+## Assumptions
+
+Each row is one case rated twice. Both columns are categories with a small number of levels.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Crosstabs → Kappa. In chat: “Cohen’s kappa for rater A and rater B.”</Step>
+<Step>Column A and column B are the two raters.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'First rater.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Second rater.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+{/* TODO: regenerate after fix */}
+
+On an 8-case, three-category example the result stored kappa as 1, observed agreement as 0.625, and expected agreement as 1. Those three numbers cannot describe the same table. The standard error, z, confidence interval, and p were empty. Do not quote this run.
+
+## Reporting (APA 7)
+
+Quote kappa, its confidence interval, and p after the stored agreement figures are consistent.
+
+## Coming from SPSS
+
+Crosstabs → Statistics → Kappa. SPSS prints kappa, an asymptotic standard error, and an approximate significance.

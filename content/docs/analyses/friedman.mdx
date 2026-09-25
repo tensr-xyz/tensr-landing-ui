@@ -1,0 +1,64 @@
+---
+title: Friedman test
+description: Compare three or more repeated measurements by their ranks.
+category: Non-parametric
+---
+
+## When to use it
+
+Use Friedman instead of a [repeated-measures ANOVA](/docs/analyses/anova-repeated) when the same people are measured three or more times and the scores are ordinal or skewed.
+
+## Assumptions
+
+Each row is one person. You need at least three measure columns. Kendall’s W is a separate analysis, not a field on this request.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → K Related Samples. In chat: “Friedman test of t1, t2, and t3.”</Step>
+<Step>Select at least three measure columns.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    measure_columns: {
+      type: 'string[]',
+      description: 'Repeated measurements. At least three.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eight people, three occasions. Means were 5.0, 7.0, and 8.5.
+
+| χ² | df | p |
+| ---: | ---: | --- |
+| 15.000 | 2 | < .001 |
+
+The ranks differ across the three occasions. The result also stores those three means.
+
+## Reporting (APA 7)
+
+A Friedman test showed that scores changed across the three occasions, χ²(2, N = 8) = 15.00, p < .001.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → K Related Samples.

@@ -1,0 +1,68 @@
+---
+title: Relative risk
+description: Risk of a binary outcome in one group divided by the risk in another.
+category: Categorical
+---
+
+## When to use it
+
+Use relative risk when you have a 2×2 table and you want a ratio of probabilities, not odds. The first alphabetical outcome level is the event. The first group level is the exposed group.
+
+## Assumptions
+
+Both columns have exactly two levels. Relative risk is easiest to interpret when the rows are groups and the columns are the outcome of a cohort, not a case-control sample.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Relative Risk. In chat: “Relative risk of group by outcome.”</Step>
+<Step>Check alphabetical order before you read `risk_exposed`.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'Grouping variable. The first alphabetical level is exposed.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Outcome. The first alphabetical level is the event.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same 60-person table. Risk of `event` is 0.733 in `exposed` and 0.400 in `unexposed`.
+
+| Relative risk | 95% CI | p |
+| ---: | --- | --- |
+| 1.833 | [1.125, 2.988] | .018 |
+
+The event is about 1.8 times as common in the exposed group. `nnt` is empty on this run because the relative risk is above 1. Tensr only fills NNT when the relative risk is below 1.
+
+## Reporting (APA 7)
+
+Exposed participants were more likely to have the event than unexposed participants, RR = 1.83, 95% CI [1.12, 2.99], p = .018.
+
+## Coming from SPSS
+
+Analyze → Descriptive Statistics → Relative Risk. Confirm which row SPSS calls exposed.

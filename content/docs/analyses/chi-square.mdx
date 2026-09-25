@@ -1,0 +1,84 @@
+---
+title: Chi-square test of independence
+description: Test whether two categorical variables are associated.
+category: Categorical
+---
+
+## When to use it
+
+Use this when both variables are categories and you want to know whether the pattern of counts could have come from independence. For example: does passing a quiz depend on teaching method?
+
+## Assumptions
+
+Each row is one case. Expected counts should be at least 5 in most cells. Tensr stores `low_expected_cells`, the number of cells whose expected count is under 5. When that number is high, use [Fisher’s exact test](/docs/analyses/fishers-exact) on a 2×2 table.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Crosstabs. In chat: “Chi-square of method by passed.”</Step>
+<Step>Column A and column B are the two categorical variables. Order does not change the chi-square.</Step>
+<Step>Phi and Cramér’s V are on by default. Fisher’s exact is off. Turning it on replaces this test with Fisher’s exact.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'First categorical variable.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Second categorical variable.',
+    },
+    include_phi: {
+      type: 'boolean',
+      description: 'Store phi, the 2×2 effect size.',
+      default: 'true',
+    },
+    include_cramers_v: {
+      type: 'boolean',
+      description: 'Store Cramér’s V. On a 2×2 table it equals phi.',
+      default: 'true',
+    },
+    use_fishers_exact: {
+      type: 'boolean',
+      description: 'Run Fisher’s exact instead of chi-square.',
+      default: 'false',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Sixty people. `group` is exposed or unexposed. `outcome` is event or none. Counts are exposed 22 event / 8 none, unexposed 12 event / 18 none. Expected counts are 17 and 13 in each row. `low_expected_cells` is 0.
+
+| χ² | df | p | Phi | Cramér’s V |
+| ---: | ---: | --- | ---: | ---: |
+| 5.498 | 1 | .019 | 0.303 | 0.303 |
+
+p = .019 is below .05, so the outcome is associated with group. Phi and Cramér’s V are the same on a 2×2 table. Around .30 is a moderate association.
+
+## Reporting (APA 7)
+
+A chi-square test of independence showed that outcome and group were associated, χ²(1, N = 60) = 5.50, p = .019, φ = .30.
+
+## Coming from SPSS
+
+Analyze → Descriptive Statistics → Crosstabs, with Chi-square, Phi, and Cramér’s V. SPSS prints expected counts in the crosstab. Tensr stores them on `expected_counts` and counts how many fall under 5.

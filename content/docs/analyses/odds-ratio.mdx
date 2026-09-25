@@ -1,0 +1,68 @@
+---
+title: Odds ratio
+description: Odds of a binary outcome in one group relative to another.
+category: Categorical
+---
+
+## When to use it
+
+Use an odds ratio when both variables are binary and you want the odds of one level in the first group divided by the odds in the second. Levels are sorted alphabetically. The first outcome level is the event, and the first group level is the group in the numerator.
+
+## Assumptions
+
+Both columns have exactly two levels. This is the same 2×2 table as Fisher’s exact test, with the odds ratio as the headline number.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Odds Ratio. In chat: “Odds ratio of group by outcome.”</Step>
+<Step>Name the levels so alphabetical order matches the comparison you want.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'Grouping variable. The first alphabetical level is the numerator group.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Outcome. The first alphabetical level is the event.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+`exposed` / `unexposed` by `event` / `none`, N = 60. Exposed has 22 events and 8 non-events. Unexposed has 12 and 18.
+
+| Odds ratio | 95% CI | p |
+| ---: | --- | --- |
+| 4.125 | [1.387, 12.270] | .018 |
+
+The stored interpretation is “Increased odds in first group”. An odds ratio of 1 would be no association.
+
+## Reporting (APA 7)
+
+The odds of the event were higher for exposed than unexposed participants, OR = 4.13, 95% CI [1.39, 12.27], p = .018.
+
+## Coming from SPSS
+
+Analyze → Descriptive Statistics → Odds Ratio. Check which level SPSS treats as the event. Tensr uses alphabetical order.
