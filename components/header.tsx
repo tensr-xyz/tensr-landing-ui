@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 const navLinks = [
   { href: '/features', label: 'Product' },
   { href: '/pricing', label: 'Pricing' },
+  { href: '/docs', label: 'Docs' },
+  { href: '/changelog', label: 'Changelog' },
 ];
 
 export const Header = () => {
