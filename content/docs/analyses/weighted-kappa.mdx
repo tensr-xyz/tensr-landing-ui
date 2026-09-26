@@ -56,17 +56,25 @@ Both columns are ordered categories. Tensr sorts the level names alphabetically 
 
 ## Reading the output
 
-Eight cases, categories high, low, and mid, linear weights. The kappa figures come from the weighted and unweighted scores. The standard error, z, p, and confidence interval were empty on this run. The weighted kappa is labeled with the same Landis and Koch benchmarks as Cohen’s kappa. Cutoffs: Landis & Koch, 1977.
+Twelve cases rated 1, 2, or 3. Weights are linear. Levels sort numerically, which is the scale order. Fair agreement uses the same Landis and Koch benchmarks as Cohen’s kappa. Cutoffs: Landis & Koch, 1977.
 
-| Weighted kappa | Unweighted kappa | SE | p |
-| ---: | ---: | --- | --- |
-| 0.286 | 0.429 | — | — |
+| Weighted κ | Unweighted κ | SE | z | p |
+| ---: | ---: | ---: | ---: | ---: |
+| 0.323 | 0.25 | 0.222 | 1.454 | .146 |
 
-{/* TODO: regenerate after fix */}
+The contingency table, with rater A down the rows:
+
+| rater_a | 1 | 2 | 3 |
+| --- | ---: | ---: | ---: |
+| 1 | 2 | 2 | 0 |
+| 2 | 0 | 2 | 2 |
+| 3 | 1 | 1 | 2 |
+
+p = .146, so this set does not show weighted agreement beyond chance.
 
 ## Reporting (APA 7)
 
-Report weighted kappa with its standard error and p once those cells are filled.
+Linear weighted κ was .32, SE = 0.22, z = 1.45, p = .146, indicating fair agreement. N = 12.
 
 ## Coming from SPSS
 

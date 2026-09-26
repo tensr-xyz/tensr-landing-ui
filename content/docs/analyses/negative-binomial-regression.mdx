@@ -10,7 +10,7 @@ Use negative binomial regression for counts when the variance is larger than a P
 
 ## Assumptions
 
-The outcome is a non-negative count. Rows are independent. This fit uses a default dispersion when the model does not estimate one. Read the α line before you treat the model as a checked over-dispersion fit.
+The outcome is a non-negative count. Rows are independent. Tensr estimates α from the counts and refits the coefficients at that value. The report prints α, its standard error, and a likelihood-ratio comparison with a Poisson model. When the counts are not over-dispersed, α can collapse and the standard error stays blank.
 
 ## Running it in Tensr
 
@@ -62,42 +62,38 @@ The outcome is a non-negative count. Rows are independent. This fit uses a defau
 
 ## Reading the output
 
-Twenty-four students. `absences` is a count. `anxiety` is the predictor. The fit warned that α was not set and used the default 1.0.
+A class of 24 absence counts is not over-dispersed, so α collapses and the Poisson comparison is not informative. This example uses an over-dispersed set of 180 visits, with anxiety as the predictor.
 
-| Term | Estimate | 95% CI | IRR | p-value |
-| --- | ---: | --- | ---: | ---: |
-| const | 2.736 | [1.419, 4.053] | 15.425 | < .001 |
-| anxiety | -0.271 | [-0.497, -0.044] | 0.763 | .019 |
+| Term | Estimate | SE | 95% CI | IRR | p-value |
+| --- | ---: | ---: | --- | ---: | ---: |
+| const | 1.082 | 0.113 | [0.860, 1.303] | 2.949 | < .001 |
+| anxiety | 0.593 | 0.13 | [0.337, 0.849] | 1.809 | < .001 |
 
-The anxiety IRR is 0.763, so the expected count is smaller at higher anxiety. p = .019.
+The anxiety IRR is 1.809, so the expected visit count is larger at higher anxiety. p < .001.
 
 Metrics on this run:
 
 | Metric | Value |
 | --- | ---: |
-| Dispersion α | 1 |
-| α SE | — |
-| LR vs Poisson χ² | 0 |
-| LR vs Poisson p | > .999 |
-| AIC | 116.478 |
-| Deviance | 0.613 |
-| Observations | 24 |
+| Dispersion α | 1.865 |
+| α SE | 0.274 |
+| LR vs Poisson χ² | 491.58 |
+| LR vs Poisson p | < .001 |
+| AIC | 766.091 |
+| Deviance | 184.366 |
+| Observations | 180 |
 
-{/* TODO: regenerate after fix */}
-
-α SE is blank, and the likelihood-ratio chi-square against Poisson printed as 0. Those two cells are not a finished comparison of the two count models. The coefficient table above is what this run returned for the slopes.
+α is estimated, and its standard error is filled in. The likelihood-ratio test says this negative binomial fits better than a Poisson model of the same counts.
 
 ## Reporting (APA 7)
 
-{/* TODO: regenerate after fix */}
-
-Do not quote the blank α standard error or the chi-square of 0 as a test that the negative binomial fits better than the Poisson. The anxiety IRR on this run was 0.76, p = .019, N = 24.
+A negative binomial regression related visit counts to anxiety (N = 180). Anxiety was associated with more visits, B = 0.59, 95% CI [0.34, 0.85], IRR = 1.81, p < .001. Dispersion was α = 1.87 (SE = 0.27). The negative binomial fit better than a Poisson model, χ² = 491.58, p < .001.
 
 ## Coming from SPSS
 
 Analyze → Regression → Negative Binomial.
 
-SPSS negative binomial estimates the dispersion. This run kept α at the default of 1 and left its standard error blank.
+SPSS negative binomial estimates the dispersion. Tensr estimates α as well, and prints it with a standard error.
 
 ## Related
 

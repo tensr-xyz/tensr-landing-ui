@@ -81,9 +81,9 @@ The coefficient matrix and a separate p-value matrix:
 
 | | hours | anxiety | score |
 | --- | ---: | ---: | ---: |
-| hours | 1 | -0.926*** | 0.982*** |
-| anxiety | -0.926*** | 1 | -0.967*** |
-| score | 0.982*** | -0.967*** | 1 |
+| hours | 1 | -0.926 | 0.982 |
+| anxiety | -0.926 | 1 | -0.967 |
+| score | 0.982 | -0.967 | 1 |
 
 | | hours | anxiety | score |
 | --- | ---: | ---: | ---: |
@@ -93,15 +93,11 @@ The coefficient matrix and a separate p-value matrix:
 
 The diagonal of the coefficient matrix is 1 because a column correlates perfectly with itself. The diagonal of the p-value matrix is an em dash for that same reason. A positive coefficient means the columns rise together. A negative one means one falls as the other rises. r near 0.98 is a very tight line in this toy set.
 
-{/* TODO: regenerate after fix */}
-
-The summary line on this run included the star note (`* p < .05. ** p < .01. *** p < .001.`) and the stars were printed on the coefficients even though flag significant was off. Metrics are Method, Complete rows (24), and Significance α (0.05).
+With `flag_significant` off, the coefficients have no stars. Turning it on adds a star column beside each variable. On this same data every off-diagonal pair is `***`, and the summary adds `* p < .05. ** p < .01. *** p < .001.` Metrics are Method, Complete rows (24), and Significance α (0.05).
 
 ## Reporting (APA 7)
 
-{/* TODO: regenerate after fix */}
-
-Hours studied and exam score were positively correlated, and anxiety and exam score were negatively correlated, in this class of 24. Quote r and the p-value from the two matrices after the star placement is corrected. Do not copy the stars off the coefficient cell.
+Hours studied and exam score were positively correlated, r = .98, p < .001. Anxiety and exam score were negatively correlated, r = −.97, p < .001. Hours and anxiety were also negatively correlated, r = −.93, p < .001. N = 24.
 
 ## Coming from SPSS
 

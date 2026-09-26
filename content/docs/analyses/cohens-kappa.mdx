@@ -51,13 +51,24 @@ Each row is one case rated twice. Both columns are categories with a small numbe
 
 ## Reading the output
 
-{/* TODO: regenerate after fix */}
+Eight cases, each rated yes or no by two raters. Five pairs agree and three disagree, so observed agreement is 0.625. Kappa is 0.25, which is fair on the Landis and Koch scale: below 0 is poor, 0 ≤ κ < 0.2 is slight, 0.2 ≤ κ < 0.4 is fair, 0.4 ≤ κ < 0.6 is moderate, 0.6 ≤ κ < 0.8 is substantial, and κ ≥ 0.8 is almost perfect. Cutoffs: Landis & Koch, 1977.
 
-On an 8-case, three-category example the result stored kappa as 1, observed agreement as 0.625, and expected agreement as 1. Those three numbers cannot describe the same table. The standard error, z, confidence interval, and p were empty. Do not quote this run. Agreement labels follow Landis and Koch: below 0 is poor, 0 ≤ κ < 0.2 is slight, 0.2 ≤ κ < 0.4 is fair, 0.4 ≤ κ < 0.6 is moderate, 0.6 ≤ κ < 0.8 is substantial, and κ ≥ 0.8 is almost perfect. Cutoffs: Landis & Koch, 1977.
+| κ | SE | z | 95% CI | p | Observed agreement |
+| ---: | ---: | ---: | --- | ---: | ---: |
+| 0.25 | 0.342 | 0.73 | [-0.421, 0.921] | .465 | 0.625 |
+
+The contingency table:
+
+| | no | yes |
+| --- | ---: | ---: |
+| no | 2 | 2 |
+| yes | 1 | 3 |
+
+p = .465, so this small set does not show agreement beyond chance. The interval is wide because N is 8.
 
 ## Reporting (APA 7)
 
-Quote kappa, its confidence interval, and p after the stored agreement figures are consistent.
+Cohen’s κ was .25, 95% CI [−.42, .92], p = .465, indicating fair agreement. Observed agreement was .63. N = 8.
 
 ## Coming from SPSS
 

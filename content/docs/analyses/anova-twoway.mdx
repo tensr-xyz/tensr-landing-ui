@@ -74,7 +74,7 @@ Tensr does not run Levene’s test or Shapiro–Wilk for this procedure. There i
 
 ## Reading the output
 
-Twenty-four scores, crossed by teaching (Lecture, Workshop) and time (Morning, Afternoon). Interaction was on. Post hoc was left at none. The sums of squares are Type II.
+Twenty-four scores, crossed by teaching (Lecture, Workshop) and time (Morning, Afternoon). Interaction was on. Post hoc was Tukey. The sums of squares are Type II.
 
 | Source | Sum of squares | df | F | p-value |
 | --- | ---: | ---: | ---: | ---: |
@@ -87,11 +87,17 @@ Teaching is significant: the methods differ, averaging over time of day. Time is
 
 p < .05 is the significance line. Residual has no F, because it is the error term the other F ratios are divided by.
 
+Tukey compared the two teaching methods. The star sits in its own column. Time of day is not in this pairwise table.
+
+| Group A | Group B | Mean difference | p (adj) | * | CI low | CI high | Reject H₀ |
+| --- | --- | ---: | --- | --- | ---: | ---: | --- |
+| Lecture | Workshop | 12.833 | < .001 | *** | 10.125 | 15.542 | True |
+
 The chart is a box plot of score by teaching (factor A only).
 
 ## Reporting (APA 7)
 
-A two-way ANOVA tested exam scores by teaching method and time of day (N = 24). The teaching main effect was significant, F(1, 20) = 93.96, p < .001. The time-of-day main effect was not, F(1, 20) = 0.40, p = .536, and the teaching × time interaction was not, F(1, 20) = 1.01, p = .326. The model R² was .83.
+A two-way ANOVA tested exam scores by teaching method and time of day (N = 24). The teaching main effect was significant, F(1, 20) = 93.96, p < .001. The time-of-day main effect was not, F(1, 20) = 0.40, p = .536, and the teaching × time interaction was not, F(1, 20) = 1.01, p = .326. The model R² was .83. Workshop scores were higher than lecture scores, mean difference = 12.83, 95% CI [10.13, 15.54], p < .001.
 
 ## Coming from SPSS
 

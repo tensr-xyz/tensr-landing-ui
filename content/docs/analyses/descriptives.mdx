@@ -35,7 +35,7 @@ These names are the fields Tensr sends. The dialog labels the last three under R
     statistics: {
       type: 'mean | median | std_dev | variance | range | min | max | skewness | kurtosis | sem',
       description:
-        'Which extras to request. The dialog default is mean, median, std_dev, range, min, and max. The Statistics block still shows N, the mean, and the standard deviation even when this list changes.',
+        'Which statistics to print, in the order you request them. The dialog default is mean, median, std_dev, range, min, and max. Only those rows appear. An empty list prints no numeric describe rows.',
     },
     decimal_places: {
       type: '0–6',
@@ -65,11 +65,22 @@ Above the tables, the report lists dataset rows, listwise-complete rows (no miss
 
 With charts on, the first chart is a histogram titled “Distribution of” plus the column name. Further numeric columns, up to three more, get their own histograms.
 
-{/* TODO: regenerate after fix */}
+This run asked for mean, median, standard deviation, range, minimum, and maximum on exam `score` and teaching `method` (N = 24). `method` is not numeric, so those cells are blank.
+
+| Statistic | score | method |
+| --- | ---: | --- |
+| mean | 73.292 | — |
+| 50% | 73.5 | — |
+| std | 5.528 | — |
+| range | 18 | — |
+| min | 64 | — |
+| max | 82 | — |
+
+The median is the row labelled 50%. The standard deviation is the row labelled std.
 
 ## Reporting (APA 7)
 
-Exam scores (N = 24) averaged 73.29 (SD = 5.92). Eight students were assigned to each teaching method (lecture, workshop, and online).
+Exam scores (N = 24) averaged 73.29 (SD = 5.53). Eight students were assigned to each teaching method (lecture, workshop, and online).
 
 ## Coming from SPSS
 

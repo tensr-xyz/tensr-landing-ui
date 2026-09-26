@@ -15,12 +15,7 @@ Two groups only: use the [independent-samples t-test](/docs/analyses/ttest-indep
 
 Scores are numeric, and each person is in one group. Within each group, scores should be roughly normal, and the groups should have similar spread.
 
-Tensr checks both and writes assumption notes:
-
-- Homogeneity of variance. The default test is Levene’s (median centre). You can switch it to Brown–Forsythe or turn it off. Levene’s p below .05 means the spreads differ.
-- Shapiro–Wilk inside each group that was actually analysed. The note says how many rows and groups that used.
-
-If both fail, the note suggests Welch’s ANOVA or the [Kruskal–Wallis test](/docs/analyses/kruskal-wallis). Welch is the `use_welch` option on this same procedure, off by default. If only the spreads differ, the note suggests Welch. If only normality fails, it suggests Welch or Kruskal–Wallis.
+Tensr stores Levene’s test on the result. The default is the median-centre version. You can switch it to Brown–Forsythe or turn it off. Levene’s p below .05 means the spreads differ. This procedure does not print a Shapiro–Wilk table. If the spreads differ, use Welch (`use_welch`, off by default) or the [Kruskal–Wallis test](/docs/analyses/kruskal-wallis).
 
 ## Running it in Tensr
 
@@ -112,29 +107,31 @@ Group means. Status is included unless the group was too small to analyse.
 | Online | 8 | 73.5 | included |
 | Workshop | 8 | 79.5 | included |
 
-ANOVA. η² is the proportion of score variance that sits between teaching methods. .791 means about 79% of the variation in this toy set is between methods, which is only believable because the groups barely overlap.
+ANOVA. η² is the proportion of score variance that sits between teaching methods. 0.908 means about 91% of the variation in this toy set is between methods, which is only believable because the groups barely overlap.
 
 | Source | SS | df | MS | F | p | η² |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Between Groups | 638.083 | 2 | 319.042 | 39.674 | < .001 | 0.791 |
-| Within Groups | 168.875 | 21 | 8.042 | — | — | — |
-| Total | 806.958 | 23 | | | | |
+| Between Groups | 638.083 | 2 | 319.042 | 103.274 | < .001 | 0.908 |
+| Within Groups | 64.875 | 21 | 3.089 | — | — | — |
+| Total | 702.958 | 23 | | | | |
 
 F compares between-group variance with within-group variance. df are 2 and 21 (groups minus 1, and N minus the number of groups). p < .001 means the three means are not all equal.
 
-Assumption notes: Levene’s F = 0.403, p = .673. Shapiro–Wilk was not significant in Lecture (W = 0.966, p = .865), Workshop (W = 0.998, p > .999), or Online (W = 0.975, p = .933). The summary line was “Assumptions of normality and homogeneity of variance are met.”
+Tukey comparisons. The mean difference is Group B minus Group A. Every pair differs.
 
-{/* TODO: regenerate after fix */}
+| Group A | Group B | Mean difference | p (adj) | CI low | CI high | Reject H₀ |
+| --- | --- | ---: | --- | ---: | ---: | --- |
+| Lecture | Online | 6.625 | < .001 | 4.41 | 8.84 | True |
+| Lecture | Workshop | 12.625 | < .001 | 10.41 | 14.84 | True |
+| Online | Workshop | 6 | < .001 | 3.785 | 8.215 | True |
 
-The chart is a box plot titled “score across method.”
+Levene’s test on this run was F = 0.42, p = .662, so the spreads are similar. The chart is a box plot titled “score across method.”
 
 ## Reporting (APA 7)
 
-A one-way ANOVA tested exam scores across lecture, online, and workshop teaching (n = 8 per method). Teaching method had a significant effect, F(2, 21) = 39.67, p < .001, η² = .79. Levene’s test was not significant, F = 0.40, p = .673.
+A one-way ANOVA tested exam scores across lecture, online, and workshop teaching (n = 8 per method). Teaching method had a significant effect, F(2, 21) = 103.27, p < .001, η² = .91. Levene’s test was not significant, F = 0.42, p = .662. Tukey tests showed that every pair of methods differed, all p < .001. Workshop scores were highest (M = 79.50), then online (M = 73.50), then lecture (M = 66.88).
 
-{/* TODO: regenerate after fix */}
-
-The ANOVA table prints η² as 0.791. APA drops the leading zero for a statistic that cannot exceed 1.
+The ANOVA table prints η² as 0.908. APA drops the leading zero for a statistic that cannot exceed 1.
 
 ## Coming from SPSS
 
