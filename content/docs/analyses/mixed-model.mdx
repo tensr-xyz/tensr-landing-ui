@@ -1,0 +1,102 @@
+---
+title: Mixed model
+description: Random-intercept model with a null-model ICC, z, and a confidence interval.
+category: Mixed models
+---
+
+## When to use it
+
+Use Mixed Model when people are nested in groups and you want the slope, its confidence interval, and how much of the outcome the groups account for before any predictor is added. The ICC on this page comes from that empty model. The coefficient table comes from the model that includes your fixed effects.
+
+The agent sends “mixed model” and “LMM” here. The [linear mixed model](/docs/analyses/linear-mixed-model) menu item is a separate request.
+
+## Assumptions
+
+The outcome is numeric. The grouping column needs about 10 or more groups. With fewer than 10, the report warns that a mixed model is poorly identified and points at cluster-robust ordinary least squares. An unconverged fit is not a finished result. A random slope that does not vary inside groups is not identified.
+
+Fixed effects may be empty. That run is an intercept-only model. This example includes one predictor.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Multivariate → Mixed Models → Mixed Model. In chat: “Mixed model of score on hours, grouped by clinic.”</Step>
+<Step>Dependent is the numeric outcome. Grouping variable is the cluster. Fixed effects can be empty.</Step>
+<Step>Random slopes start empty, which is a random intercept only. Estimation starts at REML. ML is the other choice.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    outcome: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    group: {
+      type: 'string',
+      description: 'Cluster id.',
+    },
+    fixed_effects: {
+      type: 'string[]',
+      description: 'Numeric predictors. Empty means an intercept-only model.',
+      default: '[]',
+    },
+    random_slopes: {
+      type: 'string[]',
+      description: 'Predictors that may have a different slope in each group. Empty means a random intercept only.',
+      default: '[]',
+    },
+    reml: {
+      type: 'boolean',
+      description: 'Restricted maximum likelihood. Off uses maximum likelihood.',
+      default: 'true',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. This procedure does not add its own chart.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same 96 scores as the [linear mixed model](/docs/analyses/linear-mixed-model) page: twelve clinics, eight people each, outcome `score`, predictor `hours`. Random slopes were empty. REML was on. The fit converged.
+
+| Term | Coefficient | SE | z | p | 95% CI low | 95% CI high |
+| --- | ---: | ---: | ---: | --- | ---: | ---: |
+| Intercept | 50.517 | 0.978 | 51.643 | < .001 | 48.6 | 52.434 |
+| hours | 2.017 | 0.096 | 20.978 | < .001 | 1.829 | 2.206 |
+
+| Component | Variance | Std. Dev |
+| --- | ---: | ---: |
+| Random intercept (clinic) | 9.081 | 3.013 |
+| Residual | 3.52 | 1.876 |
+
+The hours interval excludes 0. Metrics on this run: ICC (null model) 0.373, 12 groups, 96 observations, 0 singletons, log-likelihood −214.696, AIC 435.393, BIC 443.086, converged yes.
+
+The null-model ICC (0.373) is smaller than the 0.721 on the [multilevel modelling](/docs/analyses/multilevel-modelling) page. That page’s ICC comes from the model that already includes hours. This page’s ICC comes from a model with no predictors. The hours coefficient matches the other two procedures on these rows.
+
+A group with only one row would be counted under Singletons. This run has none.
+
+## Reporting (APA 7)
+
+A mixed model predicted exam score from study hours with a random intercept for clinic (N = 96, 12 clinics). The null-model ICC was .37. Each extra hour was associated with 2.02 points, 95% CI [1.83, 2.21], p < .001.
+
+## Coming from SPSS
+
+The product menu is Multivariate → Mixed Models → Mixed Model. SPSS fits this with MIXED. The path string stored for this item says Analyze → Mixed Models → Mixed Model. The item itself is on the Multivariate menu.
+
+## Related
+
+A shorter coefficient table from the same engine is the [linear mixed model](/docs/analyses/linear-mixed-model). The ICC after the predictor is in the model is [multilevel modelling](/docs/analyses/multilevel-modelling). Fewer than 10 groups: [linear regression](/docs/analyses/linear-regression) can take a cluster column.

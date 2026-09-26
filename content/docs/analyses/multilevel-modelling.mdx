@@ -1,0 +1,93 @@
+---
+title: Multilevel modelling
+description: Hierarchical linear model with an ICC for nested scores.
+category: Mixed models
+---
+
+## When to use it
+
+Use multilevel modelling when a numeric outcome sits inside groups and you want the intraclass correlation as well as the slopes. The ICC is the share of score variance that sits between groups. A high ICC means people in the same clinic resemble each other.
+
+This procedure fits the same REML mixed model as the [linear mixed model](/docs/analyses/linear-mixed-model). The request uses different field names, and the report adds the ICC and a variance split.
+
+## Assumptions
+
+The outcome and the level-1 predictors are numeric. The level-2 column has at least two groups. This fit uses REML and a random intercept. It does not test residual normality.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Multivariate → Mixed Models → Multilevel Modelling (HLM). In chat: “Multilevel model of score on hours, with clinic as level 2.”</Step>
+<Step>Outcome is the level-1 score. Level-1 predictors need at least one column. Level-2 grouping variable is the cluster.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    outcome_column: {
+      type: 'string',
+      description: 'Numeric level-1 outcome.',
+    },
+    level1_predictors: {
+      type: 'string[]',
+      description: 'Numeric predictors measured on the people. At least one.',
+    },
+    level2_group_column: {
+      type: 'string',
+      description: 'Cluster id, such as clinic or school.',
+    },
+    random_slopes: {
+      type: 'string[]',
+      description:
+        'Optional. Each column must also be a level-1 predictor. The dialog does not send this, so a dialog run is a random intercept only.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Fitted-versus-residual scatter and a random-intercept bar chart.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Same 96 scores as the [linear mixed model](/docs/analyses/linear-mixed-model) page: twelve clinics, eight people each, outcome `score`, predictor `hours`.
+
+| Term | Estimate | Std. Err | p-value |
+| --- | ---: | ---: | --- |
+| const | 50.5168 | 0.97817 | p < .001 |
+| hours | 2.01735 | 0.0961672 | p < .001 |
+
+| Level | Variance | % of total |
+| --- | ---: | ---: |
+| Between clinic | 9.08003 | 72.06% |
+| Within (residual) | 3.52042 | 27.94% |
+
+ICC is 0.721. That is the between-clinic variance divided by between plus residual, from this model that already includes hours. About 72% of the remaining variation sits between clinics. The hours slope matches the linear mixed model on the same rows. The metrics line shows ICC 0.721, 96 observations, and 12 groups.
+
+The charts are “Fitted vs residual” and “Random intercepts by group.” The bar chart shows up to 12 group intercepts.
+
+An ICC below 0.05 would add a sentence that the grouping variable accounts for negligible variance. This run is far above that line, so that sentence is absent.
+
+## Reporting (APA 7)
+
+A multilevel model predicted exam score from study hours with a random intercept for clinic (N = 96, 12 clinics). ICC = .72. Each extra hour was associated with 2.02 points, p < .001.
+
+## Coming from SPSS
+
+The product menu is Multivariate → Mixed Models → Multilevel Modelling (HLM). SPSS fits this with MIXED. The ICC is the ratio of the random-intercept variance to the total variance.
+
+## Related
+
+The coefficient table without the ICC is the [linear mixed model](/docs/analyses/linear-mixed-model). A null-model ICC, z, and a confidence interval are on [Mixed Model](/docs/analyses/mixed-model).
