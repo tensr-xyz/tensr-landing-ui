@@ -10,7 +10,7 @@ Use random forest classification when the outcome is a category and you want hol
 
 ## Assumptions
 
-The outcome is categorical. Features are numeric. Classes with fewer than two rows are dropped. Holdout fraction 0.25, 100 trees, `random_state=0`. HTTP and chat dispatch both honour `test_fraction`. Kernel and class weights are not exposed.
+The outcome is categorical. Features are numeric. Classes with fewer than two rows are dropped. Holdout fraction 0.25, 100 trees, min_samples_leaf 5, no depth cap, `random_state=0`. HTTP and chat dispatch both honour `test_fraction` and `min_samples_leaf`. Kernel and class weights are not exposed.
 
 ## Running it in Tensr
 
@@ -35,6 +35,11 @@ The outcome is categorical. Features are numeric. Classes with fewer than two ro
       type: '10–500',
       description: 'Number of trees.',
       default: '100',
+    },
+    min_samples_leaf: {
+      type: '1–100',
+      description: 'Minimum rows in a leaf. Maps to ranger min.node.size. No depth cap.',
+      default: '5',
     },
     test_fraction: {
       type: '0.05–0.5',
@@ -61,7 +66,7 @@ The outcome is categorical. Features are numeric. Classes with fewer than two ro
 
 ## Reading the output
 
-A separate 240-row sample where hours strongly shifts the pass rate. 100 trees, 25% holdout. Test accuracy should sit clearly above chance.
+A separate 240-row sample where hours strongly shifts the pass rate. 100 trees, min_samples_leaf 5, no depth cap, 25% holdout. Test accuracy should sit clearly above chance.
 
 | Actual \ Predicted | 0 | 1 |
 | ---: | ---: | ---: |
@@ -70,14 +75,14 @@ A separate 240-row sample where hours strongly shifts the pass rate. 100 trees, 
 
 | Variable | Importance |
 | --- | ---: |
-| hours | 0.708 |
-| anxiety | 0.292 |
+| hours | 0.798 |
+| anxiety | 0.202 |
 
-Train accuracy = 1, test accuracy = 0.717, n = 240. Hours was built to move the pass rate strongly, so holdout accuracy should sit clearly above chance.
+Train accuracy = 0.9, test accuracy = 0.717, n = 240, trees = 100, min_samples_leaf = 5. Hours was built to move the pass rate strongly, so holdout accuracy should sit clearly above chance.
 
 ## Reporting (APA 7)
 
-Holdout classification of `passed` from hours and anxiety, n = 240. Test accuracy = 0.717, train accuracy = 1.
+Holdout classification of `passed` from hours and anxiety, n = 240. Test accuracy = 0.717, train accuracy = 0.9.
 
 ## Coming from SPSS
 

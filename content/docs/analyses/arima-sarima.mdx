@@ -10,9 +10,9 @@ Use ARIMA when you have one numeric series and you want a short forecast with a 
 
 ## Assumptions
 
-The target is numeric, with at least eight non-missing values and non-zero variance. An optional date column sorts the rows. Tensr picks p, d, and q by AIC on a small grid (p and q up to 2, d up to 1). It does not test residuals or invertibility after the fit.
+The target is numeric, with at least eight non-missing values and non-zero variance. An optional date column sorts the rows. Tensr chooses d from a KPSS test (ADF is reported) and D from seasonal strength, then searches p, q, P, and Q by AICc among models that share those differencing orders. It reports both AIC and AICc. Near-unit AR/MA roots are rejected. The search caps the number of parameters relative to the series length after differencing, and it skips seasonal terms when there are fewer than three full seasons.
 
-If a seasonal period of 2 or more is set and the series is at least twice that long, the search also includes a seasonal order. The dialog starts that field at 12. The HTTP body default is null, which is a non-seasonal search. Chat dispatch that omits the field uses 12.
+If a seasonal period of 2 or more is set and the series is long enough, the search includes a seasonal order. The dialog starts that field at 12. The HTTP body default is null, which is a non-seasonal search. Chat dispatch that omits the field uses 12.
 
 A dataset of more than 5,000 rows with repeated dates is rejected as a panel.
 
@@ -71,26 +71,26 @@ Forty-eight months of sales. A mild upward trend and a 12-month wiggle, with noi
 
 | Step | Forecast | Lower 95% | Upper 95% |
 | ---: | ---: | ---: | ---: |
-| 1 | 51.4105 | 46.3156 | 56.5054 |
-| 2 | 51.1734 | 45.4749 | 56.8718 |
-| 3 | 51.8052 | 45.7864 | 57.8241 |
-| 4 | 53.9942 | 47.6893 | 60.2991 |
-| 5 | 53.0084 | 46.4299 | 59.5870 |
-| 6 | 52.9026 | 46.0613 | 59.7438 |
-| 7 | 54.3677 | 47.2735 | 61.4620 |
-| 8 | 48.2489 | 40.9103 | 55.5874 |
+| 1 | 46.7048 | 38.1211 | 55.2885 |
+| 2 | 46.9551 | 38.0314 | 55.8788 |
+| 3 | 50.0524 | 41.1018 | 59.0030 |
+| 4 | 50.7991 | 41.8464 | 59.7519 |
+| 5 | 47.1597 | 38.2068 | 56.1126 |
+| 6 | 48.6367 | 39.6837 | 57.5896 |
+| 7 | 47.8265 | 38.8735 | 56.7794 |
+| 8 | 43.2559 | 34.3030 | 52.2089 |
 
-Selected order (0, 1, 2), seasonal order (0, 1, 2, 12), AIC = 48.161, N = 48. The table is the 12-step forecast with a 95% interval from the fitted model. Seasonal period is 12, so this is a SARIMA search.
+Selected order (1, 0, 0), seasonal order (1, 1, 0, 12), AIC = 217.872, AICc = 218.622, N = 48. d and D are chosen from unit-root tests first; AICc is compared only among models with those orders. The table is the 12-step forecast with a 95% interval from the fitted model. Seasonal period is 12, so this is a SARIMA search.
 
 ## Reporting (APA 7)
 
-An automatic SARIMA(0, 1, 2), seasonal order (0, 1, 2, 12) forecast of monthly sales, N = 48, AIC = 48.161. Report the selected order and the forecast interval, not a p-value.
+An automatic SARIMA(1, 0, 0), seasonal order (1, 1, 0, 12) forecast of monthly sales, N = 48, AIC = 217.872, AICc = 218.622. Report the selected order and the forecast interval, not a p-value.
 
 ## Coming from SPSS
 
 SPSS is Analyze → Forecasting → Create Models with the ARIMA method, or Expert Modeler. Tensr’s item is on the Time series menu, Forecasting → ARIMA / SARIMA. The path string stored for this item matches that menu.
 
-SPSS Expert Modeler searches a wider order space and can keep outliers. Tensr’s grid is small (p and q up to 2, d up to 1; seasonal P, D, Q on the same bounds). A seasonal period of 12 rebuilds that seasonal grid for every non-seasonal (p, d, q). This example sets period 12.
+SPSS Expert Modeler searches a wider order space and can keep outliers. Tensr fixes d from KPSS and D from seasonal strength, then searches p, q, P, and Q by AICc on a small grid (p and q up to 2, d up to 1; seasonal P, D, Q on the same bounds). A seasonal period of 12 rebuilds that seasonal grid for every non-seasonal (p, q). This example sets period 12.
 
 ## Related
 

@@ -555,7 +555,7 @@ def jobs(frames: dict[str, pd.DataFrame]) -> list[tuple[str, str, pd.DataFrame, 
         ("stationarity-tests", "stationarity_tests", frames["series"], {"target_column": "sales", "date_column": "month"}),
         ("autocorrelation", "autocorrelation", frames["series"], {"target_column": "noise", "date_column": "month", "max_lags": 20}),
         ("cluster-analysis", "cluster_analysis", frames["ml"], {"columns": ["x", "y"], "method": "kmeans", "n_clusters": 2}),
-        ("decision-tree", "decision_tree", c, {"dependent": "passed", "independents": ["hours", "anxiety"]}),
+        ("decision-tree", "decision_tree", c, {"dependent": "passed", "independents": ["hours", "anxiety"], "max_depth": None, "min_samples_leaf": 1}),
         ("random-forest-classification", "random_forest_classification", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"]}),
         ("random-forest-regression", "random_forest_regression", frames["ml"], {"dependent": "score", "independents": ["hours", "anxiety"]}),
         ("svm-classification", "svm_classification", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"]}),
@@ -641,9 +641,9 @@ INTRO = {
     "stationarity-tests": "The same sales series, which was built with a drift and a seasonal wiggle, not as white noise. ADF’s null is a unit root. KPSS’s null is level stationarity.",
     "autocorrelation": "The noise column on those 48 months, drawn as independent N(50, 4) values. Lag structure here is leftover chance, not the sales season.",
     "cluster-analysis": "Two numeric columns built as two well-separated blobs, 240 rows, k-means with k = 2, standardised. Silhouette should be high.",
-    "decision-tree": "The 96-student exam cohort, pass or fail from hours and anxiety, one unpruned tree, 25% holdout. Hours only shifts the pass rate a little, so this page is the overfitting example: train accuracy near 1 and test accuracy near chance.",
-    "random-forest-classification": "A separate 240-row sample where hours strongly shifts the pass rate. 100 trees, 25% holdout. Test accuracy should sit clearly above chance.",
-    "random-forest-regression": "Exam score from hours and anxiety on that same 240-row sample. Both slopes were built steep, so holdout R² should be positive.",
+    "decision-tree": "The 96-student exam cohort, pass or fail from hours and anxiety, 25% holdout. max_depth is set to None and min_samples_leaf to 1 so the tree is unrestricted; the dialog defaults are 5 and 5. Hours only shifts the pass rate a little, so this page is the overfitting example: train accuracy near 1 and test accuracy near chance.",
+    "random-forest-classification": "A separate 240-row sample where hours strongly shifts the pass rate. 100 trees, min_samples_leaf 5, no depth cap, 25% holdout. Test accuracy should sit clearly above chance.",
+    "random-forest-regression": "Exam score from hours and anxiety on that same 240-row sample. 100 trees, min_samples_leaf 5, no depth cap. Both slopes were built steep, so holdout R² should be positive.",
     "svm-classification": "The same strong pass/fail sample and the same two features. Kernel and C are not user controls.",
     "gradient-boosting": "The same strong pass/fail sample, classification mode, 100 stages, 25% holdout.",
     "neural-network-mlp": "The same strong pass/fail sample, classification mode, hidden layers 64 and 32, 25% holdout.",
@@ -753,15 +753,19 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
         order = ex.metric("Order (p,d,q)")
         seasonal = ex.metric("Seasonal order")
         aic = ex.metric("AIC")
+        aicc = ex.metric("AICc")
         n_obs = ex.metric("Observations")
         season_bit = f", seasonal order {seasonal}" if seasonal else ""
+        aicc_bit = f", AICc = {aicc}" if aicc else ""
         reading = (
-            f"Selected order {order}{season_bit}, AIC = {aic}, N = {n_obs}. "
+            f"Selected order {order}{season_bit}, AIC = {aic}{aicc_bit}, N = {n_obs}. "
+            "d and D are chosen from unit-root tests first; AICc is compared only among models with those orders. "
             "The table is the 12-step forecast with a 95% interval from the fitted model. "
             "Seasonal period is 12, so this is a SARIMA search."
         )
         apa = (
-            f"An automatic SARIMA{order}{'' if not seasonal else season_bit} forecast of monthly sales, N = {n_obs}, AIC = {aic}. "
+            f"An automatic SARIMA{order}{'' if not seasonal else season_bit} forecast of monthly sales, "
+            f"N = {n_obs}, AIC = {aic}{aicc_bit}. "
             "Report the selected order and the forecast interval, not a p-value."
         )
         return section(intro, tables, reading, apa, extra)
@@ -849,14 +853,15 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
         n_obs = ex.metric("Observations")
         reading = (
             f"Train accuracy = {train_acc}, test accuracy = {test_acc}, n = {n_obs}. "
-            "This page is the overfitting example on purpose. The tree has no depth limit, "
-            "hours only shifts the pass rate a little, and 72 training rows are enough to memorise the sample. "
+            "This page is the overfitting example on purpose. max_depth is set to None "
+            "and min_samples_leaf to 1 (the dialog defaults are 5 and 5), hours only shifts "
+            "the pass rate a little, and 72 training rows are enough to memorise the sample. "
             "A large train–test gap, with test accuracy near 0.5, is the reading."
         )
         apa = (
             f"Holdout classification of `passed` from hours and anxiety, n = {n_obs}. "
             f"Test accuracy = {test_acc}, train accuracy = {train_acc}. "
-            "The unpruned tree overfits this weak exam-cohort signal."
+            "With max_depth set to None and min_samples_leaf to 1, the unpruned tree overfits this weak exam-cohort signal."
         )
         return section(intro, tables, reading, apa, extra)
     if slug in {
@@ -872,6 +877,20 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
             f"Train accuracy = {train_acc}, test accuracy = {test_acc}, n = {n_obs}. "
             "Hours was built to move the pass rate strongly, so holdout accuracy should sit clearly above chance."
         )
+        if slug == "random-forest-classification":
+            leaf = ex.metric("min_samples_leaf")
+            trees = ex.metric("n_estimators") or ex.metric("Trees")
+            extra_h = []
+            if trees:
+                extra_h.append(f"trees = {trees}")
+            if leaf:
+                extra_h.append(f"min_samples_leaf = {leaf}")
+            if extra_h:
+                reading = (
+                    f"Train accuracy = {train_acc}, test accuracy = {test_acc}, n = {n_obs}, "
+                    + ", ".join(extra_h)
+                    + ". Hours was built to move the pass rate strongly, so holdout accuracy should sit clearly above chance."
+                )
         apa = (
             f"Holdout classification of `passed` from hours and anxiety, n = {n_obs}. "
             f"Test accuracy = {test_acc}, train accuracy = {train_acc}."
@@ -881,8 +900,10 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
         r2 = ex.metric("R²")
         rmse = ex.metric("RMSE")
         n_obs = ex.metric("Observations")
+        leaf = ex.metric("min_samples_leaf")
+        leaf_bit = f", min_samples_leaf = {leaf}" if leaf else ""
         reading = (
-            f"Holdout R² = {r2}, RMSE = {rmse}, n = {n_obs}. "
+            f"Holdout R² = {r2}, RMSE = {rmse}, n = {n_obs}{leaf_bit}. "
             "Hours and anxiety were built with steep slopes, so a positive holdout R² is the expected reading."
         )
         apa = (

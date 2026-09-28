@@ -10,7 +10,7 @@ Use random forest regression when the outcome is numeric and you want a holdout 
 
 ## Assumptions
 
-Outcome and features are numeric. Holdout fraction 0.25, 100 trees, `random_state=0`. HTTP and chat dispatch both honour `test_fraction`.
+Outcome and features are numeric. Holdout fraction 0.25, 100 trees, min_samples_leaf 5, no depth cap, `random_state=0`. HTTP and chat dispatch both honour `test_fraction` and `min_samples_leaf`.
 
 ## Running it in Tensr
 
@@ -35,6 +35,11 @@ Outcome and features are numeric. Holdout fraction 0.25, 100 trees, `random_stat
       type: '10–500',
       description: 'Number of trees.',
       default: '100',
+    },
+    min_samples_leaf: {
+      type: '1–100',
+      description: 'Minimum rows in a leaf. Maps to ranger min.node.size. No depth cap.',
+      default: '5',
     },
     test_fraction: {
       type: '0.05–0.5',
@@ -61,18 +66,18 @@ Outcome and features are numeric. Holdout fraction 0.25, 100 trees, `random_stat
 
 ## Reading the output
 
-Exam score from hours and anxiety on that same 240-row sample. Both slopes were built steep, so holdout R² should be positive.
+Exam score from hours and anxiety on that same 240-row sample. 100 trees, min_samples_leaf 5, no depth cap. Both slopes were built steep, so holdout R² should be positive.
 
 | Variable | Importance |
 | --- | ---: |
-| hours | 0.791 |
-| anxiety | 0.209 |
+| hours | 0.845 |
+| anxiety | 0.155 |
 
-Holdout R² = 0.704, RMSE = 4.871, n = 240. Hours and anxiety were built with steep slopes, so a positive holdout R² is the expected reading.
+Holdout R² = 0.721, RMSE = 4.733, n = 240, min_samples_leaf = 5. Hours and anxiety were built with steep slopes, so a positive holdout R² is the expected reading.
 
 ## Reporting (APA 7)
 
-Random forest regression of exam score on hours and anxiety, n = 240, holdout R² = 0.704, RMSE = 4.871.
+Random forest regression of exam score on hours and anxiety, n = 240, holdout R² = 0.721, RMSE = 4.733.
 
 ## Coming from SPSS
 
