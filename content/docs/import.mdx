@@ -3,7 +3,7 @@ title: Import
 description: Upload a survey file. Labels stay on the codes. Recodes do not overwrite the upload.
 ---
 
-File → Import Data. The picker accepts CSV, Excel (`.xlsx`, `.xls`), SPSS (`.sav`), Stata (`.dta`), or Triple-S (`.sss`).
+Data → Import & Export → Import Data. The picker that succeeds is CSV, Excel (`.xlsx`, `.xls`), SPSS (`.sav`), Stata (`.dta`), or Triple-S (`.sss`).
 
 The file lands as a dataset. Column identities are the original variables. Recodes, rakes, and merges create a new version with a new dataset id. They do not overwrite the upload.
 
@@ -21,11 +21,11 @@ Excel is the first sheet with a header row. There is no label metadata on `.xlsx
 
 ## Qualtrics and Alchemer CSV
 
-Qualtrics files often have a variable-label row and an ImportId row (`{"ImportId": "QID…"}`) in the first few rows. Those two rows become column metadata (`label` and `qualtrics_import_id`) and are dropped from the data.
+A Qualtrics CSV is detected when at least half the cells in one of the first three data rows contain `ImportId` (any case). That row is dropped, not treated as a case. The row above it, if it looks like labels, is stored as variable labels and also dropped.
+
+Each ImportId cell is read as JSON when it is JSON (`{"ImportId": "QID1"}`). If it is not JSON, Tensr looks for `ImportId":"…"` in the cell text. If that is missing too, the whole cell text is stored as the import id.
 
 Alchemer files often have long question text as headers and short variable IDs in the first data row. The headers become labels, the first data row becomes the variable names, and that row is dropped.
-
-{/* TODO: confirm Qualtrics detection still holds when the ImportId row is not JSON */}
 
 ## Multi-select
 
@@ -35,6 +35,4 @@ Each set is stored as type `dichotomy`. Counted value is `1` for 0/1 columns, or
 
 ## Triple-S and other intake
 
-`.sss` is on the main picker. Data → Legacy import also has Triple-S Import, MDD Import, Qualtrics Definition, WinCross Job Import, and related paths.
-
-{/* TODO: confirm whether .mdd / .parquet / .json on an older file-picker accept string are supported for ordinary Import Data. They are not in ACCEPTED_UPLOAD_EXTENSIONS. */}
+`.sss` is on Import Data. Data → Legacy import also has Triple-S Import, MDD Import, Qualtrics Definition, WinCross Job Import, and related paths. Use those dialogs for MDD and Qualtrics definitions — not Import Data.

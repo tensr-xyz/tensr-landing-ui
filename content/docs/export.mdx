@@ -28,11 +28,9 @@ EXECUTE.
 
 If there is no weight column, the `.sps` is `* This dataset has no survey weight column.`
 
-{/* TODO: confirm Stata (.dta) export is live on GET /datasets/:id/export?format=dta. It is in the dialog. */}
+## Banner — Excel, PowerPoint, Word
 
-## Banner — Excel and PowerPoint
-
-From the banner grid: Excel (`banner.xlsx`) and PowerPoint (`banner.pptx`).
+On Custom Tables: Excel (`banner.xlsx`) and PowerPoint (`banner.pptx`).
 
 Excel is the audit record. The provenance sheet carries bitsets, weight identity, and the convention tuple so the file stands alone.
 
@@ -40,10 +38,10 @@ PowerPoint is not an audit record. Convention is in the slide notes only.
 
 Weight identity is on both. Unweighted tables store `explicit_null`.
 
-{/* TODO: confirm whether export.docx is offered anywhere. The URL builder accepts docx; the download helper is xlsx and pptx only. */}
+Word is a methodology document (`methodology.docx`), not a copy of the grid. It is offered next to Excel and PowerPoint on the agency table export, not on the Custom Tables buttons.
 
 ## Analysis reports
 
-Reports can download tables as CSV (with run id, dataset id, fingerprint) and the full write-up as Markdown. HTML is produced for print. SPSS syntax sits in a collapsible **SPSS syntax (reference)**. The R script is under **Reproducibility (R)** — see [The R script](/docs/r-script).
+Reports can download tables as CSV (with run id, dataset id, fingerprint), the write-up as Markdown, and a self-contained HTML file. **Print / PDF** opens the browser print dialog (`window.print()`). There is no separate PDF file generator.
 
-{/* TODO: confirm how PDF is produced from that HTML. There is no downloadPdf helper in the report export module. */}
+SPSS syntax sits in a collapsible **SPSS syntax (reference)**. The R script is under **Reproducibility (R)** — see [The R script](/docs/r-script).

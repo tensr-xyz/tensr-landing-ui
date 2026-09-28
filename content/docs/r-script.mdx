@@ -16,7 +16,7 @@ Identity comments at the top are `# dataset_id:` and `# source: dataset.csv`.
 
 ## Badges
 
-The **R syntax** badge is on engine analyses, not plugins.
+The **R syntax** badge is on engine analyses, not plugins. The live allow-list is `_BADGE` in `app/r_coverage.py`: when Rscript can run, those keys stamp `verified` or `not_verified`; without Rscript they can stamp `verified_in_ci` on this build.
 
 | Kind | Default text |
 | --- | --- |
@@ -25,17 +25,22 @@ The **R syntax** badge is on engine analyses, not plugins.
 | `not_verified` | Generated R does not reproduce the engine result. |
 | `unknown` | R syntax reproduction unknown. |
 
-`not_verified` is the amber state. The live statement on the badge can be more specific (for example ANOVA includes ΔF and Δn).
+`not_verified` is the amber state. The live statement on the badge can be more specific (for example ANOVA includes ΔF and Δn). Keys that are not in `_BADGE` stay `unknown`.
 
-## What is not compared to R
+`_BADGE` keys: anova_oneway, anova_twoway, linear_regression, logistic_regression, descriptives, correlation, ttest_one_sample, ttest_paired, stepwise_regression, anova_mixed, mixed_anova, mann_whitney_u, wilcoxon_signed_rank, kruskal_wallis, friedman, sign_test, median_test, anova_repeated, rm_anova, anova_threeway, ancova, manova, hotelling_t2, hierarchical_regression, moderation_analysis, poisson_regression, probit_regression, negative_binomial_regression, ordinal_regression, partial_correlation, multilevel_modelling, fishers_exact, odds_ratio, relative_risk, mcnemar, cochrans_q, mantel_haenszel, cochran_armitage, cohens_kappa, weighted_kappa, fleiss_kappa, kendalls_w, goodman_kruskal_gamma, goodman_kruskal_lambda, somers_d, loglinear, jonckheere_terpstra, moses_test, runs_test, kolmogorov_smirnov, lilliefors_ks, shapiro_wilk, linear_mixed_model, mixed_model, ttest_independent, chi_square, reliability, reliability_cronbach, pca, kaplan_meier, cox_proportional_hazards, nelson_aalen, autocorrelation, nps, gee, generalized_linear_mixed_model, banner_table, batch_tables, rake, poststratify, merge_datasets, fuse_waves, set_active_weight, turf, maxdiff_count, van_westendorp, gabor_granger, funnel, drivers, choice_simulator, confirmatory_factor_analysis, structural_equation_modelling, efa, cluster_analysis, discriminant_analysis, canonical_correlation, correspondence, multidimensional_scaling, arima_sarima, exponential_smoothing, stl_decomposition, stationarity_tests, network, dbscan, latent_class_analysis, maxdiff_mnl, conjoint_mnl.
 
-These procedures emit Python (sklearn / similar). The badge stays off because the libraries do not line up:
+## Not compared to R (`NOT_VERIFIABLE` in the same file)
 
-- Decision tree, random forest, gradient boosting, SVM, neural network (MLP)
-- Open-text coding (agent procedure, not a statistic)
-- MaxDiff HB and conjoint HB
+The badge stays off. Reasons from `r_coverage.py`:
 
-{/* TODO: confirm the current NOT_VERIFIABLE list still matches r_coverage.py before this page is treated as complete. */}
+- Open-text coding — an agent procedure, not a statistic with an R equivalent
+- Decision tree — sklearn DecisionTree vs rpart splits differ; CART implementations are not aligned
+- Random forest classification and regression — sklearn RandomForest vs randomForest; trees are not aligned across libraries
+- Gradient boosting — sklearn GradientBoosting vs gbm; boosting paths differ
+- SVM classification — sklearn SVC vs e1071::svm kernels/solvers differ
+- Neural network (MLP) — sklearn MLP vs nnet; random init and architecture differ
+- MaxDiff HB — penalized mixed-logit HB is not Sawtooth and has no unique R reference
+- Conjoint HB — penalized mixed-logit CBC is not Sawtooth and has no unique R reference
 
 ## How to run it
 
