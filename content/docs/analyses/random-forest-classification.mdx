@@ -1,0 +1,88 @@
+---
+title: Random forest classification
+description: Bagged trees for a categorical outcome, with holdout accuracy and feature importance.
+category: Machine learning
+---
+
+## When to use it
+
+Use random forest classification when the outcome is a category and you want holdout accuracy plus which numeric features split the classes, without reading one tree. A single tree is [decision tree](/docs/analyses/decision-tree). The numeric-outcome version is [random forest regression](/docs/analyses/random-forest-regression).
+
+## Assumptions
+
+The outcome is categorical. Features are numeric. Classes with fewer than two rows are dropped. Holdout fraction 0.25, 100 trees, `random_state=0`. Chat dispatch does not forward `test_fraction`. Kernel and class weights are not exposed.
+
+## Running it in Tensr
+
+<Steps>
+<Step>ML → Classification → Random Forest Classification. In chat: “Random forest of passed on hours and anxiety.”</Step>
+<Step>Target is the categorical column. Features need at least one numeric column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Categorical outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Numeric features. At least one.',
+    },
+    n_estimators: {
+      type: '10–500',
+      description: 'Number of trees.',
+      default: '100',
+    },
+    test_fraction: {
+      type: '0.05–0.5',
+      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      default: '0.25',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Feature-importance chart and, for two classes, an ROC.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same pass/fail outcome and the same two features, 100 trees, 25% holdout.
+
+| Actual \ Predicted | 0 | 1 |
+| ---: | ---: | ---: |
+| 0 | 4 | 8 |
+| 1 | 5 | 7 |
+
+| Variable | Importance |
+| --- | ---: |
+| hours | 0.485 |
+| anxiety | 0.515 |
+
+Train accuracy = 1, test accuracy = 0.458, n = 96. Hours only shifts the pass rate a little, so a large gap between train and test is overfitting, and a test accuracy near 0.5 is chance.
+
+## Reporting (APA 7)
+
+Holdout classification of `passed` from hours and anxiety, n = 96. Test accuracy = 0.458, train accuracy = 1.
+
+## Coming from SPSS
+
+SPSS has no random-forest dialog. Tensr’s item is on the ML menu, Classification → Random Forest Classification. The path string stored for this item matches that menu.
+
+## Related
+
+[Decision tree](/docs/analyses/decision-tree) is one tree. [Gradient boosting](/docs/analyses/gradient-boosting) is the boosting counterpart. [SVM classification](/docs/analyses/svm-classification) is another holdout classifier.

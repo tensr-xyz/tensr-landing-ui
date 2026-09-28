@@ -1,0 +1,91 @@
+---
+title: Cluster analysis
+description: K-means or hierarchical partitions of rows on numeric columns.
+category: Machine learning
+---
+
+## When to use it
+
+Use cluster analysis when you want to split people into a chosen number of groups based on numeric similarity, not a known label. “Three study-style groups from hours and anxiety” is the shape of the question. Density clusters that can leave points as noise are [DBSCAN](/docs/analyses/dbscan).
+
+## Assumptions
+
+Columns are numeric. K-means is the dialog default, with three clusters, and variables standardized. Hierarchical uses Ward linkage on the same standardized columns. Chat dispatch does not forward `standardize`, so a request that sets it to false still standardizes. The number-of-clusters field in the dialog is shared with PCA’s component count; a leftover 2 from PCA becomes k = 2 here.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Classification → Cluster Analysis. In chat: “K-means on hours and anxiety, three clusters.”</Step>
+<Step>Put the numeric columns in the clustering list. Method starts at k-means. Number of clusters starts at 3. Standardize starts on.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    columns: {
+      type: 'string[]',
+      description: 'Numeric columns to cluster on. At least one.',
+    },
+    method: {
+      type: 'kmeans | hierarchical',
+      description: 'Partition method. Hierarchical is Ward on the standardised columns.',
+      default: 'kmeans',
+    },
+    n_clusters: {
+      type: '2–50',
+      description: 'How many groups to form.',
+      default: '3',
+    },
+    standardize: {
+      type: 'boolean',
+      description: 'Z-score the columns first. The HTTP body honours this. Chat dispatch always standardises.',
+      default: 'true',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Hours and anxiety for the 96 students, k-means, three clusters, standardised. The two columns were not built as three blobs, so the groups should overlap.
+
+| Cluster | hours | anxiety |
+| ---: | ---: | ---: |
+| 0 | 4.066 | 4.323 |
+| 1 | 6.365 | 4.439 |
+| 2 | 4.89 | 6.589 |
+
+| Cluster | Within-cluster SS | Silhouette |
+| ---: | ---: | ---: |
+| 0 | 36.724 | 0.325 |
+| 1 | 28.414 | 0.346 |
+| 2 | 18.034 | 0.364 |
+
+kmeans, k = 3, silhouette = 0.342. Silhouette of 0.34 is a weak partition. The three groups overlap, which is the expected reading when hours and anxiety were not built as blobs.
+
+## Reporting (APA 7)
+
+K-means clustering of hours and anxiety into 3 groups, n = 96, silhouette = 0.342.
+
+## Coming from SPSS
+
+SPSS is Analyze → Classify → K-Means Cluster or Hierarchical Cluster. Tensr’s Analyze menu is Classification → Cluster Analysis, with k-means as the default. The path string stored for this item says Analyze → Classify → Hierarchical Cluster even when the method is k-means.
+
+## Related
+
+[DBSCAN](/docs/analyses/dbscan) finds dense regions and can label noise. A known group label is [discriminant analysis](/docs/analyses/discriminant-analysis).

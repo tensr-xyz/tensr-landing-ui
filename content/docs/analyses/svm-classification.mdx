@@ -1,0 +1,78 @@
+---
+title: SVM classification
+description: Support-vector classifier with a holdout confusion matrix and, for two classes, an ROC.
+category: Machine learning
+---
+
+## When to use it
+
+Use SVM classification when the outcome is a category and you want a holdout confusion matrix without trees. Random forest of the same problem is [random forest classification](/docs/analyses/random-forest-classification).
+
+## Assumptions
+
+The outcome is categorical. Features are numeric. Classes with fewer than two rows are dropped. Kernel, C, and class weights are not exposed. Holdout fraction 0.25; chat dispatch does not forward `test_fraction`.
+
+## Running it in Tensr
+
+<Steps>
+<Step>ML → Classification → Support Vector Machines (Classification). In chat: “SVM of passed on hours and anxiety.”</Step>
+<Step>Target is the categorical column. Features need at least one numeric column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Categorical outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Numeric features. At least one.',
+    },
+    test_fraction: {
+      type: '0.05–0.5',
+      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      default: '0.25',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. ROC when the outcome has two classes.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same pass/fail outcome and the same two features. Kernel and C are not user controls.
+
+| Actual \ Predicted | 0 | 1 |
+| ---: | ---: | ---: |
+| 0 | 6 | 6 |
+| 1 | 7 | 5 |
+
+Train accuracy = 0.736, test accuracy = 0.458, n = 96. Hours only shifts the pass rate a little, so a large gap between train and test is overfitting, and a test accuracy near 0.5 is chance.
+
+## Reporting (APA 7)
+
+Holdout classification of `passed` from hours and anxiety, n = 96. Test accuracy = 0.458, train accuracy = 0.736.
+
+## Coming from SPSS
+
+SPSS has no SVM dialog. Tensr’s item is on the ML menu, Classification → Support Vector Machines (Classification). The path string stored for this item says ML → Classification → SVM.
+
+## Related
+
+[Random forest classification](/docs/analyses/random-forest-classification) and [gradient boosting](/docs/analyses/gradient-boosting) are the tree ensembles.

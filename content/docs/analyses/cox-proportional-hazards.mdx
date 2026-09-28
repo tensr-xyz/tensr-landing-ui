@@ -1,0 +1,82 @@
+---
+title: Cox proportional hazards
+description: Hazard ratios for numeric covariates on time-to-event data with censoring.
+category: Survival
+---
+
+## When to use it
+
+Use Cox when you have duration, an event indicator, and at least one numeric covariate that should change the hazard. “Does each extra hour of study change the hazard of dropping the course?” is the shape of the question. Two named arms with no covariate is [Kaplan–Meier](/docs/analyses/kaplan-meier) plus log-rank.
+
+## Assumptions
+
+Duration must be positive and numeric. The event column is 1 for the event and 0 for censored; `true`, `yes`, `y`, and `event` also count as 1. Covariates are coerced to numeric; a categorical column becomes missing and those rows drop. After dropping missing values you need more rows than covariates plus two.
+
+The model assumes proportional hazards. Tensr does not run a Schoenfeld or other proportional-hazards test. The dialog only offers numeric covariates.
+
+The baseline survival chart is a connected scatter of the fitted baseline, not a step function.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Survival → Cox Proportional Hazards. In chat: “Cox model of weeks on hours.”</Step>
+<Step>Duration and event are the same columns as Kaplan–Meier. Covariates need at least one numeric column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    duration_column: {
+      type: 'string',
+      description: 'Positive time until the event or censoring.',
+    },
+    event_column: {
+      type: 'string',
+      description: '1 = event, 0 = censored. true / yes / y / event also count as 1.',
+    },
+    covariates: {
+      type: 'string[]',
+      description: 'Numeric predictors. At least one. Categorical columns are not dummy-coded.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values on the metrics line. Coefficient p-values are four-decimal strings from the fit.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Draws the baseline survival curve.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same 80 people. Hours is a numeric covariate with a moderate link to the hazard. Arm is not in this model.
+
+| Covariate | Coef | Hazard ratio | p-value |
+| --- | ---: | ---: | ---: |
+| hours | 0.3633 | 1.4380 | 0.0125 |
+
+Hours is the only covariate. Coef = 0.3633, hazard ratio = 1.4380, p = 0.0125. Concordance = 0.561 on 80 people and 58 events. The slope is moderate. Concordance still sits near chance, so hours sorts the times only a little.
+
+## Reporting (APA 7)
+
+A Cox model of weeks on hours (N = 80, 58 events) gave a hazard ratio of 1.4380 per hour, p = 0.0125, concordance = 0.561.
+
+## Coming from SPSS
+
+SPSS is Analyze → Survival → Cox Regression. Tensr’s Analyze menu has Survival → Cox Proportional Hazards. The path string stored for this item says Time series → Survival → Cox PH. Time series is a separate top-level menu for forecasting; this item is not on it.
+
+SPSS lets you enter categorical covariates and offers a proportional-hazards plot. Tensr takes numeric covariates only and does not test proportional hazards.
+
+## Related
+
+Two groups and no covariate: [Kaplan–Meier](/docs/analyses/kaplan-meier). Cumulative hazard without covariates: [Nelson–Aalen](/docs/analyses/nelson-aalen).

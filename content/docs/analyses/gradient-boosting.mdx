@@ -1,0 +1,93 @@
+---
+title: Gradient boosting
+description: Boosted trees for classification or regression, with holdout fit and feature importance.
+category: Machine learning
+---
+
+## When to use it
+
+Use gradient boosting when you want an ensemble of trees that can run as classification or as regression from one dialog. Mode starts at classification. Random forest is the bagged counterpart: [classification](/docs/analyses/random-forest-classification) or [regression](/docs/analyses/random-forest-regression).
+
+## Assumptions
+
+Classification: categorical outcome, numeric features, classes with fewer than two rows dropped. Regression: numeric outcome. Holdout fraction 0.25, 100 trees. Chat dispatch does not forward `test_fraction`. Learning rate and maximum depth are not exposed.
+
+## Running it in Tensr
+
+<Steps>
+<Step>ML → Classification → Gradient Boosting (Classification), or ML → Regression → Gradient Boosting (Regression). In chat: “Gradient boosting of passed on hours and anxiety.”</Step>
+<Step>Set mode to classification or regression. Target matches that mode. Features need at least one numeric column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Outcome. Categorical in classification mode, numeric in regression mode.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Numeric features. At least one.',
+    },
+    mode: {
+      type: 'classification | regression',
+      description: 'Which holdout metrics to compute.',
+      default: 'classification',
+    },
+    n_estimators: {
+      type: '10–300',
+      description: 'Number of boosting stages.',
+      default: '100',
+    },
+    test_fraction: {
+      type: '0.05–0.5',
+      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      default: '0.25',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Feature importance, plus ROC or predicted-versus-actual depending on mode.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same pass/fail outcome, classification mode, 100 stages, 25% holdout.
+
+| Actual \ Predicted | 0 | 1 |
+| ---: | ---: | ---: |
+| 0 | 7 | 5 |
+| 1 | 5 | 7 |
+
+| Variable | Importance |
+| --- | ---: |
+| hours | 0.484 |
+| anxiety | 0.516 |
+
+Train accuracy = 1, test accuracy = 0.583, n = 96. Hours only shifts the pass rate a little, so a large gap between train and test is overfitting, and a test accuracy near 0.5 is chance.
+
+## Reporting (APA 7)
+
+Holdout classification of `passed` from hours and anxiety, n = 96. Test accuracy = 0.583, train accuracy = 1.
+
+## Coming from SPSS
+
+SPSS has no gradient-boosting dialog. Tensr puts classification and regression on the ML menu as two labels of this one procedure. The path string stored for this item says ML → Gradient Boosting.
+
+## Related
+
+[Random forest classification](/docs/analyses/random-forest-classification) is bagging. [Neural network](/docs/analyses/neural-network-mlp) is the other mode-switched model.

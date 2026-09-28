@@ -1,0 +1,85 @@
+---
+title: DBSCAN
+description: Density clustering that can label points as noise.
+category: Machine learning
+---
+
+## When to use it
+
+Use DBSCAN when you want clusters of dense points and you are willing to leave sparse points as noise, rather than forcing every row into k groups. A fixed k is [cluster analysis](/docs/analyses/cluster-analysis).
+
+## Assumptions
+
+Columns are numeric. Epsilon starts at 0.5, minimum samples at 5, standardize on. Chat dispatch does not forward `standardize`. If more than 30% of rows are noise, the report warns. There is no k to choose.
+
+## Running it in Tensr
+
+<Steps>
+<Step>ML → Clustering → DBSCAN. In chat: “DBSCAN on hours and anxiety.”</Step>
+<Step>Put the numeric columns in the feature list. Epsilon, minimum samples, and standardize start at 0.5, 5, and on.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    columns: {
+      type: 'string[]',
+      description: 'Numeric features. At least one.',
+    },
+    epsilon: {
+      type: 'number > 0',
+      description: 'Neighbourhood radius.',
+      default: '0.5',
+    },
+    min_samples: {
+      type: '1–100',
+      description: 'Minimum points to form a dense region.',
+      default: '5',
+    },
+    standardize: {
+      type: 'boolean',
+      description: 'Z-score the columns first. The HTTP body honours this. Chat dispatch always standardises.',
+      default: 'true',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. 2-D scatter of the first two features, coloured by cluster.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Hours and anxiety, ε = 0.5, min_samples = 5, standardised. Dense cores if they exist; leftover points are noise.
+
+| Cluster | Size |
+| --- | ---: |
+| 0 | 8 |
+| 1 | 66 |
+| Noise | 22 |
+
+2 dense cluster(s), 22 noise points (22.9%). A high noise share means ε = 0.5 is tight on these two columns after standardising.
+
+## Reporting (APA 7)
+
+DBSCAN on hours and anxiety, ε = 0.5, min_samples = 5, 2 cluster(s), 22 noise points.
+
+## Coming from SPSS
+
+SPSS has no DBSCAN dialog. Tensr’s item is on the ML menu, Clustering → DBSCAN. The path string stored for this item matches that menu.
+
+## Related
+
+A chosen number of groups is [cluster analysis](/docs/analyses/cluster-analysis).

@@ -47,6 +47,7 @@ NS_SLUGS = {
     "mantel-haenszel",
     "logistic-regression",
     "probit-regression",
+    "kaplan-meier",
 }
 
 
@@ -253,6 +254,36 @@ def build_frames(rng: np.random.Generator) -> dict[str, pd.DataFrame]:
     lca = pd.DataFrame(lca_cols)
     normal = pd.DataFrame({"noise": rng.normal(0, 1, 120)})
 
+    # Survival: 80 people, two arms, a weak arm gap and a moderate hours slope.
+    n_s = 80
+    arm = np.array(["Standard"] * 40 + ["New"] * 40)
+    hours_s = rng.normal(5, 1.2, n_s).clip(1, 9)
+    lp = 0.16 * (hours_s - 5) + np.where(arm == "Standard", 0.22, 0.0)
+    duration = -np.log(rng.random(n_s)) * 12 / np.exp(lp)
+    cens = rng.exponential(20, n_s)
+    event = (duration <= cens).astype(int)
+    duration = np.minimum(duration, cens)
+    survival = pd.DataFrame(
+        {
+            "weeks": np.round(np.clip(duration, 0.1, None), 2),
+            "event": event,
+            "arm": arm,
+            "hours": np.round(hours_s, 2),
+        }
+    )
+
+    # Monthly series: mild trend, period-12 season, and a near-white noise column.
+    t = np.arange(48)
+    months = pd.date_range("2021-01-01", periods=48, freq="MS")
+    sales = 40 + 0.18 * t + 3.5 * np.sin(2 * np.pi * t / 12) + rng.normal(0, 3.2, 48)
+    series = pd.DataFrame(
+        {
+            "month": months,
+            "sales": np.round(sales, 2),
+            "noise": np.round(rng.normal(50, 4, 48), 2),
+        }
+    )
+
     return {
         "cohort": cohort,
         "paired": paired,
@@ -271,6 +302,8 @@ def build_frames(rng: np.random.Generator) -> dict[str, pd.DataFrame]:
         "network": network,
         "lca": lca,
         "normal": normal,
+        "survival": survival,
+        "series": series,
     }
 
 
@@ -490,6 +523,22 @@ def jobs(frames: dict[str, pd.DataFrame]) -> list[tuple[str, str, pd.DataFrame, 
         ("generalized-linear-mixed-model", "generalized_linear_mixed_model", cl, {"dependent": "passed", "fixed_effects": ["hours"], "group_column": "clinic", "family": "binomial"}),
         ("multilevel-modelling", "multilevel_modelling", cl, {"outcome_column": "score", "level1_predictors": ["hours"], "level2_group_column": "clinic"}),
         ("gee", "gee", cl, {"outcome": "passed", "independents": ["hours"], "group": "clinic"}),
+        ("kaplan-meier", "kaplan_meier", frames["survival"], {"duration_column": "weeks", "event_column": "event", "group_column": "arm"}),
+        ("cox-proportional-hazards", "cox_proportional_hazards", frames["survival"], {"duration_column": "weeks", "event_column": "event", "covariates": ["hours"]}),
+        ("nelson-aalen", "nelson_aalen", frames["survival"], {"duration_column": "weeks", "event_column": "event"}),
+        ("arima-sarima", "arima_sarima", frames["series"], {"target_column": "sales", "date_column": "month", "seasonal_period": None, "forecast_steps": 12}),
+        ("exponential-smoothing", "exponential_smoothing", frames["series"], {"target_column": "sales", "date_column": "month", "seasonal_period": 12, "forecast_steps": 12}),
+        ("stl-decomposition", "stl_decomposition", frames["series"], {"target_column": "sales", "date_column": "month", "period": 12}),
+        ("stationarity-tests", "stationarity_tests", frames["series"], {"target_column": "sales", "date_column": "month"}),
+        ("autocorrelation", "autocorrelation", frames["series"], {"target_column": "noise", "date_column": "month", "max_lags": 20}),
+        ("cluster-analysis", "cluster_analysis", c, {"columns": ["hours", "anxiety"], "method": "kmeans", "n_clusters": 3}),
+        ("decision-tree", "decision_tree", c, {"dependent": "passed", "independents": ["hours", "anxiety"]}),
+        ("random-forest-classification", "random_forest_classification", c, {"dependent": "passed", "independents": ["hours", "anxiety"]}),
+        ("random-forest-regression", "random_forest_regression", c, {"dependent": "score", "independents": ["hours", "anxiety"]}),
+        ("svm-classification", "svm_classification", c, {"dependent": "passed", "independents": ["hours", "anxiety"]}),
+        ("gradient-boosting", "gradient_boosting", c, {"dependent": "passed", "independents": ["hours", "anxiety"], "mode": "classification"}),
+        ("neural-network-mlp", "neural_network_mlp", c, {"dependent": "passed", "independents": ["hours", "anxiety"], "mode": "classification"}),
+        ("dbscan", "dbscan", c, {"columns": ["hours", "anxiety"], "epsilon": 0.5, "min_samples": 5}),
     ]
 
 
@@ -560,6 +609,22 @@ INTRO = {
     "generalized-linear-mixed-model": "The same clinics, with a pass/fail outcome and a moderate hours slope, binomial family.",
     "multilevel-modelling": "The same linear mixed model, reported with the intraclass correlation and the split of variance between clinic and residual.",
     "gee": "The clustered pass/fail outcome, population-average, exchangeable correlation within clinic.",
+    "kaplan-meier": "Eighty people, 40 on standard care and 40 on a new arm. Time is weeks until the event. The new arm was built with a slightly lower hazard, and about a third of the rows are censored. The log-rank is the two-group comparison.",
+    "cox-proportional-hazards": "The same 80 people. Hours is a numeric covariate with a moderate link to the hazard. Arm is not in this model.",
+    "nelson-aalen": "The same 80 durations and events, as a cumulative hazard rather than a survival curve. There is no grouping column on this procedure.",
+    "arima-sarima": "Forty-eight months of sales. A mild upward trend and a 12-month wiggle, with noise of about three units. This request leaves seasonal period unset, so the search is non-seasonal auto ARIMA, 12 steps ahead.",
+    "exponential-smoothing": "The same 48 months of sales. Holt–Winters with period 12 and an additive trend. The series is long enough for additive season.",
+    "stl-decomposition": "The same 48 months, split into trend, season, and residual with period 12. There is no forecast table.",
+    "stationarity-tests": "The same sales series, which was built with a drift and a seasonal wiggle, not as white noise. ADF’s null is a unit root. KPSS’s null is level stationarity.",
+    "autocorrelation": "The noise column on those 48 months, drawn as independent N(50, 4) values. Lag structure here is leftover chance, not the sales season.",
+    "cluster-analysis": "Hours and anxiety for the 96 students, k-means, three clusters, standardised. The two columns were not built as three blobs, so the groups should overlap.",
+    "decision-tree": "Pass or fail from hours and anxiety, one tree, 25% holdout. Hours shifts the pass rate a little, so holdout accuracy should beat chance and stay well short of perfect.",
+    "random-forest-classification": "The same pass/fail outcome and the same two features, 100 trees, 25% holdout.",
+    "random-forest-regression": "Exam score from hours and anxiety, 100 trees, 25% holdout. Both slopes were built moderate, so holdout R² should be real and far from 1.",
+    "svm-classification": "The same pass/fail outcome and the same two features. Kernel and C are not user controls.",
+    "gradient-boosting": "The same pass/fail outcome, classification mode, 100 stages, 25% holdout.",
+    "neural-network-mlp": "The same pass/fail outcome, classification mode, hidden layers 64 and 32, 25% holdout.",
+    "dbscan": "Hours and anxiety, ε = 0.5, min_samples = 5, standardised. Dense cores if they exist; leftover points are noise.",
 }
 
 
@@ -634,6 +699,158 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
             "Teaching method and time of day were not associated."
         )
         return section(intro, cells, reading, apa, extra)
+    if slug == "cox-proportional-hazards":
+        row = ex.tables["cox_coef"]["rows"][0]
+        c_index = ex.metric("Concordance index")
+        n_ev = ex.metric("Events")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Hours is the only covariate. Coef = {row[1]}, hazard ratio = {row[2]}, p = {row[3]}. "
+            f"Concordance = {c_index} on {n_obs} people and {n_ev} events. "
+            "The slope is moderate. Concordance still sits near chance, so hours sorts the times only a little."
+        )
+        apa = (
+            f"A Cox model of weeks on hours (N = {n_obs}, {n_ev} events) gave a hazard ratio of {row[2]} "
+            f"per hour, p = {row[3]}, concordance = {c_index}."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "nelson-aalen":
+        n_obs = ex.metric("Observations")
+        n_ev = ex.metric("Events")
+        reading = (
+            f"The report is the count of rows and events, not a p-value. "
+            f"N = {n_obs}, events = {n_ev}. The cumulative hazard chart is the picture of those events over weeks."
+        )
+        apa = (
+            f"Nelson–Aalen cumulative hazard for weeks, N = {n_obs}, {n_ev} events. "
+            "Report the curve and the event count; this estimator has no single p-value."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "arima-sarima":
+        order = ex.metric("Order (p,d,q)")
+        aic = ex.metric("AIC")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Selected order {order}, AIC = {aic}, N = {n_obs}. "
+            "The table is the 12-step forecast with a 95% interval from the fitted model. "
+            "Seasonal period was left unset, so this is not a SARIMA search."
+        )
+        apa = (
+            f"An automatic ARIMA{order} forecast of monthly sales, N = {n_obs}, AIC = {aic}. "
+            "Report the selected order and the forecast interval, not a p-value."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "exponential-smoothing":
+        period = ex.metric("Seasonal period")
+        sse = ex.metric("SSE")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Period = {period}, SSE = {sse}, N = {n_obs}. "
+            "The interval is residual SD × 1.96, so a wide band means the fit left a lot of leftover scatter, not a model-based prediction interval."
+        )
+        apa = (
+            f"Holt–Winters exponential smoothing of monthly sales, N = {n_obs}, period = {period}. "
+            "Report the forecast and the approximate interval."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "stl-decomposition":
+        period = ex.metric("Period")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Period = {period}, N = {n_obs}. "
+            "There is no component table. The three charts are the trend, the seasonal wiggle, and the residual."
+        )
+        apa = (
+            f"STL decomposition of monthly sales, N = {n_obs}, period = {period}. "
+            "Describe the charts; this procedure has no p-value."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "stationarity-tests":
+        adf_p = ex.metric("ADF p-value")
+        kpss_p = ex.metric("KPSS p-value")
+        reading = (
+            f"ADF {adf_p} (null: unit root). KPSS {kpss_p} (null: level stationarity). "
+            "Neither test rejects its null on this short, mildly drifting series, so the pair is inconclusive."
+        )
+        apa = (
+            f"ADF {adf_p}, KPSS {kpss_p} on 48 months of sales. "
+            "Report both tests; they do not share a null."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "autocorrelation":
+        lb = ex.tables.get("ljung_box")
+        lb_line = ""
+        if lb and lb.get("rows"):
+            row10 = lb["rows"][0]
+            lb_line = f" Ljung–Box at lag {row10[0]}: Q = {row10[1]}, {row10[2]}."
+        reading = (
+            "ACF and PACF on independent draws should sit inside the 95% bands at most lags."
+            + lb_line
+        )
+        apa = (
+            f"ACF and PACF of the noise series, N = {ex.metric('Observations')}, max lags = {ex.metric('Max lags')}."
+            + (f" Ljung–Box {lb['rows'][0][2]} at lag {lb['rows'][0][0]}." if lb and lb.get("rows") else "")
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "cluster-analysis":
+        sil = ex.metric("Silhouette score")
+        method = ex.metric("Method")
+        k = ex.metric("Clusters")
+        reading = (
+            f"{method}, k = {k}, silhouette = {sil}. "
+            "Silhouette of 0.34 is a weak partition. The three groups overlap, which is the expected reading when hours and anxiety were not built as blobs."
+        )
+        apa = (
+            f"K-means clustering of hours and anxiety into {k} groups, n = {ex.metric('Cases')}, "
+            f"silhouette = {sil}."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "dbscan":
+        k = ex.metric("Clusters")
+        noise = ex.metric("Noise points")
+        noise_pct = ex.metric("Noise %")
+        reading = (
+            f"{k} dense cluster(s), {noise} noise points ({noise_pct}). "
+            "A high noise share means ε = 0.5 is tight on these two columns after standardising."
+        )
+        apa = (
+            f"DBSCAN on hours and anxiety, ε = {ex.metric('ε')}, min_samples = {ex.metric('min_samples')}, "
+            f"{k} cluster(s), {noise} noise points."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug in {
+        "decision-tree",
+        "random-forest-classification",
+        "svm-classification",
+        "gradient-boosting",
+        "neural-network-mlp",
+    }:
+        test_acc = ex.metric("Test accuracy")
+        train_acc = ex.metric("Train accuracy")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Train accuracy = {train_acc}, test accuracy = {test_acc}, n = {n_obs}. "
+            "Hours only shifts the pass rate a little, so a large gap between train and test is overfitting, and a test accuracy near 0.5 is chance."
+        )
+        apa = (
+            f"Holdout classification of `passed` from hours and anxiety, n = {n_obs}. "
+            f"Test accuracy = {test_acc}, train accuracy = {train_acc}."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "random-forest-regression":
+        r2 = ex.metric("R²")
+        rmse = ex.metric("RMSE")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Holdout R² = {r2}, RMSE = {rmse}, n = {n_obs}. "
+            "A negative R² means the forest did worse on the holdout rows than predicting the mean. "
+            "That is what an unpruned forest looks like on a moderate linear signal with 72 training rows."
+        )
+        apa = (
+            f"Random forest regression of exam score on hours and anxiety, n = {n_obs}, "
+            f"holdout R² = {r2}, RMSE = {rmse}."
+        )
+        return section(intro, tables, reading, apa, extra)
     if slug in NS_SLUGS and sig is False:
         reading = (
             f"The primary result is not significant (p = {p}). "
@@ -747,10 +964,20 @@ def main() -> None:
         text = path.read_text()
         start = text.index("## Reading the output")
         end = text.index("## Coming from SPSS")
+        between = text[start:end]
+        extras = ""
+        marker = "\n## "
+        idx = between.find(marker, 1)
+        while idx != -1:
+            heading = between[idx + 1 :].split("\n", 1)[0]
+            if heading not in {"## Reading the output", "## Reporting (APA 7)"}:
+                extras = between[idx + 1 :].rstrip() + "\n\n"
+                break
+            idx = between.find(marker, idx + 1)
         rendered = render(slug, ex, stepwise if slug == "linear-regression" else None)
         if "{" in rendered.split("## Reading the output", 1)[-1]:
             raise SystemExit(f"curly brace in {slug}")
-        path.write_text(text[:start] + rendered + "\n" + text[end:])
+        path.write_text(text[:start] + rendered + "\n" + extras + text[end:])
         print("wrote", slug)
 
 

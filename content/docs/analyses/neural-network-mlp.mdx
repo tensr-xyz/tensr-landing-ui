@@ -1,0 +1,88 @@
+---
+title: Neural network (MLP)
+description: A small multi-layer perceptron for classification or regression, with a holdout fit.
+category: Machine learning
+---
+
+## When to use it
+
+Use the MLP when you want a small neural net on tabular data, as classification or regression. Trees with readable importances are [gradient boosting](/docs/analyses/gradient-boosting) or [random forest](/docs/analyses/random-forest-classification).
+
+## Assumptions
+
+Hidden-layer size is not a user control. The fit uses two hidden layers of 64 and 32 units. This run also prints permutation importances. Holdout fraction 0.25; chat dispatch does not forward `test_fraction`.
+
+## Running it in Tensr
+
+<Steps>
+<Step>ML → Classification → Neural Network MLP (Classification), or ML → Regression → Neural Network MLP (Regression). In chat: “MLP of passed on hours and anxiety.”</Step>
+<Step>Set mode to classification or regression. Target matches that mode. Features need at least one numeric column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Outcome. Categorical in classification mode, numeric in regression mode.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Numeric features. At least one.',
+    },
+    mode: {
+      type: 'classification | regression',
+      description: 'Which holdout metrics to compute.',
+      default: 'classification',
+    },
+    test_fraction: {
+      type: '0.05–0.5',
+      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      default: '0.25',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Loss curve, plus a confusion matrix or predicted-versus-actual plot.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same pass/fail outcome, classification mode, hidden layers 64 and 32, 25% holdout.
+
+| Actual \ Predicted | 0 | 1 |
+| ---: | ---: | ---: |
+| 0 | 7 | 5 |
+| 1 | 4 | 8 |
+
+| Variable | Importance |
+| --- | ---: |
+| hours | 0.146 |
+| anxiety | 0.158 |
+
+Train accuracy = 0.847, test accuracy = 0.625, n = 96. Hours only shifts the pass rate a little, so a large gap between train and test is overfitting, and a test accuracy near 0.5 is chance.
+
+## Reporting (APA 7)
+
+Holdout classification of `passed` from hours and anxiety, n = 96. Test accuracy = 0.625, train accuracy = 0.847.
+
+## Coming from SPSS
+
+SPSS Neural Networks is Analyze → Neural Networks. Tensr’s items are on the ML menu. The path string stored for this item says ML → Neural Network. Hidden layers are not a dialog control.
+
+## Related
+
+[Gradient boosting](/docs/analyses/gradient-boosting) is the tree ensemble with the same mode switch.

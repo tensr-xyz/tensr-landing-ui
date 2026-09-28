@@ -1,0 +1,68 @@
+---
+title: Nelson–Aalen
+description: Non-parametric cumulative hazard from duration and an event indicator.
+category: Survival
+---
+
+## When to use it
+
+Use Nelson–Aalen when you want the cumulative hazard of the same duration and event columns that Kaplan–Meier uses for survival. Survival probability is [Kaplan–Meier](/docs/analyses/kaplan-meier). A covariate on the hazard is [Cox](/docs/analyses/cox-proportional-hazards).
+
+## Assumptions
+
+Duration must be positive and numeric. The event column is 1 for the event and 0 for censored; `true`, `yes`, `y`, and `event` also count as 1. At least three valid rows are required. There is no grouping column on this procedure.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Survival → Nelson–Aalen. In chat: “Nelson–Aalen of weeks.”</Step>
+<Step>Duration is the time column. Event is 1 = event, 0 = censored.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    duration_column: {
+      type: 'string',
+      description: 'Positive time until the event or censoring.',
+    },
+    event_column: {
+      type: 'string',
+      description: '1 = event, 0 = censored. true / yes / y / event also count as 1.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Draws the cumulative hazard curve.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same 80 durations and events, as a cumulative hazard rather than a survival curve. There is no grouping column on this procedure.
+
+The report is the count of rows and events, not a p-value. N = 80, events = 58. The cumulative hazard chart is the picture of those events over weeks.
+
+## Reporting (APA 7)
+
+Nelson–Aalen cumulative hazard for weeks, N = 80, 58 events. Report the curve and the event count; this estimator has no single p-value.
+
+## Coming from SPSS
+
+SPSS does not ship a Nelson–Aalen dialog. The estimator is the Fleming–Harrington cumulative hazard from the same `Surv` object as Kaplan–Meier. Tensr’s Analyze menu is Survival → Nelson–Aalen. The path string stored for this item says Time series → Survival → Nelson-Aalen. Time series is a separate top-level menu for forecasting; this item is not on it.
+
+## Related
+
+The survival curve of the same times is [Kaplan–Meier](/docs/analyses/kaplan-meier). A covariate on the hazard is [Cox proportional hazards](/docs/analyses/cox-proportional-hazards).

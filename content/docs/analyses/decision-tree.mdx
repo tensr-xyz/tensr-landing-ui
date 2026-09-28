@@ -1,0 +1,83 @@
+---
+title: Decision tree
+description: Classify a categorical outcome with a simple tree and a train/test split.
+category: Machine learning
+---
+
+## When to use it
+
+Use a decision tree when the outcome is a category and you want a readable split of numeric predictors, with holdout accuracy. An ensemble of the same problem is [random forest classification](/docs/analyses/random-forest-classification).
+
+## Assumptions
+
+The outcome is categorical. Predictors are numeric. Classes with fewer than two rows are dropped. The holdout fraction is 0.25 on the HTTP body. Chat dispatch omits that field, so the service default of 0.25 is used. The service also clamps the fraction to at least 0.10. Maximum depth empty means an unrestricted tree. There is no pruning control.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Classification → Decision Tree Classification. In chat: “Decision tree of passed on hours and anxiety.”</Step>
+<Step>Outcome is the categorical column. Predictors need at least one numeric column. Maximum depth can be left blank.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Categorical outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Numeric predictors. At least one.',
+    },
+    max_depth: {
+      type: '1–50 | null',
+      description: 'Tree depth cap. Null is unrestricted.',
+      default: 'null',
+    },
+    test_fraction: {
+      type: '0.05–0.5',
+      description: 'Holdout fraction. The service clamps this to 0.10–0.50. Chat dispatch does not forward it.',
+      default: '0.25',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Pass or fail from hours and anxiety, one tree, 25% holdout. Hours shifts the pass rate a little, so holdout accuracy should beat chance and stay well short of perfect.
+
+| Variable | Importance |
+| --- | ---: |
+| hours | 0.431 |
+| anxiety | 0.569 |
+
+Train accuracy = 1, test accuracy = 0.417, n = 96. Hours only shifts the pass rate a little, so a large gap between train and test is overfitting, and a test accuracy near 0.5 is chance.
+
+## Reporting (APA 7)
+
+Holdout classification of `passed` from hours and anxiety, n = 96. Test accuracy = 0.417, train accuracy = 1.
+
+## Coming from SPSS
+
+SPSS is Analyze → Classify → Tree. Tensr’s Analyze menu is Classification → Decision Tree Classification. The path string stored for this item matches that SPSS path. There is no CHAID or CRT method switch.
+
+## Related
+
+[Random forest classification](/docs/analyses/random-forest-classification) averages many trees. [Logistic regression](/docs/analyses/logistic-regression) is the parametric binary model.

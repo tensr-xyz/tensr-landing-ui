@@ -1,0 +1,83 @@
+---
+title: Random forest regression
+description: Bagged trees for a numeric outcome, with holdout R² and RMSE.
+category: Machine learning
+---
+
+## When to use it
+
+Use random forest regression when the outcome is numeric and you want a holdout R², RMSE, and feature importance without a linear model. The classification version is [random forest classification](/docs/analyses/random-forest-classification). A linear fit of the same columns is [linear regression](/docs/analyses/linear-regression).
+
+## Assumptions
+
+Outcome and features are numeric. Holdout fraction 0.25, 100 trees, `random_state=0`. Chat dispatch does not forward `test_fraction`.
+
+## Running it in Tensr
+
+<Steps>
+<Step>ML → Regression → Random Forest Regression. In chat: “Random forest regression of score on hours and anxiety.”</Step>
+<Step>Target is the numeric outcome. Features need at least one numeric column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Numeric features. At least one.',
+    },
+    n_estimators: {
+      type: '10–500',
+      description: 'Number of trees.',
+      default: '100',
+    },
+    test_fraction: {
+      type: '0.05–0.5',
+      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      default: '0.25',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Predicted-versus-actual scatter and feature importance.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Exam score from hours and anxiety, 100 trees, 25% holdout. Both slopes were built moderate, so holdout R² should be real and far from 1.
+
+| Variable | Importance |
+| --- | ---: |
+| hours | 0.39 |
+| anxiety | 0.61 |
+
+Holdout R² = -0.828, RMSE = 8.3, n = 96. A negative R² means the forest did worse on the holdout rows than predicting the mean. That is what an unpruned forest looks like on a moderate linear signal with 72 training rows.
+
+## Reporting (APA 7)
+
+Random forest regression of exam score on hours and anxiety, n = 96, holdout R² = -0.828, RMSE = 8.3.
+
+## Coming from SPSS
+
+SPSS has no random-forest regression dialog. Tensr’s item is on the ML menu, Regression → Random Forest Regression.
+
+## Related
+
+[Linear regression](/docs/analyses/linear-regression) is the parametric counterpart. [Gradient boosting](/docs/analyses/gradient-boosting) can be switched to regression mode.

@@ -1,0 +1,97 @@
+---
+title: ARIMA / SARIMA
+description: Automatic ARIMA or SARIMA forecast with a 95% interval on a single series.
+category: Time series
+---
+
+## When to use it
+
+Use ARIMA when you have one numeric series and you want a short forecast with a 95% interval. Monthly sales for the next year is the usual case. A series that is stacked across many products is the wrong shape; filter to one series first. A Holt–Winters forecast of the same series is [exponential smoothing](/docs/analyses/exponential-smoothing). Order clues before the fit are [autocorrelation](/docs/analyses/autocorrelation).
+
+## Assumptions
+
+The target is numeric, with at least eight non-missing values and non-zero variance. An optional date column sorts the rows. Tensr picks p, d, and q by AIC on a small grid (p and q up to 2, d up to 1). It does not test residuals or invertibility after the fit.
+
+If a seasonal period of 2 or more is set and the series is at least twice that long, the search also includes a seasonal order. The dialog starts that field at 12. The HTTP body default is null, which is a non-seasonal search. Chat dispatch that omits the field uses 12.
+
+A dataset of more than 5,000 rows with repeated dates is rejected as a panel.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Time series → Forecasting → ARIMA / SARIMA. In chat: “ARIMA forecast of sales.”</Step>
+<Step>Target is the numeric series. Date is optional. Forecast steps start at 12.</Step>
+<Step>Seasonal period starts at 12 in the dialog. Clear it for a non-seasonal search.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    target_column: {
+      type: 'string',
+      description: 'Numeric series to forecast.',
+    },
+    date_column: {
+      type: 'string',
+      description: 'Optional date column used to sort the series.',
+      default: 'null',
+    },
+    seasonal_period: {
+      type: '2–365 | null',
+      description: 'Seasonal length. Null is a non-seasonal ARIMA search. The dialog starts at 12.',
+      default: 'null',
+    },
+    forecast_steps: {
+      type: '1–60',
+      description: 'How many steps ahead to forecast.',
+      default: '12',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Historical series and forecast charts.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Forty-eight months of sales. A mild upward trend and a 12-month wiggle, with noise of about three units. This request leaves seasonal period unset, so the search is non-seasonal auto ARIMA, 12 steps ahead.
+
+| Step | Forecast | Lower 95% | Upper 95% |
+| ---: | ---: | ---: | ---: |
+| 1 | 48.1901 | 40.3775 | 56.0026 |
+| 2 | 45.4489 | 36.3848 | 54.5130 |
+| 3 | 45.4489 | 36.3110 | 54.5868 |
+| 4 | 45.4489 | 36.2377 | 54.6601 |
+| 5 | 45.4489 | 36.1650 | 54.7328 |
+| 6 | 45.4489 | 36.0929 | 54.8049 |
+| 7 | 45.4489 | 36.0214 | 54.8764 |
+| 8 | 45.4489 | 35.9503 | 54.9475 |
+
+Selected order (0, 1, 2), AIC = 253.452, N = 48. The table is the 12-step forecast with a 95% interval from the fitted model. Seasonal period was left unset, so this is not a SARIMA search.
+
+## Reporting (APA 7)
+
+An automatic ARIMA(0, 1, 2) forecast of monthly sales, N = 48, AIC = 253.452. Report the selected order and the forecast interval, not a p-value.
+
+## Coming from SPSS
+
+SPSS is Analyze → Forecasting → Create Models with the ARIMA method, or Expert Modeler. Tensr’s item is on the Time series menu, Forecasting → ARIMA / SARIMA. The path string stored for this item matches that menu.
+
+SPSS Expert Modeler searches a wider order space and can keep outliers. Tensr’s grid is small, and a seasonal period of 12 does not run a full seasonal grid: only the first non-seasonal (p, d, q) is paired with the seasonal orders. This example uses the HTTP default of no seasonal period so the forecast is a non-seasonal auto ARIMA.
+
+## Related
+
+[Exponential smoothing](/docs/analyses/exponential-smoothing) is the other forecast. [STL](/docs/analyses/stl-decomposition) splits trend from season. [Stationarity tests](/docs/analyses/stationarity-tests) and [autocorrelation](/docs/analyses/autocorrelation) are the diagnostics.

@@ -75,8 +75,24 @@
     "multilevel-modelling",
     "gee",
     "---Survival---",
+    "kaplan-meier",
+    "cox-proportional-hazards",
+    "nelson-aalen",
     "---Time series---",
+    "arima-sarima",
+    "exponential-smoothing",
+    "stl-decomposition",
+    "stationarity-tests",
+    "autocorrelation",
     "---Survey techniques---",
-    "---Machine learning---"
+    "---Machine learning---",
+    "cluster-analysis",
+    "decision-tree",
+    "random-forest-classification",
+    "random-forest-regression",
+    "svm-classification",
+    "gradient-boosting",
+    "neural-network-mlp",
+    "dbscan"
   ]
 }

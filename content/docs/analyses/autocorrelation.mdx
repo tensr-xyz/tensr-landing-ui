@@ -1,0 +1,96 @@
+---
+title: Autocorrelation
+description: ACF, PACF, and Ljung–Box on one numeric series.
+category: Time series
+---
+
+## When to use it
+
+Use autocorrelation when you want to see which lags still line up with the series, before you pick an ARIMA order. Stationarity of the same series is [stationarity tests](/docs/analyses/stationarity-tests).
+
+## Assumptions
+
+The target is numeric, with at least eight non-missing values. Maximum lags starts at 20 and is capped at N − 2. ACF uses the FFT estimator. PACF uses Yule–Walker. Ljung–Box is printed at lags 10 and 20 when those lags fit under the cap.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Time series → Decomposition → Autocorrelation. In chat: “ACF and PACF of sales.”</Step>
+<Step>Target is the numeric series. Date is optional. Maximum lags starts at 20.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    target_column: {
+      type: 'string',
+      description: 'Numeric series to diagnose.',
+    },
+    date_column: {
+      type: 'string',
+      description: 'Optional date column used to sort the series.',
+      default: 'null',
+    },
+    max_lags: {
+      type: '1–100',
+      description: 'Largest lag in the ACF and PACF. Capped at N − 2.',
+      default: '20',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. ACF and PACF bar charts.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The noise column on those 48 months, drawn as independent N(50, 4) values. Lag structure here is leftover chance, not the sales season.
+
+| Lag | ACF | Lower 95% | Upper 95% | Significant |
+| ---: | ---: | ---: | ---: | --- |
+| 0 | 1 | — | — | — |
+| 1 | -0.147 | -0.283 | 0.283 | No |
+| 2 | -0.04 | -0.283 | 0.283 | No |
+| 3 | -0.112 | -0.283 | 0.283 | No |
+| 4 | -0.016 | -0.283 | 0.283 | No |
+| 5 | 0.039 | -0.283 | 0.283 | No |
+| 6 | 0.125 | -0.283 | 0.283 | No |
+| 7 | 0.02 | -0.283 | 0.283 | No |
+
+| Lag | PACF | Lower 95% | Upper 95% | Significant |
+| ---: | ---: | ---: | ---: | --- |
+| 0 | 1 | — | — | — |
+| 1 | -0.147 | -0.283 | 0.283 | No |
+| 2 | -0.063 | -0.283 | 0.283 | No |
+| 3 | -0.13 | -0.283 | 0.283 | No |
+| 4 | -0.06 | -0.283 | 0.283 | No |
+| 5 | 0.012 | -0.283 | 0.283 | No |
+| 6 | 0.119 | -0.283 | 0.283 | No |
+| 7 | 0.06 | -0.283 | 0.283 | No |
+
+ACF and PACF on independent draws should sit inside the 95% bands at most lags. Ljung–Box at lag 10: Q = 3.697, p = .960.
+
+## Reporting (APA 7)
+
+ACF and PACF of the noise series, N = 48, max lags = 20. Ljung–Box p = .960 at lag 10.
+
+## Coming from SPSS
+
+SPSS is Analyze → Forecasting → Autocorrelations. Tensr’s item is Time series → Decomposition → Autocorrelation. The path string stored for this item says Time series → Diagnostics → ACF / PACF. The item itself sits under Decomposition with STL.
+
+## Related
+
+[Stationarity tests](/docs/analyses/stationarity-tests) are the other diagnostic. [ARIMA / SARIMA](/docs/analyses/arima-sarima) is the forecast those plots are meant to inform.
