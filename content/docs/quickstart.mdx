@@ -1,0 +1,41 @@
+---
+title: Quickstart
+description: Upload a survey file, build one banner, and export the book.
+---
+
+The first table that matters is one banner on a file you already ship. Everything else can wait.
+
+## Import
+
+<Tabs items={['SPSS', 'Stata', 'CSV']}>
+  <Tab value="SPSS">
+    Upload a `.sav`. Variable labels become column names, and value labels stay attached to the codes.
+  </Tab>
+  <Tab value="Stata">
+    Upload a `.dta`. Stata variable labels and value labels are kept, including missing-value codes.
+  </Tab>
+  <Tab value="CSV">
+    Upload a CSV with a header row. Add value labels afterwards if the file only has codes.
+  </Tab>
+</Tabs>
+
+```tsx
+// The file lands as a dataset. Column identities are the original variables.
+const dataset = await workspace.open('wave-12.sav');
+```
+
+## Build one banner
+
+<Steps>
+  <Step>Choose the weight variable, or leave the table unweighted.</Step>
+  <Step>Drop brands or statements down the side, and age or region across the top.</Step>
+  <Step>Turn on column proportions at 95%. Letters appear on cells that differ.</Step>
+</Steps>
+
+<Callout type="warn" title="Low bases">
+Cells under your base cutoff stay in the grid, flagged, so a client can see that a letter was withheld on purpose.
+</Callout>
+
+## Export
+
+Export the same grid you signed off. Excel keeps the numbers. PowerPoint keeps the layout. Both include the weight and the significance settings in the methodology note.

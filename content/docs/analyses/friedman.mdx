@@ -1,0 +1,66 @@
+---
+title: Friedman test
+description: Compare three or more repeated measurements by their ranks.
+category: Non-parametric
+---
+
+## When to use it
+
+Use Friedman instead of a [repeated-measures ANOVA](/docs/analyses/anova-repeated) when the same people are measured three or more times and the scores are ordinal or skewed.
+
+## Assumptions
+
+Each row is one person. You need at least three measure columns. Kendall’s W is a separate analysis, not a field on this request.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → K Related Samples. In chat: “Friedman test of t1, t2, and t3.”</Step>
+<Step>Select at least three measure columns.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    measure_columns: {
+      type: 'string[]',
+      description: 'Repeated measurements. At least three.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The three weekly scores. The later weeks tend to rank higher, without a person-by-person lockstep.
+
+| Measure | Mean |
+| --- | ---: |
+| week1 | 19.906 |
+| week2 | 20.889 |
+| week3 | 23.953 |
+
+Significant differences across repeated measures (χ² = 9.556, p = .008, W = 0.133). Post-hoc pairwise comparisons recommended. Effect size (small; W < 0.1 negligible, 0.1 ≤ W < 0.3 small, 0.3 ≤ W < 0.5 moderate, W ≥ 0.5 large). Cutoffs: Tomczak & Tomczak, 2014. The primary result is significant (p = .008). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: χ² = 9.556; df = 2; p-value = .008; Kendall's W = 0.133.
+
+## Reporting (APA 7)
+
+Significant differences across repeated measures (χ² = 9.556, p = .008, W = 0.133). Post-hoc pairwise comparisons recommended. Effect size (small; W < 0.1 negligible, 0.1 ≤ W < 0.3 small, 0.3 ≤ W < 0.5 moderate, W ≥ 0.5 large). Cutoffs: Tomczak & Tomczak, 2014. This result is significant (p = .008). The effect is moderate, so report its size with the p-value.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → K Related Samples.

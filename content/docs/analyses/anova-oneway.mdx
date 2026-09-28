@@ -1,0 +1,128 @@
+---
+title: One-way ANOVA
+description: Compare the means of three or more independent groups.
+category: Compare means
+nonparametric_alternative: Kruskal-Wallis H test
+---
+
+## When to use it
+
+Use one-way ANOVA when a numeric outcome might differ across three or more separate groups. For example: do exam scores differ between lecture, online, and workshop teaching? The test asks whether the group means are all the same. It does not, by itself, say which pair differs. That is what a post-hoc test is for.
+
+Two groups only: use the [independent-samples t-test](/docs/analyses/ttest-independent).
+
+## Assumptions
+
+Scores are numeric, and each person is in one group. Within each group, scores should be roughly normal, and the groups should have similar spread.
+
+Tensr stores Levene’s test on the result. The default is the median-centre version. You can switch it to Brown–Forsythe or turn it off. Levene’s p below .05 means the spreads differ. This procedure does not print a Shapiro–Wilk table. If the spreads differ, use Welch (`use_welch`, off by default) or the [Kruskal–Wallis test](/docs/analyses/kruskal-wallis).
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Compare Means → One-Way ANOVA. In chat: “One-way ANOVA of score by method.” Tukey is not a separate menu item. Ask for Tukey and Tensr runs this ANOVA with post hoc set to tukey.</Step>
+<Step>Group column is the grouping variable. Value column is the numeric outcome. Groups with fewer than two rows are dropped, and the report marks them excluded.</Step>
+<Step>Post hoc starts at none. Effect size starts at eta squared. Homogeneity starts at Levene. Group descriptives start on. The chart starts as a box plot. Missing values start as listwise.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: {
+      type: 'string',
+      description: 'Categorical column that defines the groups.',
+    },
+    value_column: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    post_hoc: {
+      type: 'none | tukey | bonferroni | scheffe | games_howell',
+      description: 'Pairwise comparisons after a significant ANOVA. Games-Howell does not assume equal variances.',
+      default: 'none',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for post-hoc intervals.',
+      default: '0.95',
+    },
+    include_group_descriptives: {
+      type: 'boolean',
+      description: 'Print a group means table.',
+      default: 'true',
+    },
+    homogeneity_test: {
+      type: 'levene | brown_forsythe | none',
+      description: 'Test of equal spread.',
+      default: 'levene',
+    },
+    use_welch: {
+      type: 'boolean',
+      description: 'Welch ANOVA, which does not assume equal variances.',
+      default: 'false',
+    },
+    effect_size: {
+      type: 'eta_squared | partial_eta_squared | omega_squared | none',
+      description: 'Which effect size to feature. For one factor, eta squared and partial eta squared match.',
+      default: 'eta_squared',
+    },
+    missing_values: {
+      type: 'listwise | pairwise',
+      description: 'How incomplete rows are dropped.',
+      default: 'listwise',
+    },
+    output_chart: {
+      type: 'boxplot | means_plot | none',
+      description: 'Box plot of the outcome by group, or a bar chart of means.',
+      default: 'boxplot',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style tables.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Chart title is “score across method” for a box plot.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same 96 students, 32 in each teaching method. Tukey compares the pairs. The method gap was built to be a few exam points against a within-group spread of about 8 points.
+
+| Group | n | Mean | Status |
+| --- | ---: | ---: | --- |
+| Lecture | 32 | 68.209 | included |
+| Online | 32 | 72.234 | included |
+| Workshop | 32 | 73.741 | included |
+
+| Source | SS | df | MS | F | p | η² |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Between Groups | 523.351 | 2 | 261.675 | 4.033 | .021 | 0.08 |
+| Within Groups | 6,034.437 | 93 | 64.886 | — | — | — |
+| Total | 6,557.787 | 95 |  |  |  |  |
+
+One-way ANOVA: `score` by `method` (3 groups, n = 96). F = 4.033, p = .021 — significant at α = 0.05. Post-hoc: tukey_hsd. The primary result is significant (p = .021). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: F statistic = 4.033; p-value = .021; eta squared = 0.08.
+
+## Reporting (APA 7)
+
+One-way ANOVA: `score` by `method` (3 groups, n = 96). F = 4.033, p = .021 — significant at α = 0.05. Post-hoc: tukey_hsd. This result is significant (p = .021). The effect is moderate, so report its size with the p-value.
+
+## Coming from SPSS
+
+Analyze → Compare Means → One-Way ANOVA.
+
+SPSS puts Welch and the post-hoc tests in the same dialog. Tensr’s Welch switch is `use_welch`, and post hoc is `post_hoc`. SPSS Options also offers a means plot. Tensr’s chart control is `output_chart` (`boxplot`, `means_plot`, or `none`).
+
+## Related
+
+The rank alternative is the [Kruskal–Wallis H test](/docs/analyses/kruskal-wallis). Two groups: [independent-samples t-test](/docs/analyses/ttest-independent). A second factor: [two-way ANOVA](/docs/analyses/anova-twoway). A covariate: [ANCOVA](/docs/analyses/ancova).

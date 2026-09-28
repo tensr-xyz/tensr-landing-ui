@@ -1,0 +1,80 @@
+---
+title: Canonical correlation
+description: Relate two sets of columns, not just one pair.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use canonical correlation when each side has more than one column. For example: how does the set of study hours and anxiety line up with the set of recall and confidence? Bivariate correlation only looks at one pair at a time. This finds a weighted combination on each side that correlates as strongly as possible, then a second combination, and so on.
+
+## Assumptions
+
+The columns are numeric. The first canonical correlation is the one to read. Later functions are leftover association after the first is removed. Tensr does not test multivariate normality.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Canonical. In chat: “Canonical correlation of hours and anxiety with recall and confidence.”</Step>
+<Step>Set A and set B each need at least one column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    set_a: {
+      type: 'string[]',
+      description: 'First set of numeric columns. At least one.',
+    },
+    set_b: {
+      type: 'string[]',
+      description: 'Second set of numeric columns. At least one.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+One set is exam score and confidence. The other is hours and anxiety. The sets share a moderate link and a lot of leftover variance.
+
+| Function | Wilks' Λ | F | df | p-value |
+| --- | ---: | ---: | ---: | ---: |
+| Function 1 | 0.739 | 22.171 | 4 | < .001 |
+| Function 2 | 0.964 | 3.52 | 1 | .064 |
+
+| Variable | Function 1 | Function 2 |
+| --- | ---: | ---: |
+| score | 0.996 | -0.089 |
+| confidence | 0.277 | 0.961 |
+
+Canonical correlation: score, confidence ↔ hours, anxiety, n = 96. Function 1 accounts for 23.3% of shared variance between the two variable sets. Canonical correlation: score, confidence ↔ hours, anxiety, n = 96. Function 1 accounts for 23.3% of shared variance between the two variable sets. Metrics: Canonical r1 = 0.483; Canonical r2 = 0.191.
+
+## Reporting (APA 7)
+
+Canonical correlation: score, confidence ↔ hours, anxiety, n = 96. Function 1 accounts for 23.3% of shared variance between the two variable sets. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+Analyze → Correlate → Canonical.
+
+SPSS canonical correlation is a macro in many installations rather than a base dialog. Tensr’s menu path is Analyze → Correlate → Canonical.
+
+## Related
+
+One pair of columns is [bivariate correlation](/docs/analyses/correlation). Grouping people from several scores is [discriminant analysis](/docs/analyses/discriminant-analysis).

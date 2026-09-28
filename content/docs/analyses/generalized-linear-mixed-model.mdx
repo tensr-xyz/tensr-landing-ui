@@ -1,0 +1,95 @@
+---
+title: Generalized linear mixed model
+description: Random-intercept model for a clustered binary outcome or a clustered count.
+category: Mixed models
+---
+
+## When to use it
+
+Use a GLMM when the outcome is yes-or-no, or a count, and the rows sit inside groups. The binomial family reports an odds ratio. The Poisson family is for counts and drops that column.
+
+The fit is a variational Bayes random-intercept model. A binary outcome with an overall effect, and no random intercept you need to interpret, is [GEE](/docs/analyses/gee).
+
+## Assumptions
+
+Binomial needs two outcome values. Poisson needs a non-negative count. The grouping column has at least two clusters. Fixed effects are numeric. This page does not print a convergence warning when the variational fit fails to settle, so read a wild standard error as a reason to rerun on a larger sample.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Multivariate → Mixed Models → Generalized Linear Mixed Model (GLMM). In chat: “GLMM of passed on hours, grouped by clinic.”</Step>
+<Step>Family starts at Binomial. Poisson is the other choice. The dependent label follows the family: binary, or a count.</Step>
+<Step>Grouping variable is the cluster. Fixed effects need at least one numeric predictor.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Binary outcome, or a count when family is poisson. Optional when derive_binary_from builds one.',
+    },
+    fixed_effects: {
+      type: 'string[]',
+      description: 'Numeric predictors. At least one.',
+    },
+    group_column: {
+      type: 'string',
+      description: 'Cluster id.',
+    },
+    family: {
+      type: 'binomial | poisson',
+      description: 'Binomial reports an odds ratio. Poisson is for counts.',
+      default: 'binomial',
+    },
+    random_effects: {
+      type: 'string[]',
+      description:
+        'Accepted on the request. Each column must also be a fixed effect. The fitted model is still a random intercept for the group. The dialog does not send this.',
+    },
+    derive_binary_from: {
+      type: 'object',
+      description:
+        'Optional rule that builds a 0/1 outcome from another column. Used by chat. The dialog does not show it.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Fitted-versus-residual scatter.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same clinics, with a pass/fail outcome and a moderate hours slope, binomial family.
+
+| Term | Estimate | Std. Err | Odds ratio | p-value |
+| --- | ---: | ---: | ---: | ---: |
+| const | -1.26627 | 0.189511 | 0.282 | < .001 |
+| hours | 0.288825 | 0.0376923 | 1.335 | < .001 |
+
+GLMM (binomial) for `passed`. GLMM (binomial) for `passed`. Metrics: Family = binomial; Observations = 120; Groups = 12.
+
+## Reporting (APA 7)
+
+GLMM (binomial) for `passed`. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+The product menu is Multivariate → Mixed Models → Generalized Linear Mixed Model (GLMM). SPSS fits generalized linear mixed models in GENLINMIXED. This Tensr fit is a variational Bayes random intercept.
+
+## Related
+
+An overall effect for a clustered yes-or-no outcome, without this random intercept, is [GEE](/docs/analyses/gee). One row per person: [logistic regression](/docs/analyses/logistic-regression) or [Poisson regression](/docs/analyses/poisson-regression).

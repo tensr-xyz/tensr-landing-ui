@@ -1,0 +1,88 @@
+---
+title: Ordinal regression
+description: Predict an ordered category, such as a 1-to-5 rating.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use ordinal regression when the outcome has ordered categories and the gaps between them are not equal scores. A 1-to-4 rating is the usual case. The model has one slope per predictor and a threshold between each pair of adjacent categories.
+
+## Assumptions
+
+The outcome is ordered. The proportional-odds idea is that one slope works at every threshold. Tensr does not test that assumption.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Regression → Ordinal. In chat: “Ordinal regression of rating on practice.”</Step>
+<Step>Dependent is the ordered outcome. Independents need at least one predictor.</Step>
+<Step>Confidence level starts at 0.95. Include constant is on the request. The dispatcher does not pass it through.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Ordered outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Predictors. At least one.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Accepted on the request. The coefficient table prints the estimate and p.',
+      default: '0.95',
+    },
+    include_constant: {
+      type: 'boolean',
+      description: 'The request accepts this. The analyze dispatcher does not pass it through, so the fit uses the function default.',
+      default: 'true',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+A 1–4 satisfaction rating predicted from study hours. Higher hours were built to push people up the scale, with a lot of overlap between adjacent ratings.
+
+| Term | Estimate | p-value |
+| --- | ---: | ---: |
+| hours | 0.551 | < .001 |
+| 0.0/1.0 | 0.744 | .351 |
+| 1.0/2.0 | 0.599 | < .001 |
+| 2.0/3.0 | 0.498 | .002 |
+
+Ordinal regression for `satisfaction`, n = 96. Ordinal regression for `satisfaction`, n = 96. Metrics: AIC = 250.7; Log-likelihood = -121.35.
+
+## Reporting (APA 7)
+
+Ordinal regression for `satisfaction`, n = 96. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+Analyze → Regression → Ordinal.
+
+SPSS PLUM prints thresholds and a slope, with standard errors and Wald tests. Tensr’s table uses Term, Estimate, and p-value.
+
+## Related
+
+A numeric score uses [linear regression](/docs/analyses/linear-regression). Two categories use [logistic regression](/docs/analyses/logistic-regression).

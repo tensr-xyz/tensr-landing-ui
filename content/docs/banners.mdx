@@ -1,0 +1,65 @@
+---
+title: Banners
+description: Weighted crosstabs with nested banners and significance letters.
+---
+
+<ComponentPreview name="banner-demo" />
+
+## Getting started
+
+<Steps>
+  <Step>Open a dataset and choose the weight, or leave the banner unweighted.</Step>
+  <Step>Nest the banner: a question down the side, breaks across the top.</Step>
+</Steps>
+
+## Usage
+
+A banner is the book a client already reads: rows of brands or statements, columns of a break, a total column, and letters where columns differ. The grid stores the weight, the base, and the row identities next to every cell.
+
+```tsx
+const banner = dataset.banner({
+  weight: 'weight',
+  rows: ['brand'],
+  columns: ['age'],
+  significance: { level: 0.05 },
+});
+```
+
+## Examples
+
+### Column proportions
+
+Compare each column with every other column at 95%. A letter means that cell is higher than the named column.
+
+### Nested breaks
+
+Put region under age. The total column stays the weighted total of the rows, not a sum of the displayed breaks.
+
+## Notes
+
+Letters are withheld when a column base is below the cutoff, even if the percentage looks decisive. Unweighted counts stay available beside the weighted percent so a client can see the base. The grid is keyboard reachable, and each letter has a text alternative in the cell, not colour alone.
+
+## Reference
+
+<TypeTable
+  type={{
+    weight: {
+      type: 'string',
+      description: 'Variable used as the weight. Omit for an unweighted banner.',
+      default: 'unweighted',
+    },
+    rows: {
+      type: 'string[]',
+      description: 'Questions or variables down the side of the grid.',
+    },
+    columns: {
+      type: 'string[]',
+      description: 'Breaks across the top. Order is nesting order, outer first.',
+    },
+    significance: {
+      type: '0.05 | 0.1 | false',
+      description: 'Column-proportion test. False hides letters.',
+      default: '0.05',
+    },
+  }}
+/>

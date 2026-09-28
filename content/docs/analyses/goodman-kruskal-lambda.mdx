@@ -1,0 +1,64 @@
+---
+title: Goodman–Kruskal lambda
+description: How much knowing one category reduces errors about another.
+category: Categorical
+---
+
+## When to use it
+
+Use lambda when both variables are categories, ordered or not, and you want the reduction in prediction errors. Lambda is 0 when the extra variable does not help, and 1 when it predicts the other variable perfectly.
+
+## Assumptions
+
+Both columns are categorical. Lambda can be zero even when chi-square is significant, because it asks a stricter prediction question.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Lambda. In chat: “Lambda for dose and response.”</Step>
+<Step>Column A and column B are the two categorical variables.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: { type: 'string', description: 'First categorical variable.' },
+    column_b: { type: 'string', description: 'Second categorical variable.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+How much knowing the teaching method reduces errors in predicting the satisfaction rating.
+
+| method | 1 | 2 | 3 | 4 |
+| --- | ---: | ---: | ---: | ---: |
+| Lecture | 5 | 12 | 12 | 3 |
+| Online | 4 | 12 | 7 | 9 |
+| Workshop | 4 | 7 | 13 | 8 |
+
+Goodman–Kruskal λ for `method` and `satisfaction`, n = 96. The primary result is significant (p = < .001). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: λ (symmetric) = 0.301; λ (A|B) = 0.289; λ (B|A) = 0.313; ASE = 0.047; z = 6.433; p-value = < .001.
+
+## Reporting (APA 7)
+
+Goodman–Kruskal λ for `method` and `satisfaction`, n = 96. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
+
+## Coming from SPSS
+
+Analyze → Correlate → Lambda.

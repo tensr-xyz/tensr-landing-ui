@@ -1,0 +1,62 @@
+---
+title: Runs test
+description: Test whether a sequence alternates more or less than chance.
+category: Non-parametric
+---
+
+## When to use it
+
+Use the runs test when the order of the rows matters. A run is a streak of values on the same side of a cutoff. Too few runs means the series clumps. Too many means it flips back and forth.
+
+## Assumptions
+
+The column is numeric. The cutoff starts as the median. Mean is the other choice. The test uses the order of the rows as the sequence.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → Runs. In chat: “Runs test of this column.”</Step>
+<Step>Leave the cutoff at median unless you want the mean.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column: { type: 'string', description: 'Sequence, in row order.' },
+    cutoff: {
+      type: 'median | mean',
+      description: 'Split point for a run.',
+      default: 'median',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The 96 exam scores in row order, split at the median. The row order is not a time order, so runs above and below the median should look mixed.
+
+Runs test for `score` (cutoff = 70.15). The primary result is not significant (p = .538). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Runs = 46; Z = -0.616; p-value = .538.
+
+## Reporting (APA 7)
+
+Runs test for `score` (cutoff = 70.15). This result is not significant (p = .538). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → Runs.

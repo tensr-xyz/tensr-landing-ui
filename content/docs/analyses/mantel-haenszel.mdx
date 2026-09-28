@@ -1,0 +1,58 @@
+---
+title: Mantel–Haenszel trend test
+description: Test a trend in a binary outcome across ordered groups.
+category: Categorical
+---
+
+## When to use it
+
+Use the Mantel–Haenszel trend test when groups are ordered and the outcome is binary. It asks whether the outcome rate rises or falls across that order, instead of treating the groups as unordered the way chi-square does.
+
+## Assumptions
+
+The grouping column should sort into the order you mean. Numeric-looking labels sort numerically. Other labels sort alphabetically.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Mantel-Haenszel Trend. In chat: “Mantel–Haenszel trend of dose by illness.”</Step>
+<Step>Group column is the ordered exposure. Outcome column is binary.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: { type: 'string', description: 'Ordered groups.' },
+    outcome_column: { type: 'string', description: 'Binary outcome.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Low, mid, and high dose against a response that was built flat across dose.
+
+Mantel–Haenszel trend test: `flat` across ordered `dose`, n = 120. The primary result is not significant (p = .653). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: M–H χ² = 0.202; df = 1; p-value = .653; Trend coefficient = 0.013.
+
+## Reporting (APA 7)
+
+Mantel–Haenszel trend test: `flat` across ordered `dose`, n = 120. This result is not significant (p = .653). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+Analyze → Correlate → Mantel-Haenszel Trend.

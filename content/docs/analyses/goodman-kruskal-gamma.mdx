@@ -1,0 +1,58 @@
+---
+title: Goodman–Kruskal gamma
+description: Association between two ordered categorical variables.
+category: Categorical
+---
+
+## When to use it
+
+Use gamma when both variables are ordered categories and you want to know whether higher scores on one tend to come with higher scores on the other. Gamma runs from −1 to 1. It ignores ties.
+
+## Assumptions
+
+Both columns are ordered. Tensr sorts level names alphabetically, so the names need to sort in the true order.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Gamma. In chat: “Gamma for dose and response.”</Step>
+<Step>Column A and column B are the two ordered variables.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: { type: 'string', description: 'First ordered variable.' },
+    column_b: { type: 'string', description: 'Second ordered variable.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Teaching method against the 1–4 satisfaction rating. Method and satisfaction share a mild ordinal association through the exam.
+
+Goodman–Kruskal γ for `method` and `satisfaction`, n = 96. The primary result is significant (p = < .001). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: Gamma = 0.198; ASE = 0.001; z = 157.702; p-value = < .001; Concordant = 1348; Discordant = 902.
+
+## Reporting (APA 7)
+
+Goodman–Kruskal γ for `method` and `satisfaction`, n = 96. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
+
+## Coming from SPSS
+
+Analyze → Correlate → Gamma.

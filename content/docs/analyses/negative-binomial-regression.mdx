@@ -1,0 +1,97 @@
+---
+title: Negative binomial regression
+description: Predict an over-dispersed count with an extra dispersion parameter.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use negative binomial regression for counts when the variance is larger than a Poisson model allows. The table still reports an incidence rate ratio. The extra piece is the dispersion parameter α.
+
+## Assumptions
+
+The outcome is a non-negative count. Rows are independent. Tensr estimates α from the counts and refits the coefficients at that value. The report prints α, its standard error, and a likelihood-ratio comparison with a Poisson model. When the counts are not over-dispersed, α can collapse and the standard error stays blank.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Regression → Negative Binomial. In chat: “Negative binomial regression of absences on anxiety.”</Step>
+<Step>Dependent is the count. Independents need at least one predictor.</Step>
+<Step>Confidence level starts at 0.95. Include constant starts on.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Count outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Predictors. At least one.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for the coefficient interval.',
+      default: '0.95',
+    },
+    include_constant: {
+      type: 'boolean',
+      description: 'Fit an intercept.',
+      default: 'true',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Visit counts with extra-Poisson scatter, predicted from anxiety. Dispersion was built in, so α should be estimated rather than collapsing to zero.
+
+| Term | Estimate | SE | 95% CI | IRR | p-value |
+| --- | ---: | ---: | --- | ---: | ---: |
+| const | -1.213 | 0.692 | [-2.571, 0.144] | 0.297 | .080 |
+| anxiety | 0.281 | 0.131 | [0.025, 0.537] | 1.324 | .032 |
+
+Negative binomial regression for `visits` with 1 predictor(s), n = 96. The primary result is significant (p = < .001). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: Dispersion α = 2.19; α SE = 0.599; LR vs Poisson χ² = 75.168; LR vs Poisson p = < .001; AIC = 292.213; Deviance = 84.712.
+
+## Reporting (APA 7)
+
+Negative binomial regression for `visits` with 1 predictor(s), n = 96. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
+
+## When α collapses, use Poisson
+
+The same 96 people, with `absences` as a Poisson count of missed sessions and anxiety as the predictor. Negative binomial still runs, but α is 0.004 (SE = 0.071) and the likelihood-ratio test against Poisson is χ² = 0.004, p = .948. Poisson AIC is 333.110; negative binomial AIC is 335.105. The extra dispersion parameter is not doing any work.
+
+| Term | Estimate | SE | IRR | p-value |
+| --- | ---: | ---: | ---: | ---: |
+| const | 0.026 | 0.281 | 1.026 | .926 |
+| anxiety | 0.136 | 0.052 | 1.145 | .009 |
+
+Use [Poisson regression](/docs/analyses/poisson-regression) for this table. Keep negative binomial when α is estimated with a usable standard error, as in the visits example above.
+
+## Coming from SPSS
+
+Analyze → Regression → Negative Binomial.
+
+SPSS negative binomial estimates the dispersion. Tensr estimates α as well, and prints it with a standard error.
+
+## Related
+
+A Poisson model of a count is [Poisson regression](/docs/analyses/poisson-regression).

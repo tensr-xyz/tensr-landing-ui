@@ -1,0 +1,88 @@
+---
+title: Network centrality
+description: Summarise a graph of nodes and the links between them.
+category: Reliability & factor analysis
+---
+
+## When to use it
+
+Use this when the rows are relationships, not people-by-variable scores. An edge list has a source column and a target column. An adjacency block is a square set of columns, one per node. The result is who is central, how dense the graph is, and how it splits into communities.
+
+## Assumptions
+
+Give either an edge list or adjacency columns, not a vague mix. Node names are read as text. An optional weight column is numeric. A graph with no nodes is an error. Centrality uses an undirected reading of the links.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Network → Centrality. In chat: “Centrality for this edge list.”</Step>
+<Step>For an edge list, set source and target. Weight is optional.</Step>
+<Step>Or set adjacency columns for a square matrix and leave source and target empty.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    source: {
+      type: 'string',
+      description: 'Edge-list column for the start of a link.',
+      default: 'null',
+    },
+    target: {
+      type: 'string',
+      description: 'Edge-list column for the end of a link.',
+      default: 'null',
+    },
+    weight: {
+      type: 'string',
+      description: 'Optional numeric column of link strength.',
+      default: 'null',
+    },
+    adjacency_columns: {
+      type: 'string[]',
+      description: 'Square adjacency block. Use this instead of source and target.',
+      default: 'null',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch. Includes a spring layout.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+A 12-person class. An edge is a study link, kept when a seeded draw fell under 0.28, with a weight from 1 to 4. Centrality is descriptive.
+
+| Node | Degree | Betweenness | Closeness | Eigenvector |
+| --- | ---: | ---: | ---: | ---: |
+| s1 | 0.273 | 0.091 | 0.524 | 0.168 |
+| s2 | 0.455 | 0.127 | 0.611 | 0.434 |
+| s4 | 0.273 | 0.036 | 0.44 | 0.127 |
+| s10 | 0.455 | 0.218 | 0.611 | 0.297 |
+| s3 | 0.364 | 0.091 | 0.579 | 0.338 |
+| s7 | 0.273 | 0.136 | 0.55 | 0.236 |
+| s11 | 0.182 | 0 | 0.458 | 0.164 |
+| s12 | 0.364 | 0.055 | 0.579 | 0.437 |
+
+Network with 12 nodes and 22 edges. Network with 12 nodes and 22 edges. Metrics: Nodes = 12; Edges = 22; Density = 0.333; Components = 1; Modularity = 0.251.
+
+## Reporting (APA 7)
+
+Network with 12 nodes and 22 edges. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+The product menu is Analyze → Network → Centrality. SPSS does not have this dialog. The spring layout is a scatter of nodes, with a fixed seed so the picture does not jump between runs.
