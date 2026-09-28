@@ -52,12 +52,14 @@ Exactly two groups. Each group needs at least two scores. Trim fraction starts a
 
 The same two similar tutorial groups, asking whether one group has more extreme scores than the other.
 
-Moses test of extreme reaction for `score` by `group`. Moses test of extreme reaction for `score` by `group`. Metrics: Range ratio = 1.202; Range group 1 = 20.8; Range group 2 = 25.
+Moses test of extreme reaction for `score` by `group`. Metrics: S statistic = 70; p-value = .500; Range ratio = 1.29; Range group 1 = 37.8; Range group 2 = 29.3.
+
+The span after trimming is 70 and p = .500. The two groups do not differ in extreme reactions. That is the expected result for two samples drawn from the same spread.
 
 ## Reporting (APA 7)
 
-Moses test of extreme reaction for `score` by `group`. Report the estimate in the table. This procedure is not summarised by one p-value.
+A Moses test of extreme reactions comparing score in groups A and B was not significant, S = 70, p = .500. The groups did not differ in spread.
 
 ## Coming from SPSS
 
-Analyze → Nonparametric Tests → Moses. SPSS prints a significance for the span. Tensr currently reports the ranges and the ratio.
+Analyze → Nonparametric Tests → Moses. SPSS prints a significance for the span. Tensr reports the span S, the p-value, and the two ranges.

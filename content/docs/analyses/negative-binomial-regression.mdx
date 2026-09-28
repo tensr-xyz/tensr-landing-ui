@@ -75,6 +75,17 @@ Negative binomial regression for `visits` with 1 predictor(s), n = 96. The prima
 
 Negative binomial regression for `visits` with 1 predictor(s), n = 96. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
 
+## When α collapses, use Poisson
+
+The same 96 people, with `absences` as a Poisson count of missed sessions and anxiety as the predictor. Negative binomial still runs, but α is 0.004 (SE = 0.071) and the likelihood-ratio test against Poisson is χ² = 0.004, p = .948. Poisson AIC is 333.110; negative binomial AIC is 335.105. The extra dispersion parameter is not doing any work.
+
+| Term | Estimate | SE | IRR | p-value |
+| --- | ---: | ---: | ---: | ---: |
+| const | 0.026 | 0.281 | 1.026 | .926 |
+| anxiety | 0.136 | 0.052 | 1.145 | .009 |
+
+Use [Poisson regression](/docs/analyses/poisson-regression) for this table. Keep negative binomial when α is estimated with a usable standard error, as in the visits example above.
+
 ## Coming from SPSS
 
 Analyze → Regression → Negative Binomial.

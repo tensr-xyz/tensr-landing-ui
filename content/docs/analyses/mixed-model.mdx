@@ -89,6 +89,10 @@ Mixed model for `score` nested in `clinic`. Mixed model for `score` nested in `c
 
 Mixed model for `score` nested in `clinic`. Report the estimate in the table. This procedure is not summarised by one p-value.
 
+## Notes
+
+This fit still prints a singular-covariance warning. A singular fit means the random-effects covariance is on the edge of the parameter space, usually because a variance is estimated at zero or two random terms are perfectly correlated. With a random intercept only, that often means the clinic variance is hard to separate from the residual. The hours slope here is identified (0.974, p = .013) and matches the linear mixed model, so the warning is worth printing and the slope is still usable. Ignore the warning only when the fixed-effect you care about is identified and the variance components still make sense. If a random slope is in the model and the warning appears, drop that slope.
+
 ## Coming from SPSS
 
 The product menu is Multivariate → Mixed Models → Mixed Model. SPSS fits this with MIXED. The path string stored for this item says Analyze → Mixed Models → Mixed Model. The item itself is on the Multivariate menu.
