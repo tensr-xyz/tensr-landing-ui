@@ -73,22 +73,18 @@ Binomial needs two outcome values. Poisson needs a non-negative count. The group
 
 ## Reading the output
 
-Twelve clinics, fifteen people in each (N = 180). Family is binomial. The outcome is `passed` (95 of 180). The predictor is `hours`.
+The same clinics, with a pass/fail outcome and a moderate hours slope, binomial family.
 
 | Term | Estimate | Std. Err | Odds ratio | p-value |
-| --- | ---: | ---: | ---: | --- |
-| const | -0.98837 | 0.157343 | 0.372 | < .001 |
-| hours | 0.372139 | 0.0463393 | 1.451 | < .001 |
+| --- | ---: | ---: | ---: | ---: |
+| const | -1.26627 | 0.189511 | 0.282 | < .001 |
+| hours | 0.288825 | 0.0376923 | 1.335 | < .001 |
 
-The hours odds ratio is 1.451, so the odds of passing are larger at higher hours in this set. p < .001. Metrics are Family binomial, 180 observations, and 12 groups. This fit does not print an AIC. The report notes that AIC is not available for this GLMM fit.
-
-The chart is a scatter titled “Fitted vs residual.”
-
-Poisson uses the same request with `family` set to `poisson`. The coefficient table then has Term, Estimate, Std. Err, and p-value, and no odds-ratio column.
+GLMM (binomial) for `passed`. GLMM (binomial) for `passed`. Metrics: Family = binomial; Observations = 120; Groups = 12.
 
 ## Reporting (APA 7)
 
-A binomial GLMM predicted passing from study hours with a random intercept for clinic (N = 180, 12 clinics). Each extra hour was associated with higher odds of passing, odds ratio = 1.45, p < .001.
+GLMM (binomial) for `passed`. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

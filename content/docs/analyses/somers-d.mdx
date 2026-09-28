@@ -45,17 +45,13 @@ Both columns are ordered categories. Level names are sorted alphabetically.
 
 ## Reading the output
 
-Same ten-case dose and response table as gamma.
+The same method-by-satisfaction table, as an asymmetric ordinal association.
 
-| d (B from A) | d (A from B) | SE | z | p |
-| ---: | ---: | ---: | ---: | --- |
-| 0.138 | 0.121 | 0.355 | 0.389 | .698 |
-
-`somers_d_yx` is the first number and `somers_d_xy` is the second. Both are near zero, and p = .698.
+Somers' D (X = `method`, Y = `satisfaction`), n = 96. The primary result is significant (p = < .001). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: D(Y|X) = 0.134; D(X|Y) = 0.145; ASE = 0.031; z = 4.271; p-value = < .001.
 
 ## Reporting (APA 7)
 
-Somers’ d was .14, p = .70.
+Somers' D (X = `method`, Y = `satisfaction`), n = 96. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

@@ -51,19 +51,19 @@ Groups are independent. The outcome is at least ordinal. The test does not tell 
 
 ## Reading the output
 
-Six people in lecture, online, and workshop. Scores rise across those three labels.
+The three teaching methods, compared on ranks. The same moderate mean gap as the ANOVA, read without assuming a normal curve.
 
-| Group | n | Median |
-| --- | ---: | ---: |
-| Lecture | 6 | 66.5 |
-| Online | 6 | 73.5 |
-| Workshop | 6 | 79.5 |
+| Group | n | Median | Status |
+| --- | ---: | ---: | --- |
+| Lecture | 32 | 69.1 | included |
+| Online | 32 | 71.05 | included |
+| Workshop | 32 | 72.95 | included |
 
-H = 15.158, p < .001. Epsilon-squared is 0.892, labeled large. Below 0.01 is negligible, 0.01 ≤ ε² < 0.08 is small, 0.08 ≤ ε² < 0.26 is medium, and ε² ≥ 0.26 is large. Cutoffs: Mangiafico, 2016. With post hoc on, Tensr adds pairwise Mann–Whitney tests and stores `p-adj`.
+Kruskal-Wallis test of `score` by `method` (3 groups) on 96 rows. Effect size ε² = 0.076 (small; ε² < 0.01 negligible, 0.01 ≤ ε² < 0.08 small, 0.08 ≤ ε² < 0.26 medium, ε² ≥ 0.26 large). Cutoffs: Mangiafico, 2016. The primary result is significant (p = .027). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: H statistic = 7.22; p-value = .027; ε² = 0.076; Effect size = small.
 
 ## Reporting (APA 7)
 
-A Kruskal–Wallis test showed that scores differed by teaching method, H(2) = 15.16, p < .001, ε² = .89.
+Kruskal-Wallis test of `score` by `method` (3 groups) on 96 rows. Effect size ε² = 0.076 (small; ε² < 0.01 negligible, 0.01 ≤ ε² < 0.08 small, 0.08 ≤ ε² < 0.26 medium, ε² ≥ 0.26 large). Cutoffs: Mangiafico, 2016. This result is significant (p = .027). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

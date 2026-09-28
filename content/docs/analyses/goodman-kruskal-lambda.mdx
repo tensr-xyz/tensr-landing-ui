@@ -45,17 +45,19 @@ Both columns are categorical. Lambda can be zero even when chi-square is signifi
 
 ## Reading the output
 
-Same ten-case table.
+How much knowing the teaching method reduces errors in predicting the satisfaction rating.
 
-| Symmetric λ | A dependent | B dependent | SE | z | p |
-| ---: | ---: | ---: | ---: | ---: | --- |
-| 0.500 | 0.571 | 0.429 | 0.158 | 3.162 | .002 |
+| method | 1 | 2 | 3 | 4 |
+| --- | ---: | ---: | ---: | ---: |
+| Lecture | 5 | 12 | 12 | 3 |
+| Online | 4 | 12 | 7 | 9 |
+| Workshop | 4 | 7 | 13 | 8 |
 
-Symmetric lambda is .50, p = .002. Knowing one variable cuts prediction errors about in half on this tiny table. With only ten cases, treat the size as fragile even though the p-value is small.
+Goodman–Kruskal λ for `method` and `satisfaction`, n = 96. The primary result is significant (p = < .001). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: λ (symmetric) = 0.301; λ (A|B) = 0.289; λ (B|A) = 0.313; ASE = 0.047; z = 6.433; p-value = < .001.
 
 ## Reporting (APA 7)
 
-Goodman–Kruskal lambda was .50, p = .002.
+Goodman–Kruskal λ for `method` and `satisfaction`, n = 96. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

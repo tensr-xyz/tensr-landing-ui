@@ -67,17 +67,18 @@ Each row is one case. Expected counts should be at least 5 in most cells. Tensr 
 
 ## Reading the output
 
-Sixty people. `group` is exposed or unexposed. `outcome` is event or none. Counts are exposed 22 event / 8 none, unexposed 12 event / 18 none. Expected counts are 17 and 13 in each row. `low_expected_cells` is 0.
+Gender and writing hand in the class. The two were drawn independently.
 
-| χ² | df | p | Phi | Cramér’s V |
-| ---: | ---: | --- | ---: | ---: |
-| 5.498 | 1 | .019 | 0.303 | 0.303 |
+| gender | Left | Right |
+| --- | ---: | ---: |
+| Man | 5 | 42 |
+| Woman | 12 | 37 |
 
-p = .019 is below .05, so the outcome is associated with group. Phi and Cramér’s V are the same on a 2×2 table. Around .30 is a moderate association.
+Chi-square test of independence between `gender` and `hand`, 96 complete rows. The primary result is not significant (p = .131). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: χ² = 2.28; df = 1; p-value = .131.
 
 ## Reporting (APA 7)
 
-A chi-square test of independence showed that outcome and group were associated, χ²(1, N = 60) = 5.50, p = .019, φ = .30.
+Chi-square test of independence between `gender` and `hand`, 96 complete rows. This result is not significant (p = .131). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

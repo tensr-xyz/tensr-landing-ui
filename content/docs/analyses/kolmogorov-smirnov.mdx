@@ -53,19 +53,13 @@ Two-sample mode needs two numeric columns. Normality mode needs one numeric colu
 
 ## Reading the output
 
-Eight lecture scores and eight workshop scores, entered as two columns.
+Two tutorial groups of 40, each drawn from a normal curve near 70 with the same spread. The columns are the two groups.
 
-| D | p | n |
-| ---: | --- | ---: |
-| 0.750 | .019 | 8 and 8 |
-
-D = 0.75 means the largest gap between the two empirical distributions is three quarters of the sample. p = .019, so the two score columns do not look like the same distribution.
-
-The normality option on the twelve-score column used for Shapiro–Wilk returned W = 0.941, p = .512, the same figures as that test.
+No significant difference between the distributions of `score_a` and `score_b` (two-sided K–S: D = 0.1, p = .990; n = 40, 40). Critical D at α = .05 = 0.304. The primary result is not significant (p = .990). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: D statistic = 0.1; p-value = .990; n (score_a) = 40; n (score_b) = 40; Critical D (α = .05) = 0.304.
 
 ## Reporting (APA 7)
 
-A two-sample Kolmogorov–Smirnov test showed that the lecture and workshop scores differed, D = .75, p = .019.
+No significant difference between the distributions of `score_a` and `score_b` (two-sided K–S: D = 0.1, p = .990; n = 40, 40). Critical D at α = .05 = 0.304. This result is not significant (p = .990). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

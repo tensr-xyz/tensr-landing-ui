@@ -60,26 +60,18 @@ Tensr does not test those assumptions. It does compute η² from the T² statist
 
 ## Reading the output
 
-The same 16 students as the MANOVA example: eight Lecture, eight Workshop, outcomes recall and confidence. Lecture is group 1, so differences are Lecture minus Workshop.
+Two tutorial groups drawn from the same marking scheme, on score and confidence. The groups were not built to differ.
 
-Metrics: T² = 39.2, F = 18.2, p < .001, η² = 0.737.
-
-T² is large when the groups are far apart across the outcomes together. Tensr converts it to an F so you can read a p-value. p < .001 means the two groups differ on the set of outcomes. η² here is T² / (T² + N − 2). 0.737 means a large share of the multivariate variation is between the two teaching methods. In a real class it will be much smaller. The MANOVA on these same rows reported Pillai’s trace of 0.737 and the same F and p. For two groups those tests agree.
-
-Group means:
-
-| Variable | Lecture mean | Workshop mean | Difference |
+| Variable | A mean | B mean | Difference |
 | --- | ---: | ---: | ---: |
-| recall | 6 | 8 | -2 |
-| confidence | 3.125 | 5.125 | -2 |
+| score | 68.575 | 68.935 | -0.36 |
+| confidence | 48.407 | 51.355 | -2.948 |
 
-The difference column is not a significance test for that one variable. Both gaps point the same way (workshop higher), which is why the joint test is decisive. The chart is a box plot of recall by method, the first dependent column only.
+Hotelling's T² comparing A vs B on 2 variable(s) (score, confidence). The primary result is not significant (p = .276). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: T² = 2.653; F = 1.31; p-value = .276; η² = 0.033.
 
 ## Reporting (APA 7)
 
-A Hotelling’s T² test compared lecture and workshop students (n = 8 each) on recall and confidence. The groups differed, T² = 39.20, F(2, 13) = 18.20, p < .001, η² = .74. Workshop means were higher on recall (8.00 versus 6.00) and on confidence (5.13 versus 3.13).
-
-The F degrees of freedom are the ones returned with the result: 2 and 13. The metrics line prints F as 18.2 and does not repeat those df.
+Hotelling's T² comparing A vs B on 2 variable(s) (score, confidence). This result is not significant (p = .276). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

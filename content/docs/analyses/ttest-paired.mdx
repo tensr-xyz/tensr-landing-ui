@@ -62,23 +62,17 @@ Tensr calculates a Jarque–Bera test on those differences and stores it on the 
 
 ## Reading the output
 
-Eight people, scored before and after a short session. Difference = before − after, so a negative mean means scores went up.
+Forty-eight people measured before and after a short course. The typical gain is a few points, and some people go the other way.
 
-| | Mean | SD | SE | 95% CI low | 95% CI high | t | df | p |
+|   | Mean | SD | SE | 95% CI low | 95% CI high | t | df | p |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| before - after | -1.625 | 0.916 | 0.324 | -2.391 | -0.859 | -5.017 | 7 | .002 |
+| before - after | -3.808 | 7.843 | 1.132 | -6.086 | -1.531 | -3.364 | 47 | .002 |
 
-The mean is the average change. SD is the spread of those changes. SE is the standard error of that mean (SD divided by the square root of the number of pairs). df is N − 1, here 7.
-
-p = .002 is below .05, so the mean change is significant. The 95% CI runs from −2.391 to −0.859 and does not include 0, which says the same thing.
-
-Cohen’s dz is the mean difference divided by the SD of the differences. Tensr reports it as a metric: −1.774. It is not a column in the table. The usual .2 / .5 / .8 guide is for this version of d as well. This toy set changes in almost the same direction for everyone, so dz is large.
-
-On this run Jarque–Bera was 0.276, p = .871, so the differences do not look skewed. That number is on the result, not in the table above.
+Paired t-test comparing `before` and `after` on 48 paired rows (mean diff = -3.808, p = .002). The primary result is significant (p = .002). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: Mean difference = -3.808; SD of differences = 7.843; SE mean difference = 1.132; 95% CI mean diff = [-6.086, -1.531]; t statistic = -3.364; p-value = .002.
 
 ## Reporting (APA 7)
 
-Scores increased from before the session to after it. The mean change (before − after) was −1.63 (SD = 0.92). A paired-samples t test was significant, t(7) = −5.02, p = .002, 95% CI [−2.39, −0.86], dz = −1.77.
+Paired t-test comparing `before` and `after` on 48 paired rows (mean diff = -3.808, p = .002). This result is significant (p = .002). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

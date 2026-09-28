@@ -57,18 +57,22 @@ Cells should not be mostly empty. Tensr stores `sparse_cell_fraction`. The satur
 
 ## Reading the output
 
-Twenty-four people, gender F or M, region N or S, six people in every cell. Saturated model.
+Teaching method and time of day. The independence model. Time was balanced inside each method, so the two factors were not built to be associated.
 
-| Model | LR χ² | df | p |
-| --- | ---: | ---: | --- |
-| Independence | 0.000 | 1 | > .999 |
-| Saturated | 0.000 | 0 | — |
+| Cell | Observed | Expected |
+| --- | ---: | ---: |
+| Lecture, Afternoon | 16 | 16 |
+| Lecture, Morning | 16 | 16 |
+| Online, Afternoon | 16 | 16 |
+| Online, Morning | 16 | 16 |
+| Workshop, Afternoon | 16 | 16 |
+| Workshop, Morning | 16 | 16 |
 
-The saturated likelihood-ratio chi-square is 0 because the model reproduces the cells. The independence comparison is also about 0 here, p > .999, because the table is uniform. Pearson chi-square on the saturated fit was about 0, and the goodness-of-fit p was > .999. An empty p on the saturated row is df = 0, not a missing calculation.
+Every teaching method × time cell has the same count, and the independence model expects that same count. Goodness-of-fit p = > .999. Method and time of day are not associated. The coefficient rows for this balanced table are numerical zeros, so use the cell table and the fit p.
 
 ## Reporting (APA 7)
 
-A saturated loglinear model reproduced the gender by region counts. The independence model also fit, LR χ²(1) ≈ 0, p > .999.
+An independence loglinear model fit the method × time table, p = > .999, N = 96. Teaching method and time of day were not associated.
 
 ## Coming from SPSS
 

@@ -76,35 +76,34 @@ If a sum of squares comes out negative, the report warns that the model may be o
 
 ## Reading the output
 
-A balanced 2×2×2 design, two scores in each combination, 16 rows. Sleep, caffeine, and practice are each Low or High. The design was balanced, so the sums of squares are Type II. R² was 0.93.
-
-Main effects and the residual, copied from the ANOVA table:
+Method, time of day, and a north/south campus label on the same exam. Only method was built to move the scores.
 
 | Source | SS | df | F | p | η² |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| sleep | 400 | 1 | 88.889 | < .001 | 0.775 |
-| caffeine | 64 | 1 | 14.222 | .005 | 0.124 |
-| practice | 16 | 1 | 3.556 | .096 | 0.031 |
-| Residual | 36 | 8 | — | — | — |
-
-Sleep and caffeine are significant at .05. Practice is not (p = .096). η² says how large each share of the total variation is. Sleep dominates this made-up set.
-
-The interaction rows were numerical zeros. Tensr printed them in scientific notation (for example sleep × caffeine SS of 1.262e-27) with p > .999. Treat those rows as no interaction, not as tiny real effects.
-
-Marginal means by factor average over the other two factors:
+| method | 523.351 | 2 | 3.858 | .025 | 0.08 |
+| time | 5.95 | 1 | 0.088 | .768 | 0.0009073 |
+| campus | 1.426 | 1 | 0.021 | .885 | 0.0002174 |
+| method × time | 166.676 | 2 | 1.229 | .298 | 0.025 |
+| method × campus | 88.883 | 2 | 0.655 | .522 | 0.014 |
+| time × campus | 46.343 | 1 | 0.683 | .411 | 0.007 |
+| method × time × campus | 28.416 | 2 | 0.209 | .811 | 0.004 |
+| Residual | 5697 | 84 | — | — | — |
 
 | Factor | Level | Mean |
 | --- | --- | ---: |
-| sleep | High | 64.5 |
-| sleep | Low | 54.5 |
-| caffeine | High | 61.5 |
-| caffeine | Low | 57.5 |
-| practice | High | 60.5 |
-| practice | Low | 58.5 |
+| method | Lecture | 68.209 |
+| method | Online | 72.234 |
+| method | Workshop | 73.741 |
+| time | Afternoon | 71.644 |
+| time | Morning | 71.146 |
+| campus | North | 71.273 |
+| campus | South | 71.517 |
+
+Three-way ANOVA for `score`, n = 96. Three-way ANOVA for `score`, n = 96. Metrics: R² = 0.131.
 
 ## Reporting (APA 7)
 
-A three-way ANOVA tested practice scores by sleep, caffeine, and practice schedule (N = 16, balanced). Sleep was significant, F(1, 8) = 88.89, p < .001, η² = .78, as was caffeine, F(1, 8) = 14.22, p = .005, η² = .12. Practice schedule was not, F(1, 8) = 3.56, p = .096, η² = .03. The two-way and three-way interactions were not significant (all p > .999).
+Three-way ANOVA for `score`, n = 96. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

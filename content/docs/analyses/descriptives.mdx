@@ -57,30 +57,22 @@ These names are the fields Tensr sends. The dialog labels the last three under R
 
 ## Reading the output
 
-Tensr opens with a frequency table for each column. Counts are the number of rows with that value. Percent uses every row, including missing rows, as the base. Valid percent uses non-missing rows. Cumulative percent adds the valid percents down the table.
+Ninety-six students. `score` is the exam, `hours` is time studied, and `method` is lecture, online, or workshop. The request asks for the mean, median, standard deviation, range, minimum, and maximum.
 
-The Statistics block and the Descriptive statistics table are the numeric summary. N Valid is how many values were present. The mean is the arithmetic average. The standard deviation uses the sample formula (divide by N − 1).
+| Statistic | score | hours | method |
+| --- | ---: | ---: | --- |
+| mean | 71.395 | 4.984 | — |
+| 50% | 70.15 | 4.88 | — |
+| std | 8.308 | 1.222 | — |
+| range | 41.9 | 6.52 | — |
+| min | 49.4 | 2.14 | — |
+| max | 91.3 | 8.66 | — |
 
-Above the tables, the report lists dataset rows, listwise-complete rows (no missing value on any selected column), and the number of columns. There is no p-value. Nothing here is “significant.”
-
-With charts on, the first chart is a histogram titled “Distribution of” plus the column name. Further numeric columns, up to three more, get their own histograms.
-
-This run asked for mean, median, standard deviation, range, minimum, and maximum on exam `score` and teaching `method` (N = 24). `method` is not numeric, so those cells are blank.
-
-| Statistic | score | method |
-| --- | ---: | --- |
-| mean | 73.292 | — |
-| 50% | 73.5 | — |
-| std | 5.528 | — |
-| range | 18 | — |
-| min | 64 | — |
-| max | 82 | — |
-
-The median is the row labelled 50%. The standard deviation is the row labelled std.
+Summary statistics for 3 column(s); dataset N = 96. Summary statistics for 3 column(s); dataset N = 96. Metrics: Dataset rows = 96; Listwise-complete rows = 96; Columns = 3.
 
 ## Reporting (APA 7)
 
-Exam scores (N = 24) averaged 73.29 (SD = 5.53). Eight students were assigned to each teaching method (lecture, workshop, and online).
+Summary statistics for 3 column(s); dataset N = 96. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

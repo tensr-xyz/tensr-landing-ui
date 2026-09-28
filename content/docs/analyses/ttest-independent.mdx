@@ -81,36 +81,18 @@ There is no switch to turn those checks off.
 
 ## Reading the output
 
-Sixteen of the exam-score rows: eight Lecture and eight Workshop. Lecture was the first group in the file, so the mean difference is Lecture minus Workshop.
+Lecture versus workshop on the exam. Online is left out so this is a two-group comparison. The workshop mean was built to sit a few points higher, with plenty of overlap.
 
-Group Statistics:
+| Group | n | Mean |
+| --- | ---: | ---: |
+| Lecture | 32 | 68.209 |
+| Workshop | 32 | 73.741 |
 
-| score | N | Mean | Std. Deviation |
-| --- | ---: | ---: | ---: |
-| Lecture | 8 | 66.875 | 3.137 |
-| Workshop | 8 | 79.5 | 2.878 |
-
-Assumption notes on this run:
-
-- Shapiro–Wilk, Lecture: W = 0.966, p = .865
-- Shapiro–Wilk, Workshop: W = 0.998, p > .999
-- Levene’s test: equal variances assumed (F = 0.251, p = .624). The equal-variances row was used.
-
-Independent Samples Test:
-
-| | t | df | Sig. (2-tailed) | Mean Difference | Cohen's d | 95% CI |
-| --- | ---: | ---: | ---: | ---: | ---: | --- |
-| Equal variances assumed | -8.388 | 14 | < .001 | -12.625 | -4.194 | -15.856 to -9.394 |
-
-Sig. (2-tailed) is the p-value. Tensr treats p < .05 as significant and prints p < .001 when the value is smaller than that. A 95% CI that does not contain 0 matches that decision for a difference of zero.
-
-Cohen’s d is the mean difference divided by the pooled standard deviation. Tensr always calculates it. Around 0.2 is small, 0.5 medium, and 0.8 large. Here d is enormous because the two made-up groups do not overlap. Do not expect that in a real class.
-
-The metric row above the tables is labelled Welch even when Levene says variances are equal. On this run the Welch t matches the equal-variances t (−8.388) and the Welch df is 13.898. A second table, Group summaries, repeats N and the mean without the standard deviation.
+Independent samples t-test of `score` by `method` (Lecture vs Workshop) on 64 rows. The primary result is significant (p = .005). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: t statistic (Welch) = -2.904; p-value (Welch) = .005; df (Welch) = 56.279; Cohen's d = -0.726; 95% CI (mean diff) = -9.347 to -1.715.
 
 ## Reporting (APA 7)
 
-An independent-samples t test compared exam scores after lecture (n = 8, M = 66.88, SD = 3.14) and workshop teaching (n = 8, M = 79.50, SD = 2.88). Levene’s test was not significant, F = 0.25, p = .624, so equal variances were assumed. Workshop scores were higher, t(14) = −8.39, p < .001, 95% CI [−15.86, −9.39], d = −4.19. The sign is Lecture minus Workshop.
+Independent samples t-test of `score` by `method` (Lecture vs Workshop) on 64 rows. This result is significant (p = .005). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

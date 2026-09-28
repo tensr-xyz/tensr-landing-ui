@@ -65,38 +65,23 @@ With only two repeated columns, Tensr does not print Mauchly’s test. It does n
 
 ## Reading the output
 
-Eight people, four Control and four Treatment, with `pre` and `post` columns. Control stays near 5. Treatment moves from about 5 to about 8.
-
-Between-subjects effects are the group comparison, using each person’s average of pre and post. Within-subjects effects are the repeated factor (pre versus post) and the group × condition interaction. Partial η² is that effect’s sum of squares divided by the effect plus its error. With two within levels, Mauchly’s test is not printed.
-
-Group × condition means show the pattern the interaction tests.
-
-Between-subjects effects:
+Twenty-four people in control and 24 in treatment, each with a pre and a post score. Treatment was built to gain a bit more than control. The gains overlap.
 
 | Source | SS | df | MS | F | p | partial η² |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Between: group | 6.25 | 1 | 6.25 | 5.769 | .053 | 0.49 |
-| Error | 6.5 | 6 | 1.083 | — | — | — |
-
-Within-subjects effects:
+| Between: group | 2.22 | 1 | 2.22 | 0.02 | .889 | 0.0004258 |
+| Error | 5213 | 46 | 113.321 | — | — | — |
 
 | Source | SS | df | F | p | partial η² |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| condition | 12.25 | 1 | 147 | < .001 | 0.961 |
-| group × condition | 6.25 | 1 | 75 | < .001 | 0.926 |
+| condition | 175.5 | 1 | 9.947 | .003 | 0.178 |
+| group × condition | 48.167 | 1 | 2.73 | .105 | 0.056 |
 
-Group × condition means:
-
-| Group | post | pre |
-| --- | ---: | ---: |
-| Control | 5.5 | 5 |
-| Treatment | 8 | 5 |
-
-The group main effect is not significant at .05 (p = .053). Scores rise from pre to post, and that rise is larger in the treatment group.
+The group main effect is not significant, F = 0.02, p = .889. Scores change from pre to post, F = 9.947, p = .003. The extra treatment gain, the group × condition interaction, is not significant, F = 2.73, p = .105.
 
 ## Reporting (APA 7)
 
-A mixed ANOVA tested pre and post scores in control and treatment groups (n = 4 per group). The group effect was not significant, F(1, 6) = 5.77, p = .053, partial η² = .49. Scores changed from pre to post, F = 147, p < .001, partial η² = .96. The group × condition interaction was significant, F = 75, p < .001, partial η² = .93. The within table does not print an error row, so those two F ratios are quoted without a second degrees of freedom. Control means were 5.00 at pre and 5.50 at post. Treatment means were 5.00 at pre and 8.00 at post.
+A mixed ANOVA (n = 24 per group) found no group effect, F = 0.02, p = .889, a pre-to-post change, F = 9.947, p = .003, and no group × condition interaction, F = 2.73, p = .105.
 
 ## Coming from SPSS
 

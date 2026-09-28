@@ -62,27 +62,23 @@ The outcome and the level-1 predictors are numeric. The level-2 column has at le
 
 ## Reading the output
 
-Same 96 scores as the [linear mixed model](/docs/analyses/linear-mixed-model) page: twelve clinics, eight people each, outcome `score`, predictor `hours`.
+The same linear mixed model, reported with the intraclass correlation and the split of variance between clinic and residual.
 
 | Term | Estimate | Std. Err | p-value |
 | --- | ---: | ---: | --- |
-| const | 50.5168 | 0.97817 | p < .001 |
-| hours | 2.01735 | 0.0961672 | p < .001 |
+| const | 45.7742 | 2.35335 | p < .001 |
+| hours | 0.973909 | 0.393446 | p = .013 |
 
 | Level | Variance | % of total |
 | --- | ---: | ---: |
-| Between clinic | 9.08003 | 72.06% |
-| Within (residual) | 3.52042 | 27.94% |
+| Between clinic | 18.6857 | 47.07% |
+| Within (residual) | 21.0128 | 52.93% |
 
-ICC is 0.721. That is the between-clinic variance divided by between plus residual, from this model that already includes hours. About 72% of the remaining variation sits between clinics. The hours slope matches the linear mixed model on the same rows. The metrics line shows ICC 0.721, 96 observations, and 12 groups.
-
-The charts are “Fitted vs residual” and “Random intercepts by group.” The bar chart shows up to 12 group intercepts.
-
-An ICC below 0.05 would add a sentence that the grouping variable accounts for negligible variance. This run is far above that line, so that sentence is absent.
+Multilevel model for `score`, ICC = 0.471. Multilevel model for `score`, ICC = 0.471. Metrics: ICC = 0.471; Observations = 120; Groups = 12.
 
 ## Reporting (APA 7)
 
-A multilevel model predicted exam score from study hours with a random intercept for clinic (N = 96, 12 clinics). ICC = .72. Each extra hour was associated with 2.02 points, p < .001.
+Multilevel model for `score`, ICC = 0.471. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

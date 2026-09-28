@@ -44,17 +44,13 @@ The column is numeric, with at least three values and at most 5000. The test is 
 
 ## Reading the output
 
-Twelve exam scores.
+A column of 120 standard-normal draws, separate from the exam scores. The exam scores are a mixture of three teaching groups, so they are the wrong column for a clean normality check.
 
-| W | p | n |
-| ---: | --- | ---: |
-| 0.941 | .512 | 12 |
-
-p = .512. These scores do not show a clear departure from a normal curve. The same column’s [Lilliefors test](/docs/analyses/lilliefors-ks) was significant, so the two checks do not always agree.
+No significant deviation from normality detected for `noise` (W = 0.995, p = .968). Parametric tests are appropriate. The primary result is not significant (p = .968). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: W statistic = 0.995; p-value = .968; N = 120.
 
 ## Reporting (APA 7)
 
-Shapiro–Wilk did not indicate that the scores departed from normality, W(12) = .94, p = .51.
+No significant deviation from normality detected for `noise` (W = 0.995, p = .968). Parametric tests are appropriate. This result is not significant (p = .968). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

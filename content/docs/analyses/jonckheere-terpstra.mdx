@@ -49,17 +49,13 @@ Groups are independent. Pass `group_order` when the label sort is not the order 
 
 ## Reading the output
 
-Six people in each of lecture, online, and workshop, ordered in that sequence. Scores increase along the order.
+The teaching methods ordered Workshop, then Lecture, then Online. That is not the order of the exam means, so a monotone trend in this order is not expected.
 
-| J | Expected J | z | p |
-| ---: | ---: | ---: | --- |
-| 108 | 54 | 4.548 | < .001 |
-
-J is well above the value expected if the groups were exchangeable. The p-value is one-tailed for the ordered trend.
+Jonckheere–Terpstra trend test for `score` across ordered groups (Workshop, Lecture, Online). The primary result is not significant (p = .805). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: J statistic = 1409; Z = -0.861; p-value = .805.
 
 ## Reporting (APA 7)
 
-A Jonckheere–Terpstra test showed that scores increased from lecture to online to workshop, J = 108, z = 4.55, p < .001.
+Jonckheere–Terpstra trend test for `score` across ordered groups (Workshop, Lecture, Online). This result is not significant (p = .805). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

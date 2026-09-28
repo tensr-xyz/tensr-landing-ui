@@ -66,30 +66,26 @@ Same straight-line model as [linear regression](/docs/analyses/linear-regression
 
 ## Reading the output
 
-Same 24 students. Outcome `score`, predictor `hours`, moderator `anxiety`. Centering on.
+Hours predicting exam score, with practice quizzes as the moderator. Practice was built with no link to the slope, so the interaction is the result to read.
 
 | Term | B | SE | p |
 | --- | ---: | ---: | ---: |
-| Intercept | 73.892 | 0.317 | < .001 |
-| hours | 3.315 | 0.328 | < .001 |
-| anxiety | -2.047 | 0.295 | < .001 |
-| hours × anxiety | 0.124 | 0.064 | .065 |
-
-The interaction p is .065, which is not below .05. The summary says the interaction is not statistically significant at the 95% level, so moderation is not supported. R² is 0.99, adjusted R² is 0.988, model F is 656.483, and the model p is < .001. The model as a whole fits. The product term does not clear .05.
-
-Simple slopes of hours:
+| Intercept | 71.372 | 0.815 | < .001 |
+| hours | 2.108 | 0.706 | .004 |
+| practice | -0.247 | 0.851 | .772 |
+| hours × practice | -0.307 | 0.655 | .641 |
 
 | Moderator level | Slope |
 | --- | ---: |
-| Low M (−1 SD) | 3.054 |
-| Mean M | 3.315 |
-| High M (+1 SD) | 3.575 |
+| Low M (−1 SD) | 2.405 |
+| Mean M | 2.108 |
+| High M (+1 SD) | 1.811 |
 
-These are the hours slopes at low, average, and high anxiety. They are close together, which matches an interaction that did not reach .05.
+The interaction between `hours` and `practice` is not statistically significant at the 95% level, suggesting moderation is not supported. The primary result is not significant (p = .641). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: R² = 0.11; Adj R² = 0.081; F = 3.776; p (model) = .013; p (interaction) = .641.
 
 ## Reporting (APA 7)
 
-Exam score was regressed on study hours, anxiety, and their product (N = 24), with hours and anxiety centered. The interaction was not significant, B = 0.12, SE = 0.06, p = .065. The hours slope at average anxiety was 3.32, p < .001.
+The interaction between `hours` and `practice` is not statistically significant at the 95% level, suggesting moderation is not supported. This result is not significant (p = .641). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

@@ -66,26 +66,22 @@ The outcome is binary. The underlying probit model is a fair summary, and the ro
 
 ## Reading the output
 
-Same 24 students and the same `passed` and `practice` columns as the logistic example.
+The same pass/fail outcome and the same hours predictor, fit as a probit instead of a logit.
 
 | Term | Estimate | p-value |
 | --- | ---: | ---: |
-| const | -3.769 | .007 |
-| practice | 0.94 | .006 |
-
-Metrics: pseudo R² 0.541, model χ² 17.983, model p < .001, AIC 19.288, N 24. Model p < .001 means practice, as a model, is not a plausible zero. The practice row p = .006 is the slope test.
-
-Marginal effects at the mean:
+| const | -0.96 | .085 |
+| hours | 0.187 | .085 |
 
 | Predictor | Marginal effect (dP/dX at mean) |
 | --- | ---: |
-| practice | 0.375 |
+| hours | 0.075 |
 
-That 0.375 is the change in predicted probability of passing for a one-unit practice increase, evaluated at the mean of practice. It is not an odds ratio.
+Probit regression predicting `passed` from 1 predictor(s), n = 96. The primary result is not significant (p = .085). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Pseudo R² = 0.023; Model χ² = 3.044; Model p = .081; AIC = 133.999; Observations = 96.
 
 ## Reporting (APA 7)
 
-A probit model predicted passing from practice (N = 24). The model was significant, χ² = 17.98, p < .001. The practice slope was positive, estimate = 0.94, p = .006. The marginal effect at the mean was 0.38.
+Probit regression predicting `passed` from 1 predictor(s), n = 96. This result is not significant (p = .085). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

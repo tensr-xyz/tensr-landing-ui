@@ -49,17 +49,13 @@ The column is numeric. The cutoff starts as the median. Mean is the other choice
 
 ## Reading the output
 
-Sixteen values, mostly small, with two large spikes. Cutoff was the median, stored as 2.
+The 96 exam scores in row order, split at the median. The row order is not a time order, so runs above and below the median should look mixed.
 
-| Runs | Expected runs | n above | n below | z | p |
-| ---: | ---: | ---: | ---: | ---: | --- |
-| 5 | 4.5 | 2 | 14 | 0.655 | .513 |
-
-p = .513. The number of runs is close to what a random order would produce.
+Runs test for `score` (cutoff = 70.15). The primary result is not significant (p = .538). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Runs = 46; Z = -0.616; p-value = .538.
 
 ## Reporting (APA 7)
 
-A runs test did not show that the sequence was clumped or alternating, 5 runs, z = 0.65, p = .51.
+Runs test for `score` (cutoff = 70.15). This result is not significant (p = .538). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

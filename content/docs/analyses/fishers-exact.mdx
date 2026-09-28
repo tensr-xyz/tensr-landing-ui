@@ -52,17 +52,18 @@ Both columns have exactly two levels. The test conditions on the row and column 
 
 ## Reading the output
 
-Same 60-person table as chi-square. Levels are sorted alphabetically, so the odds ratio is the odds of `event` versus `none` for `exposed` versus `unexposed`.
+A 2×2 of exposure and case status. The case rate was built only a little higher in the exposed row, on 90 people.
 
-| Odds ratio | 95% CI | Two-tailed p |
-| ---: | --- | --- |
-| 4.125 | [1.387, 12.270] | .018 |
+| exposed | No | Yes |
+| --- | ---: | ---: |
+| No | 28 | 15 |
+| Yes | 23 | 24 |
 
-The odds of the event are about four times higher in the exposed group. The interval does not include 1, and p = .018.
+Fisher's exact test for `exposed` × `case`, n = 90. The primary result is not significant (p = .140). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Odds ratio = 1.948; 95% CI = [0.834, 4.552]; p (two-tailed) = .140; p (one-tailed) = .140.
 
 ## Reporting (APA 7)
 
-Fisher’s exact test indicated an association between group and outcome, p = .018, OR = 4.13, 95% CI [1.39, 12.27].
+Fisher's exact test for `exposed` × `case`, n = 90. This result is not significant (p = .140). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

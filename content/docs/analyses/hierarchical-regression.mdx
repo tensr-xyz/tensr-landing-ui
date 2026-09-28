@@ -62,27 +62,23 @@ Same straight-line model as [linear regression](/docs/analyses/linear-regression
 
 ## Reading the output
 
-Same 24 students. Block 1 is `hours`. Block 2 is `hours` and `anxiety`. Outcome `score`.
+Hours go in first. Anxiety is added in a second block. Each block was built to add a slice of R², not to swallow the outcome.
 
 | Block | Predictors | R² | Adj R² | ΔR² | F-change | p-change |
-| --- | --- | ---: | ---: | ---: | ---: | ---: |
-| 1 | hours | 0.965 | 0.964 | — | — | — |
-| 2 | hours, anxiety | 0.988 | 0.987 | 0.023 | 20.035 | < .001 |
-
-The first block has no previous model, so change in R², F-change, and p-change are em dashes. ΔR² on block 2 is how much R² rose when anxiety was added. p-change < .001 means that rise is not a plausible zero.
-
-Final model coefficients:
+| ---: | --- | ---: | ---: | ---: | ---: | ---: |
+| 1 | hours | 0.107 | 0.097 | — | — | — |
+| 2 | anxiety | 0.231 | 0.215 | 0.124 | 15.047 | < .001 |
 
 | Variable | B | SE | β | 95% CI | p-value |
 | --- | ---: | ---: | ---: | --- | ---: |
-| hours | 3.367 | 0.348 | 0.612 | [2.644, 4.09] | < .001 |
-| anxiety | -1.97 | 0.311 | -0.4 | [-2.618, -1.323] | < .001 |
+| hours | 2.062 | 0.619 | 0.303 | [0.832, 3.292] | .001 |
+| anxiety | -2.092 | 0.539 | -0.353 | [-3.162, -1.021] | < .001 |
 
-B is the raw slope. SE is its standard error. β is the standardized slope. Metrics are Final R² 0.988, Adj R² 0.987, and N 24.
+Hierarchical regression for `score` with 2 block(s). Hierarchical regression for `score` with 2 block(s). Metrics: Final R² = 0.231; Adj R² = 0.215; N = 96.
 
 ## Reporting (APA 7)
 
-Study hours alone accounted for R² = .97 of exam-score variance (N = 24). Adding anxiety increased R² by .02, F-change = 20.04, p < .001. In the final model, B = 3.37 for hours, 95% CI [2.64, 4.09], and B = −1.97 for anxiety, 95% CI [−2.62, −1.32].
+Hierarchical regression for `score` with 2 block(s). Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

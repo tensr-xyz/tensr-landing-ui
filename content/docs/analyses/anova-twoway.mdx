@@ -74,30 +74,26 @@ Tensr does not run Levene’s test or Shapiro–Wilk for this procedure. There i
 
 ## Reading the output
 
-Twenty-four scores, crossed by teaching (Lecture, Workshop) and time (Morning, Afternoon). Interaction was on. Post hoc was Tukey. The sums of squares are Type II.
+Teaching method and morning versus afternoon, on the same exam. Method was built to matter. Time of day was not, and the two were not built to interact.
 
 | Source | Sum of squares | df | F | p-value |
 | --- | ---: | ---: | ---: | ---: |
-| teaching | 988.167 | 1 | 93.962 | < .001 |
-| time | 4.167 | 1 | 0.396 | .536 |
-| teaching × time | 10.667 | 1 | 1.014 | .326 |
-| Residual | 210.333 | 20 | — | — |
-
-Teaching is significant: the methods differ, averaging over time of day. Time is not: morning and afternoon means are close. The interaction p of .326 means you do not have evidence that the teaching gap changes with time of day. R² is 0.827, so this model accounts for most of the variation in the toy scores.
-
-p < .05 is the significance line. Residual has no F, because it is the error term the other F ratios are divided by.
-
-Tukey compared the two teaching methods. The star sits in its own column. Time of day is not in this pairwise table.
+| method | 523.351 | 2 | 4.018 | .021 |
+| time | 5.95 | 1 | 0.091 | .763 |
+| method × time | 166.676 | 2 | 1.28 | .283 |
+| Residual | 5,861.811 | 90 | — | — |
 
 | Group A | Group B | Mean difference | p (adj) | * | CI low | CI high | Reject H₀ |
-| --- | --- | ---: | --- | --- | ---: | ---: | --- |
-| Lecture | Workshop | 12.833 | < .001 | *** | 10.125 | 15.542 | True |
+| --- | --- | ---: | ---: | --- | ---: | ---: | --- |
+| Lecture | Online | 4.025 | .118 |  | -0.771 | 8.822 | False |
+| Lecture | Workshop | 5.531 | .020 | * | 0.735 | 10.328 | True |
+| Online | Workshop | 1.506 | .736 |  | -3.29 | 6.303 | False |
 
-The chart is a box plot of score by teaching (factor A only).
+Method is associated with the exam, F = 4.018, p = .021. Time of day is not, F = 0.091, p = .763. The method × time interaction is not either, F = 1.28, p = .283. Tukey then compares teaching methods. Only some pairs clear .05, which is what a moderate gap looks like when the groups overlap.
 
 ## Reporting (APA 7)
 
-A two-way ANOVA tested exam scores by teaching method and time of day (N = 24). The teaching main effect was significant, F(1, 20) = 93.96, p < .001. The time-of-day main effect was not, F(1, 20) = 0.40, p = .536, and the teaching × time interaction was not, F(1, 20) = 1.01, p = .326. The model R² was .83. Workshop scores were higher than lecture scores, mean difference = 12.83, 95% CI [10.13, 15.54], p < .001.
+A two-way ANOVA on exam score (N = 96) found a method effect, F = 4.018, p = .021, no time-of-day effect, F = 0.091, p = .763, and no method × time interaction, F = 1.28, p = .283.
 
 ## Coming from SPSS
 

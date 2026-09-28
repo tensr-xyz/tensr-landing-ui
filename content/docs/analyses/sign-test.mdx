@@ -45,17 +45,13 @@ Each row is one pair. Ties (no change) are counted and then set aside.
 
 ## Reading the output
 
-Same eight pairs as the Wilcoxon example. A positive difference is before higher than after.
+A second set of 48 pairs whose true change is about zero. The sign test only counts who went up and who went down.
 
-| Positive | Negative | Ties | Statistic | p |
-| ---: | ---: | ---: | ---: | --- |
-| 0 | 6 | 2 | 0 | .031 |
-
-The statistic is the smaller of the two change counts, so 0 means every non-tied pair moved the same way. p = .031.
+Sign test comparing `before_ns` and `after_ns`, n = 48 pairs. The primary result is not significant (p = .471). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Positive diffs = 27; Negative diffs = 21; p-value = .471.
 
 ## Reporting (APA 7)
 
-A sign test found a consistent drop from before to after, 6 decreases, 0 increases, 2 ties, p = .031.
+Sign test comparing `before_ns` and `after_ns`, n = 48 pairs. This result is not significant (p = .471). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

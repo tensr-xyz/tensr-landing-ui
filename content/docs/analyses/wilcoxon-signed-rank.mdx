@@ -46,19 +46,19 @@ Each row is one pair. Differences of zero are ties and drop out of the rank sum.
 
 ## Reading the output
 
-Eight pairs. Six scores fell, and two did not change. W = 0, the median difference is 1, and p = .031. The matched-pairs r is 0.899, labeled large. The 95% confidence interval for the median difference is [1, 1].
+The before and after course scores. Most people gain, some lose a little, so the signed-rank statistic is not zero.
 
-| | N | Mean rank | Sum of ranks |
+|   | N | Mean rank | Sum of ranks |
 | --- | ---: | ---: | ---: |
-| Positive ranks | 6 | 3.5 | 21 |
-| Negative ranks | 0 | — | — |
-| Ties | 2 | — | — |
+| Positive ranks | 15 | 19.9 | 298.5 |
+| Negative ranks | 33 | 26.591 | 877.5 |
+| Ties | 0 | — | — |
 
-W = 0 because every non-tied change went the same way, so the smaller rank sum is zero. The scale is the same as Mann–Whitney: r below 0.1 is negligible, 0.1 ≤ r < 0.3 is small, 0.3 ≤ r < 0.5 is medium, and r ≥ 0.5 is large. Cutoffs: Cohen, 1988.
+Wilcoxon signed-rank test comparing `before` and `after` on 48 paired rows (W = 298.5, p = .003, r = 0.429). Effect size (medium; r < 0.1 negligible, 0.1 ≤ r < 0.3 small, 0.3 ≤ r < 0.5 medium, r ≥ 0.5 large). Cutoffs: Cohen, 1988. The primary result is significant (p = .003). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: W statistic = 298.5; p-value = .003; Median difference = -4.4; Effect size r = 0.429; Effect size = medium; 95% CI median diff (HL) = [-8.3, -0.4].
 
 ## Reporting (APA 7)
 
-Scores were lower after the session than before it, Wilcoxon signed-rank W = 0, p = .031, r = .90. The median difference (before − after) was 1, 95% CI [1, 1].
+Wilcoxon signed-rank test comparing `before` and `after` on 48 paired rows (W = 298.5, p = .003, r = 0.429). Effect size (medium; r < 0.1 negligible, 0.1 ≤ r < 0.3 small, 0.3 ≤ r < 0.5 medium, r ≥ 0.5 large). Cutoffs: Cohen, 1988. This result is significant (p = .003). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

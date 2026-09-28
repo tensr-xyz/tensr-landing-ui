@@ -62,20 +62,18 @@ Counts are non-negative. The mean and the variance of the count are similar. If 
 
 ## Reading the output
 
-Twenty-four students. `absences` is a count from 0 to 7. `anxiety` runs from 2 to 9.
+Absence counts generated as Poisson, with anxiety raising the mean a little. These counts are not the over-dispersed visit counts.
 
 | Term | Coef | 95% CI | IRR | p-value |
 | --- | ---: | --- | ---: | ---: |
-| const | 2.761 | [2.174, 3.348] | 15.816 | < .001 |
-| anxiety | -0.348 | [-0.473, -0.223] | 0.706 | < .001 |
+| const | 0.025 | [-0.524, 0.575] | 1.026 | .928 |
+| anxiety | 0.136 | [0.034, 0.237] | 1.146 | .009 |
 
-The anxiety coefficient is negative, so higher anxiety goes with fewer absences in this toy set. The IRR of 0.706 means the expected count is about 0.71 times as large per extra anxiety point. The interval excludes 1.
-
-Fit metrics: AIC 72.187, deviance 7.61, Pearson χ² 5.461, deviance/df 0.346, N 24. Deviance/df well below 1 means the counts vary less than a Poisson model expects. That is under-dispersion, the opposite of the usual reason to switch to a negative binomial.
+Poisson regression of `absences` with 1 predictor(s). Poisson regression of `absences` with 1 predictor(s). Metrics: AIC = 333.11; Deviance = 110.082; Pearson χ² = 93.399; Deviance/df = 1.171; Observations = 96.
 
 ## Reporting (APA 7)
 
-A Poisson regression predicted absences from anxiety (N = 24). Higher anxiety was associated with a lower expected count, IRR = 0.71, p < .001. The printed interval is for the log coefficient, [−0.473, −0.223], not for the IRR.
+Poisson regression of `absences` with 1 predictor(s). Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

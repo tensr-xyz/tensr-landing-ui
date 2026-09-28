@@ -51,40 +51,23 @@ The columns are numeric. The first canonical correlation is the one to read. Lat
 
 ## Reading the output
 
-Twenty-four students. Set A is `hours` and `anxiety`. Set B is `recall` and `confidence`.
-
-Metrics: canonical r1 = 0.581, canonical r2 = 0.118. The summary says function 1 accounts for 33.7% of the shared variance between the two sets. That percentage is the square of the first canonical correlation.
-
-Wilks’ lambda:
+One set is exam score and confidence. The other is hours and anxiety. The sets share a moderate link and a lot of leftover variance.
 
 | Function | Wilks' Λ | F | df | p-value |
 | --- | ---: | ---: | ---: | ---: |
-| Function 1 | 0.653 | 7.4 | 4 | < .001 |
-| Function 2 | 0.986 | 0.302 | 1 | .588 |
-
-Function 1 is the test that the sets are related at all. p < .001. Function 2 is what remains, and p = .588 does not support a second relationship. df is printed as a single number.
-
-Structure coefficients, set A:
+| Function 1 | 0.739 | 22.171 | 4 | < .001 |
+| Function 2 | 0.964 | 3.52 | 1 | .064 |
 
 | Variable | Function 1 | Function 2 |
 | --- | ---: | ---: |
-| hours | -0.871 | 0.492 |
-| anxiety | 0.992 | -0.127 |
+| score | 0.996 | -0.089 |
+| confidence | 0.277 | 0.961 |
 
-Structure coefficients, set B:
-
-| Variable | Function 1 | Function 2 |
-| --- | ---: | ---: |
-| recall | -0.979 | 0.204 |
-| confidence | -0.862 | 0.507 |
-
-A structure coefficient is the correlation between a column and the canonical function on its own side. Anxiety and recall load most strongly on function 1. The sign pattern says higher anxiety goes with lower recall on that function.
-
-Canonical loadings are a second table for each set. On this run, set A loadings were hours 0.25 and 0.968, anxiety 0.968 and −0.25. Set B loadings were recall −0.928 and 0.373, confidence 0.373 and 0.928.
+Canonical correlation: score, confidence ↔ hours, anxiety, n = 96. Function 1 accounts for 23.3% of shared variance between the two variable sets. Canonical correlation: score, confidence ↔ hours, anxiety, n = 96. Function 1 accounts for 23.3% of shared variance between the two variable sets. Metrics: Canonical r1 = 0.483; Canonical r2 = 0.191.
 
 ## Reporting (APA 7)
 
-Canonical correlation related study hours and anxiety to recall and confidence (N = 24). The first canonical correlation was .58, Wilks’ Λ = .65, F = 7.40, p < .001. The second was not significant, r = .12, p = .588.
+Canonical correlation: score, confidence ↔ hours, anxiety, n = 96. Function 1 accounts for 23.3% of shared variance between the two variable sets. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

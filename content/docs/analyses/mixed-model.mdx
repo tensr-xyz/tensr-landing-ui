@@ -71,27 +71,23 @@ Fixed effects may be empty. That run is an intercept-only model. This example in
 
 ## Reading the output
 
-Same 96 scores as the [linear mixed model](/docs/analyses/linear-mixed-model) page: twelve clinics, eight people each, outcome `score`, predictor `hours`. Random slopes were empty. REML was on. The fit converged.
+Twelve clinics, ten students each. Clinic shifts the intercept. Hours has a moderate slope. The model reports a null-model ICC, z, and a confidence interval.
 
 | Term | Coefficient | SE | z | p | 95% CI low | 95% CI high |
-| --- | ---: | ---: | ---: | --- | ---: | ---: |
-| Intercept | 50.517 | 0.978 | 51.643 | < .001 | 48.6 | 52.434 |
-| hours | 2.017 | 0.096 | 20.978 | < .001 | 1.829 | 2.206 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Intercept | 45.774 | 2.353 | 19.45 | < .001 | 41.162 | 50.387 |
+| hours | 0.974 | 0.393 | 2.475 | .013 | 0.203 | 1.745 |
 
 | Component | Variance | Std. Dev |
 | --- | ---: | ---: |
-| Random intercept (clinic) | 9.081 | 3.013 |
-| Residual | 3.52 | 1.876 |
+| Random intercept (clinic) | 18.694 | 4.324 |
+| Residual | 21.012 | 4.584 |
 
-The hours interval excludes 0. Metrics on this run: ICC (null model) 0.373, 12 groups, 96 observations, 0 singletons, log-likelihood −214.696, AIC 435.393, BIC 443.086, converged yes.
-
-The null-model ICC (0.373) is smaller than the 0.721 on the [multilevel modelling](/docs/analyses/multilevel-modelling) page. That page’s ICC comes from the model that already includes hours. This page’s ICC comes from a model with no predictors. The hours coefficient matches the other two procedures on these rows.
-
-A group with only one row would be counted under Singletons. This run has none.
+Mixed model for `score` nested in `clinic`. Mixed model for `score` nested in `clinic`. Metrics: ICC (null model) = 0.483; Groups = 12; Observations = 120; Singletons = 0; Log-likelihood = -364.554; AIC = 735.109.
 
 ## Reporting (APA 7)
 
-A mixed model predicted exam score from study hours with a random intercept for clinic (N = 96, 12 clinics). The null-model ICC was .37. Each extra hour was associated with 2.02 points, 95% CI [1.83, 2.21], p < .001.
+Mixed model for `score` nested in `clinic`. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

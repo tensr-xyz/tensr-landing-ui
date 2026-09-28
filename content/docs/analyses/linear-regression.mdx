@@ -84,45 +84,39 @@ The outcome is numeric. The straight-line model is a fair summary, the spread of
 
 ## Reading the output
 
-Same 24 students. Outcome `score`. Predictors `hours` and `anxiety`. Method enter.
-
-R² is 0.988 and adjusted R² is 0.987. N is 24. The model F p-value is < .001, so the predictors together are not a plausible zero.
+Exam score predicted from hours and anxiety. Both slopes were built to be moderate. A noise column, practice, is not in this model.
 
 | Term | Estimate | p-value | 95% CI low | 95% CI high |
 | --- | ---: | ---: | ---: | ---: |
-| Intercept | 67.73 | < .001 | 60.51 | 74.95 |
-| hours | 3.367 | < .001 | 2.644 | 4.09 |
-| anxiety | -1.97 | < .001 | -2.618 | -1.323 |
+| Intercept | 71.518 | < .001 | 63.003 | 80.034 |
+| hours | 2.062 | .001 | 0.832 | 3.292 |
+| anxiety | -2.092 | < .001 | -3.162 | -1.021 |
 
-The hours slope is the exam-point change for one extra hour, holding anxiety constant. The anxiety slope is the point change for one extra anxiety point, holding hours constant. Both intervals exclude 0.
+| Metric | Value |
+| --- | ---: |
+| RMSE | 7.246 |
+| Durbin-Watson | 1.929 |
+| Jarque-Bera statistic | 0.394 |
+| Jarque-Bera p-value | .821 |
+| Residual skewness | 0.09 |
+| Residual kurtosis | 2.743 |
 
-Diagnostics on this run: RMSE 1.105, Durbin–Watson 1.745, Jarque–Bera statistic 0.85, Jarque–Bera p .654, residual skewness 0.46, residual kurtosis 3.052. Jarque–Bera p .654 does not flag a badly skewed residual in this toy set.
-
-Because there are two predictors, collinearity diagnostics were on:
-
-| Variable | VIF | Tolerance |
-| --- | ---: | ---: |
-| hours | 7.008 | 0.143 |
-| anxiety | 7.008 | 0.143 |
-
-VIF above about 5 means the predictors overlap a lot. Hours and anxiety are strongly related in this example, so each slope is harder to separate from the other. Tolerance is 1 / VIF.
-
-## Stepwise regression
-
-Stepwise is a Method value on this page, not a separate analysis. Forward adds the predictor that helps most, one step at a time. Backward starts with all of them and drops the weakest. Stepwise can add and later remove. Enter ignores that search and keeps every predictor.
-
-The same 24 rows with `method: "stepwise"`:
-
-| Step | Variable entered/removed | R² | ΔR² | F change | p |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| 1 | entered: hours | 0.965 | 0.965 | 610.235 | < .001 |
-| 2 | entered: anxiety | 0.988 | 0.023 | 40.07 | < .001 |
-
-Hours entered first. Anxiety still added a small slice of R². The first step’s p-value prints as < .001, from an F change of 610.235. The final coefficients matched the enter model above, because both predictors stayed in. There is also a route named stepwise regression. It runs the same family of search. This page is the one to use from the Linear dialog.
+OLS regression (enter) predicting `score` from 2 predictor(s), n = 96. Inferential test: t. The primary result is significant (p = < .001). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: R² = 0.231; Adj. R² = 0.215; Observations = 96; F p-value = < .001.
 
 ## Reporting (APA 7)
 
-Exam score was regressed on study hours and anxiety (N = 24). The model was significant, p < .001, R² = .99, adjusted R² = .99. Each extra study hour was associated with 3.37 points, 95% CI [2.64, 4.09], p < .001, and each extra anxiety point with −1.97 points, 95% CI [−2.62, −1.32], p < .001.
+## Stepwise regression
+
+The same scores with method set to stepwise. Hours and anxiety are the two candidates.
+
+| Step | Variable entered/removed | R² | ΔR² | F change | p |
+| ---: | --- | ---: | ---: | ---: | ---: |
+| 1 | entered: anxiety | 0.14 | 0.14 | 15.268 | < .001 |
+| 2 | entered: hours | 0.231 | 0.092 | 11.083 | .001 |
+
+OLS regression (stepwise) predicting `score` from 2 predictor(s), n = 96. Inferential test: t.
+
+OLS regression (enter) predicting `score` from 2 predictor(s), n = 96. Inferential test: t. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

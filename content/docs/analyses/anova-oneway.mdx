@@ -97,41 +97,25 @@ Tensr stores Levene’s test on the result. The default is the median-centre ver
 
 ## Reading the output
 
-Twenty-four students, eight in each teaching method. This run used the defaults plus Tukey.
-
-Group means. Status is included unless the group was too small to analyse.
+The same 96 students, 32 in each teaching method. Tukey compares the pairs. The method gap was built to be a few exam points against a within-group spread of about 8 points.
 
 | Group | n | Mean | Status |
 | --- | ---: | ---: | --- |
-| Lecture | 8 | 66.875 | included |
-| Online | 8 | 73.5 | included |
-| Workshop | 8 | 79.5 | included |
-
-ANOVA. η² is the proportion of score variance that sits between teaching methods. 0.908 means about 91% of the variation in this toy set is between methods, which is only believable because the groups barely overlap.
+| Lecture | 32 | 68.209 | included |
+| Online | 32 | 72.234 | included |
+| Workshop | 32 | 73.741 | included |
 
 | Source | SS | df | MS | F | p | η² |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Between Groups | 638.083 | 2 | 319.042 | 103.274 | < .001 | 0.908 |
-| Within Groups | 64.875 | 21 | 3.089 | — | — | — |
-| Total | 702.958 | 23 | | | | |
+| Between Groups | 523.351 | 2 | 261.675 | 4.033 | .021 | 0.08 |
+| Within Groups | 6,034.437 | 93 | 64.886 | — | — | — |
+| Total | 6,557.787 | 95 |  |  |  |  |
 
-F compares between-group variance with within-group variance. df are 2 and 21 (groups minus 1, and N minus the number of groups). p < .001 means the three means are not all equal.
-
-Tukey comparisons. The mean difference is Group B minus Group A. Every pair differs.
-
-| Group A | Group B | Mean difference | p (adj) | CI low | CI high | Reject H₀ |
-| --- | --- | ---: | --- | ---: | ---: | --- |
-| Lecture | Online | 6.625 | < .001 | 4.41 | 8.84 | True |
-| Lecture | Workshop | 12.625 | < .001 | 10.41 | 14.84 | True |
-| Online | Workshop | 6 | < .001 | 3.785 | 8.215 | True |
-
-Levene’s test on this run was F = 0.42, p = .662, so the spreads are similar. The chart is a box plot titled “score across method.”
+One-way ANOVA: `score` by `method` (3 groups, n = 96). F = 4.033, p = .021 — significant at α = 0.05. Post-hoc: tukey_hsd. The primary result is significant (p = .021). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: F statistic = 4.033; p-value = .021; eta squared = 0.08.
 
 ## Reporting (APA 7)
 
-A one-way ANOVA tested exam scores across lecture, online, and workshop teaching (n = 8 per method). Teaching method had a significant effect, F(2, 21) = 103.27, p < .001, η² = .91. Levene’s test was not significant, F = 0.42, p = .662. Tukey tests showed that every pair of methods differed, all p < .001. Workshop scores were highest (M = 79.50), then online (M = 73.50), then lecture (M = 66.88).
-
-The ANOVA table prints η² as 0.908. APA drops the leading zero for a statistic that cannot exceed 1.
+One-way ANOVA: `score` by `method` (3 groups, n = 96). F = 4.033, p = .021 — significant at α = 0.05. Post-hoc: tukey_hsd. This result is significant (p = .021). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

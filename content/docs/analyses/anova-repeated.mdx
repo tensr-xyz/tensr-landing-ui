@@ -59,42 +59,23 @@ Partial η² is computed for the within-subjects effect. You do not choose it in
 
 ## Reading the output
 
-Ten people, three weekly ratings drawn from normal distributions centred at 5, 6, and 7.2. Partial η² for the condition effect was 0.36.
+Thirty-six people across three weeks. Later weeks were built a little higher, with enough noise that the weeks still overlap.
 
 | Source | F | df (num) | df (den) | p-value |
 | --- | ---: | ---: | ---: | ---: |
-| condition | 5.059 | 2 | 18 | .018 |
-
-The uncorrected test is significant at .05. df (num) is conditions minus 1. df (den) is that times subjects minus 1.
-
-Condition means:
+| condition | 8.278 | 2 | 70 | < .001 |
 
 | Condition | n | Mean | SD |
 | --- | ---: | ---: | ---: |
-| week1 | 10 | 5.27 | 0.796 |
-| week2 | 10 | 5.82 | 0.566 |
-| week3 | 10 | 6.872 | 1.455 |
+| week1 | 36 | 19.906 | 5.479 |
+| week2 | 36 | 20.889 | 4.685 |
+| week3 | 36 | 23.953 | 4.962 |
 
-Sphericity:
-
-| Test | W | p-value |
-| --- | ---: | ---: |
-| Mauchly's test of sphericity | 0.253 | .007 |
-
-Mauchly’s p is below .05, so the uncorrected p is not the one to quote. The corrections:
-
-| Correction | ε | df (num) | df (den) | p-value |
-| --- | ---: | ---: | ---: | ---: |
-| Greenhouse-Geisser | 0.536 | 1.073 | 9.657 | .047 |
-| Huynh-Feldt | 0.551 | 1.101 | 9.912 | .046 |
-
-Epsilon shrinks the degrees of freedom. Both corrected p-values are still just under .05, so the week effect survives the correction on this sample. When epsilon is above .75, Huynh–Feldt is the usual choice. Here it is about .55, so Greenhouse–Geisser is the more cautious one. The report’s own sentence still describes the uncorrected test. Prefer the correction table when Mauchly is significant.
-
-Partial η² of 0.36 means the week factor accounts for 36% of the within-person variation. There is no pairwise table, so this result does not say whether week 3 differs from week 2 specifically.
+Repeated measures ANOVA on 3 conditions, 36 subjects. Repeated measures ANOVA on 3 conditions, 36 subjects. Metrics: Subjects = 36; Partial η² = 0.191.
 
 ## Reporting (APA 7)
 
-Mood ratings from 10 people were compared across three weeks. Mauchly’s test indicated that sphericity was violated, W = 0.25, p = .007. With a Greenhouse–Geisser correction (ε = .54), the week effect was significant, F(1.07, 9.66) = 5.06, p = .047, partial η² = .36. Means rose from week 1 (M = 5.27, SD = 0.80) to week 3 (M = 6.87, SD = 1.46).
+Repeated measures ANOVA on 3 conditions, 36 subjects. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

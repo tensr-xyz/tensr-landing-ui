@@ -51,17 +51,13 @@ Each row is one pair. Both columns are binary. Concordant pairs (no change) do n
 
 ## Reading the output
 
-Eight pairs. Three changed from no to yes, and one changed from yes to no.
+Eighty people classified yes or no before and after. Discordant pairs were built in both directions in similar numbers.
 
-| n pairs | no → yes | yes → no | Statistic | p |
-| ---: | ---: | ---: | ---: | --- |
-| 8 | 3 | 1 | 1.000 | .625 |
-
-p = .625 is above .05. With only four discordant pairs, the test does not show a change.
+McNemar test for `before` vs `after`, n = 80 pairs. The primary result is not significant (p = > .999). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Discordant a→b = 5; Discordant b→a = 6; p-value = > .999.
 
 ## Reporting (APA 7)
 
-A McNemar test found no significant change from before to after, p = .63. Three pairs changed from no to yes and one changed from yes to no.
+McNemar test for `before` vs `after`, n = 80 pairs. This result is not significant (p = > .999). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

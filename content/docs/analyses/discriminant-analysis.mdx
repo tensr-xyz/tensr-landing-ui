@@ -51,46 +51,24 @@ Predictors are numeric. The groups have similar covariance. Tensr does not test 
 
 ## Reading the output
 
-Twenty-four students, 12 Lecture and 12 Workshop. Predictors `recall` and `confidence`.
+Teaching method predicted from exam score and study hours. The groups overlap, so classification should be better than chance and well short of perfect.
 
-Metrics: classification accuracy 91.7%, groups 2, cases 24, chance accuracy 50%. Chance accuracy is the rate from always guessing the largest group. Here the groups are equal, so chance is 50%. 91.7% is above that.
-
-Group centroids on the discriminant function:
-
-| Group | LD1 |
-| --- | ---: |
-| Lecture | -1.442 |
-| Workshop | 1.442 |
-
-The groups sit on opposite sides of the function. Wilks’ lambda for that function:
+| Group | LD1 | LD2 |
+| --- | ---: | ---: |
+| Lecture | -0.438 | 0.082 |
+| Online | 0.008 | -0.168 |
+| Workshop | 0.429 | 0.087 |
 
 | Functions | Wilks' λ | χ² | df | p-value |
 | --- | ---: | ---: | ---: | ---: |
-| 1 | 0.325 | 25.118 | 2 | < .001 |
+| 1 through 2 | 0.876 | 12.44 | 4 | .014 |
+| 2 | 0.986 | 1.323 | 1 | .250 |
 
-p < .001 means the predictors separate the groups beyond chance in this sample.
-
-Classification results:
-
-| Actual | Predicted Lecture | Predicted Workshop | % Correct |
-| --- | ---: | ---: | ---: |
-| Lecture | 10 | 2 | 83.3% |
-| Workshop | 0 | 12 | 100.0% |
-
-Two lecture students were classified as workshop. Every workshop student was classified correctly.
-
-Coefficients:
-
-| Variable | Coefficient |
-| --- | ---: |
-| recall | -0.498 |
-| confidence | 3.555 |
-
-Confidence has the larger weight, so it does more of the separating on this function.
+Linear discriminant analysis of `method` using 2 predictor(s). Linear discriminant analysis of `method` using 2 predictor(s). Metrics: Classification accuracy = 44.8%; Groups = 3; Cases = 96; Chance accuracy = 33.3%.
 
 ## Reporting (APA 7)
 
-A discriminant analysis predicted teaching method from recall and confidence (N = 24). The function was significant, Wilks’ Λ = .33, χ²(2) = 25.12, p < .001. Classification accuracy was 91.7%, against a chance rate of 50%.
+Linear discriminant analysis of `method` using 2 predictor(s). Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

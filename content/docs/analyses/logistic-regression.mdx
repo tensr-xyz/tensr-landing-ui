@@ -63,20 +63,18 @@ The request also accepts `classification_cutoff` (0.5), `max_iter` (20), `includ
 
 ## Reading the output
 
-Twenty-four students. `practice` runs from 1 to 7. `passed` is 0 or 1, with both outcomes in the low and high practice rows.
+Whether the student passed, predicted from study hours. The pass rate sits near the middle, and hours shifts it rather than separating the two groups.
 
 | Term | Estimate | Odds ratio | 95% CI (OR) | p-value |
 | --- | ---: | ---: | --- | ---: |
-| Intercept | -6.435 | 0.002 | [0.000, 0.260] | .013 |
-| practice | 1.606 | 4.981 | [1.447, 17.145] | .011 |
+| Intercept | -1.531 | 0.216 | [0.037, 1.258] | .088 |
+| hours | 0.299 | 1.348 | [0.956, 1.901] | .088 |
 
-The estimate is the log-odds slope. The odds ratio of 4.981 means the odds of passing are about five times larger per extra practice unit in this toy set. The interval excludes 1, and p = .011 is below .05. Pseudo R² is 0.533. N is 24. The summary names the inferential test as Wald z.
-
-This run did not print a classification table.
+The primary result is not significant (p = .088). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Pseudo R² = 0.023; Observations = 96.
 
 ## Reporting (APA 7)
 
-A logistic regression predicted passing from practice (N = 24). More practice was associated with higher odds of passing, odds ratio = 4.98, 95% CI [1.45, 17.15], p = .011.
+This result is not significant (p = .088). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

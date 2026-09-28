@@ -53,33 +53,21 @@ Observed variables in the spec must be numeric columns. Rows with a missing valu
 
 ## Reading the output
 
-Eighty people. q1–q3 measure F1. q4–q6 measure F2. F2 was generated partly from F1. The spec is:
+Focus measured by item1 to item3, then exam score predicted from Focus and study hours, on 96 people.
 
-```
-F1 =~ q1 + q2 + q3
-F2 =~ q4 + q5 + q6
-F2 ~ F1
-```
-
-| χ² | df | CFI | RMSEA | SRMR |
-| ---: | ---: | ---: | ---: | ---: |
-| 14.186 | 8 | 0.985 | 0.099 | 0.042 |
-
-| Left | Op | Right | Estimate | SE | p |
+| To | Op | From | Estimate | Std. Err | p-value |
 | --- | --- | --- | ---: | ---: | --- |
-| F2 | ~ | F1 | 0.546 | 0.091 | < .001 |
-| F1 | =~ | q1 | 1 | — | — |
-| F1 | =~ | q2 | 1.040 | 0.078 | < .001 |
-| F1 | =~ | q3 | 0.978 | 0.083 | < .001 |
-| F2 | =~ | q4 | 1 | — | — |
-| F2 | =~ | q5 | 1.107 | 0.099 | < .001 |
-| F2 | =~ | q6 | 1.049 | 0.106 | < .001 |
+| item1 | ~ | Focus | 1 | — | — |
+| item2 | ~ | Focus | 1.38684 | 0.476729 | p = .004 |
+| item3 | ~ | Focus | 1.40377 | 0.496276 | p = .005 |
+| score | ~ | Focus | -0.309337 | 1.74098 | p = .859 |
+| score | ~ | hours | 2.23996 | 0.655468 | p < .001 |
 
-CFI is .985 and SRMR is .042, which is a comfortable measurement fit. RMSEA is .099, around the usual .10 line where people start to worry, so this is acceptable rather than excellent. The structural path from F1 to F2 is 0.546, p < .001. Fixed loadings of 1 have no standard error.
+Structural equation model with semopy fit indices. Structural equation model with semopy fit indices. Metrics: CFI = 1.036; RMSEA = 0; SRMR = 0.077.
 
 ## Reporting (APA 7)
 
-The structural model (N = 80) was acceptable, χ²(8) = 14.19, CFI = .985, RMSEA = .099, SRMR = .042. F1 predicted F2, b = 0.55, SE = 0.09, p < .001.
+Structural equation model with semopy fit indices. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

@@ -54,22 +54,26 @@ An empty factor count keeps up to five factors, and never more than the number o
 
 ## Reading the output
 
-Same six items as the PCA example: eighty people, two underlying sources, request for two factors. Extraction is maximum likelihood, unrotated.
+One factor extracted from the six items. Loadings should be moderate, and the sixth item was built weaker than the first five.
 
-| Variable | Factor 1 | Factor 2 | Communality |
+| Variable | Factor1 |
+| --- | ---: |
+| item1 | 0.456 |
+| item2 | 0.549 |
+| item3 | 0.58 |
+| item4 | 0.562 |
+| item5 | 0.497 |
+| item6 | 0.363 |
+
+| Factor | Eigenvalue | Variance % | Cumulative % |
 | --- | ---: | ---: | ---: |
-| q1 | 0.863 | −0.136 | 0.763 |
-| q2 | 0.897 | −0.114 | 0.818 |
-| q3 | 0.878 | −0.185 | 0.805 |
-| q4 | 0.807 | −0.192 | 0.689 |
-| q5 | −0.168 | −0.886 | 0.813 |
-| q6 | −0.298 | −0.866 | 0.839 |
+| Factor1 | 1.54 | 25.7% | 25.7% |
 
-q1 to q4 load on the first factor. q5 and q6 load on the second, with negative signs because the factor was not rotated to make the large loadings positive. A communality is the share of that item’s variance the factors account for. q4 is the least well explained, at .689.
+EFA on 6 variables, n = 120. EFA on 6 variables, n = 120. Metrics: Factors = 1; Cases = 120.
 
 ## Reporting (APA 7)
 
-An unrotated maximum-likelihood factor analysis of six items (N = 80) extracted two factors. q1–q4 loaded on the first factor (loadings .81 to .90). q5 and q6 loaded on the second (loadings −.89 and −.87).
+EFA on 6 variables, n = 120. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

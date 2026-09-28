@@ -61,27 +61,13 @@ The Pearson path assumes straight-line relationships among the two columns and t
 
 ## Reading the output
 
-Same 24 students as bivariate correlation. Partial correlation of `hours` and `score`, controlling for `anxiety`.
+Practice quizzes and exam score, holding study hours constant. Practice was drawn independently of the exam, so any leftover correlation is noise.
 
-| Metric | Value |
-| --- | ---: |
-| Partial r | 0.904 |
-| p-value | < .001 |
-| df | 21 |
-| t statistic | 9.686 |
-| 95% CI | 0.788 to 0.958 |
-| Method | pearson |
-| Control variables | anxiety |
-
-Partial r is the correlation of the two columns after each has had the control columns subtracted out. df is N − 2 − (number of controls), here 24 − 2 − 1 = 21. p < .001 means the remaining relationship is not a plausible zero. The interval 0.788 to 0.958 is for the partial r, and it excludes 0.
-
-The summary says hours and score remain significantly positively correlated (r = 0.904, p < .001) after controlling for anxiety.
+Partial correlation between `practice` and `score`, controlling for hours, n = 96. No significant partial correlation between `practice` and `score` (r = -0.025, p = .810) after controlling for hours. The primary result is not significant (p = .810). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Partial r = -0.025; p-value = .810; df = 93; t statistic = -0.239; 95% CI = -0.224 to 0.177; Method = pearson.
 
 ## Reporting (APA 7)
 
-Study hours and exam score stayed positively related after anxiety was held constant, r(21) = .90, p < .001, 95% CI [.79, .96], N = 24.
-
-APA drops the leading zero on a correlation. The metrics table prints 0.904.
+Partial correlation between `practice` and `score`, controlling for hours, n = 96. No significant partial correlation between `practice` and `score` (r = -0.025, p = .810) after controlling for hours. This result is not significant (p = .810). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

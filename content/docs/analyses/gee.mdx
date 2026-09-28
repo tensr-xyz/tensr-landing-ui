@@ -57,18 +57,18 @@ The dialog reuses the mixed-model form, so it also shows random slopes and a REM
 
 ## Reading the output
 
-Same 96 rows as the [linear mixed model](/docs/analyses/linear-mixed-model) page: twelve clinics, eight people each. The outcome is `passed` (58 of 96). The predictor is `hours`.
+The clustered pass/fail outcome, population-average, exchangeable correlation within clinic.
 
 | Term | Coefficient | SE | z | p | 95% CI low | 95% CI high |
-| --- | ---: | ---: | ---: | --- | ---: | ---: |
-| const | -0.92 | 0.421 | -2.182 | .029 | -1.746 | -0.094 |
-| hours | 0.333 | 0.085 | 3.926 | < .001 | 0.167 | 0.499 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| const | -1.48 | 0.768 | -1.926 | .054 | -2.986 | 0.026 |
+| hours | 0.326 | 0.15 | 2.175 | .030 | 0.032 | 0.62 |
 
-The hours coefficient is on the log-odds scale. The interval excludes 0, and p < .001, so more hours go with higher odds of passing in this set. The standard errors are cluster-robust. Metrics are Family binomial, Correlation exchangeable, 12 groups, and 96 observations.
+GEE binomial (exchangeable) for `passed` clustered by `clinic`. GEE binomial (exchangeable) for `passed` clustered by `clinic`. Metrics: Family = binomial; Correlation = exchangeable; Groups = 12; Observations = 120.
 
 ## Reporting (APA 7)
 
-A GEE model with an exchangeable working correlation predicted passing from study hours, clustered by clinic (N = 96, 12 clinics). Each extra hour was associated with higher log-odds of passing, coefficient = 0.33, 95% CI [0.17, 0.50], p < .001.
+GEE binomial (exchangeable) for `passed` clustered by `clinic`. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

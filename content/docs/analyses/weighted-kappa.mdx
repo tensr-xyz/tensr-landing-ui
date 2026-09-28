@@ -56,25 +56,19 @@ Both columns are ordered categories. Tensr sorts the level names alphabetically 
 
 ## Reading the output
 
-Twelve cases rated 1, 2, or 3. Weights are linear. Levels sort numerically, which is the scale order. Fair agreement uses the same Landis and Koch benchmarks as Cohen’s kappa. Cutoffs: Landis & Koch, 1977.
-
-| Weighted κ | Unweighted κ | SE | z | p |
-| ---: | ---: | ---: | ---: | ---: |
-| 0.323 | 0.25 | 0.222 | 1.454 | .146 |
-
-The contingency table, with rater A down the rows:
+The same two raters. Linear weights give partial credit for a one-step miss. Categories are numeric, so sort order matches the scale.
 
 | rater_a | 1 | 2 | 3 |
-| --- | ---: | ---: | ---: |
-| 1 | 2 | 2 | 0 |
-| 2 | 0 | 2 | 2 |
-| 3 | 1 | 1 | 2 |
+| ---: | ---: | ---: | ---: |
+| 1 | 13 | 4 | 0 |
+| 2 | 12 | 17 | 7 |
+| 3 | 1 | 8 | 18 |
 
-p = .146, so this set does not show weighted agreement beyond chance.
+Weighted κ (linear) for `rater_a` vs `rater_b`, n = 80. Moderate agreement (κ < 0 poor, 0 ≤ κ < 0.2 slight, 0.2 ≤ κ < 0.4 fair, 0.4 ≤ κ < 0.6 moderate, 0.6 ≤ κ < 0.8 substantial, κ ≥ 0.8 almost perfect). Cutoffs: Landis & Koch, 1977. The primary result is significant (p = < .001). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: Weighted κ = 0.508; Unweighted κ = 0.396; SE = 0.084; z = 6.044; p-value = < .001.
 
 ## Reporting (APA 7)
 
-Linear weighted κ was .32, SE = 0.22, z = 1.45, p = .146, indicating fair agreement. N = 12.
+Weighted κ (linear) for `rater_a` vs `rater_b`, n = 80. Moderate agreement (κ < 0 poor, 0 ≤ κ < 0.2 slight, 0.2 ≤ κ < 0.4 fair, 0.4 ≤ κ < 0.6 moderate, 0.6 ≤ κ < 0.8 substantial, κ ≥ 0.8 almost perfect). Cutoffs: Landis & Koch, 1977. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

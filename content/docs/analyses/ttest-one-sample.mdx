@@ -59,19 +59,17 @@ Tensr does not run Shapiro–Wilk or any other normality check inside this proce
 
 ## Reading the output
 
-Ten anxiety scores: 12, 15, 11, 14, 13, 16, 12, 10, 14, 13. The comparison value is 10.
+The same 96 exam scores, tested against a department target of 71. The class was built to land near that target, so a difference of a point or two is the result to read.
 
-| | t | df | p | Mean diff | 95% CI low | 95% CI high |
+|   | t | df | p | Mean diff | 95% CI low | 95% CI high |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| anxiety | 5.196 | 9 | < .001 | 3 | 1.694 | 4.306 |
+| score | 0.466 | 95 | .643 | 0.395 | -1.289 | 2.078 |
 
-The metrics next to that table are the sample mean (13), the standard error of the mean (0.577), μ₀ (10), and a 95% CI for the mean itself, [11.694, 14.306]. The CI in the table is for the difference from 10, which is the mean CI shifted by μ₀.
-
-df is N − 1. p < .001 means the mean is not a plausible match for 10 at the .05 level. The difference CI excludes 0, so the same conclusion shows up there. Mean diff is sample mean minus μ₀ (13 − 10 = 3).
+One-sample t-test of `score` against μ = 71 on 96 rows (mean diff = 0.395, p = .643). The primary result is not significant (p = .643). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: t statistic = 0.466; p-value = .643; df = 95; Sample mean = 71.395; SE mean = 0.848; Mean diff = 0.395.
 
 ## Reporting (APA 7)
 
-Anxiety scores (N = 10, M = 13.00, SE = 0.58) were higher than the scale midpoint of 10. A one-sample t test was significant, t(9) = 5.20, p < .001, 95% CI of the difference [1.69, 4.31].
+One-sample t-test of `score` against μ = 71 on 96 rows (mean diff = 0.395, p = .643). This result is not significant (p = .643). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

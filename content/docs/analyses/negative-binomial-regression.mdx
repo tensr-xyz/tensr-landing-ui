@@ -62,32 +62,18 @@ The outcome is a non-negative count. Rows are independent. Tensr estimates α fr
 
 ## Reading the output
 
-A class of 24 absence counts is not over-dispersed, so α collapses and the Poisson comparison is not informative. This example uses an over-dispersed set of 180 visits, with anxiety as the predictor.
+Visit counts with extra-Poisson scatter, predicted from anxiety. Dispersion was built in, so α should be estimated rather than collapsing to zero.
 
 | Term | Estimate | SE | 95% CI | IRR | p-value |
 | --- | ---: | ---: | --- | ---: | ---: |
-| const | 1.082 | 0.113 | [0.860, 1.303] | 2.949 | < .001 |
-| anxiety | 0.593 | 0.13 | [0.337, 0.849] | 1.809 | < .001 |
+| const | -1.213 | 0.692 | [-2.571, 0.144] | 0.297 | .080 |
+| anxiety | 0.281 | 0.131 | [0.025, 0.537] | 1.324 | .032 |
 
-The anxiety IRR is 1.809, so the expected visit count is larger at higher anxiety. p < .001.
-
-Metrics on this run:
-
-| Metric | Value |
-| --- | ---: |
-| Dispersion α | 1.865 |
-| α SE | 0.274 |
-| LR vs Poisson χ² | 491.58 |
-| LR vs Poisson p | < .001 |
-| AIC | 766.091 |
-| Deviance | 184.366 |
-| Observations | 180 |
-
-α is estimated, and its standard error is filled in. The likelihood-ratio test says this negative binomial fits better than a Poisson model of the same counts.
+Negative binomial regression for `visits` with 1 predictor(s), n = 96. The primary result is significant (p = < .001). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: Dispersion α = 2.19; α SE = 0.599; LR vs Poisson χ² = 75.168; LR vs Poisson p = < .001; AIC = 292.213; Deviance = 84.712.
 
 ## Reporting (APA 7)
 
-A negative binomial regression related visit counts to anxiety (N = 180). Anxiety was associated with more visits, B = 0.59, 95% CI [0.34, 0.85], IRR = 1.81, p < .001. Dispersion was α = 1.87 (SE = 0.27). The negative binomial fit better than a Poisson model, χ² = 491.58, p < .001.
+Negative binomial regression for `visits` with 1 predictor(s), n = 96. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
 
 ## Coming from SPSS
 

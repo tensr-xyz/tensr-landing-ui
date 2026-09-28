@@ -75,29 +75,25 @@ Pearson’s r assumes a straight line and is pulled around by outliers. Spearman
 
 ## Reading the output
 
-Twenty-four students. `hours` runs from 2 to 8, `anxiety` from 2 to 9, and `score` from 55 to 91. This run left `flag_significant` off.
+Hours, anxiety, and exam score for the 96 students. Flag significant is off, so the coefficients are printed without stars. Hours was built to rise with score. Anxiety was built to fall with it. Neither link is tight.
 
-The coefficient matrix and a separate p-value matrix:
-
-| | hours | anxiety | score |
+|   | hours | anxiety | score |
 | --- | ---: | ---: | ---: |
-| hours | 1 | -0.926 | 0.982 |
-| anxiety | -0.926 | 1 | -0.967 |
-| score | 0.982 | -0.967 | 1 |
+| hours | 1 | -0.067 | 0.327 |
+| anxiety | -0.067 | 1 | -0.374 |
+| score | 0.327 | -0.374 | 1 |
 
-| | hours | anxiety | score |
+|   | hours | anxiety | score |
 | --- | ---: | ---: | ---: |
-| hours | — | < .001 | < .001 |
-| anxiety | < .001 | — | < .001 |
-| score | < .001 | < .001 | — |
+| hours | — | .516 | .001 |
+| anxiety | .516 | — | < .001 |
+| score | .001 | < .001 | — |
 
-The diagonal of the coefficient matrix is 1 because a column correlates perfectly with itself. The diagonal of the p-value matrix is an em dash for that same reason. A positive coefficient means the columns rise together. A negative one means one falls as the other rises. r near 0.98 is a very tight line in this toy set.
-
-With `flag_significant` off, the coefficients have no stars. Turning it on adds a star column beside each variable. On this same data every off-diagonal pair is `***`, and the summary adds `* p < .05. ** p < .01. *** p < .001.` Metrics are Method, Complete rows (24), and Significance α (0.05).
+Pearson correlations among 3 numeric variable(s), 96 complete rows. Pearson correlations among 3 numeric variable(s), 96 complete rows. Metrics: Method = Pearson; Complete rows = 96; Significance α = 0.05.
 
 ## Reporting (APA 7)
 
-Hours studied and exam score were positively correlated, r = .98, p < .001. Anxiety and exam score were negatively correlated, r = −.97, p < .001. Hours and anxiety were also negatively correlated, r = −.93, p < .001. N = 24.
+Pearson correlations among 3 numeric variable(s), 96 complete rows. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

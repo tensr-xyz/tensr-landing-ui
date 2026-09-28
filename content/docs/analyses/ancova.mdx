@@ -67,21 +67,19 @@ There is no Levene test, no Shapiro–Wilk test, and no partial η² column. The
 
 ## Reading the output
 
-Twelve students, six Lecture and six Workshop, with a pretest and an exam score. Interaction was left off. Sums of squares are Type II. R² was 0.998 because the toy scores are almost a straight line of the pretest plus a method gap. That R² will not show up in a real exam.
+Teaching method on the exam, with study hours as the covariate. Hours and method both have a moderate link to the score.
 
 | Source | Sum of squares | df | F | p-value |
 | --- | ---: | ---: | ---: | ---: |
-| method | 477.331 | 1 | 4000 | < .001 |
-| pretest | 103.093 | 1 | 863.884 | < .001 |
-| Residual | 1.074 | 9 | — | — |
+| method | 294.54 | 2 | 2.436 | .093 |
+| hours | 472.674 | 1 | 7.819 | .006 |
+| Residual | 5,561.762 | 92 | — | — |
 
-The method row is the group difference after the linear pretest relationship is in the model. p < .001 means the adjusted means differ. The pretest row means the covariate predicts the exam, which is what you want from a covariate. F for method is printed as 4000 because values of 1000 or more use a short format. The unrounded F was about 3999.88.
-
-There is no table of adjusted means. The report summary names the outcome, the group, and the covariate, and gives N.
+ANCOVA of `score` by `method` controlling for `hours`, n = 96. ANCOVA of `score` by `method` controlling for `hours`, n = 96. Metrics: R² = 0.152.
 
 ## Reporting (APA 7)
 
-An ANCOVA compared exam scores for lecture and workshop students, with pretest as the covariate (N = 12). Pretest was a significant covariate, F(1, 9) = 863.88, p < .001. The teaching-method effect, adjusted for pretest, was also significant, F(1, 9) = 3999.88, p < .001. Model R² = .998.
+ANCOVA of `score` by `method` controlling for `hours`, n = 96. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

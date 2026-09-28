@@ -51,17 +51,18 @@ Both columns have exactly two levels. Relative risk is easiest to interpret when
 
 ## Reading the output
 
-Same 60-person table. Risk of `event` is 0.733 in `exposed` and 0.400 in `unexposed`.
+The same weak 2×2, as a ratio of risks rather than odds.
 
-| Relative risk | 95% CI | p |
-| ---: | --- | --- |
-| 1.833 | [1.125, 2.988] | .018 |
+| exposed | No | Yes |
+| --- | ---: | ---: |
+| No | 28 | 15 |
+| Yes | 23 | 24 |
 
-The event is about 1.8 times as common in the exposed group. `nnt` is empty on this run because the relative risk is above 1. Tensr only fills NNT when the relative risk is below 1.
+Relative risk of `case` by `exposed`, n = 90. The primary result is not significant (p = .140). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Relative risk = 1.331; 95% CI = [0.924, 1.917]; p-value = .140; Risk (exposed) = 0.651; Risk (unexposed) = 0.489.
 
 ## Reporting (APA 7)
 
-Exposed participants were more likely to have the event than unexposed participants, RR = 1.83, 95% CI [1.12, 2.99], p = .018.
+Relative risk of `case` by `exposed`, n = 90. This result is not significant (p = .140). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 

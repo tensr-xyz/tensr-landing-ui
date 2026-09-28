@@ -52,28 +52,25 @@ Indicators are numeric. On 0/1 items Tensr fits a binary measurement model. On o
 
 ## Reading the output
 
-Sixty people and three yes/no items. The first 30 people answered 1 on every item. The other 30 answered 0 on the first two items, and half of them answered 1 on the third. Two classes.
+Four yes/no items scored 1 and 0, and two latent classes. One class was built to endorse the items more often. Membership is probabilistic, not a clean split.
 
 | Class | n | % |
-| --- | ---: | ---: |
-| 1 | 30 | 50 |
-| 2 | 30 | 50 |
-
-| Item | Class 1 | Class 2 |
-| --- | ---: | ---: |
-| a | 0.000 | 1.000 |
-| b | 0.000 | 1.000 |
-| c | 0.500 | 1.000 |
-
-| AIC | BIC | Entropy |
 | ---: | ---: | ---: |
-| 138.766 | 153.427 | 0.000 |
+| 1 | 97 | 60.6% |
+| 2 | 63 | 39.4% |
 
-Class 2 is the “yes to everything” group. Class 1 said no to the first two items and was split on the third. Entropy near 0 means the membership probabilities are almost 0 or 1: people are not sitting on the boundary between classes. AIC and BIC are for comparing this class count with another count on the same items. Lower is better.
+| Indicator | Class 1 | Class 2 |
+| --- | ---: | ---: |
+| q1 | 0.2371 | 0.8254 |
+| q2 | 0.2990 | 0.7778 |
+| q3 | 0.0928 | 1.0000 |
+| q4 | 0.4330 | 0.5873 |
+
+Latent class analysis with 2 classes on 4 indicators. Latent class analysis with 2 classes on 4 indicators. Metrics: Classes = 2; Observations = 160; AIC = 842.435; BIC = 870.111; Entropy = 19.841; Log-likelihood = -412.217.
 
 ## Reporting (APA 7)
 
-A two-class model of three binary items (N = 60) split the sample evenly. One class endorsed every item. The other endorsed none of the first two items (AIC = 138.77, BIC = 153.43).
+Latent class analysis with 2 classes on 4 indicators. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

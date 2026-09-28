@@ -64,24 +64,24 @@ Give either an edge list or adjacency columns, not a vague mix. Node names are r
 
 ## Reading the output
 
-Five links among A, B, C, and D. One link from A to C has weight 2. The others have weight 1. A also links back from D, so the component is a single loop with an extra chord.
-
-| Nodes | Edges | Density | Components | Communities | Modularity |
-| ---: | ---: | ---: | ---: | ---: | ---: |
-| 4 | 5 | 0.833 | 1 | 1 | 0.000 |
+A 12-person class. An edge is a study link, kept when a seeded draw fell under 0.28, with a weight from 1 to 4. Centrality is descriptive.
 
 | Node | Degree | Betweenness | Closeness | Eigenvector |
 | --- | ---: | ---: | ---: | ---: |
-| A | 1.000 | 0.167 | 1.000 | 0.602 |
-| B | 0.667 | 0.111 | 0.750 | 0.372 |
-| C | 1.000 | 0.167 | 1.000 | 0.602 |
-| D | 0.667 | 0.111 | 0.750 | 0.372 |
+| s1 | 0.273 | 0.091 | 0.524 | 0.168 |
+| s2 | 0.455 | 0.127 | 0.611 | 0.434 |
+| s4 | 0.273 | 0.036 | 0.44 | 0.127 |
+| s10 | 0.455 | 0.218 | 0.611 | 0.297 |
+| s3 | 0.364 | 0.091 | 0.579 | 0.338 |
+| s7 | 0.273 | 0.136 | 0.55 | 0.236 |
+| s11 | 0.182 | 0 | 0.458 | 0.164 |
+| s12 | 0.364 | 0.055 | 0.579 | 0.437 |
 
-Density .833 means most possible pairs are linked. One component and modularity 0 mean the algorithm did not find a split: A and C are the more central nodes, and B and D are equivalent to each other. Degree, betweenness, and closeness ignore the idea of a directed arrow. Eigenvector centrality uses the weights, so the heavier A–C link shows up there.
+Network with 12 nodes and 22 edges. Network with 12 nodes and 22 edges. Metrics: Nodes = 12; Edges = 22; Density = 0.333; Components = 1; Modularity = 0.251.
 
 ## Reporting (APA 7)
 
-The four-node network had 5 edges (density = .83) and did not split into separate communities (modularity = 0). A and C had the highest degree and eigenvector centrality.
+Network with 12 nodes and 22 edges. Report the estimate in the table. This procedure is not summarised by one p-value.
 
 ## Coming from SPSS
 

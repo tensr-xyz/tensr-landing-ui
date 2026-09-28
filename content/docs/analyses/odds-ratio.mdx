@@ -51,17 +51,18 @@ Both columns have exactly two levels. This is the same 2×2 table as Fisher’s 
 
 ## Reading the output
 
-`exposed` / `unexposed` by `event` / `none`, N = 60. Exposed has 22 events and 8 non-events. Unexposed has 12 and 18.
+The same weak 2×2. The odds ratio should sit near 1, and the interval should be read before the point estimate.
 
-| Odds ratio | 95% CI | p |
-| ---: | --- | --- |
-| 4.125 | [1.387, 12.270] | .018 |
+| exposed | No | Yes |
+| --- | ---: | ---: |
+| No | 28 | 15 |
+| Yes | 23 | 24 |
 
-The stored interpretation is “Increased odds in first group”. An odds ratio of 1 would be no association.
+Odds ratio for `exposed` × `case`, n = 90. The primary result is not significant (p = .140). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Odds ratio = 1.948; 95% CI = [0.834, 4.552]; p (two-tailed) = .140; p (one-tailed) = .140.
 
 ## Reporting (APA 7)
 
-The odds of the event were higher for exposed than unexposed participants, OR = 4.13, 95% CI [1.39, 12.27], p = .018.
+Odds ratio for `exposed` × `case`, n = 90. This result is not significant (p = .140). Report the estimate with that p, and do not describe the pattern as a reliable effect.
 
 ## Coming from SPSS
 
