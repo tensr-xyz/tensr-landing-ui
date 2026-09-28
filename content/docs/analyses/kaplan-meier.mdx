@@ -1,0 +1,79 @@
+---
+title: Kaplan–Meier
+description: Non-parametric survival curve from duration and an event indicator, with an optional two-group log-rank test.
+category: Survival
+---
+
+## When to use it
+
+Use Kaplan–Meier when each row is a person (or unit) with a time until an event, and some people are still event-free when observation stops. “Do patients on the new arm stay event-free longer than standard care?” is the usual two-group question. A covariate that should shift the hazard is [Cox](/docs/analyses/cox-proportional-hazards). The cumulative hazard of the same times is [Nelson–Aalen](/docs/analyses/nelson-aalen).
+
+## Assumptions
+
+Duration must be positive and numeric. Rows with missing or non-positive duration are dropped. The event column is 1 for the event and 0 for censored; the service also reads `true`, `yes`, `y`, and `event` as 1. At least three valid rows are required.
+
+The log-rank p-value is only computed when a grouping column has exactly two levels. Three or more groups still get a curve each (up to four groups), with no overall log-rank. There is no proportional-hazards check on this page.
+
+The chart is a step curve with marks at censored times. It does not draw confidence bands.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Survival → Kaplan–Meier. In chat: “Kaplan–Meier of weeks by arm.”</Step>
+<Step>Duration is the time column. Event is 1 = event, 0 = censored. Grouping variable is optional.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    duration_column: {
+      type: 'string',
+      description: 'Positive time until the event or censoring.',
+    },
+    event_column: {
+      type: 'string',
+      description: '1 = event, 0 = censored. true / yes / y / event also count as 1.',
+    },
+    group_column: {
+      type: 'string',
+      description: 'Optional grouping column. Log-rank runs only when there are exactly two groups.',
+      default: 'null',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Draws a step survival curve per group.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Eighty people, 40 on standard care and 40 on a new arm. Time is weeks until the event. The new arm was built with a slightly lower hazard, and about a third of the rows are censored. The log-rank is the two-group comparison.
+
+Kaplan–Meier survival analysis using `weeks` and `event`. The primary result is not significant (p = .545). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Observations = 80; Events = 58; Log-rank p-value = .545.
+
+## Reporting (APA 7)
+
+Kaplan–Meier survival analysis using `weeks` and `event`. This result is not significant (p = .545). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+SPSS is Analyze → Survival → Kaplan-Meier. Tensr’s Analyze menu has the same Survival section. The path string stored for this item is Analyze → Survival → Kaplan-Meier.
+
+SPSS prints a survival table (time, n at risk, n events, survival). Tensr’s report is the observation and event counts, the log-rank p when there are two groups, and the step chart. It does not print a life table.
+
+## Related
+
+A numeric covariate on the same times is [Cox proportional hazards](/docs/analyses/cox-proportional-hazards). The cumulative hazard is [Nelson–Aalen](/docs/analyses/nelson-aalen).

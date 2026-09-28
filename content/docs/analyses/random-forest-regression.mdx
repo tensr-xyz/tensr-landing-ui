@@ -1,0 +1,88 @@
+---
+title: Random forest regression
+description: Bagged trees for a numeric outcome, with holdout R² and RMSE.
+category: Machine learning
+---
+
+## When to use it
+
+Use random forest regression when the outcome is numeric and you want a holdout R², RMSE, and feature importance without a linear model. The classification version is [random forest classification](/docs/analyses/random-forest-classification). A linear fit of the same columns is [linear regression](/docs/analyses/linear-regression).
+
+## Assumptions
+
+Outcome and features are numeric. Holdout fraction 0.25, 100 trees, min_samples_leaf 5, no depth cap, `random_state=0`. HTTP and chat dispatch both honour `test_fraction` and `min_samples_leaf`.
+
+## Running it in Tensr
+
+<Steps>
+<Step>ML → Regression → Random Forest Regression. In chat: “Random forest regression of score on hours and anxiety.”</Step>
+<Step>Target is the numeric outcome. Features need at least one numeric column.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Numeric features. At least one.',
+    },
+    n_estimators: {
+      type: '10–500',
+      description: 'Number of trees.',
+      default: '100',
+    },
+    min_samples_leaf: {
+      type: '1–100',
+      description: 'Minimum rows in a leaf. Maps to ranger min.node.size. No depth cap.',
+      default: '5',
+    },
+    test_fraction: {
+      type: '0.05–0.5',
+      description: 'Holdout fraction, clamped to 0.10–0.50. HTTP and chat dispatch both honour it. A note is added when the value is clamped.',
+      default: '0.25',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Predicted-versus-actual scatter and feature importance.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Exam score from hours and anxiety on that same 240-row sample. 100 trees, min_samples_leaf 5, no depth cap. Both slopes were built steep, so holdout R² should be positive.
+
+| Variable | Importance |
+| --- | ---: |
+| hours | 0.845 |
+| anxiety | 0.155 |
+
+Holdout R² = 0.721, RMSE = 4.733, n = 240, min_samples_leaf = 5. Hours and anxiety were built with steep slopes, so a positive holdout R² is the expected reading.
+
+## Reporting (APA 7)
+
+Random forest regression of exam score on hours and anxiety, n = 240, holdout R² = 0.721, RMSE = 4.733.
+
+## Coming from SPSS
+
+SPSS has no random-forest regression dialog. Tensr’s item is on the ML menu, Regression → Random Forest Regression.
+
+## Related
+
+[Linear regression](/docs/analyses/linear-regression) is the parametric counterpart. [Gradient boosting](/docs/analyses/gradient-boosting) can be switched to regression mode.

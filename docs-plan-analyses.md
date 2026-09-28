@@ -19,75 +19,91 @@ Reading the output and Reporting (APA 7) on every analysis page are regenerated 
 
 ## Status
 
-| Analysis                       | Slug                           | Status       |
-| ------------------------------ | ------------------------------ | ------------ |
-| Descriptives                   | descriptives                   | drafted      |
-| One-sample t-test              | ttest-one-sample               | drafted      |
-| Independent-samples t-test     | ttest-independent              | drafted      |
-| Paired-samples t-test          | ttest-paired                   | drafted      |
-| One-way ANOVA                  | anova-oneway                   | drafted      |
-| Two-way ANOVA                  | anova-twoway                   | drafted      |
-| Three-way ANOVA                | anova-threeway                 | drafted      |
-| Repeated-measures ANOVA        | anova-repeated                 | drafted      |
-| Mixed ANOVA                    | anova-mixed                    | drafted      |
-| ANCOVA                         | ancova                         | drafted      |
-| MANOVA                         | manova                         | drafted      |
-| Hotelling’s T²                 | hotelling-t2                   | drafted      |
-| Bivariate correlation          | correlation                    | drafted      |
-| Partial correlation            | partial-correlation            | drafted      |
-| Linear regression              | linear-regression              | drafted      |
-| Hierarchical regression        | hierarchical-regression        | drafted      |
-| Logistic regression            | logistic-regression            | drafted      |
-| Probit regression              | probit-regression              | drafted      |
-| Poisson regression             | poisson-regression             | drafted      |
-| Negative binomial regression   | negative-binomial-regression   | drafted      |
-| Ordinal regression             | ordinal-regression             | drafted      |
-| Moderation                     | moderation-analysis            | drafted      |
-| Canonical correlation          | canonical-correlation          | drafted      |
-| Discriminant analysis          | discriminant-analysis          | drafted      |
-| Mann–Whitney U                 | mann-whitney-u                 | drafted      |
-| Kruskal–Wallis H               | kruskal-wallis                 | drafted      |
-| Wilcoxon signed-rank           | wilcoxon-signed-rank           | drafted      |
-| Sign test                      | sign-test                      | drafted      |
-| Friedman                       | friedman                       | drafted      |
-| Median test                    | median-test                    | drafted      |
-| Jonckheere–Terpstra            | jonckheere-terpstra            | drafted      |
-| Moses test                     | moses-test                     | drafted      |
-| Runs test                      | runs-test                      | drafted      |
-| Cochran’s Q                    | cochrans-q                     | drafted      |
-| Kolmogorov–Smirnov             | kolmogorov-smirnov             | drafted      |
-| Shapiro–Wilk                   | shapiro-wilk                   | drafted      |
-| Lilliefors K-S                 | lilliefors-ks                  | needs-review |
-| Chi-square                     | chi-square                     | drafted      |
-| Fisher’s exact                 | fishers-exact                  | drafted      |
-| Odds ratio                     | odds-ratio                     | drafted      |
-| Relative risk                  | relative-risk                  | drafted      |
-| McNemar                        | mcnemar                        | drafted      |
-| Cohen’s kappa                  | cohens-kappa                   | drafted      |
-| Weighted kappa                 | weighted-kappa                 | drafted      |
-| Fleiss’ kappa                  | fleiss-kappa                   | drafted      |
-| Kendall’s W                    | kendalls-w                     | drafted      |
-| Goodman–Kruskal gamma          | goodman-kruskal-gamma          | drafted      |
-| Somers’ d                      | somers-d                       | drafted      |
-| Goodman–Kruskal lambda         | goodman-kruskal-lambda         | drafted      |
-| Mantel–Haenszel                | mantel-haenszel                | drafted      |
-| Cochran–Armitage               | cochran-armitage               | drafted      |
-| Loglinear                      | loglinear                      | drafted      |
-| Correspondence                 | correspondence                 | drafted      |
-| Cronbach’s alpha               | cronbachs-alpha                | drafted      |
-| PCA                            | pca                            | drafted      |
-| Exploratory factor analysis    | efa                            | drafted      |
-| Confirmatory factor analysis   | confirmatory-factor-analysis   | drafted      |
-| Structural equation modelling  | structural-equation-modelling  | drafted      |
-| Multidimensional scaling       | multidimensional-scaling       | drafted      |
-| Latent class analysis          | latent-class-analysis          | drafted      |
-| Network centrality             | network                        | drafted      |
-| Mixed model                    | mixed-model                    | drafted      |
-| Linear mixed model             | linear-mixed-model             | drafted      |
-| Generalized linear mixed model | generalized-linear-mixed-model | drafted      |
-| Multilevel modelling           | multilevel-modelling           | drafted      |
-| GEE                            | gee                            | drafted      |
-| Everything else in this file   |                                | todo         |
+| Analysis                       | Slug                           | Status  |
+| ------------------------------ | ------------------------------ | ------- |
+| Descriptives                   | descriptives                   | drafted |
+| One-sample t-test              | ttest-one-sample               | drafted |
+| Independent-samples t-test     | ttest-independent              | drafted |
+| Paired-samples t-test          | ttest-paired                   | drafted |
+| One-way ANOVA                  | anova-oneway                   | drafted |
+| Two-way ANOVA                  | anova-twoway                   | drafted |
+| Three-way ANOVA                | anova-threeway                 | drafted |
+| Repeated-measures ANOVA        | anova-repeated                 | drafted |
+| Mixed ANOVA                    | anova-mixed                    | drafted |
+| ANCOVA                         | ancova                         | drafted |
+| MANOVA                         | manova                         | drafted |
+| Hotelling’s T²                 | hotelling-t2                   | drafted |
+| Bivariate correlation          | correlation                    | drafted |
+| Partial correlation            | partial-correlation            | drafted |
+| Linear regression              | linear-regression              | drafted |
+| Hierarchical regression        | hierarchical-regression        | drafted |
+| Logistic regression            | logistic-regression            | drafted |
+| Probit regression              | probit-regression              | drafted |
+| Poisson regression             | poisson-regression             | drafted |
+| Negative binomial regression   | negative-binomial-regression   | drafted |
+| Ordinal regression             | ordinal-regression             | drafted |
+| Moderation                     | moderation-analysis            | drafted |
+| Canonical correlation          | canonical-correlation          | drafted |
+| Discriminant analysis          | discriminant-analysis          | drafted |
+| Mann–Whitney U                 | mann-whitney-u                 | drafted |
+| Kruskal–Wallis H               | kruskal-wallis                 | drafted |
+| Wilcoxon signed-rank           | wilcoxon-signed-rank           | drafted |
+| Sign test                      | sign-test                      | drafted |
+| Friedman                       | friedman                       | drafted |
+| Median test                    | median-test                    | drafted |
+| Jonckheere–Terpstra            | jonckheere-terpstra            | drafted |
+| Moses test                     | moses-test                     | drafted |
+| Runs test                      | runs-test                      | drafted |
+| Cochran’s Q                    | cochrans-q                     | drafted |
+| Kolmogorov–Smirnov             | kolmogorov-smirnov             | drafted |
+| Shapiro–Wilk                   | shapiro-wilk                   | drafted |
+| Lilliefors K-S                 | lilliefors-ks                  | drafted |
+| Chi-square                     | chi-square                     | drafted |
+| Fisher’s exact                 | fishers-exact                  | drafted |
+| Odds ratio                     | odds-ratio                     | drafted |
+| Relative risk                  | relative-risk                  | drafted |
+| McNemar                        | mcnemar                        | drafted |
+| Cohen’s kappa                  | cohens-kappa                   | drafted |
+| Weighted kappa                 | weighted-kappa                 | drafted |
+| Fleiss’ kappa                  | fleiss-kappa                   | drafted |
+| Kendall’s W                    | kendalls-w                     | drafted |
+| Goodman–Kruskal gamma          | goodman-kruskal-gamma          | drafted |
+| Somers’ d                      | somers-d                       | drafted |
+| Goodman–Kruskal lambda         | goodman-kruskal-lambda         | drafted |
+| Mantel–Haenszel                | mantel-haenszel                | drafted |
+| Cochran–Armitage               | cochran-armitage               | drafted |
+| Loglinear                      | loglinear                      | drafted |
+| Correspondence                 | correspondence                 | drafted |
+| Cronbach’s alpha               | cronbachs-alpha                | drafted |
+| PCA                            | pca                            | drafted |
+| Exploratory factor analysis    | efa                            | drafted |
+| Confirmatory factor analysis   | confirmatory-factor-analysis   | drafted |
+| Structural equation modelling  | structural-equation-modelling  | drafted |
+| Multidimensional scaling       | multidimensional-scaling       | drafted |
+| Latent class analysis          | latent-class-analysis          | drafted |
+| Network centrality             | network                        | drafted |
+| Mixed model                    | mixed-model                    | drafted |
+| Linear mixed model             | linear-mixed-model             | drafted |
+| Generalized linear mixed model | generalized-linear-mixed-model | drafted |
+| Multilevel modelling           | multilevel-modelling           | drafted |
+| GEE                            | gee                            | drafted |
+| Kaplan-Meier                   | kaplan-meier                   | drafted |
+| Cox proportional hazards       | cox-proportional-hazards       | drafted |
+| Nelson-Aalen                   | nelson-aalen                   | drafted |
+| ARIMA / SARIMA                 | arima-sarima                   | drafted |
+| Exponential smoothing          | exponential-smoothing          | drafted |
+| STL decomposition              | stl-decomposition              | drafted |
+| Stationarity tests             | stationarity-tests             | drafted |
+| Autocorrelation                | autocorrelation                | drafted |
+| Cluster analysis               | cluster-analysis               | drafted |
+| Decision tree                  | decision-tree                  | drafted |
+| Random forest classification   | random-forest-classification   | drafted |
+| Random forest regression       | random-forest-regression       | drafted |
+| SVM classification             | svm-classification             | drafted |
+| Gradient boosting              | gradient-boosting              | drafted |
+| Neural network (MLP)           | neural-network-mlp             | drafted |
+| DBSCAN                         | dbscan                         | drafted |
+| Everything else in this file   |                                | todo    |
 
 ## Tech debt (alias keys)
 
@@ -129,6 +145,29 @@ Request fields the dispatcher does not pass through (listed, not fixed): partial
 1. **LMM and GEE dialogs show controls they do not post.** Both reuse `MixedModelForm` (random slopes and REML). `linear_mixed_model` posts `dependent`, `fixed_effects`, and `group_column` only, and the fit is always REML with a random intercept. `gee` posts `outcome`, `independents`, and `group`. The GEE form labels the dependent as numeric. The fit requires a binary outcome. Family is binomial and the correlation is exchangeable.
 2. **GLMM `random_effects` does not add a random slope.** The body accepts it, dispatch forwards it, and each listed column must also be a fixed effect. The variational Bayes fit still uses a group random intercept only. The dialog does not send the field.
 3. **Stored menu paths for Mixed Model and GEE say Analyze.** Both items live under Multivariate → Mixed Models. `SPSS_MENU_PATHS` says Analyze → Mixed Models → Mixed Model, and Analyze → Generalized Linear Models → GEE.
+
+## Bugs found while drafting survival
+
+1. **Kaplan–Meier tooltip promises confidence bands.** `analysis-wizard-tooltips.ts` says “Survival curve with confidence bands”. The chart is `step_line` with censored marks and no interval. Documented the chart Tensr draws.
+2. **Log-rank is two-group only.** Three or more groups still get a curve each (capped at four) and `logrank_p_value` stays null. No overall or pairwise log-rank.
+3. **Cox coefficient p-values ignore `apa_format`.** The table copies lifelines’ four-decimal strings (`0.0125`). Metrics such as Kaplan–Meier’s log-rank do go through `_fmt_p`.
+4. **Nelson–Aalen (and Cox baseline) charts are diagonal scatter+trend lines.** Kaplan–Meier was switched to `step_line`. Cumulative hazard and Cox baseline survival still use `_scatter_line` with a first-to-last `line`. The docs do not describe that diagonal as a step function.
+5. **Stored menu paths say Time series → Survival.** The items live under Analyze → Survival. Time series is a separate top-level menu for forecasting.
+
+## Bugs found while drafting time series
+
+1. **SARIMA order search consumes the seasonal grid once.** `_select_arima_order` builds `seasonal_grid = product(...)` then loops `for p, d, q` and `for P, D, Q in seasonal_grid`. The inner iterator is exhausted after the first non-seasonal order, so a seasonal period of 12 only pairs seasonal orders with the first (p, d, q). Documented a non-seasonal example instead of that search. HTTP default is `null`; the dialog and chat dispatch that omit the field use 12.
+2. **Holt–Winters 95% interval is residual SD × 1.96**, not a prediction interval. Documented that.
+3. **Stationarity and Autocorrelation sit under Decomposition in the product menu.** `SPSS_MENU_PATHS` says Diagnostics.
+
+## Bugs found while drafting machine learning
+
+1. **Chat dispatch drops fields the HTTP route honours.** `cluster_analysis` and `dbscan` `standardize`; `decision_tree` and the supervised ML bodies `test_fraction`. Omitting them uses the service default (standardize true, 0.25 holdout). A chat request that sets them still gets the default.
+2. **`test_fraction` is clamped to 0.10–0.50** in the services even though the body allows greater than 0.05.
+3. **Cluster k shares `pcaNComponents` in the dialog.** A leftover PCA component count becomes k.
+4. **Decision-tree and random-forest classification train accuracy hit 1.0** on this 96-row example, with test accuracy at chance. Documented as overfitting, not as a successful classifier.
+5. **Random-forest regression holdout R² was negative** on the same moderate linear scores. Documented as worse than the mean on 24 holdout rows, not as a good fit.
+6. **MLP HTTP route never passes `hidden_layer_sizes`.** The fit is always (64, 32). Dispatch would forward the key if it were in the body; the pydantic model does not include it.
 
 Sources:
 
@@ -502,7 +541,7 @@ Tukey is not its own analysis. `coerce_tukey_analysis_type` turns a Tukey reques
 - **SPSS:** Analyze → Nonparametric Tests → Normality
 - **Sources:** `LillieforsKsBody`
 - **Options:** `column`.
-- **Output:** D and p. Status is needs-review: on 120 standard-normal draws the page prints D = 0.043 with p < .001. Those disagree, so the page tells the reader not to treat that p as evidence against normality.
+- **Output:** D and p. Regenerated from main after the nortest p-value fix. On 120 standard-normal draws the page prints D = 0.043, p = .848.
 
 ---
 

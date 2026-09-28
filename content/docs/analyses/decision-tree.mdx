@@ -1,0 +1,88 @@
+---
+title: Decision tree
+description: Classify a categorical outcome with a simple tree and a train/test split.
+category: Machine learning
+---
+
+## When to use it
+
+Use a decision tree when the outcome is a category and you want a readable split of numeric predictors, with holdout accuracy. This page uses the weak exam-cohort signal on purpose so the unpruned tree overfits. An ensemble of a stronger version of the same problem is [random forest classification](/docs/analyses/random-forest-classification).
+
+## Assumptions
+
+The outcome is categorical. Predictors are numeric. Classes with fewer than two rows are dropped. The holdout fraction is 0.25 on the HTTP body and in chat. The service clamps it to 0.10–0.50 and adds a note when it does. Maximum depth defaults to 5. Clear the field (HTTP `null`) for an unrestricted tree. Minimum leaf size defaults to 5. There is no pruning control. This page sets `max_depth` to None and `min_samples_leaf` to 1 so the tree can overfit.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Classification → Decision Tree Classification. In chat: “Decision tree of passed on hours and anxiety.”</Step>
+<Step>Outcome is the categorical column. Predictors need at least one numeric column. Maximum depth starts at 5; clear it for an unrestricted tree. This page sets max_depth to None and min_samples_leaf to 1 to show overfitting.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Categorical outcome.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Numeric predictors. At least one.',
+    },
+    max_depth: {
+      type: '1–50 | null',
+      description: 'Tree depth cap. Default 5. Null is unrestricted. This page sets null, and min_samples_leaf to 1, so the tree can overfit.',
+      default: '5',
+    },
+    min_samples_leaf: {
+      type: '1–100',
+      description: 'Minimum rows in a leaf. Maps to rpart minbucket.',
+      default: '5',
+    },
+    test_fraction: {
+      type: '0.05–0.5',
+      description: 'Holdout fraction, clamped to 0.10–0.50. HTTP and chat dispatch both honour it. A note is added when the value is clamped.',
+      default: '0.25',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The 96-student exam cohort, pass or fail from hours and anxiety, 25% holdout. max_depth is set to None and min_samples_leaf to 1 so the tree is unrestricted; the dialog defaults are 5 and 5. Hours only shifts the pass rate a little, so this page is the overfitting example: train accuracy near 1 and test accuracy near chance.
+
+| Variable | Importance |
+| --- | ---: |
+| hours | 0.431 |
+| anxiety | 0.569 |
+
+Train accuracy = 1, test accuracy = 0.417, n = 96. This page is the overfitting example on purpose. max_depth is set to None and min_samples_leaf to 1 (the dialog defaults are 5 and 5), hours only shifts the pass rate a little, and 72 training rows are enough to memorise the sample. A large train–test gap, with test accuracy near 0.5, is the reading.
+
+## Reporting (APA 7)
+
+Holdout classification of `passed` from hours and anxiety, n = 96. Test accuracy = 0.417, train accuracy = 1. With max_depth set to None and min_samples_leaf to 1, the unpruned tree overfits this weak exam-cohort signal.
+
+## Coming from SPSS
+
+SPSS is Analyze → Classify → Tree. Tensr’s Analyze menu is Classification → Decision Tree Classification. The path string stored for this item matches that SPSS path. There is no CHAID or CRT method switch.
+
+## Related
+
+[Random forest classification](/docs/analyses/random-forest-classification) averages many trees. [Logistic regression](/docs/analyses/logistic-regression) is the parametric binary model.

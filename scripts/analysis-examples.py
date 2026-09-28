@@ -47,6 +47,7 @@ NS_SLUGS = {
     "mantel-haenszel",
     "logistic-regression",
     "probit-regression",
+    "kaplan-meier",
 }
 
 
@@ -253,6 +254,58 @@ def build_frames(rng: np.random.Generator) -> dict[str, pd.DataFrame]:
     lca = pd.DataFrame(lca_cols)
     normal = pd.DataFrame({"noise": rng.normal(0, 1, 120)})
 
+    # Survival: 80 people, two arms, a weak arm gap and a moderate hours slope.
+    n_s = 80
+    arm = np.array(["Standard"] * 40 + ["New"] * 40)
+    hours_s = rng.normal(5, 1.2, n_s).clip(1, 9)
+    lp = 0.16 * (hours_s - 5) + np.where(arm == "Standard", 0.22, 0.0)
+    duration = -np.log(rng.random(n_s)) * 12 / np.exp(lp)
+    cens = rng.exponential(20, n_s)
+    event = (duration <= cens).astype(int)
+    duration = np.minimum(duration, cens)
+    survival = pd.DataFrame(
+        {
+            "weeks": np.round(np.clip(duration, 0.1, None), 2),
+            "event": event,
+            "arm": arm,
+            "hours": np.round(hours_s, 2),
+        }
+    )
+
+    # Monthly series: mild trend, period-12 season, and a near-white noise column.
+    t = np.arange(48)
+    months = pd.date_range("2021-01-01", periods=48, freq="MS")
+    sales = 40 + 0.18 * t + 3.5 * np.sin(2 * np.pi * t / 12) + rng.normal(0, 3.2, 48)
+    series = pd.DataFrame(
+        {
+            "month": months,
+            "sales": np.round(sales, 2),
+            "noise": np.round(rng.normal(50, 4, 48), 2),
+        }
+    )
+
+    # Strong-signal ML sample, drawn after survival/series so those pages stay fixed.
+    # The exam cohort remains the overfitting tree page.
+    n_ml = 240
+    hours_ml = rng.normal(6.0, 1.6, n_ml).clip(0.5, 12)
+    anxiety_ml = rng.normal(50, 10, n_ml).clip(20, 80)
+    score_ml = np.round(np.clip(40 + 5.5 * hours_ml - 0.35 * anxiety_ml + rng.normal(0, 4.5, n_ml), 20, 100), 1)
+    logit = -6.0 + 1.15 * hours_ml - 0.02 * anxiety_ml
+    passed_ml = (rng.random(n_ml) < 1 / (1 + np.exp(-logit))).astype(int)
+    blob = np.concatenate([np.zeros(n_ml // 2), np.ones(n_ml - n_ml // 2)])
+    x_blob = np.where(blob == 0, rng.normal(-2.2, 0.45, n_ml), rng.normal(2.2, 0.45, n_ml))
+    y_blob = np.where(blob == 0, rng.normal(-2.0, 0.45, n_ml), rng.normal(2.0, 0.45, n_ml))
+    ml = pd.DataFrame(
+        {
+            "hours": np.round(hours_ml, 2),
+            "anxiety": np.round(anxiety_ml, 1),
+            "score": score_ml,
+            "passed": passed_ml,
+            "x": np.round(x_blob, 3),
+            "y": np.round(y_blob, 3),
+        }
+    )
+
     return {
         "cohort": cohort,
         "paired": paired,
@@ -271,6 +324,9 @@ def build_frames(rng: np.random.Generator) -> dict[str, pd.DataFrame]:
         "network": network,
         "lca": lca,
         "normal": normal,
+        "survival": survival,
+        "series": series,
+        "ml": ml,
     }
 
 
@@ -490,6 +546,22 @@ def jobs(frames: dict[str, pd.DataFrame]) -> list[tuple[str, str, pd.DataFrame, 
         ("generalized-linear-mixed-model", "generalized_linear_mixed_model", cl, {"dependent": "passed", "fixed_effects": ["hours"], "group_column": "clinic", "family": "binomial"}),
         ("multilevel-modelling", "multilevel_modelling", cl, {"outcome_column": "score", "level1_predictors": ["hours"], "level2_group_column": "clinic"}),
         ("gee", "gee", cl, {"outcome": "passed", "independents": ["hours"], "group": "clinic"}),
+        ("kaplan-meier", "kaplan_meier", frames["survival"], {"duration_column": "weeks", "event_column": "event", "group_column": "arm"}),
+        ("cox-proportional-hazards", "cox_proportional_hazards", frames["survival"], {"duration_column": "weeks", "event_column": "event", "covariates": ["hours"]}),
+        ("nelson-aalen", "nelson_aalen", frames["survival"], {"duration_column": "weeks", "event_column": "event"}),
+        ("arima-sarima", "arima_sarima", frames["series"], {"target_column": "sales", "date_column": "month", "seasonal_period": 12, "forecast_steps": 12}),
+        ("exponential-smoothing", "exponential_smoothing", frames["series"], {"target_column": "sales", "date_column": "month", "seasonal_period": 12, "forecast_steps": 12}),
+        ("stl-decomposition", "stl_decomposition", frames["series"], {"target_column": "sales", "date_column": "month", "period": 12}),
+        ("stationarity-tests", "stationarity_tests", frames["series"], {"target_column": "sales", "date_column": "month"}),
+        ("autocorrelation", "autocorrelation", frames["series"], {"target_column": "noise", "date_column": "month", "max_lags": 20}),
+        ("cluster-analysis", "cluster_analysis", frames["ml"], {"columns": ["x", "y"], "method": "kmeans", "n_clusters": 2}),
+        ("decision-tree", "decision_tree", c, {"dependent": "passed", "independents": ["hours", "anxiety"], "max_depth": None, "min_samples_leaf": 1}),
+        ("random-forest-classification", "random_forest_classification", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"]}),
+        ("random-forest-regression", "random_forest_regression", frames["ml"], {"dependent": "score", "independents": ["hours", "anxiety"]}),
+        ("svm-classification", "svm_classification", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"]}),
+        ("gradient-boosting", "gradient_boosting", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"], "mode": "classification"}),
+        ("neural-network-mlp", "neural_network_mlp", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"], "mode": "classification"}),
+        ("dbscan", "dbscan", frames["ml"], {"columns": ["x", "y"], "epsilon": 0.8, "min_samples": 5}),
     ]
 
 
@@ -560,6 +632,22 @@ INTRO = {
     "generalized-linear-mixed-model": "The same clinics, with a pass/fail outcome and a moderate hours slope, binomial family.",
     "multilevel-modelling": "The same linear mixed model, reported with the intraclass correlation and the split of variance between clinic and residual.",
     "gee": "The clustered pass/fail outcome, population-average, exchangeable correlation within clinic.",
+    "kaplan-meier": "Eighty people, 40 on standard care and 40 on a new arm. Time is weeks until the event. The new arm was built with a slightly lower hazard, and about a third of the rows are censored. The log-rank is the two-group comparison.",
+    "cox-proportional-hazards": "The same 80 people. Hours is a numeric covariate with a moderate link to the hazard. Arm is not in this model.",
+    "nelson-aalen": "The same 80 durations and events, as a cumulative hazard rather than a survival curve. There is no grouping column on this procedure.",
+    "arima-sarima": "Forty-eight months of sales. A mild upward trend and a 12-month wiggle, with noise of about three units. Seasonal period is 12, so the search includes a seasonal order, 12 steps ahead.",
+    "exponential-smoothing": "The same 48 months of sales. Holt–Winters with period 12 and an additive trend. The series is long enough for additive season.",
+    "stl-decomposition": "The same 48 months, split into trend, season, and residual with period 12. There is no forecast table.",
+    "stationarity-tests": "The same sales series, which was built with a drift and a seasonal wiggle, not as white noise. ADF’s null is a unit root. KPSS’s null is level stationarity.",
+    "autocorrelation": "The noise column on those 48 months, drawn as independent N(50, 4) values. Lag structure here is leftover chance, not the sales season.",
+    "cluster-analysis": "Two numeric columns built as two well-separated blobs, 240 rows, k-means with k = 2, standardised. Silhouette should be high.",
+    "decision-tree": "The 96-student exam cohort, pass or fail from hours and anxiety, 25% holdout. max_depth is set to None and min_samples_leaf to 1 so the tree is unrestricted; the dialog defaults are 5 and 5. Hours only shifts the pass rate a little, so this page is the overfitting example: train accuracy near 1 and test accuracy near chance.",
+    "random-forest-classification": "A separate 240-row sample where hours strongly shifts the pass rate. 100 trees, min_samples_leaf 5, no depth cap, 25% holdout. Test accuracy should sit clearly above chance.",
+    "random-forest-regression": "Exam score from hours and anxiety on that same 240-row sample. 100 trees, min_samples_leaf 5, no depth cap. Both slopes were built steep, so holdout R² should be positive.",
+    "svm-classification": "The same strong pass/fail sample and the same two features. Kernel and C are not user controls.",
+    "gradient-boosting": "The same strong pass/fail sample, classification mode, 100 stages, 25% holdout.",
+    "neural-network-mlp": "The same strong pass/fail sample, classification mode, hidden layers 64 and 32, 25% holdout.",
+    "dbscan": "The two blobs, ε = 0.8, min_samples = 5, standardised. Dense cores should appear, with a modest noise share.",
 }
 
 
@@ -634,6 +722,195 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
             "Teaching method and time of day were not associated."
         )
         return section(intro, cells, reading, apa, extra)
+    if slug == "cox-proportional-hazards":
+        row = ex.tables["cox_coef"]["rows"][0]
+        c_index = ex.metric("Concordance index")
+        n_ev = ex.metric("Events")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Hours is the only covariate. Coef = {row[1]}, hazard ratio = {row[2]}, p = {row[3]}. "
+            f"Concordance = {c_index} on {n_obs} people and {n_ev} events. "
+            "The slope is moderate. Concordance still sits near chance, so hours sorts the times only a little."
+        )
+        apa = (
+            f"A Cox model of weeks on hours (N = {n_obs}, {n_ev} events) gave a hazard ratio of {row[2]} "
+            f"per hour, p = {row[3]}, concordance = {c_index}."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "nelson-aalen":
+        n_obs = ex.metric("Observations")
+        n_ev = ex.metric("Events")
+        reading = (
+            f"The report is the count of rows and events, not a p-value. "
+            f"N = {n_obs}, events = {n_ev}. The cumulative hazard chart is a step function of those events over weeks."
+        )
+        apa = (
+            f"Nelson–Aalen cumulative hazard for weeks, N = {n_obs}, {n_ev} events. "
+            "Report the curve and the event count; this estimator has no single p-value."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "arima-sarima":
+        order = ex.metric("Order (p,d,q)")
+        seasonal = ex.metric("Seasonal order")
+        aic = ex.metric("AIC")
+        aicc = ex.metric("AICc")
+        n_obs = ex.metric("Observations")
+        season_bit = f", seasonal order {seasonal}" if seasonal else ""
+        aicc_bit = f", AICc = {aicc}" if aicc else ""
+        reading = (
+            f"Selected order {order}{season_bit}, AIC = {aic}{aicc_bit}, N = {n_obs}. "
+            "d and D are chosen from unit-root tests first; AICc is compared only among models with those orders. "
+            "The table is the 12-step forecast with a 95% interval from the fitted model. "
+            "Seasonal period is 12, so this is a SARIMA search."
+        )
+        apa = (
+            f"An automatic SARIMA{order}{'' if not seasonal else season_bit} forecast of monthly sales, "
+            f"N = {n_obs}, AIC = {aic}{aicc_bit}. "
+            "Report the selected order and the forecast interval, not a p-value."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "exponential-smoothing":
+        period = ex.metric("Seasonal period")
+        sse = ex.metric("SSE")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Period = {period}, SSE = {sse}, N = {n_obs}. "
+            "The interval is residual SD × 1.96, so a wide band means the fit left a lot of leftover scatter, not a model-based prediction interval."
+        )
+        apa = (
+            f"Holt–Winters exponential smoothing of monthly sales, N = {n_obs}, period = {period}. "
+            "Report the forecast and the approximate interval."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "stl-decomposition":
+        period = ex.metric("Period")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Period = {period}, N = {n_obs}. "
+            "There is no component table. The three charts are the trend, the seasonal wiggle, and the residual."
+        )
+        apa = (
+            f"STL decomposition of monthly sales, N = {n_obs}, period = {period}. "
+            "Describe the charts; this procedure has no p-value."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "stationarity-tests":
+        adf_p = ex.metric("ADF p-value")
+        kpss_p = ex.metric("KPSS p-value")
+        reading = (
+            f"ADF {adf_p} (null: unit root). KPSS {kpss_p} (null: level stationarity). "
+            "Neither test rejects its null on this short, mildly drifting series, so the pair is inconclusive."
+        )
+        apa = (
+            f"ADF {adf_p}, KPSS {kpss_p} on 48 months of sales. "
+            "Report both tests; they do not share a null."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "autocorrelation":
+        lb = ex.tables.get("ljung_box")
+        lb_line = ""
+        if lb and lb.get("rows"):
+            row10 = lb["rows"][0]
+            lb_line = f" Ljung–Box at lag {row10[0]}: Q = {row10[1]}, {row10[2]}."
+        reading = (
+            "ACF and PACF on independent draws should sit inside the 95% bands at most lags."
+            + lb_line
+        )
+        apa = (
+            f"ACF and PACF of the noise series, N = {ex.metric('Observations')}, max lags = {ex.metric('Max lags')}."
+            + (f" Ljung–Box {lb['rows'][0][2]} at lag {lb['rows'][0][0]}." if lb and lb.get("rows") else "")
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "cluster-analysis":
+        sil = ex.metric("Silhouette score")
+        method = ex.metric("Method")
+        k = ex.metric("Clusters")
+        reading = (
+            f"{method}, k = {k}, silhouette = {sil}. "
+            "The two columns were built as separate blobs, so a high silhouette is the expected reading."
+        )
+        apa = (
+            f"K-means clustering of x and y into {k} groups, n = {ex.metric('Cases')}, "
+            f"silhouette = {sil}."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "dbscan":
+        k = ex.metric("Clusters")
+        noise = ex.metric("Noise points")
+        noise_pct = ex.metric("Noise %")
+        reading = (
+            f"{k} dense cluster(s), {noise} noise points ({noise_pct}). "
+            "ε = 0.8 on two well-separated blobs after standardising should recover the cores and leave a modest noise share."
+        )
+        apa = (
+            f"DBSCAN on x and y, ε = {ex.metric('ε')}, min_samples = {ex.metric('min_samples')}, "
+            f"{k} cluster(s), {noise} noise points."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "decision-tree":
+        test_acc = ex.metric("Test accuracy")
+        train_acc = ex.metric("Train accuracy")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Train accuracy = {train_acc}, test accuracy = {test_acc}, n = {n_obs}. "
+            "This page is the overfitting example on purpose. max_depth is set to None "
+            "and min_samples_leaf to 1 (the dialog defaults are 5 and 5), hours only shifts "
+            "the pass rate a little, and 72 training rows are enough to memorise the sample. "
+            "A large train–test gap, with test accuracy near 0.5, is the reading."
+        )
+        apa = (
+            f"Holdout classification of `passed` from hours and anxiety, n = {n_obs}. "
+            f"Test accuracy = {test_acc}, train accuracy = {train_acc}. "
+            "With max_depth set to None and min_samples_leaf to 1, the unpruned tree overfits this weak exam-cohort signal."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug in {
+        "random-forest-classification",
+        "svm-classification",
+        "gradient-boosting",
+        "neural-network-mlp",
+    }:
+        test_acc = ex.metric("Test accuracy")
+        train_acc = ex.metric("Train accuracy")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Train accuracy = {train_acc}, test accuracy = {test_acc}, n = {n_obs}. "
+            "Hours was built to move the pass rate strongly, so holdout accuracy should sit clearly above chance."
+        )
+        if slug == "random-forest-classification":
+            leaf = ex.metric("min_samples_leaf")
+            trees = ex.metric("n_estimators") or ex.metric("Trees")
+            extra_h = []
+            if trees:
+                extra_h.append(f"trees = {trees}")
+            if leaf:
+                extra_h.append(f"min_samples_leaf = {leaf}")
+            if extra_h:
+                reading = (
+                    f"Train accuracy = {train_acc}, test accuracy = {test_acc}, n = {n_obs}, "
+                    + ", ".join(extra_h)
+                    + ". Hours was built to move the pass rate strongly, so holdout accuracy should sit clearly above chance."
+                )
+        apa = (
+            f"Holdout classification of `passed` from hours and anxiety, n = {n_obs}. "
+            f"Test accuracy = {test_acc}, train accuracy = {train_acc}."
+        )
+        return section(intro, tables, reading, apa, extra)
+    if slug == "random-forest-regression":
+        r2 = ex.metric("R²")
+        rmse = ex.metric("RMSE")
+        n_obs = ex.metric("Observations")
+        leaf = ex.metric("min_samples_leaf")
+        leaf_bit = f", min_samples_leaf = {leaf}" if leaf else ""
+        reading = (
+            f"Holdout R² = {r2}, RMSE = {rmse}, n = {n_obs}{leaf_bit}. "
+            "Hours and anxiety were built with steep slopes, so a positive holdout R² is the expected reading."
+        )
+        apa = (
+            f"Random forest regression of exam score on hours and anxiety, n = {n_obs}, "
+            f"holdout R² = {r2}, RMSE = {rmse}."
+        )
+        return section(intro, tables, reading, apa, extra)
     if slug in NS_SLUGS and sig is False:
         reading = (
             f"The primary result is not significant (p = {p}). "
@@ -656,6 +933,18 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
     return section(intro, tables, reading, apa, extra)
 
 
+def _metric_float(ex: Example, label: str) -> float | None:
+    text = ex.metric(label).strip().replace("%", "").replace(",", "")
+    if not text or text == "—":
+        return None
+    if text.startswith("."):
+        text = "0" + text
+    try:
+        return float(text)
+    except ValueError:
+        return None
+
+
 def check_extremes(results: dict[str, Example]) -> list[str]:
     problems = []
     mw = results.get("mann-whitney-u")
@@ -675,6 +964,31 @@ def check_extremes(results: dict[str, Example]) -> list[str]:
                             problems.append(f"correlation cell {cell} is extreme")
                     except (TypeError, ValueError):
                         continue
+    tree = results.get("decision-tree")
+    if tree:
+        test_acc = _metric_float(tree, "Test accuracy")
+        train_acc = _metric_float(tree, "Train accuracy")
+        if train_acc is not None and train_acc < 0.9:
+            problems.append(f"decision-tree train accuracy {train_acc} is not an overfit")
+        if test_acc is not None and test_acc > 0.7:
+            problems.append(f"decision-tree test accuracy {test_acc} is too high for the overfitting page")
+    for slug in (
+        "random-forest-classification",
+        "svm-classification",
+        "gradient-boosting",
+        "neural-network-mlp",
+    ):
+        ex = results.get(slug)
+        if not ex:
+            continue
+        test_acc = _metric_float(ex, "Test accuracy")
+        if test_acc is None or test_acc < 0.65:
+            problems.append(f"{slug} test accuracy {test_acc} is not clearly above chance")
+    rf = results.get("random-forest-regression")
+    if rf:
+        r2 = _metric_float(rf, "R²")
+        if r2 is None or r2 <= 0:
+            problems.append(f"random-forest-regression holdout R² {r2} is not positive")
     return problems
 
 
@@ -682,12 +996,25 @@ def main() -> None:
     sys.path.insert(0, "/Users/ollie.darby/repos/tensr-worktrees/tensr-api-main")
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
+    parser.add_argument(
+        "--only",
+        default="",
+        help="Comma-separated slugs. Empty runs every page.",
+    )
     args = parser.parse_args()
+    only = {s.strip() for s in args.only.split(",") if s.strip()}
     rng = np.random.default_rng(SEED)
     frames = build_frames(rng)
     results: dict[str, Example] = {}
     failures: list[str] = []
-    for slug, key, frame, body in jobs(frames):
+    job_list = jobs(frames)
+    if only:
+        known = {j[0] for j in job_list}
+        missing = only - known
+        if missing:
+            raise SystemExit(f"unknown slugs: {sorted(missing)}")
+        job_list = [j for j in job_list if j[0] in only]
+    for slug, key, frame, body in job_list:
         try:
             results[slug] = run_one(key, frame, body)
             results[slug].slug = slug
@@ -705,14 +1032,15 @@ def main() -> None:
             failures.append(f"{slug}: {type(exc).__name__}: {exc}")
 
     stepwise = None
-    try:
-        stepwise = run_one(
-            "linear_regression",
-            frames["cohort"],
-            {"dependent": "score", "independents": ["hours", "anxiety"], "method": "stepwise"},
-        )
-    except Exception as exc:  # noqa: BLE001
-        failures.append(f"stepwise: {type(exc).__name__}: {exc}")
+    if not only or "linear-regression" in only:
+        try:
+            stepwise = run_one(
+                "linear_regression",
+                frames["cohort"],
+                {"dependent": "score", "independents": ["hours", "anxiety"], "method": "stepwise"},
+            )
+        except Exception as exc:  # noqa: BLE001
+            failures.append(f"stepwise: {type(exc).__name__}: {exc}")
 
     ns_hit = [slug for slug, ex in results.items() if slug in NS_SLUGS and ex.significant is False]
     ns_miss = [slug for slug in NS_SLUGS if slug not in ns_hit]
@@ -722,23 +1050,28 @@ def main() -> None:
     for slug in sorted(set(results) - set(ns_hit)):
         ex = results[slug]
         print(f"  ..  {slug:32} p={ex.p_text} sig={ex.significant}")
-    for slug in ns_miss:
-        if slug not in results:
-            print("MISSING RUN", slug)
-            continue
-        ex = results[slug]
-        print("UNCLASSIFIED", slug, "metrics", ex.metrics, "summary", ex.summary[:240])
+    if not only:
+        for slug in ns_miss:
+            if slug not in results:
+                print("MISSING RUN", slug)
+                continue
+            ex = results[slug]
+            print("UNCLASSIFIED", slug, "metrics", ex.metrics, "summary", ex.summary[:240])
     for line in failures:
         print("FAIL", line)
     for line in check_extremes(results):
         print("EXTREME", line)
 
-    if failures or ns_miss or check_extremes(results):
+    if failures or check_extremes(results):
         print("ns missing", ns_miss)
         sys.exit(1)
-    if len(ns_hit) * 4 < len(results):
-        print("fewer than a quarter of pages are non-significant", len(ns_hit), len(results))
-        sys.exit(1)
+    if not only:
+        if ns_miss:
+            print("ns missing", ns_miss)
+            sys.exit(1)
+        if len(ns_hit) * 4 < len(results):
+            print("fewer than a quarter of pages are non-significant", len(ns_hit), len(results))
+            sys.exit(1)
     if not args.write:
         return
 
@@ -747,10 +1080,20 @@ def main() -> None:
         text = path.read_text()
         start = text.index("## Reading the output")
         end = text.index("## Coming from SPSS")
+        between = text[start:end]
+        extras = ""
+        marker = "\n## "
+        idx = between.find(marker, 1)
+        while idx != -1:
+            heading = between[idx + 1 :].split("\n", 1)[0]
+            if heading not in {"## Reading the output", "## Reporting (APA 7)"}:
+                extras = between[idx + 1 :].rstrip() + "\n\n"
+                break
+            idx = between.find(marker, idx + 1)
         rendered = render(slug, ex, stepwise if slug == "linear-regression" else None)
         if "{" in rendered.split("## Reading the output", 1)[-1]:
             raise SystemExit(f"curly brace in {slug}")
-        path.write_text(text[:start] + rendered + "\n" + text[end:])
+        path.write_text(text[:start] + rendered + "\n" + extras + text[end:])
         print("wrote", slug)
 
 
