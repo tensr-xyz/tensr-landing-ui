@@ -1,0 +1,18 @@
+---
+title: Statistical accuracy fixes, checked against R
+date: 2026-09-28
+version: 0.4.0
+tags: [fix]
+---
+
+We compared Tensr's output against R across the core analyses and fixed every mismatch we found. Each fix now has a test that checks it against R on the same data.
+
+- Tukey post-hoc tables fill in standard errors and show very small p-values as < .001 instead of 0
+- Mixed ANOVA between-subjects sums of squares now match R and SPSS, and Mauchly's test is hidden when there are only two levels
+- Descriptives show the statistics you select
+- Negative binomial regression estimates dispersion rather than fixing it at 1, so standard errors and p-values are correct
+- Cohen's kappa is correct (it could previously show 1), and weighted kappa now reports SE and p
+- Lilliefors p-values match R's nortest
+- The Moses test runs again and reports a p-value
+- Effect-size labels use one rule at cutoffs and cite their source
+- Written summaries only mention your own variables

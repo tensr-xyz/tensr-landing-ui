@@ -1,0 +1,40 @@
+---
+title: Merging
+description: Join or stack two datasets, then preview unmatched rows. Three or more files use Fuse.
+---
+
+Data → Data preparation → Merge Datasets. The dialog merges the open file with one other dataset. Preview the unmatched rows before Merge datasets is enabled.
+
+## Merge type
+
+- **Join on keys** — match on columns that exist on both files (`_row_uid`, `_source_row_uids`, and `_weight` are not offered as keys).
+- **Stack rows (union columns)** — append rows. No keys. The result has the union of columns.
+
+Join type, when joining: Inner (default), Left, Right, or Outer.
+
+{/* TODO: confirm whether API merge_type values add_cases and add_variables are still used. They are not in this dialog. */}
+
+## Unmatched report
+
+Preview match shows:
+
+- `N rows in the result.`
+- On a keyed join: unmatched counts on this file and the other file, with sample key values.
+- Columns only on this file, and only on the other file, when those lists are not empty.
+
+The merge button stays disabled until the preview matches the current selection. Changing the other file, the join type, or the keys clears the report.
+
+{/* TODO: confirm whether duplicate_key_count and column_suffixes should appear in the report. They exist on the payload and are not rendered. */}
+
+## Three or more files
+
+Merge Datasets is two files. For 3+ files use Data → Data preparation:
+
+| Dialog | When |
+| --- | --- |
+| **Fuse Waves** | Tracker / wave files. Optional key / wave column. |
+| **Fuse Datasets** | Separate respondent files. Optional key column. |
+
+Select at least two datasets. The open file is pre-checked. With a key, waves are merged outer, one after another. Without a key, rows are stacked and a `_wave` column is added.
+
+{/* TODO: confirm the Fuse result is adopted as the open dataset the same way Merge Datasets is. The fuse dialog currently toasts the row count. */}

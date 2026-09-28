@@ -1,0 +1,38 @@
+---
+title: Weights
+description: Raking creates a new dataset version. SPSS Weight Cases mutates the open file; this does not.
+---
+
+Data → Data preparation → Rake Weights. Submit is **Create raked version**.
+
+Raking creates a new dataset version. It does not overwrite the open file (SPSS Weight Cases mutates the open file; this does not).
+
+## Targets
+
+Fill margins in the dialog, or attach a CSV. The file needs columns for variable, category, and proportion or count. Accepted headers:
+
+- Variable: `variable`, `var`, `column`, `margin`
+- Category: `category`, `level`, `label`
+- Value: `proportion`, `percent`, `percentage`, `count`, `population`, `target`, `n`, `freq`, `frequency`
+
+Excel targets must be saved as CSV, or attached in chat.
+
+The form always sends `missing_handling: exclude`. Rows with a missing or untargeted category are excluded and given weight 0. They stay in the dataset and are counted in the weighting summary. To impute them or add a “missing” target, say so in chat.
+
+{/* TODO: confirm chat can set missing_handling to impute or missing_target. Those values exist on the API type and are not in the form. */}
+
+## On a banner
+
+The weight picker on Custom Tables:
+
+- **Unweighted (original file)**
+- **This file's weight** when the open version is a raked version
+- **Raked weight (`id…`)** for other raked siblings
+
+**Set weight** chooses an active weight column, or **No active weight**.
+
+Crosstabs, means, t-tests, chi-square, and regression use the active weight. Other analyses refuse while a weight is active.
+
+Cells show `n` (unweighted), `wn` (weighted), and `ESS` (Kish effective sample size). Nested banners use that same weight — the nest itself is on [Banner table](/docs/analyses/banner-table).
+
+{/* TODO: confirm whether “rim” should appear as an SPSS alias. It does not appear in the UI. */}

@@ -1,0 +1,33 @@
+---
+title: The agent
+description: Ask, Plan, or Agent. Plan proposes a pipeline you approve. Agent runs when it is confident.
+---
+
+The composer placeholder is **Ask about your data…**. Mode is in the `+` menu (**Switch mode…**) and shown under the box. Default is **Agent**. The choice is stored per project.
+
+| Mode | Hint |
+| --- | --- |
+| **Ask** | Read-only answers — no edits or analyses run |
+| **Plan** | Propose a pipeline; approve before anything runs |
+| **Agent** | Execute when confident; ask when ambiguous |
+
+## Approval
+
+When a step needs a decision, the card has **Accept**, **Skip**, and **Manage**. That covers a proposed analysis, a data action, a tool call that writes, and each step of a prep playbook.
+
+Filter previews always need confirm before they apply. Unambiguous analyses can run without a card (`autoExecute`). A superseded plan collapses to “Suggestion expired — ask again if needed”.
+
+## What it can do
+
+- Run the same analyses as the menu, after approval or auto-run
+- Apply data actions (filters, compute, transforms)
+- Attach CSV, Excel, or SPSS, up to 8 MB per file
+- Walk a multi-step prep playbook, confirming each step
+
+## What it cannot do
+
+It does not start procedures that have been removed from the workspace. That retired list is currently empty — saved reports still open if one is reintroduced.
+
+It does not reach files outside the session, the public internet, or a disk outside the workspace.
+
+{/* TODO: confirm the 8 MB attachment cap is still the live limit on /assistant/agent-loop. */}

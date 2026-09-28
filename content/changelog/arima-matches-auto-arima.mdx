@@ -1,0 +1,12 @@
+---
+title: ARIMA matches auto.arima, and trees are pruned by default
+date: 2026-09-28
+version: 0.4.1
+tags: [improvement, fix]
+---
+
+Automatic ARIMA picks its model the same way as R's auto.arima, choosing differencing first and then comparing models by AICc. Reports show both AIC and AICc, and seasonal terms are skipped when there are fewer than three full seasons of data.
+
+Decision trees now default to a max depth of 5 and a minimum leaf size of 5, so they no longer overfit out of the box. Random forests use the same leaf size. Clear the depth field if you want an unrestricted tree.
+
+The docs now cover survival, time series, survey techniques and machine learning.

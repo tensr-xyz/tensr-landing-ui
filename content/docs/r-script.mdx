@@ -1,0 +1,48 @@
+---
+title: The R script
+description: What Tensr emits, what the verified badges mean, and how to run the script locally.
+---
+
+Every analysis report that has R shows a **Reproducibility (R)** block with the emitted script, below the result. SPSS syntax is separate, under **SPSS syntax (reference)**.
+
+The script loads your download as:
+
+```r
+df <- read.csv("dataset.csv", stringsAsFactors = FALSE, check.names = FALSE,
+               na.strings = c('', 'NA', 'null', 'NULL'))
+```
+
+Identity comments at the top are `# dataset_id:` and `# source: dataset.csv`.
+
+## Badges
+
+The **R syntax** badge is on engine analyses, not plugins.
+
+| Kind | Default text |
+| --- | --- |
+| `verified` | R syntax reproduced F, df and n. |
+| `verified_in_ci` | This syntax reproduced against a reference dataset on this build. |
+| `not_verified` | Generated R does not reproduce the engine result. |
+| `unknown` | R syntax reproduction unknown. |
+
+`not_verified` is the amber state. The live statement on the badge can be more specific (for example ANOVA includes ΔF and Δn).
+
+## What is not compared to R
+
+These procedures emit Python (sklearn / similar). The badge stays off because the libraries do not line up:
+
+- Decision tree, random forest, gradient boosting, SVM, neural network (MLP)
+- Open-text coding (agent procedure, not a statistic)
+- MaxDiff HB and conjoint HB
+
+{/* TODO: confirm the current NOT_VERIFIABLE list still matches r_coverage.py before this page is treated as complete. */}
+
+## How to run it
+
+1. Export the dataset as CSV (same names as the `.sav`, including `weight` when present).
+2. Save the emitted script next to `dataset.csv`.
+3. Run `Rscript your-script.R`. Tensr uses `RSCRIPT_BIN` if set, otherwise `Rscript`.
+
+Packages the runner expects include `jsonlite`, `dplyr`, `irr`, `epitools`, `DescTools`, `ez`, `ggplot2`, and analysis-specific libraries such as `car`, `lme4`, `MASS`, `survival`, and `geepack`.
+
+Open-text coding emits a comment only: it is not a stats engine call.
