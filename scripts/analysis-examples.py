@@ -742,7 +742,7 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
         n_ev = ex.metric("Events")
         reading = (
             f"The report is the count of rows and events, not a p-value. "
-            f"N = {n_obs}, events = {n_ev}. The cumulative hazard chart is the picture of those events over weeks."
+            f"N = {n_obs}, events = {n_ev}. The cumulative hazard chart is a step function of those events over weeks."
         )
         apa = (
             f"Nelson–Aalen cumulative hazard for weeks, N = {n_obs}, {n_ev} events. "
@@ -1029,12 +1029,13 @@ def main() -> None:
     for slug in sorted(set(results) - set(ns_hit)):
         ex = results[slug]
         print(f"  ..  {slug:32} p={ex.p_text} sig={ex.significant}")
-    for slug in ns_miss:
-        if slug not in results:
-            print("MISSING RUN", slug)
-            continue
-        ex = results[slug]
-        print("UNCLASSIFIED", slug, "metrics", ex.metrics, "summary", ex.summary[:240])
+    if not only:
+        for slug in ns_miss:
+            if slug not in results:
+                print("MISSING RUN", slug)
+                continue
+            ex = results[slug]
+            print("UNCLASSIFIED", slug, "metrics", ex.metrics, "summary", ex.summary[:240])
     for line in failures:
         print("FAIL", line)
     for line in check_extremes(results):

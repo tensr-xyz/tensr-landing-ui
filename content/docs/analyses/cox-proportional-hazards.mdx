@@ -14,7 +14,7 @@ Duration must be positive and numeric. The event column is 1 for the event and 0
 
 The model assumes proportional hazards. Tensr does not run a Schoenfeld or other proportional-hazards test. The dialog only offers numeric covariates.
 
-The baseline survival chart is a connected scatter of the fitted baseline, not a step function.
+The baseline chart is a step function of the fitted baseline cumulative hazard, from the origin (0, 0), matching Kaplan–Meier.
 
 ## Running it in Tensr
 
@@ -51,7 +51,7 @@ The baseline survival chart is a connected scatter of the fitted baseline, not a
     },
     include_charts: {
       type: 'boolean',
-      description: 'Report output. Draws the baseline survival curve.',
+      description: 'Report output. Draws the baseline cumulative hazard as a step function.',
       default: 'true',
     },
   }}

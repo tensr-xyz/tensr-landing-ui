@@ -10,7 +10,7 @@ Use Nelson–Aalen when you want the cumulative hazard of the same duration and 
 
 ## Assumptions
 
-Duration must be positive and numeric. The event column is 1 for the event and 0 for censored; `true`, `yes`, `y`, and `event` also count as 1. At least three valid rows are required. There is no grouping column on this procedure.
+Duration must be positive and numeric. The event column is 1 for the event and 0 for censored; `true`, `yes`, `y`, and `event` also count as 1. At least three valid rows are required. There is no grouping column on this procedure. The cumulative hazard chart is a step function from the origin (0, 0), matching Kaplan–Meier.
 
 ## Running it in Tensr
 
@@ -43,7 +43,7 @@ Duration must be positive and numeric. The event column is 1 for the event and 0
     },
     include_charts: {
       type: 'boolean',
-      description: 'Report output. Draws the cumulative hazard curve.',
+      description: 'Report output. Draws the cumulative hazard as a step function.',
       default: 'true',
     },
   }}
@@ -53,7 +53,7 @@ Duration must be positive and numeric. The event column is 1 for the event and 0
 
 The same 80 durations and events, as a cumulative hazard rather than a survival curve. There is no grouping column on this procedure.
 
-The report is the count of rows and events, not a p-value. N = 80, events = 58. The cumulative hazard chart is the picture of those events over weeks.
+The report is the count of rows and events, not a p-value. N = 80, events = 58. The cumulative hazard chart is a step function of those events over weeks.
 
 ## Reporting (APA 7)
 
