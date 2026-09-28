@@ -30,6 +30,7 @@ NS_SLUGS = {
     "median-test",
     "runs-test",
     "shapiro-wilk",
+    "lilliefors-ks",
     "loglinear",
     "kolmogorov-smirnov",
     "fishers-exact",
@@ -591,18 +592,6 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
             f"{step_p}\n\n"
             f"{stepwise.summary}"
         )
-    if slug == "lilliefors-ks":
-        d_value = ex.metric("D")
-        reading = (
-            f"D = {d_value} on 120 standard-normal draws. A discrepancy that small is what normal data looks like. "
-            f"The printed p is {p}. Those two do not belong together for a Lilliefors test at this sample size, "
-            "so this page does not treat the p as a normality decision."
-        )
-        apa = (
-            f"Lilliefors D = {d_value}, N = 120. Do not report the printed p ({p}) as evidence against normality. "
-            "The statistic and the p disagree."
-        )
-        return section(intro, tables, reading, apa, extra)
     if slug == "anova-twoway":
         rows = {row[0]: row for row in ex.tables["anova2"]["rows"]}
         reading = (
