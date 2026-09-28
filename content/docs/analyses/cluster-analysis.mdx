@@ -6,7 +6,7 @@ category: Machine learning
 
 ## When to use it
 
-Use cluster analysis when you want to split people into a chosen number of groups based on numeric similarity, not a known label. “Three study-style groups from hours and anxiety” is the shape of the question. Density clusters that can leave points as noise are [DBSCAN](/docs/analyses/dbscan).
+Use cluster analysis when you want to split people into a chosen number of groups based on numeric similarity, not a known label. “Two style groups from two well-separated columns” is the shape of this example. Density clusters that can leave points as noise are [DBSCAN](/docs/analyses/dbscan).
 
 ## Assumptions
 
@@ -62,25 +62,23 @@ Columns are numeric. K-means is the dialog default, with three clusters, and var
 
 ## Reading the output
 
-Hours and anxiety for the 96 students, k-means, three clusters, standardised. The two columns were not built as three blobs, so the groups should overlap.
+Two numeric columns built as two well-separated blobs, 240 rows, k-means with k = 2, standardised. Silhouette should be high.
 
-| Cluster | hours | anxiety |
+| Cluster | x | y |
 | ---: | ---: | ---: |
-| 0 | 4.066 | 4.323 |
-| 1 | 6.365 | 4.439 |
-| 2 | 4.89 | 6.589 |
+| 0 | 2.215 | 1.972 |
+| 1 | -2.121 | -2.044 |
 
 | Cluster | Within-cluster SS | Silhouette |
 | ---: | ---: | ---: |
-| 0 | 36.724 | 0.325 |
-| 1 | 28.414 | 0.346 |
-| 2 | 18.034 | 0.364 |
+| 0 | 9.534 | 0.872 |
+| 1 | 10.508 | 0.865 |
 
-kmeans, k = 3, silhouette = 0.342. Silhouette of 0.34 is a weak partition. The three groups overlap, which is the expected reading when hours and anxiety were not built as blobs.
+kmeans, k = 2, silhouette = 0.869. The two columns were built as separate blobs, so a high silhouette is the expected reading.
 
 ## Reporting (APA 7)
 
-K-means clustering of hours and anxiety into 3 groups, n = 96, silhouette = 0.342.
+K-means clustering of x and y into 2 groups, n = 240, silhouette = 0.869.
 
 ## Coming from SPSS
 

@@ -66,23 +66,23 @@ Classification: categorical outcome, numeric features, classes with fewer than t
 
 ## Reading the output
 
-The same pass/fail outcome, classification mode, 100 stages, 25% holdout.
+The same strong pass/fail sample, classification mode, 100 stages, 25% holdout.
 
 | Actual \ Predicted | 0 | 1 |
 | ---: | ---: | ---: |
-| 0 | 7 | 5 |
-| 1 | 5 | 7 |
+| 0 | 27 | 6 |
+| 1 | 11 | 16 |
 
 | Variable | Importance |
 | --- | ---: |
-| hours | 0.484 |
-| anxiety | 0.516 |
+| hours | 0.792 |
+| anxiety | 0.208 |
 
-Train accuracy = 1, test accuracy = 0.583, n = 96. Hours only shifts the pass rate a little, so a large gap between train and test is overfitting, and a test accuracy near 0.5 is chance.
+Train accuracy = 0.994, test accuracy = 0.717, n = 240. Hours was built to move the pass rate strongly, so holdout accuracy should sit clearly above chance.
 
 ## Reporting (APA 7)
 
-Holdout classification of `passed` from hours and anxiety, n = 96. Test accuracy = 0.583, train accuracy = 1.
+Holdout classification of `passed` from hours and anxiety, n = 240. Test accuracy = 0.717, train accuracy = 0.994.
 
 ## Coming from SPSS
 

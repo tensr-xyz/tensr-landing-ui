@@ -62,19 +62,18 @@ Columns are numeric. Epsilon starts at 0.5, minimum samples at 5, standardize on
 
 ## Reading the output
 
-Hours and anxiety, ε = 0.5, min_samples = 5, standardised. Dense cores if they exist; leftover points are noise.
+The two blobs, ε = 0.8, min_samples = 5, standardised. Dense cores should appear, with a modest noise share.
 
 | Cluster | Size |
-| --- | ---: |
-| 0 | 8 |
-| 1 | 66 |
-| Noise | 22 |
+| ---: | ---: |
+| 0 | 120 |
+| 1 | 120 |
 
-2 dense cluster(s), 22 noise points (22.9%). A high noise share means ε = 0.5 is tight on these two columns after standardising.
+2 dense cluster(s), 0 noise points (0%). ε = 0.8 on two well-separated blobs after standardising should recover the cores and leave a modest noise share.
 
 ## Reporting (APA 7)
 
-DBSCAN on hours and anxiety, ε = 0.5, min_samples = 5, 2 cluster(s), 22 noise points.
+DBSCAN on x and y, ε = 0.8, min_samples = 5, 2 cluster(s), 0 noise points.
 
 ## Coming from SPSS
 

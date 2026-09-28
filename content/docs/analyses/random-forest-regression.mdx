@@ -61,18 +61,18 @@ Outcome and features are numeric. Holdout fraction 0.25, 100 trees, `random_stat
 
 ## Reading the output
 
-Exam score from hours and anxiety, 100 trees, 25% holdout. Both slopes were built moderate, so holdout R² should be real and far from 1.
+Exam score from hours and anxiety on that same 240-row sample. Both slopes were built steep, so holdout R² should be positive.
 
 | Variable | Importance |
 | --- | ---: |
-| hours | 0.39 |
-| anxiety | 0.61 |
+| hours | 0.791 |
+| anxiety | 0.209 |
 
-Holdout R² = -0.828, RMSE = 8.3, n = 96. A negative R² means the forest did worse on the holdout rows than predicting the mean. That is what an unpruned forest looks like on a moderate linear signal with 72 training rows.
+Holdout R² = 0.704, RMSE = 4.871, n = 240. Hours and anxiety were built with steep slopes, so a positive holdout R² is the expected reading.
 
 ## Reporting (APA 7)
 
-Random forest regression of exam score on hours and anxiety, n = 96, holdout R² = -0.828, RMSE = 8.3.
+Random forest regression of exam score on hours and anxiety, n = 240, holdout R² = 0.704, RMSE = 4.871.
 
 ## Coming from SPSS
 

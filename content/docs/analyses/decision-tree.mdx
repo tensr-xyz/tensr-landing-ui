@@ -6,7 +6,7 @@ category: Machine learning
 
 ## When to use it
 
-Use a decision tree when the outcome is a category and you want a readable split of numeric predictors, with holdout accuracy. An ensemble of the same problem is [random forest classification](/docs/analyses/random-forest-classification).
+Use a decision tree when the outcome is a category and you want a readable split of numeric predictors, with holdout accuracy. This page uses the weak exam-cohort signal on purpose so the unpruned tree overfits. An ensemble of a stronger version of the same problem is [random forest classification](/docs/analyses/random-forest-classification).
 
 ## Assumptions
 
@@ -61,18 +61,18 @@ The outcome is categorical. Predictors are numeric. Classes with fewer than two 
 
 ## Reading the output
 
-Pass or fail from hours and anxiety, one tree, 25% holdout. Hours shifts the pass rate a little, so holdout accuracy should beat chance and stay well short of perfect.
+The 96-student exam cohort, pass or fail from hours and anxiety, one unpruned tree, 25% holdout. Hours only shifts the pass rate a little, so this page is the overfitting example: train accuracy near 1 and test accuracy near chance.
 
 | Variable | Importance |
 | --- | ---: |
 | hours | 0.431 |
 | anxiety | 0.569 |
 
-Train accuracy = 1, test accuracy = 0.417, n = 96. Hours only shifts the pass rate a little, so a large gap between train and test is overfitting, and a test accuracy near 0.5 is chance.
+Train accuracy = 1, test accuracy = 0.417, n = 96. This page is the overfitting example on purpose. The tree has no depth limit, hours only shifts the pass rate a little, and 72 training rows are enough to memorise the sample. A large train–test gap, with test accuracy near 0.5, is the reading.
 
 ## Reporting (APA 7)
 
-Holdout classification of `passed` from hours and anxiety, n = 96. Test accuracy = 0.417, train accuracy = 1.
+Holdout classification of `passed` from hours and anxiety, n = 96. Test accuracy = 0.417, train accuracy = 1. The unpruned tree overfits this weak exam-cohort signal.
 
 ## Coming from SPSS
 

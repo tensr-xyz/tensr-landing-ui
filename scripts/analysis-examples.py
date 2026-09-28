@@ -284,6 +284,28 @@ def build_frames(rng: np.random.Generator) -> dict[str, pd.DataFrame]:
         }
     )
 
+    # Strong-signal ML sample, drawn after survival/series so those pages stay fixed.
+    # The exam cohort remains the overfitting tree page.
+    n_ml = 240
+    hours_ml = rng.normal(6.0, 1.6, n_ml).clip(0.5, 12)
+    anxiety_ml = rng.normal(50, 10, n_ml).clip(20, 80)
+    score_ml = np.round(np.clip(40 + 5.5 * hours_ml - 0.35 * anxiety_ml + rng.normal(0, 4.5, n_ml), 20, 100), 1)
+    logit = -6.0 + 1.15 * hours_ml - 0.02 * anxiety_ml
+    passed_ml = (rng.random(n_ml) < 1 / (1 + np.exp(-logit))).astype(int)
+    blob = np.concatenate([np.zeros(n_ml // 2), np.ones(n_ml - n_ml // 2)])
+    x_blob = np.where(blob == 0, rng.normal(-2.2, 0.45, n_ml), rng.normal(2.2, 0.45, n_ml))
+    y_blob = np.where(blob == 0, rng.normal(-2.0, 0.45, n_ml), rng.normal(2.0, 0.45, n_ml))
+    ml = pd.DataFrame(
+        {
+            "hours": np.round(hours_ml, 2),
+            "anxiety": np.round(anxiety_ml, 1),
+            "score": score_ml,
+            "passed": passed_ml,
+            "x": np.round(x_blob, 3),
+            "y": np.round(y_blob, 3),
+        }
+    )
+
     return {
         "cohort": cohort,
         "paired": paired,
@@ -304,6 +326,7 @@ def build_frames(rng: np.random.Generator) -> dict[str, pd.DataFrame]:
         "normal": normal,
         "survival": survival,
         "series": series,
+        "ml": ml,
     }
 
 
@@ -531,14 +554,14 @@ def jobs(frames: dict[str, pd.DataFrame]) -> list[tuple[str, str, pd.DataFrame, 
         ("stl-decomposition", "stl_decomposition", frames["series"], {"target_column": "sales", "date_column": "month", "period": 12}),
         ("stationarity-tests", "stationarity_tests", frames["series"], {"target_column": "sales", "date_column": "month"}),
         ("autocorrelation", "autocorrelation", frames["series"], {"target_column": "noise", "date_column": "month", "max_lags": 20}),
-        ("cluster-analysis", "cluster_analysis", c, {"columns": ["hours", "anxiety"], "method": "kmeans", "n_clusters": 3}),
+        ("cluster-analysis", "cluster_analysis", frames["ml"], {"columns": ["x", "y"], "method": "kmeans", "n_clusters": 2}),
         ("decision-tree", "decision_tree", c, {"dependent": "passed", "independents": ["hours", "anxiety"]}),
-        ("random-forest-classification", "random_forest_classification", c, {"dependent": "passed", "independents": ["hours", "anxiety"]}),
-        ("random-forest-regression", "random_forest_regression", c, {"dependent": "score", "independents": ["hours", "anxiety"]}),
-        ("svm-classification", "svm_classification", c, {"dependent": "passed", "independents": ["hours", "anxiety"]}),
-        ("gradient-boosting", "gradient_boosting", c, {"dependent": "passed", "independents": ["hours", "anxiety"], "mode": "classification"}),
-        ("neural-network-mlp", "neural_network_mlp", c, {"dependent": "passed", "independents": ["hours", "anxiety"], "mode": "classification"}),
-        ("dbscan", "dbscan", c, {"columns": ["hours", "anxiety"], "epsilon": 0.5, "min_samples": 5}),
+        ("random-forest-classification", "random_forest_classification", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"]}),
+        ("random-forest-regression", "random_forest_regression", frames["ml"], {"dependent": "score", "independents": ["hours", "anxiety"]}),
+        ("svm-classification", "svm_classification", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"]}),
+        ("gradient-boosting", "gradient_boosting", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"], "mode": "classification"}),
+        ("neural-network-mlp", "neural_network_mlp", frames["ml"], {"dependent": "passed", "independents": ["hours", "anxiety"], "mode": "classification"}),
+        ("dbscan", "dbscan", frames["ml"], {"columns": ["x", "y"], "epsilon": 0.8, "min_samples": 5}),
     ]
 
 
@@ -617,14 +640,14 @@ INTRO = {
     "stl-decomposition": "The same 48 months, split into trend, season, and residual with period 12. There is no forecast table.",
     "stationarity-tests": "The same sales series, which was built with a drift and a seasonal wiggle, not as white noise. ADF’s null is a unit root. KPSS’s null is level stationarity.",
     "autocorrelation": "The noise column on those 48 months, drawn as independent N(50, 4) values. Lag structure here is leftover chance, not the sales season.",
-    "cluster-analysis": "Hours and anxiety for the 96 students, k-means, three clusters, standardised. The two columns were not built as three blobs, so the groups should overlap.",
-    "decision-tree": "Pass or fail from hours and anxiety, one tree, 25% holdout. Hours shifts the pass rate a little, so holdout accuracy should beat chance and stay well short of perfect.",
-    "random-forest-classification": "The same pass/fail outcome and the same two features, 100 trees, 25% holdout.",
-    "random-forest-regression": "Exam score from hours and anxiety, 100 trees, 25% holdout. Both slopes were built moderate, so holdout R² should be real and far from 1.",
-    "svm-classification": "The same pass/fail outcome and the same two features. Kernel and C are not user controls.",
-    "gradient-boosting": "The same pass/fail outcome, classification mode, 100 stages, 25% holdout.",
-    "neural-network-mlp": "The same pass/fail outcome, classification mode, hidden layers 64 and 32, 25% holdout.",
-    "dbscan": "Hours and anxiety, ε = 0.5, min_samples = 5, standardised. Dense cores if they exist; leftover points are noise.",
+    "cluster-analysis": "Two numeric columns built as two well-separated blobs, 240 rows, k-means with k = 2, standardised. Silhouette should be high.",
+    "decision-tree": "The 96-student exam cohort, pass or fail from hours and anxiety, one unpruned tree, 25% holdout. Hours only shifts the pass rate a little, so this page is the overfitting example: train accuracy near 1 and test accuracy near chance.",
+    "random-forest-classification": "A separate 240-row sample where hours strongly shifts the pass rate. 100 trees, 25% holdout. Test accuracy should sit clearly above chance.",
+    "random-forest-regression": "Exam score from hours and anxiety on that same 240-row sample. Both slopes were built steep, so holdout R² should be positive.",
+    "svm-classification": "The same strong pass/fail sample and the same two features. Kernel and C are not user controls.",
+    "gradient-boosting": "The same strong pass/fail sample, classification mode, 100 stages, 25% holdout.",
+    "neural-network-mlp": "The same strong pass/fail sample, classification mode, hidden layers 64 and 32, 25% holdout.",
+    "dbscan": "The two blobs, ε = 0.8, min_samples = 5, standardised. Dense cores should appear, with a modest noise share.",
 }
 
 
@@ -798,10 +821,10 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
         k = ex.metric("Clusters")
         reading = (
             f"{method}, k = {k}, silhouette = {sil}. "
-            "Silhouette of 0.34 is a weak partition. The three groups overlap, which is the expected reading when hours and anxiety were not built as blobs."
+            "The two columns were built as separate blobs, so a high silhouette is the expected reading."
         )
         apa = (
-            f"K-means clustering of hours and anxiety into {k} groups, n = {ex.metric('Cases')}, "
+            f"K-means clustering of x and y into {k} groups, n = {ex.metric('Cases')}, "
             f"silhouette = {sil}."
         )
         return section(intro, tables, reading, apa, extra)
@@ -811,15 +834,30 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
         noise_pct = ex.metric("Noise %")
         reading = (
             f"{k} dense cluster(s), {noise} noise points ({noise_pct}). "
-            "A high noise share means ε = 0.5 is tight on these two columns after standardising."
+            "ε = 0.8 on two well-separated blobs after standardising should recover the cores and leave a modest noise share."
         )
         apa = (
-            f"DBSCAN on hours and anxiety, ε = {ex.metric('ε')}, min_samples = {ex.metric('min_samples')}, "
+            f"DBSCAN on x and y, ε = {ex.metric('ε')}, min_samples = {ex.metric('min_samples')}, "
             f"{k} cluster(s), {noise} noise points."
         )
         return section(intro, tables, reading, apa, extra)
+    if slug == "decision-tree":
+        test_acc = ex.metric("Test accuracy")
+        train_acc = ex.metric("Train accuracy")
+        n_obs = ex.metric("Observations")
+        reading = (
+            f"Train accuracy = {train_acc}, test accuracy = {test_acc}, n = {n_obs}. "
+            "This page is the overfitting example on purpose. The tree has no depth limit, "
+            "hours only shifts the pass rate a little, and 72 training rows are enough to memorise the sample. "
+            "A large train–test gap, with test accuracy near 0.5, is the reading."
+        )
+        apa = (
+            f"Holdout classification of `passed` from hours and anxiety, n = {n_obs}. "
+            f"Test accuracy = {test_acc}, train accuracy = {train_acc}. "
+            "The unpruned tree overfits this weak exam-cohort signal."
+        )
+        return section(intro, tables, reading, apa, extra)
     if slug in {
-        "decision-tree",
         "random-forest-classification",
         "svm-classification",
         "gradient-boosting",
@@ -830,7 +868,7 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
         n_obs = ex.metric("Observations")
         reading = (
             f"Train accuracy = {train_acc}, test accuracy = {test_acc}, n = {n_obs}. "
-            "Hours only shifts the pass rate a little, so a large gap between train and test is overfitting, and a test accuracy near 0.5 is chance."
+            "Hours was built to move the pass rate strongly, so holdout accuracy should sit clearly above chance."
         )
         apa = (
             f"Holdout classification of `passed` from hours and anxiety, n = {n_obs}. "
@@ -843,8 +881,7 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
         n_obs = ex.metric("Observations")
         reading = (
             f"Holdout R² = {r2}, RMSE = {rmse}, n = {n_obs}. "
-            "A negative R² means the forest did worse on the holdout rows than predicting the mean. "
-            "That is what an unpruned forest looks like on a moderate linear signal with 72 training rows."
+            "Hours and anxiety were built with steep slopes, so a positive holdout R² is the expected reading."
         )
         apa = (
             f"Random forest regression of exam score on hours and anxiety, n = {n_obs}, "
@@ -873,6 +910,18 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
     return section(intro, tables, reading, apa, extra)
 
 
+def _metric_float(ex: Example, label: str) -> float | None:
+    text = ex.metric(label).strip().replace("%", "").replace(",", "")
+    if not text or text == "—":
+        return None
+    if text.startswith("."):
+        text = "0" + text
+    try:
+        return float(text)
+    except ValueError:
+        return None
+
+
 def check_extremes(results: dict[str, Example]) -> list[str]:
     problems = []
     mw = results.get("mann-whitney-u")
@@ -892,6 +941,31 @@ def check_extremes(results: dict[str, Example]) -> list[str]:
                             problems.append(f"correlation cell {cell} is extreme")
                     except (TypeError, ValueError):
                         continue
+    tree = results.get("decision-tree")
+    if tree:
+        test_acc = _metric_float(tree, "Test accuracy")
+        train_acc = _metric_float(tree, "Train accuracy")
+        if train_acc is not None and train_acc < 0.9:
+            problems.append(f"decision-tree train accuracy {train_acc} is not an overfit")
+        if test_acc is not None and test_acc > 0.7:
+            problems.append(f"decision-tree test accuracy {test_acc} is too high for the overfitting page")
+    for slug in (
+        "random-forest-classification",
+        "svm-classification",
+        "gradient-boosting",
+        "neural-network-mlp",
+    ):
+        ex = results.get(slug)
+        if not ex:
+            continue
+        test_acc = _metric_float(ex, "Test accuracy")
+        if test_acc is None or test_acc < 0.65:
+            problems.append(f"{slug} test accuracy {test_acc} is not clearly above chance")
+    rf = results.get("random-forest-regression")
+    if rf:
+        r2 = _metric_float(rf, "R²")
+        if r2 is None or r2 <= 0:
+            problems.append(f"random-forest-regression holdout R² {r2} is not positive")
     return problems
 
 
