@@ -10,7 +10,7 @@ Use cluster analysis when you want to split people into a chosen number of group
 
 ## Assumptions
 
-Columns are numeric. K-means is the dialog default, with three clusters, and variables standardized. Hierarchical uses Ward linkage on the same standardized columns. Chat dispatch does not forward `standardize`, so a request that sets it to false still standardizes. The number-of-clusters field in the dialog is shared with PCA’s component count; a leftover 2 from PCA becomes k = 2 here.
+Columns are numeric. K-means is the dialog default, with three clusters, and variables standardized. Hierarchical uses Ward linkage on the same standardized columns. HTTP and chat dispatch both honour `standardize`. Number of clusters is its own field, not shared with PCA.
 
 ## Running it in Tensr
 
@@ -39,7 +39,7 @@ Columns are numeric. K-means is the dialog default, with three clusters, and var
     },
     standardize: {
       type: 'boolean',
-      description: 'Z-score the columns first. The HTTP body honours this. Chat dispatch always standardises.',
+      description: 'Z-score the columns first. HTTP and chat dispatch both honour this.',
       default: 'true',
     },
     decimal_places: {
@@ -71,8 +71,8 @@ Two numeric columns built as two well-separated blobs, 240 rows, k-means with k 
 
 | Cluster | Within-cluster SS | Silhouette |
 | ---: | ---: | ---: |
-| 0 | 9.534 | 0.872 |
-| 1 | 10.508 | 0.865 |
+| 0 | 9.494 | 0.872 |
+| 1 | 10.465 | 0.865 |
 
 kmeans, k = 2, silhouette = 0.869. The two columns were built as separate blobs, so a high silhouette is the expected reading.
 

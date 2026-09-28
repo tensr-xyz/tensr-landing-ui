@@ -1,0 +1,75 @@
+---
+title: Banner table
+description: Weighted crosstabs with nested banners and significance letters.
+category: Survey techniques
+---
+
+<ComponentPreview name="banner-demo" />
+
+## When to use it
+
+Use a banner table when the deliverable is the book a client already reads: a stub down the side, breaks across the top, a total column, and letters where columns differ. A single unweighted 2×2 without letters is [chi-square](/docs/analyses/chi-square). A map of the same association is [correspondence analysis](/docs/analyses/correspondence).
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Tables → Custom Tables. In chat: “Banner of brand by age.”</Step>
+<Step>Stub is the question down the side. Banner is the break across the top. Choose a weight, or leave the table unweighted.</Step>
+<Step>Column percent and column letters start on. Nested banners stay available when you stack a second break.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    stub_column: {
+      type: 'string',
+      description: 'Question or variable down the side of the grid.',
+    },
+    banner_column: {
+      type: 'string',
+      description: 'Break across the top.',
+    },
+    column_percent: {
+      type: 'boolean',
+      description: 'Column percentages in the cells.',
+      default: 'true',
+    },
+    column_letters: {
+      type: 'boolean',
+      description: 'Column-proportion significance letters.',
+      default: 'true',
+    },
+    nest_banners: {
+      type: 'boolean',
+      description: 'Allow a second break nested under the first.',
+      default: 'true',
+    },
+    row_percent: {
+      type: 'boolean',
+      description: 'Row percentages. Off by default so the book stays column-percent.',
+      default: 'false',
+    },
+    low_base_threshold: {
+      type: '1–500',
+      description: 'Unweighted column base below which letters are withheld.',
+      default: '30',
+    },
+  }}
+/>
+
+## Reading the output
+
+A banner is the book a client already reads: rows of brands or statements, columns of a break, a total column, and letters where columns differ. The grid stores the weight, the base, and the row identities next to every cell.
+
+Compare each column with every other column at 95%. A letter means that cell is higher than the named column. Put region under age and the total column stays the weighted total of the rows, not a sum of the displayed breaks.
+
+Letters are withheld when a column base is below the cutoff, even if the percentage looks decisive. Unweighted counts stay available beside the weighted percent so a client can see the base. The grid is keyboard reachable, and each letter has a text alternative in the cell, not colour alone.
+
+## Coming from SPSS
+
+SPSS is Analyze → Tables → Custom Tables. Tensr’s item uses the same path. SPSS letters are a custom-tables option; Tensr’s column letters start on, with a low-base cutoff of 30.
+
+## Related
+
+[Chi-square](/docs/analyses/chi-square) is the unweighted 2×2 without letters. [Correspondence analysis](/docs/analyses/correspondence) maps the same stub-by-banner association.

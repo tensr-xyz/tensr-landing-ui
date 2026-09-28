@@ -10,7 +10,7 @@ Use gradient boosting when you want an ensemble of trees that can run as classif
 
 ## Assumptions
 
-Classification: categorical outcome, numeric features, classes with fewer than two rows dropped. Regression: numeric outcome. Holdout fraction 0.25, 100 trees. Chat dispatch does not forward `test_fraction`. Learning rate and maximum depth are not exposed.
+Classification: categorical outcome, numeric features, classes with fewer than two rows dropped. Regression: numeric outcome. Holdout fraction 0.25, 100 trees. HTTP and chat dispatch both honour `test_fraction`. Learning rate and maximum depth are not exposed.
 
 ## Running it in Tensr
 
@@ -43,7 +43,7 @@ Classification: categorical outcome, numeric features, classes with fewer than t
     },
     test_fraction: {
       type: '0.05–0.5',
-      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      description: 'Holdout fraction, clamped to 0.10–0.50. HTTP and chat dispatch both honour it. A note is added when the value is clamped.',
       default: '0.25',
     },
     decimal_places: {

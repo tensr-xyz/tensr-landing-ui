@@ -10,7 +10,7 @@ Use the MLP when you want a small neural net on tabular data, as classification 
 
 ## Assumptions
 
-Hidden-layer size is not a user control. The fit uses two hidden layers of 64 and 32 units. This run also prints permutation importances. Holdout fraction 0.25; chat dispatch does not forward `test_fraction`.
+Hidden-layer size is not a user control. The fit uses two hidden layers of 64 and 32 units. This run also prints permutation importances. Holdout fraction 0.25; HTTP and chat dispatch both honour `test_fraction`.
 
 ## Running it in Tensr
 
@@ -38,7 +38,7 @@ Hidden-layer size is not a user control. The fit uses two hidden layers of 64 an
     },
     test_fraction: {
       type: '0.05–0.5',
-      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      description: 'Holdout fraction, clamped to 0.10–0.50. HTTP and chat dispatch both honour it. A note is added when the value is clamped.',
       default: '0.25',
     },
     decimal_places: {

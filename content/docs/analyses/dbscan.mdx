@@ -10,7 +10,7 @@ Use DBSCAN when you want clusters of dense points and you are willing to leave s
 
 ## Assumptions
 
-Columns are numeric. Epsilon starts at 0.5, minimum samples at 5, standardize on. Chat dispatch does not forward `standardize`. If more than 30% of rows are noise, the report warns. There is no k to choose.
+Columns are numeric. Epsilon starts at 0.5, minimum samples at 5, standardize on. HTTP and chat dispatch both honour `standardize`. If more than 30% of rows are noise, the report warns. There is no k to choose.
 
 ## Running it in Tensr
 
@@ -39,7 +39,7 @@ Columns are numeric. Epsilon starts at 0.5, minimum samples at 5, standardize on
     },
     standardize: {
       type: 'boolean',
-      description: 'Z-score the columns first. The HTTP body honours this. Chat dispatch always standardises.',
+      description: 'Z-score the columns first. HTTP and chat dispatch both honour this.',
       default: 'true',
     },
     decimal_places: {

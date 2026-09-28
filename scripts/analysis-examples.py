@@ -549,7 +549,7 @@ def jobs(frames: dict[str, pd.DataFrame]) -> list[tuple[str, str, pd.DataFrame, 
         ("kaplan-meier", "kaplan_meier", frames["survival"], {"duration_column": "weeks", "event_column": "event", "group_column": "arm"}),
         ("cox-proportional-hazards", "cox_proportional_hazards", frames["survival"], {"duration_column": "weeks", "event_column": "event", "covariates": ["hours"]}),
         ("nelson-aalen", "nelson_aalen", frames["survival"], {"duration_column": "weeks", "event_column": "event"}),
-        ("arima-sarima", "arima_sarima", frames["series"], {"target_column": "sales", "date_column": "month", "seasonal_period": None, "forecast_steps": 12}),
+        ("arima-sarima", "arima_sarima", frames["series"], {"target_column": "sales", "date_column": "month", "seasonal_period": 12, "forecast_steps": 12}),
         ("exponential-smoothing", "exponential_smoothing", frames["series"], {"target_column": "sales", "date_column": "month", "seasonal_period": 12, "forecast_steps": 12}),
         ("stl-decomposition", "stl_decomposition", frames["series"], {"target_column": "sales", "date_column": "month", "period": 12}),
         ("stationarity-tests", "stationarity_tests", frames["series"], {"target_column": "sales", "date_column": "month"}),
@@ -635,7 +635,7 @@ INTRO = {
     "kaplan-meier": "Eighty people, 40 on standard care and 40 on a new arm. Time is weeks until the event. The new arm was built with a slightly lower hazard, and about a third of the rows are censored. The log-rank is the two-group comparison.",
     "cox-proportional-hazards": "The same 80 people. Hours is a numeric covariate with a moderate link to the hazard. Arm is not in this model.",
     "nelson-aalen": "The same 80 durations and events, as a cumulative hazard rather than a survival curve. There is no grouping column on this procedure.",
-    "arima-sarima": "Forty-eight months of sales. A mild upward trend and a 12-month wiggle, with noise of about three units. This request leaves seasonal period unset, so the search is non-seasonal auto ARIMA, 12 steps ahead.",
+    "arima-sarima": "Forty-eight months of sales. A mild upward trend and a 12-month wiggle, with noise of about three units. Seasonal period is 12, so the search includes a seasonal order, 12 steps ahead.",
     "exponential-smoothing": "The same 48 months of sales. Holt–Winters with period 12 and an additive trend. The series is long enough for additive season.",
     "stl-decomposition": "The same 48 months, split into trend, season, and residual with period 12. There is no forecast table.",
     "stationarity-tests": "The same sales series, which was built with a drift and a seasonal wiggle, not as white noise. ADF’s null is a unit root. KPSS’s null is level stationarity.",
@@ -751,15 +751,17 @@ def render(slug: str, ex: Example, stepwise: Example | None = None) -> str:
         return section(intro, tables, reading, apa, extra)
     if slug == "arima-sarima":
         order = ex.metric("Order (p,d,q)")
+        seasonal = ex.metric("Seasonal order")
         aic = ex.metric("AIC")
         n_obs = ex.metric("Observations")
+        season_bit = f", seasonal order {seasonal}" if seasonal else ""
         reading = (
-            f"Selected order {order}, AIC = {aic}, N = {n_obs}. "
+            f"Selected order {order}{season_bit}, AIC = {aic}, N = {n_obs}. "
             "The table is the 12-step forecast with a 95% interval from the fitted model. "
-            "Seasonal period was left unset, so this is not a SARIMA search."
+            "Seasonal period is 12, so this is a SARIMA search."
         )
         apa = (
-            f"An automatic ARIMA{order} forecast of monthly sales, N = {n_obs}, AIC = {aic}. "
+            f"An automatic SARIMA{order}{'' if not seasonal else season_bit} forecast of monthly sales, N = {n_obs}, AIC = {aic}. "
             "Report the selected order and the forecast interval, not a p-value."
         )
         return section(intro, tables, reading, apa, extra)
@@ -973,12 +975,25 @@ def main() -> None:
     sys.path.insert(0, "/Users/ollie.darby/repos/tensr-worktrees/tensr-api-main")
     parser = argparse.ArgumentParser()
     parser.add_argument("--write", action="store_true")
+    parser.add_argument(
+        "--only",
+        default="",
+        help="Comma-separated slugs. Empty runs every page.",
+    )
     args = parser.parse_args()
+    only = {s.strip() for s in args.only.split(",") if s.strip()}
     rng = np.random.default_rng(SEED)
     frames = build_frames(rng)
     results: dict[str, Example] = {}
     failures: list[str] = []
-    for slug, key, frame, body in jobs(frames):
+    job_list = jobs(frames)
+    if only:
+        known = {j[0] for j in job_list}
+        missing = only - known
+        if missing:
+            raise SystemExit(f"unknown slugs: {sorted(missing)}")
+        job_list = [j for j in job_list if j[0] in only]
+    for slug, key, frame, body in job_list:
         try:
             results[slug] = run_one(key, frame, body)
             results[slug].slug = slug
@@ -996,14 +1011,15 @@ def main() -> None:
             failures.append(f"{slug}: {type(exc).__name__}: {exc}")
 
     stepwise = None
-    try:
-        stepwise = run_one(
-            "linear_regression",
-            frames["cohort"],
-            {"dependent": "score", "independents": ["hours", "anxiety"], "method": "stepwise"},
-        )
-    except Exception as exc:  # noqa: BLE001
-        failures.append(f"stepwise: {type(exc).__name__}: {exc}")
+    if not only or "linear-regression" in only:
+        try:
+            stepwise = run_one(
+                "linear_regression",
+                frames["cohort"],
+                {"dependent": "score", "independents": ["hours", "anxiety"], "method": "stepwise"},
+            )
+        except Exception as exc:  # noqa: BLE001
+            failures.append(f"stepwise: {type(exc).__name__}: {exc}")
 
     ns_hit = [slug for slug, ex in results.items() if slug in NS_SLUGS and ex.significant is False]
     ns_miss = [slug for slug in NS_SLUGS if slug not in ns_hit]
@@ -1024,12 +1040,16 @@ def main() -> None:
     for line in check_extremes(results):
         print("EXTREME", line)
 
-    if failures or ns_miss or check_extremes(results):
+    if failures or check_extremes(results):
         print("ns missing", ns_miss)
         sys.exit(1)
-    if len(ns_hit) * 4 < len(results):
-        print("fewer than a quarter of pages are non-significant", len(ns_hit), len(results))
-        sys.exit(1)
+    if not only:
+        if ns_miss:
+            print("ns missing", ns_miss)
+            sys.exit(1)
+        if len(ns_hit) * 4 < len(results):
+            print("fewer than a quarter of pages are non-significant", len(ns_hit), len(results))
+            sys.exit(1)
     if not args.write:
         return
 

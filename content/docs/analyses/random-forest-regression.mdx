@@ -10,7 +10,7 @@ Use random forest regression when the outcome is numeric and you want a holdout 
 
 ## Assumptions
 
-Outcome and features are numeric. Holdout fraction 0.25, 100 trees, `random_state=0`. Chat dispatch does not forward `test_fraction`.
+Outcome and features are numeric. Holdout fraction 0.25, 100 trees, `random_state=0`. HTTP and chat dispatch both honour `test_fraction`.
 
 ## Running it in Tensr
 
@@ -38,7 +38,7 @@ Outcome and features are numeric. Holdout fraction 0.25, 100 trees, `random_stat
     },
     test_fraction: {
       type: '0.05–0.5',
-      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      description: 'Holdout fraction, clamped to 0.10–0.50. HTTP and chat dispatch both honour it. A note is added when the value is clamped.',
       default: '0.25',
     },
     decimal_places: {

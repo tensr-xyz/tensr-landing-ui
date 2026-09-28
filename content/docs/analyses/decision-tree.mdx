@@ -10,7 +10,7 @@ Use a decision tree when the outcome is a category and you want a readable split
 
 ## Assumptions
 
-The outcome is categorical. Predictors are numeric. Classes with fewer than two rows are dropped. The holdout fraction is 0.25 on the HTTP body. Chat dispatch omits that field, so the service default of 0.25 is used. The service also clamps the fraction to at least 0.10. Maximum depth empty means an unrestricted tree. There is no pruning control.
+The outcome is categorical. Predictors are numeric. Classes with fewer than two rows are dropped. The holdout fraction is 0.25 on the HTTP body and in chat. The service clamps it to 0.10–0.50 and adds a note when it does. Maximum depth empty means an unrestricted tree. There is no pruning control.
 
 ## Running it in Tensr
 
@@ -38,7 +38,7 @@ The outcome is categorical. Predictors are numeric. Classes with fewer than two 
     },
     test_fraction: {
       type: '0.05–0.5',
-      description: 'Holdout fraction. The service clamps this to 0.10–0.50. Chat dispatch does not forward it.',
+      description: 'Holdout fraction, clamped to 0.10–0.50. HTTP and chat dispatch both honour it. A note is added when the value is clamped.',
       default: '0.25',
     },
     decimal_places: {

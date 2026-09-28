@@ -10,7 +10,7 @@ Use random forest classification when the outcome is a category and you want hol
 
 ## Assumptions
 
-The outcome is categorical. Features are numeric. Classes with fewer than two rows are dropped. Holdout fraction 0.25, 100 trees, `random_state=0`. Chat dispatch does not forward `test_fraction`. Kernel and class weights are not exposed.
+The outcome is categorical. Features are numeric. Classes with fewer than two rows are dropped. Holdout fraction 0.25, 100 trees, `random_state=0`. HTTP and chat dispatch both honour `test_fraction`. Kernel and class weights are not exposed.
 
 ## Running it in Tensr
 
@@ -38,7 +38,7 @@ The outcome is categorical. Features are numeric. Classes with fewer than two ro
     },
     test_fraction: {
       type: '0.05–0.5',
-      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      description: 'Holdout fraction, clamped to 0.10–0.50. HTTP and chat dispatch both honour it. A note is added when the value is clamped.',
       default: '0.25',
     },
     decimal_places: {

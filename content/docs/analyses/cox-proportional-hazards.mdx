@@ -46,7 +46,7 @@ The baseline survival chart is a connected scatter of the fitted baseline, not a
     },
     apa_format: {
       type: 'boolean',
-      description: 'Report output. APA-style p-values on the metrics line. Coefficient p-values are four-decimal strings from the fit.',
+      description: 'Report output. APA-style p-values, including the coefficient table.',
       default: 'true',
     },
     include_charts: {
@@ -63,17 +63,17 @@ The same 80 people. Hours is a numeric covariate with a moderate link to the haz
 
 | Covariate | Coef | Hazard ratio | p-value |
 | --- | ---: | ---: | ---: |
-| hours | 0.3633 | 1.4380 | 0.0125 |
+| hours | 0.3633 | 1.4380 | .012 |
 
-Hours is the only covariate. Coef = 0.3633, hazard ratio = 1.4380, p = 0.0125. Concordance = 0.561 on 80 people and 58 events. The slope is moderate. Concordance still sits near chance, so hours sorts the times only a little.
+Hours is the only covariate. Coef = 0.3633, hazard ratio = 1.4380, p = .012. Concordance = 0.561 on 80 people and 58 events. The slope is moderate. Concordance still sits near chance, so hours sorts the times only a little.
 
 ## Reporting (APA 7)
 
-A Cox model of weeks on hours (N = 80, 58 events) gave a hazard ratio of 1.4380 per hour, p = 0.0125, concordance = 0.561.
+A Cox model of weeks on hours (N = 80, 58 events) gave a hazard ratio of 1.4380 per hour, p = .012, concordance = 0.561.
 
 ## Coming from SPSS
 
-SPSS is Analyze → Survival → Cox Regression. Tensr’s Analyze menu has Survival → Cox Proportional Hazards. The path string stored for this item says Time series → Survival → Cox PH. Time series is a separate top-level menu for forecasting; this item is not on it.
+SPSS is Analyze → Survival → Cox Regression. Tensr’s Analyze menu has Survival → Cox Proportional Hazards. The path string stored for this item is Analyze → Survival → Cox PH.
 
 SPSS lets you enter categorical covariates and offers a proportional-hazards plot. Tensr takes numeric covariates only and does not test proportional hazards.
 

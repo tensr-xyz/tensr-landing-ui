@@ -10,7 +10,7 @@ Use SVM classification when the outcome is a category and you want a holdout con
 
 ## Assumptions
 
-The outcome is categorical. Features are numeric. Classes with fewer than two rows are dropped. Kernel, C, and class weights are not exposed. Holdout fraction 0.25; chat dispatch does not forward `test_fraction`.
+The outcome is categorical. Features are numeric. Classes with fewer than two rows are dropped. Kernel, C, and class weights are not exposed. Holdout fraction 0.25; HTTP and chat dispatch both honour `test_fraction`.
 
 ## Running it in Tensr
 
@@ -33,7 +33,7 @@ The outcome is categorical. Features are numeric. Classes with fewer than two ro
     },
     test_fraction: {
       type: '0.05–0.5',
-      description: 'Holdout fraction, clamped to 0.10–0.50. Chat dispatch does not forward it.',
+      description: 'Holdout fraction, clamped to 0.10–0.50. HTTP and chat dispatch both honour it. A note is added when the value is clamped.',
       default: '0.25',
     },
     decimal_places: {
