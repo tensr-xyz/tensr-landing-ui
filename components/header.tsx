@@ -3,7 +3,7 @@
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 
 const navLinks = [
   { href: '/features', label: 'Product' },
@@ -12,7 +12,26 @@ const navLinks = [
   { href: '/changelog', label: 'Changelog' },
 ];
 
-export const Header = () => {
+const BrandMark = () => (
+  <>
+    <Image
+      src="/tensr_icon_light.png"
+      alt=""
+      width={22}
+      height={22}
+      className="h-[22px] w-[22px] dark:hidden"
+    />
+    <Image
+      src="/tensr_icon_dark.png"
+      alt=""
+      width={22}
+      height={22}
+      className="hidden h-[22px] w-[22px] dark:block"
+    />
+  </>
+);
+
+export const Header = ({ extra }: { extra?: ReactNode }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -34,13 +53,7 @@ export const Header = () => {
       <header className="fixed top-0 left-0 z-50 h-[var(--header-height)] w-full border-b border-border-default bg-shell/90 backdrop-blur-md">
         <div className="page-pad mx-auto flex h-full max-w-[var(--max-width)] items-center justify-between">
           <Link href="/" className="inline-flex items-center gap-2.5" aria-label="Tensr homepage">
-            <Image
-              src="/tensr_icon_light.png"
-              alt=""
-              width={22}
-              height={22}
-              className="h-[22px] w-[22px]"
-            />
+            <BrandMark />
             <span className="text-[1.2rem] font-medium leading-none tracking-tight text-text-primary">
               Tensr
             </span>
@@ -78,6 +91,7 @@ export const Header = () => {
               Request a demo
               <span className="kbd">D</span>
             </Link>
+            {extra}
             <button
               type="button"
               className="inline-flex h-8 w-8 items-center justify-center text-text-primary md:hidden"
@@ -101,13 +115,7 @@ export const Header = () => {
             className="inline-flex items-center gap-2.5"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            <Image
-              src="/tensr_icon_light.png"
-              alt=""
-              width={22}
-              height={22}
-              className="h-[22px] w-[22px]"
-            />
+            <BrandMark />
             <span className="text-[1.2rem] font-medium leading-none text-text-primary">Tensr</span>
           </Link>
           <button

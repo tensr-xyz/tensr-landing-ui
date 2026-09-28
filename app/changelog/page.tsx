@@ -1,6 +1,8 @@
 import { getMDXComponents } from '@/components/mdx';
 import { changelogSlug, getChangelogEntries } from '@/lib/source';
 import { siteUrl } from '@/lib/site';
+import { DocsBody, DocsDescription, DocsPage, DocsTitle } from 'fumadocs-ui/layouts/docs/page';
+import type { TOCItemType } from 'fumadocs-core/toc';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 
@@ -21,25 +23,30 @@ const tagLabel = {
 export default function ChangelogPage() {
   const entries = getChangelogEntries();
   const components = getMDXComponents();
+  const toc: TOCItemType[] = entries.map(entry => ({
+    title: entry.title,
+    url: `#${changelogSlug(entry)}`,
+    depth: 2,
+  }));
 
   return (
-    <div className="light-content">
-      <div className="mx-auto w-full max-w-3xl px-6 py-16 md:py-24">
+    <DocsPage toc={toc}>
+      <DocsTitle>Changelog</DocsTitle>
+      <DocsDescription>What changed in Tensr, newest first.</DocsDescription>
+      <div className="flex flex-row items-center gap-2 border-b border-fd-border pt-2 pb-6">
         <p className="text-[13px] text-text-muted">Product updates</p>
-        <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-          <h1 className="text-4xl font-medium tracking-tight text-text-primary">Changelog</h1>
-          <Link
-            href="/changelog/rss.xml"
-            className="text-[13px] text-text-secondary underline-offset-4 hover:text-text-primary hover:underline"
-          >
-            RSS
-          </Link>
-        </div>
-        <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-text-secondary">
+        <Link
+          href="/changelog/rss.xml"
+          className="ms-auto text-[13px] text-text-secondary underline-offset-4 hover:text-text-primary hover:underline"
+        >
+          RSS
+        </Link>
+      </div>
+      <DocsBody>
+        <p className="max-w-xl text-[15px] leading-relaxed text-text-secondary">
           Newest changes first. Each note is what shipped and why it matters for a live job.
         </p>
-
-        <ol className="mt-14 space-y-14">
+        <ol className="mt-10 space-y-14">
           {entries.map(entry => {
             const MDX = entry.body;
             const slug = changelogSlug(entry);
@@ -81,7 +88,7 @@ export default function ChangelogPage() {
             );
           })}
         </ol>
-      </div>
-    </div>
+      </DocsBody>
+    </DocsPage>
   );
 }

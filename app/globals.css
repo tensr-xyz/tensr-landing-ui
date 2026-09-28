@@ -126,6 +126,20 @@
 }
 
 .dark {
+  --page: #111110;
+  --shell: #111110;
+  --container: #161614;
+  --standout: #1c1c1a;
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --text-primary: #f4f4f2;
+  --text-secondary: rgba(244, 244, 242, 0.72);
+  --text-muted: rgba(244, 244, 242, 0.5);
+  --text-faint: rgba(244, 244, 242, 0.35);
+  --inverted: #f4f4f2;
+  --inverted-fg: #111110;
+  --component: rgba(255, 255, 255, 0.06);
+  --component-hover: rgba(255, 255, 255, 0.1);
   --fd-bg: #111110;
   --fd-fg: #f4f4f2;
   --fd-muted: #1c1c1a;
@@ -142,6 +156,16 @@
   --fd-accent: rgba(255, 255, 255, 0.08);
   --fd-accent-fg: #f4f4f2;
   --fd-ring: #60a5fa;
+}
+
+.docs-site-offset {
+  padding-top: var(--header-height);
+}
+
+.docs-site-offset #nd-docs-layout {
+  min-height: calc(100dvh - var(--header-height));
+  --fd-docs-height: calc(100dvh - var(--header-height));
+  --fd-header-height: 0px;
 }
 
 @theme inline {
@@ -207,6 +231,10 @@ html {
   color-scheme: light;
   background: var(--page);
   overflow-x: clip;
+}
+
+html.dark {
+  color-scheme: dark;
 }
 
 body {
