@@ -31,6 +31,10 @@ function DocsSiteHeader() {
   );
 }
 
+function DocsNavTitle() {
+  return null;
+}
+
 type DocsTree = ComponentProps<typeof DocsLayout>['tree'];
 
 export function DocsShell({ children, tree }: { children: React.ReactNode; tree: DocsTree }) {
@@ -45,7 +49,10 @@ export function DocsShell({ children, tree }: { children: React.ReactNode; tree:
           ...options.nav,
           enabled: true,
         }}
-        slots={{ header: DocsSiteHeader }}
+        sidebar={{
+          collapsible: false,
+        }}
+        slots={{ header: DocsSiteHeader, navTitle: DocsNavTitle }}
       >
         {children}
       </DocsLayout>

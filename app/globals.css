@@ -1709,6 +1709,18 @@ body {
   background-color: var(--fd-bg);
   color: var(--fd-fg);
   font-family: var(--font-sans);
+  /* Sidebar stays flush left. Equal gutters sit outside the article and the
+     table of contents, so that pair is centered in the remaining width. */
+  grid-template:
+    'sidebar sidebar . header toc toc'
+    'sidebar sidebar . toc-popover toc toc'
+    'sidebar sidebar . main toc toc' 1fr
+    / 0px var(--fd-sidebar-col) minmax(0, 1fr) minmax(0, 42rem) var(--fd-toc-width)
+    minmax(0, 1fr) !important;
+}
+
+#nd-sidebar > div:first-child > div:first-child:empty {
+  display: none;
 }
 
 #nd-page {
