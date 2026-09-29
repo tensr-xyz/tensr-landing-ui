@@ -4,11 +4,7 @@ import { Footer } from '@/components/footer';
 import { Header } from '@/components/header';
 import { usePathname } from 'next/navigation';
 
-const isDocsChrome = (pathname: string) =>
-  pathname === '/docs' ||
-  pathname.startsWith('/docs/') ||
-  pathname === '/changelog' ||
-  (pathname.startsWith('/changelog/') && !pathname.startsWith('/changelog/rss'));
+const isDocsChrome = (pathname: string) => pathname === '/docs' || pathname.startsWith('/docs/');
 
 export const SiteChrome = ({ children }: { children: React.ReactNode }) => {
   const pathname = usePathname();
