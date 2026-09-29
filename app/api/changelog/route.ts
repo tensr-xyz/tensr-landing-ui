@@ -1,9 +1,17 @@
 import { changelogSlug, getChangelogEntries, summarizeMarkdown } from '@/lib/source';
+import { changelogCorsHeaders } from '@/lib/changelog-cors';
 import { siteUrl } from '@/lib/site';
 
 const limit = 10;
 
-export async function GET() {
+export async function OPTIONS(request: Request) {
+  return new Response(null, {
+    status: 204,
+    headers: changelogCorsHeaders(request.headers.get('origin')),
+  });
+}
+
+export async function GET(request: Request) {
   const entries = getChangelogEntries();
   const latest = await Promise.all(
     entries.slice(0, limit).map(async entry => {
@@ -19,14 +27,19 @@ export async function GET() {
     })
   );
 
-  return Response.json({
-    success: true,
-    data: latest,
-    error: null,
-    meta: {
-      total: entries.length,
-      page: 1,
-      limit,
+  return Response.json(
+    {
+      success: true,
+      data: latest,
+      error: null,
+      meta: {
+        total: entries.length,
+        page: 1,
+        limit,
+      },
     },
-  });
+    {
+      headers: changelogCorsHeaders(request.headers.get('origin')),
+    }
+  );
 }

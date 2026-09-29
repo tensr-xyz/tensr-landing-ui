@@ -10,6 +10,8 @@
     "lint:fix": "eslint --fix --ext .js,.jsx,.ts,.tsx . --cache",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
+    "check:links": "node scripts/check-docs-links.mjs",
+    "check:changelog-cors": "node scripts/check-changelog-cors.mjs",
     "prepare": "husky"
   },
   "dependencies": {

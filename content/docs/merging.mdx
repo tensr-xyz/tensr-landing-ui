@@ -1,0 +1,41 @@
+---
+title: Merging
+description: Add cases, add variables, or join on a key for two files. The agent can chain merges in one plan. Fuse is for waves.
+---
+
+There are three routes.
+
+## Merge Datasets — two files
+
+Data → Data preparation → Merge Datasets joins the open file to one other dataset. Preview the unmatched rows before **Merge datasets** is enabled. The result opens as a new dataset.
+
+**Add cases** stacks the second file under the first. Columns that exist on only one file stay, with blanks on the other side.
+
+**Add variables** puts the second file’s columns next to the first when both have the same number of rows. Matching is by row order, not by a key. Names that collide take the file name as a suffix.
+
+**Join on keys** matches on columns that exist on both files (`_row_uid`, `_source_row_uids`, and `_weight` are not offered as keys). Inner (default), Left, Right, or Outer.
+
+The Merge Datasets dialog offers join-on-keys and stack. Add variables is available from the agent when you ask to add columns beside the open file.
+
+## Unmatched report
+
+**Preview match** shows:
+
+- How many rows the result will have
+- On a keyed join: unmatched counts on this file and the other file, with sample key values
+- Duplicate key counts on each file, with a warning that duplicate keys multiply rows
+- Columns only on this file, and only on the other file, when those lists are not empty
+
+The merge button stays disabled until the preview matches the current selection. Changing the other file, the join type, or the keys clears the report. Saving a keyed merge still refuses duplicate keys unless you ask the agent to keep a many-to-many join.
+
+## The agent — chaining merges in one plan
+
+When you attach several files and ask to merge and weight them, the agent proposes one plan: left-merge each extra file onto the first, then rake. You approve once. That is how three or more files are joined on a key without opening Merge Datasets for each pair.
+
+## Fuse — waves
+
+Data → Data preparation → **Fuse Waves** (tracker files) or **Fuse Datasets** (separate respondent files). Select at least two datasets. The open file is pre-checked. Optional key / wave column.
+
+With a key, files are outer-merged one after another. Without a key, rows are stacked and a `_wave` column is added.
+
+Fuse does not open the result the way Merge Datasets does. It toasts the fused row count. Open the fused dataset from the project list.

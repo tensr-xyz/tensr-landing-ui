@@ -1,0 +1,38 @@
+---
+title: Import
+description: Upload a survey file. Labels stay on the codes. Recodes do not overwrite the upload.
+---
+
+Data → Import & Export → Import Data. The picker that succeeds is CSV, Excel (`.xlsx`, `.xls`), SPSS (`.sav`), Stata (`.dta`), or Triple-S (`.sss`).
+
+The file lands as a dataset. Column identities are the original variables. Recodes, rakes, and merges create a new version with a new dataset id. They do not overwrite the upload.
+
+## SPSS and Stata
+
+Upload a `.sav`. Variable labels become column names. Value labels stay attached to the codes. Measurement level (nominal, ordinal, scale) and declared missing ranges come with the file.
+
+Upload a `.dta`. Stata variable labels and value labels are kept.
+
+## CSV and Excel
+
+CSV defaults: comma delimiter, `"` as the text qualifier, a header row, empty rows skipped, spaces not trimmed.
+
+Excel is the first sheet with a header row. There is no label metadata on `.xlsx` / `.xls`. Add value labels afterwards if the file only has codes.
+
+## Qualtrics and Alchemer CSV
+
+A Qualtrics CSV is detected when at least half the cells in one of the first three data rows contain `ImportId` (any case). That row is dropped, not treated as a case. The row above it, if it looks like labels, is stored as variable labels and also dropped.
+
+Each ImportId cell is read as JSON when it is JSON (`{"ImportId": "QID1"}`). If it is not JSON, Tensr looks for `ImportId":"…"` in the cell text. If that is missing too, the whole cell text is stored as the import id.
+
+Alchemer files often have long question text as headers and short variable IDs in the first data row. The headers become labels, the first data row becomes the variable names, and that row is dropped.
+
+## Multi-select
+
+Wide questions are grouped into a multiple-response set when columns share a stem (`Q2_1`, `Q2_2`) or a label prefix (`Brand pref - Coca Cola`). Comma-separated cells are expanded into dichotomy columns and kept alongside the source.
+
+Each set is stored as type `dichotomy`. Counted value is `1` for 0/1 columns, or `non_blank` otherwise.
+
+## Triple-S and other intake
+
+`.sss` is on Import Data. Data → Legacy import also has Triple-S Import, MDD Import, Qualtrics Definition, WinCross Job Import, and related paths. Use those dialogs for MDD and Qualtrics definitions — not Import Data.
