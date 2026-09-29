@@ -1,0 +1,28 @@
+---
+title: Significance and provenance
+description: Column letters on the weighted banner, low-base skip, and a path back to the rows.
+---
+
+Column letters run on the weighted banner, not a separate test menu. They start on. The grid is [Banner table](/docs/analyses/banner-table).
+
+## Letters
+
+A letter is shown only when the corrected pairwise test passes (adjusted p < .05). There is no 90% letter level.
+
+Lowercase is .001 < p < .05. Uppercase is p ≤ .001. Letters in one cell are concatenated, so BD means that cell differs from columns B and D.
+
+Nested banners produce many columns. Letters recycle every 26; more than 16 columns only test adjacent pairs.
+
+## Low bases
+
+The unweighted column base cutoff is 30. Below that, the cell stays in the grid. The percent renders as `*`. The cell does not receive or generate letters.
+
+## Click-through
+
+Click a cell when provenance is complete (`row_uid_bitset` present, miss count 0). Tensr returns the origin respondents for that stub × banner cell.
+
+On an analysis report, complete provenance lets you reveal the consumed rows for statistics such as F, N, χ², and R². Incomplete runs show a Traceability banner instead of a silent number.
+
+## Provenance inspector
+
+The inspector lists trace kind (`complete`, `unknown`, or `unavailable` with a reason), the convention tuple (variance mode, test type, overlap, Bessel flags, extra deff), weight identity and method, content fingerprint, and origin dataset. Unweighted tables store `explicit_null`.

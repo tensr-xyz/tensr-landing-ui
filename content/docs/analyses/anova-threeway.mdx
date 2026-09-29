@@ -1,0 +1,114 @@
+---
+title: Three-way ANOVA
+description: Test three grouping factors and their interactions on one numeric outcome.
+category: Compare means
+---
+
+## When to use it
+
+Use three-way ANOVA when three categorical factors might affect one numeric outcome. For example: do practice scores depend on sleep, caffeine, and practice schedule, including the ways those factors combine?
+
+Read the three-way interaction first. If it is significant, the two-way patterns are not the same at every level of the third factor, and the main effects are a blunt summary.
+
+## Assumptions
+
+Each factor needs at least two levels, and Tensr asks for at least eight complete rows. A balanced design (the same number of scores in every combination) uses Type II sums of squares. An unbalanced or incomplete design uses Type III.
+
+Tensr does not run Levene’s test or Shapiro–Wilk here. η² in the table is each term’s sum of squares divided by the total sum of squares, not partial η². There is no switch for that.
+
+If a sum of squares comes out negative, the report warns that the model may be overspecified. Tensr then drops the three-way term and refits the two-way interactions. If squares are still negative, the run stops.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Compare Means → Three-Way ANOVA. In chat: “Three-way ANOVA of score by sleep, caffeine, and practice.”</Step>
+<Step>Factor A, factor B, and factor C are the three grouping columns. Value column is the numeric outcome.</Step>
+<Step>Include interactions starts on. Confidence level starts at 0.95. There is no post-hoc control on this procedure.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    factor_a: {
+      type: 'string',
+      description: 'First grouping factor.',
+    },
+    factor_b: {
+      type: 'string',
+      description: 'Second grouping factor.',
+    },
+    factor_c: {
+      type: 'string',
+      description: 'Third grouping factor.',
+    },
+    value_column: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    include_interactions: {
+      type: 'boolean',
+      description: 'Fit all interactions. Off means three main effects only.',
+      default: 'true',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Stored on the result. The ANOVA table does not print confidence intervals.',
+      default: '0.95',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style tables.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. This procedure does not add its own chart.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Method, time of day, and a north/south campus label on the same exam. Only method was built to move the scores.
+
+| Source | SS | df | F | p | η² |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| method | 523.351 | 2 | 3.858 | .025 | 0.08 |
+| time | 5.95 | 1 | 0.088 | .768 | 0.0009073 |
+| campus | 1.426 | 1 | 0.021 | .885 | 0.0002174 |
+| method × time | 166.676 | 2 | 1.229 | .298 | 0.025 |
+| method × campus | 88.883 | 2 | 0.655 | .522 | 0.014 |
+| time × campus | 46.343 | 1 | 0.683 | .411 | 0.007 |
+| method × time × campus | 28.416 | 2 | 0.209 | .811 | 0.004 |
+| Residual | 5697 | 84 | — | — | — |
+
+| Factor | Level | Mean |
+| --- | --- | ---: |
+| method | Lecture | 68.209 |
+| method | Online | 72.234 |
+| method | Workshop | 73.741 |
+| time | Afternoon | 71.644 |
+| time | Morning | 71.146 |
+| campus | North | 71.273 |
+| campus | South | 71.517 |
+
+Three-way ANOVA for `score`, n = 96. Three-way ANOVA for `score`, n = 96. Metrics: R² = 0.131.
+
+## Reporting (APA 7)
+
+Three-way ANOVA for `score`, n = 96. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+Analyze → General Linear Model → Univariate, with three fixed factors. Tensr’s stored path is Analyze → General Linear Model → Three-Way ANOVA. SPSS can print partial η² and post-hoc tests from that dialog. Tensr prints η² as SS / SS total and has no post-hoc option here.
+
+## Related
+
+Two factors: [two-way ANOVA](/docs/analyses/anova-twoway). One factor: [one-way ANOVA](/docs/analyses/anova-oneway).

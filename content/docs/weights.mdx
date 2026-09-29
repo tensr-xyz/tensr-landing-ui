@@ -1,0 +1,46 @@
+---
+title: Weights
+description: Raking (also called rim weighting) creates a new dataset version. SPSS Weight Cases mutates the open file; this does not.
+---
+
+Data → Data preparation → Rake Weights. Submit is **Create raked version**. Raking is also called rim weighting.
+
+Raking creates a new dataset version. It does not overwrite the open file (SPSS Weight Cases mutates the open file; this does not).
+
+## Targets
+
+Fill margins in the dialog, or attach a CSV. The file needs columns for variable, category, and proportion or count. Accepted headers:
+
+- Variable: `variable`, `var`, `column`, `margin`
+- Category: `category`, `level`, `label`
+- Value: `proportion`, `percent`, `percentage`, `count`, `population`, `target`, `n`, `freq`, `frequency`
+
+Excel targets must be saved as CSV, or attached in chat.
+
+## Missing or untargeted categories
+
+Rows whose weighting category is blank or outside the targets are not raked silently. There are three choices:
+
+| Choice | What happens |
+| --- | --- |
+| **Exclude** | Those rows stay in the file with weight 0, and are counted in the weighting summary. |
+| **Impute** | Those rows are filled to a named category that is already in the targets. In chat: `impute gender to Female`. |
+| **Missing target** | Those rows are coded as `missing` and that level is added to the targets. In chat: ask for a missing target. |
+
+The Rake Weights dialog always excludes. Its warning is: rows with a missing or untargeted category are excluded and given weight 0; they stay in the dataset and are counted in the weighting summary; to impute them or add a “missing” target, say so in chat.
+
+If chat does not choose, Tensr asks before weighting: exclude them (weight 0), impute them to a category, or add a “missing” target.
+
+## On a banner
+
+The weight picker on Custom Tables:
+
+- **Unweighted (original file)**
+- **This file's weight** when the open version is a raked version
+- **Raked weight (`id…`)** for other raked siblings
+
+**Set weight** chooses an active weight column, or **No active weight**.
+
+Crosstabs, means, t-tests, chi-square, and regression use the active weight. Other analyses refuse while a weight is active.
+
+Cells show `n` (unweighted), `wn` (weighted), and `ESS` (Kish effective sample size). Nested banners use that same weight — the nest itself is on [Banner table](/docs/analyses/banner-table).

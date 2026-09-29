@@ -1,0 +1,74 @@
+---
+title: STL decomposition
+description: Split a series into trend, seasonal, and residual charts.
+category: Time series
+---
+
+## When to use it
+
+Use STL when you want to see the trend, the repeating seasonal pattern, and what is left, without forecasting. A forecast of the same series is [ARIMA](/docs/analyses/arima-sarima) or [exponential smoothing](/docs/analyses/exponential-smoothing).
+
+## Assumptions
+
+The target is numeric. Period starts at 12. The series must be at least twice that period (24 rows when period is 12). Tensr uses a robust STL fit. There is no table of component values; the output is three charts.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Time series → Decomposition → STL Decomposition. In chat: “STL of sales, period 12.”</Step>
+<Step>Target is the numeric series. Date is optional. Period starts at 12.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    target_column: {
+      type: 'string',
+      description: 'Numeric series to decompose.',
+    },
+    date_column: {
+      type: 'string',
+      description: 'Optional date column used to sort the series.',
+      default: 'null',
+    },
+    period: {
+      type: '2–365',
+      description: 'Seasonal period. Need at least twice this many rows.',
+      default: '12',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Trend, seasonal, and residual charts.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same 48 months, split into trend, season, and residual with period 12. There is no forecast table.
+
+Period = 12, N = 48. There is no component table. The three charts are the trend, the seasonal wiggle, and the residual.
+
+## Reporting (APA 7)
+
+STL decomposition of monthly sales, N = 48, period = 12. Describe the charts; this procedure has no p-value.
+
+## Coming from SPSS
+
+SPSS does not ship STL. Seasonal decomposition in SPSS is Analyze → Forecasting → Seasonal Decomposition (classical). Tensr’s item is Time series → Decomposition → STL Decomposition. The path string stored for this item matches that menu.
+
+## Related
+
+[Exponential smoothing](/docs/analyses/exponential-smoothing) uses the same period for a forecast. [Stationarity tests](/docs/analyses/stationarity-tests) ask whether the series still has a unit root after you have looked at the trend.

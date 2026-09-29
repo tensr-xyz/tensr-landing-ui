@@ -1,0 +1,47 @@
+---
+title: Export
+description: Excel is the audit record for banners. SPSS download includes a .sps weight file. PowerPoint is not an audit record.
+---
+
+There are two export paths: the dataset, and the banner you signed off.
+
+## Dataset — Export Data
+
+Data → Import & Export → Export Data. Default format is CSV.
+
+| Format | File |
+| --- | --- |
+| CSV (.csv) | Same column names as SPSS, including `weight` when present |
+| JSON (.json) | Dataset JSON |
+| SPSS (.sav) | Variable labels, value labels, measurement level, missing ranges — plus a companion `.sps` |
+| Stata (.dta) | Variable labels and value labels |
+
+SPSS cannot take the weight-variable flag from the `.sav` pyreadstat writes, so the file opens unweighted. The companion syntax is:
+
+```
+* Open <file>.sav and run this syntax.
+* <weight label>
+* pyreadstat does not write the SPSS weight-variable flag, so the file opens unweighted.
+WEIGHT BY weight.
+EXECUTE.
+```
+
+If there is no weight column, the `.sps` is `* This dataset has no survey weight column.`
+
+## Banner — Excel, PowerPoint, Word
+
+On Custom Tables: Excel (`banner.xlsx`) and PowerPoint (`banner.pptx`).
+
+Excel is the audit record. The provenance sheet carries bitsets, weight identity, and the convention tuple so the file stands alone.
+
+PowerPoint is not an audit record. Convention is in the slide notes only.
+
+Weight identity is on both. Unweighted tables store `explicit_null`.
+
+Word is a methodology document (`methodology.docx`), not a copy of the grid. It is offered next to Excel and PowerPoint on the agency table export, not on the Custom Tables buttons.
+
+## Analysis reports
+
+Reports can download tables as CSV (with run id, dataset id, fingerprint), the write-up as Markdown, and a self-contained HTML file. **Print / PDF** opens the browser print dialog (`window.print()`). There is no separate PDF file generator.
+
+SPSS syntax sits in a collapsible **SPSS syntax (reference)**. The R script is under **Reproducibility (R)** — see [The R script](/docs/r-script).

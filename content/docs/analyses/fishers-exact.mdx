@@ -1,0 +1,70 @@
+---
+title: Fisher’s exact test
+description: Exact test of association for a 2×2 table.
+category: Categorical
+---
+
+## When to use it
+
+Use Fisher’s exact test on a 2×2 table when expected counts are small. It asks the same question as chi-square: are the two binary variables associated?
+
+## Assumptions
+
+Both columns have exactly two levels. The test conditions on the row and column totals.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Crosstabs → Exact. In chat: “Fisher’s exact test of group by outcome.”</Step>
+<Step>Column A and column B must each have two levels.</Step>
+<Step>The same test runs if you turn on Fisher’s exact inside chi-square.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'First binary variable.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Second binary variable.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+A 2×2 of exposure and case status. The case rate was built only a little higher in the exposed row, on 90 people.
+
+| exposed | No | Yes |
+| --- | ---: | ---: |
+| No | 28 | 15 |
+| Yes | 23 | 24 |
+
+Fisher's exact test for `exposed` × `case`, n = 90. The primary result is not significant (p = .140). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Odds ratio = 1.948; 95% CI = [0.834, 4.552]; p (two-tailed) = .140; p (one-tailed) = .140.
+
+## Reporting (APA 7)
+
+Fisher's exact test for `exposed` × `case`, n = 90. This result is not significant (p = .140). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+Crosstabs → Exact → Fisher’s exact test. SPSS also prints a one-sided p. Tensr stores both `p_value_two_tailed` and `p_value_one_tailed`.

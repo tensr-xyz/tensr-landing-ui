@@ -1,0 +1,69 @@
+---
+title: Odds ratio
+description: Odds of a binary outcome in one group relative to another.
+category: Categorical
+---
+
+## When to use it
+
+Use an odds ratio when both variables are binary and you want the odds of one level in the first group divided by the odds in the second. Levels are sorted alphabetically. The first outcome level is the event, and the first group level is the group in the numerator.
+
+## Assumptions
+
+Both columns have exactly two levels. This is the same 2×2 table as Fisher’s exact test, with the odds ratio as the headline number.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Odds Ratio. In chat: “Odds ratio of group by outcome.”</Step>
+<Step>Name the levels so alphabetical order matches the comparison you want.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'Grouping variable. The first alphabetical level is the numerator group.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Outcome. The first alphabetical level is the event.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same weak 2×2. The odds ratio should sit near 1, and the interval should be read before the point estimate.
+
+| exposed | No | Yes |
+| --- | ---: | ---: |
+| No | 28 | 15 |
+| Yes | 23 | 24 |
+
+Odds ratio for `exposed` × `case`, n = 90. The primary result is not significant (p = .140). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Odds ratio = 1.948; 95% CI = [0.834, 4.552]; p (two-tailed) = .140; p (one-tailed) = .140.
+
+## Reporting (APA 7)
+
+Odds ratio for `exposed` × `case`, n = 90. This result is not significant (p = .140). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+Analyze → Descriptive Statistics → Odds Ratio. Check which level SPSS treats as the event. Tensr uses alphabetical order.

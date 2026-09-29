@@ -1,0 +1,91 @@
+---
+title: Linear mixed model
+description: Predict a numeric outcome when people are nested in groups.
+category: Mixed models
+---
+
+## When to use it
+
+Use a linear mixed model when the outcome is a score and the rows are clustered, such as patients in clinics or pupils in schools. A random intercept lets each clinic have its own baseline. The hours slope is still one number for the whole sample.
+
+[Mixed Model](/docs/analyses/mixed-model) is the menu item that posts random slopes and the REML switch, and it prints a confidence interval. [Multilevel modelling](/docs/analyses/multilevel-modelling) fits this same model and adds an ICC.
+
+## Assumptions
+
+The outcome and the fixed effects are numeric. The grouping column has at least two clusters. Rows in the same cluster are not independent. This fit uses REML. It does not test normality of the residuals.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Multivariate → Mixed Models → Linear Mixed Model (LMM). In chat: “Linear mixed model of score on hours, grouped by clinic.”</Step>
+<Step>Dependent is the numeric outcome. Fixed effects need at least one predictor. Grouping variable is the cluster, such as clinic.</Step>
+</Steps>
+
+The dialog also shows random slopes and a REML switch. [Mixed Model](/docs/analyses/mixed-model) is the procedure that posts those fields. This request sends the dependent, the fixed effects, and the group column. The fit uses REML and a random intercept for the group. An API call can also send `random_effects`. Each of those columns must already be a fixed effect, and each one is added as a random slope.
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    fixed_effects: {
+      type: 'string[]',
+      description: 'Numeric predictors. At least one.',
+    },
+    group_column: {
+      type: 'string',
+      description: 'Cluster id. Each person belongs to one group.',
+    },
+    random_effects: {
+      type: 'string[]',
+      description:
+        'Optional random slopes. The dialog does not send this. Each column must also be a fixed effect.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Fitted-versus-residual scatter.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same clinics and the same hours slope, fit as a linear mixed model with REML and a random intercept.
+
+| Term | Estimate | Std. Err | p-value |
+| --- | ---: | ---: | --- |
+| const | 45.7742 | 2.35335 | p < .001 |
+| hours | 0.973909 | 0.393446 | p = .013 |
+
+| Component | Variance | Std. Dev |
+| --- | ---: | ---: |
+| Random intercept (clinic) | 18.6857 | 4.3227 |
+| Residual | 21.0128 | 4.58397 |
+
+Linear mixed model for `score` with random intercept by `clinic`. Linear mixed model for `score` with random intercept by `clinic`. Metrics: AIC = 735.109; Observations = 120; Groups = 12.
+
+## Reporting (APA 7)
+
+Linear mixed model for `score` with random intercept by `clinic`. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+The product menu is Multivariate → Mixed Models → Linear Mixed Model (LMM). SPSS fits the same idea with MIXED, using a RANDOM intercept and METHOD=REML.
+
+## Related
+
+The same engine with an ICC is [multilevel modelling](/docs/analyses/multilevel-modelling). Random slopes, a confidence interval, and a null-model ICC are on [Mixed Model](/docs/analyses/mixed-model). A binary clustered outcome is [GEE](/docs/analyses/gee) or a [GLMM](/docs/analyses/generalized-linear-mixed-model).

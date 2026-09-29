@@ -1,0 +1,83 @@
+---
+title: Descriptives
+description: Summarise one or more columns with counts, means, and frequencies.
+category: Descriptives
+---
+
+## When to use it
+
+Use descriptives when you want to see what a variable looks like before you test anything. They answer “what is typical, and how spread out are the scores?” For example: in a class of 24, what is the average exam score, and how many students sat each teaching method?
+
+## Assumptions
+
+Descriptive statistics do not assume a normal distribution or equal groups. Tensr does not run a normality test as part of this procedure.
+
+Each statistic uses the non-missing values in that column. A row can count toward the mean of one column and be skipped for another. The report also states how many rows are complete on every selected column.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Descriptives. In chat, ask for descriptives, for example “Summarise score and method.”</Step>
+<Step>Put every column you want summarised into the column list. Leave it empty to include every column.</Step>
+<Step>Tick the statistics you want. The dialog starts with mean, median, standard deviation, range, minimum, and maximum switched on. Variance, skewness, kurtosis, and the standard error of the mean start off.</Step>
+</Steps>
+
+## Options
+
+These names are the fields Tensr sends. The dialog labels the last three under Report output.
+
+<TypeTable
+  type={{
+    columns: {
+      type: 'string[]',
+      description: 'Columns to summarise. Omit to use every column.',
+    },
+    statistics: {
+      type: 'mean | median | std_dev | variance | range | min | max | skewness | kurtosis | sem',
+      description:
+        'Which statistics to print, in the order you request them. The dialog default is mean, median, std_dev, range, min, and max. Only those rows appear. An empty list prints no numeric describe rows.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Decimal places in the report.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'APA-style tables.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Include charts. Descriptives draws a histogram of the first numeric column.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Ninety-six students. `score` is the exam, `hours` is time studied, and `method` is lecture, online, or workshop. The request asks for the mean, median, standard deviation, range, minimum, and maximum.
+
+| Statistic | score | hours | method |
+| --- | ---: | ---: | --- |
+| mean | 71.395 | 4.984 | — |
+| 50% | 70.15 | 4.88 | — |
+| std | 8.308 | 1.222 | — |
+| range | 41.9 | 6.52 | — |
+| min | 49.4 | 2.14 | — |
+| max | 91.3 | 8.66 | — |
+
+Summary statistics for 3 column(s); dataset N = 96. Summary statistics for 3 column(s); dataset N = 96. Metrics: Dataset rows = 96; Listwise-complete rows = 96; Columns = 3.
+
+## Reporting (APA 7)
+
+Summary statistics for 3 column(s); dataset N = 96. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+The path stored for this procedure is Analyze → Descriptive Statistics → Frequencies. Tensr’s own menu label is Descriptives. SPSS Descriptives (the other menu item) does not print a frequency table.
+
+## Related
+
+[One-way ANOVA](/docs/analyses/anova-oneway) and the [independent-samples t-test](/docs/analyses/ttest-independent) start from these same means. A histogram with a strange shape is a reason to look at [Shapiro–Wilk](/docs/analyses/shapiro-wilk) before a parametric test.

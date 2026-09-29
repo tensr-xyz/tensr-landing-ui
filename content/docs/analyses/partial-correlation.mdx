@@ -1,0 +1,80 @@
+---
+title: Partial correlation
+description: Correlation between two columns after holding other columns constant.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use a partial correlation when two columns might only look related because they both follow a third column. For example: are study hours and exam score still related once anxiety is held constant?
+
+## Assumptions
+
+The Pearson path assumes straight-line relationships among the two columns and the controls. Tensr does not test that here. Outliers still matter.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Correlate → Partial. In chat: “Partial correlation of hours and score, controlling for anxiety.”</Step>
+<Step>Column X and column Y are the pair. Control columns are the variables held constant. An empty control list leaves an ordinary correlation of the two columns.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_x: {
+      type: 'string',
+      description: 'First column in the pair.',
+    },
+    column_y: {
+      type: 'string',
+      description: 'Second column in the pair.',
+    },
+    control_columns: {
+      type: 'string[]',
+      description: 'Columns held constant. Default is an empty list.',
+      default: '[]',
+    },
+    method: {
+      type: 'string',
+      description: 'The request accepts pearson, spearman, or kendall. The analyze dispatcher currently calls the Pearson path only.',
+      default: 'pearson',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Practice quizzes and exam score, holding study hours constant. Practice was drawn independently of the exam, so any leftover correlation is noise.
+
+Partial correlation between `practice` and `score`, controlling for hours, n = 96. No significant partial correlation between `practice` and `score` (r = -0.025, p = .810) after controlling for hours. The primary result is not significant (p = .810). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Partial r = -0.025; p-value = .810; df = 93; t statistic = -0.239; 95% CI = -0.224 to 0.177; Method = pearson.
+
+## Reporting (APA 7)
+
+Partial correlation between `practice` and `score`, controlling for hours, n = 96. No significant partial correlation between `practice` and `score` (r = -0.025, p = .810) after controlling for hours. This result is not significant (p = .810). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+Analyze → Correlate → Partial.
+
+SPSS lets you choose Pearson, Spearman, or Kendall in that dialog. Tensr’s request body has the same method field. The dispatcher does not pass it on, so this run is Pearson.
+
+## Related
+
+The uncontrolled relationships are on [bivariate correlation](/docs/analyses/correlation). A regression with both hours and anxiety as predictors is [linear regression](/docs/analyses/linear-regression).

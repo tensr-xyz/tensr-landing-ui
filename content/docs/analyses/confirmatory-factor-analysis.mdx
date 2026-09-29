@@ -1,0 +1,72 @@
+---
+title: Confirmatory factor analysis
+description: Test a factor model you specified in advance.
+category: Reliability & factor analysis
+---
+
+## When to use it
+
+Use confirmatory factor analysis when you already claim that certain items measure a named factor. The model is a sentence such as `F1 =~ q1 + q2 + q3 + q4`. Fit indices say whether that claim is tolerable. To hunt for a structure, use [exploratory factor analysis](/docs/analyses/efa).
+
+## Assumptions
+
+Indicators are numeric. Rows with a missing indicator are dropped. The model has to be identified: a factor with a single indicator, or too few indicators for the number of free loadings, will not fit. The first loading on a factor is fixed at 1 so the factor has a scale. Tensr does not offer an estimator menu.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Multivariate → CFA. In chat: “CFA with F1 measured by q1, q2, q3, and q4.”</Step>
+<Step>List the indicator columns, at least two.</Step>
+<Step>Write the model. Example: F1 =~ q1 + q2 + q3 + q4.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    indicators: {
+      type: 'string[]',
+      description: 'Observed items in the model. At least two.',
+    },
+    model_spec: {
+      type: 'string',
+      description: 'Model syntax, up to 8000 characters. A factor is written Factor =~ item1 + item2.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch. Includes the path diagram.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+A one-factor model, Focus, measured by item1 to item4. Those four items share a moderate factor.
+
+| Indicator | Factor | Estimate | Std. Err | p-value |
+| --- | --- | ---: | ---: | --- |
+| item1 | Focus | 1 | — | — |
+| item2 | Focus | 1.40438 | 0.425655 | p < .001 |
+| item3 | Focus | 1.37948 | 0.418823 | p < .001 |
+| item4 | Focus | 0.943559 | 0.319745 | p = .003 |
+
+Confirmatory factor analysis with semopy fit indices. Confirmatory factor analysis with semopy fit indices. Metrics: CFI = 0.999; RMSEA = 0.014; SRMR = 0.04.
+
+## Reporting (APA 7)
+
+Confirmatory factor analysis with semopy fit indices. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+The product menu is Multivariate → CFA. SPSS itself fits this kind of model in Amos, not in the Analyze menu. The syntax is the same shape as lavaan: `F1 =~ q1 + q2 + q3 + q4`.

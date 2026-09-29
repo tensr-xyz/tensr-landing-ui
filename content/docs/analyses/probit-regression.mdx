@@ -1,0 +1,94 @@
+---
+title: Probit regression
+description: Predict a yes-or-no outcome with a probit link instead of odds.
+category: Correlation & regression
+---
+
+## When to use it
+
+Use probit regression for the same binary outcome as logistic regression when you want the slope on the probit scale. A positive slope still means the predictor makes a “yes” more likely. There is no odds ratio on this table.
+
+## Assumptions
+
+The outcome is binary. The underlying probit model is a fair summary, and the rows are independent. Perfect separation makes the slopes unstable, the same way it does for logistic regression.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Regression → Probit. In chat: “Probit regression of passed on practice.”</Step>
+<Step>Dependent is the 0/1 outcome, unless derive_binary_from builds it. Independents need at least one predictor.</Step>
+<Step>Confidence level starts at 0.95. Include constant is on the request and is not forwarded, so the fit keeps an intercept.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    dependent: {
+      type: 'string',
+      description: 'Binary outcome. Optional when derive_binary_from builds one.',
+    },
+    independents: {
+      type: 'string[]',
+      description: 'Predictors. At least one.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Accepted on the request. The coefficient table prints the estimate and p, not a confidence interval.',
+      default: '0.95',
+    },
+    include_constant: {
+      type: 'boolean',
+      description: 'The request accepts this. The analyze dispatcher does not pass it through, so the fit uses the function default (an intercept).',
+      default: 'true',
+    },
+    derive_binary_from: {
+      type: 'object',
+      description: 'Optional rule that builds the 0/1 outcome.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same pass/fail outcome and the same hours predictor, fit as a probit instead of a logit.
+
+| Term | Estimate | p-value |
+| --- | ---: | ---: |
+| const | -0.96 | .085 |
+| hours | 0.187 | .085 |
+
+| Predictor | Marginal effect (dP/dX at mean) |
+| --- | ---: |
+| hours | 0.075 |
+
+Probit regression predicting `passed` from 1 predictor(s), n = 96. The primary result is not significant (p = .085). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Pseudo R² = 0.023; Model χ² = 3.044; Model p = .081; AIC = 133.999; Observations = 96.
+
+## Reporting (APA 7)
+
+Probit regression predicting `passed` from 1 predictor(s), n = 96. This result is not significant (p = .085). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+Analyze → Regression → Probit.
+
+SPSS Probit is often aimed at dose-response tables. Tensr fits a binary probit from row-level 0/1 data and a numeric predictor.
+
+## Related
+
+Odds ratios for the same kind of outcome are on [logistic regression](/docs/analyses/logistic-regression).

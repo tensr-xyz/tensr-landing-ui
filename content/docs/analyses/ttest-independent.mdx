@@ -1,0 +1,105 @@
+---
+title: Independent-samples t-test
+description: Compare the mean of a numeric outcome between two separate groups.
+category: Compare means
+nonparametric_alternative: Mann-Whitney U
+---
+
+## When to use it
+
+Use this when each person is in only one of two groups and you want to know whether the group means differ. For example: do exam scores differ between students taught by lecture and students taught by workshop?
+
+If you have three or more groups, use [one-way ANOVA](/docs/analyses/anova-oneway). If the same people were measured twice, use the [paired-samples t-test](/docs/analyses/ttest-paired).
+
+## Assumptions
+
+The outcome is numeric. The groups are separate. The test compares means, so extreme scores can pull the result.
+
+Tensr checks two things and prints them under assumption notes:
+
+- Shapiro–Wilk inside each group. A p-value below .05 means that group’s scores are an uneasy fit to a normal curve. The note then points you to the [Mann–Whitney U test](/docs/analyses/mann-whitney-u).
+- Levene’s test (centred at the median) for equal spread. If Levene’s p is .05 or higher, the report uses the equal-variances row. If it is below .05, the report uses the unequal-variances row (Welch).
+
+There is no switch to turn those checks off.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Compare Means → Independent-Samples T Test. In chat: “Independent t-test of score by method.”</Step>
+<Step>Put the grouping variable in the group column and the numeric outcome in the value column. The group column must have exactly two values, unless you list two labels in group values.</Step>
+<Step>Leave the hypothesised difference at 0 unless you are testing a specific gap. Confidence level starts at 0.95, and missing values start as listwise (a row is dropped if either column is missing).</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: {
+      type: 'string',
+      description: 'Categorical column that defines the two groups.',
+    },
+    value_column: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    confidence_level: {
+      type: 'number',
+      description: 'Confidence level for the interval around the mean difference.',
+      default: '0.95',
+    },
+    hypothesized_difference: {
+      type: 'number',
+      description: 'Difference you are testing against. Zero means “no difference.”',
+      default: '0',
+    },
+    missing_values: {
+      type: 'listwise | pairwise',
+      description: 'How incomplete rows are dropped.',
+      default: 'listwise',
+    },
+    group_values: {
+      type: 'string[]',
+      description: 'Optional. Exactly two group labels to keep when the column has more than two.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style tables.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Draws a box plot of the outcome by group.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Lecture versus workshop on the exam. Online is left out so this is a two-group comparison. The workshop mean was built to sit a few points higher, with plenty of overlap.
+
+| Group | n | Mean |
+| --- | ---: | ---: |
+| Lecture | 32 | 68.209 |
+| Workshop | 32 | 73.741 |
+
+Independent samples t-test of `score` by `method` (Lecture vs Workshop) on 64 rows. The primary result is significant (p = .005). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: t statistic (Welch) = -2.904; p-value (Welch) = .005; df (Welch) = 56.279; Cohen's d = -0.726; 95% CI (mean diff) = -9.347 to -1.715.
+
+## Reporting (APA 7)
+
+Independent samples t-test of `score` by `method` (Lecture vs Workshop) on 64 rows. This result is significant (p = .005). The effect is moderate, so report its size with the p-value.
+
+## Coming from SPSS
+
+Analyze → Compare Means → Independent-Samples T Test.
+
+SPSS prints both the equal-variances row and the Welch row. Tensr’s Independent Samples Test table prints only the row Levene selected. The metric chips stay labelled Welch.
+
+## Related
+
+If normality fails, use the [Mann–Whitney U test](/docs/analyses/mann-whitney-u). Three or more groups belong on [one-way ANOVA](/docs/analyses/anova-oneway). The same people measured twice belong on the [paired-samples t-test](/docs/analyses/ttest-paired).

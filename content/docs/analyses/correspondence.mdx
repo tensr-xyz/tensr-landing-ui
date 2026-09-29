@@ -1,0 +1,64 @@
+---
+title: Correspondence analysis
+description: Map the rows and columns of a contingency table into a shared space.
+category: Categorical
+---
+
+## When to use it
+
+Use correspondence analysis when a crosstab is too large to read cell by cell. It places row categories and column categories on the same axes so categories that occur together sit near each other.
+
+## Assumptions
+
+Both columns are categorical. The table cannot be empty. Two components are requested by default. A 2×2 table has only one dimension of association, so the second singular value can be zero.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Survey techniques → Correspondence Analysis. In chat: “Correspondence analysis of brand by attribute.”</Step>
+<Step>Row column and column column are the two categorical variables.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    row_column: {
+      type: 'string',
+      description: 'Categories that become the rows of the map.',
+    },
+    column_column: {
+      type: 'string',
+      description: 'Categories that become the columns of the map.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Teaching method by satisfaction rating. The association is mild, so the map should not collapse onto a single perfect diagonal.
+
+Analysis complete.
+
+## Reporting (APA 7)
+
+Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+SPSS has correspondence analysis under Dimension Reduction. Tensr lists it under Survey techniques.

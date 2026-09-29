@@ -1,0 +1,16 @@
+{
+  "title": "Docs",
+  "pages": [
+    "index",
+    "quickstart",
+    "---Product---",
+    "import",
+    "merging",
+    "weights",
+    "agent",
+    "significance",
+    "export",
+    "r-script",
+    "analyses"
+  ]
+}

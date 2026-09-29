@@ -1,0 +1,60 @@
+---
+title: Cochran’s Q test
+description: Compare three or more repeated binary measurements.
+category: Non-parametric
+---
+
+## When to use it
+
+Use Cochran’s Q when the same people are measured three or more times on a yes/no variable. It is the binary cousin of the Friedman test. McNemar is the two-occasion version.
+
+## Assumptions
+
+Each column is a repeated binary measure. Values are treated as success or failure. You need at least three columns.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → Cochran. In chat: “Cochran’s Q for these binary columns.”</Step>
+<Step>Select at least three measure columns.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    measure_columns: {
+      type: 'string[]',
+      description: 'Repeated binary measures. At least three.',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Fifty people, three tasks, each scored pass or fail. The pass rates were built to be nearly the same.
+
+Cochran's Q for 3 related dichotomous variables, n = 50. The primary result is not significant (p = .164). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: Q = 3.619; df = 2; p-value = .164.
+
+## Reporting (APA 7)
+
+Cochran's Q for 3 related dichotomous variables, n = 50. This result is not significant (p = .164). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → Cochran.

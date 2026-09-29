@@ -1,0 +1,85 @@
+---
+title: Chi-square test of independence
+description: Test whether two categorical variables are associated.
+category: Categorical
+---
+
+## When to use it
+
+Use this when both variables are categories and you want to know whether the pattern of counts could have come from independence. For example: does passing a quiz depend on teaching method?
+
+## Assumptions
+
+Each row is one case. Expected counts should be at least 5 in most cells. Tensr stores `low_expected_cells`, the number of cells whose expected count is under 5. When that number is high, use [Fisher’s exact test](/docs/analyses/fishers-exact) on a 2×2 table.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Descriptive Statistics → Crosstabs. In chat: “Chi-square of method by passed.”</Step>
+<Step>Column A and column B are the two categorical variables. Order does not change the chi-square.</Step>
+<Step>Phi and Cramér’s V are on by default. Fisher’s exact is off. Turning it on replaces this test with Fisher’s exact.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'First categorical variable.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Second categorical variable.',
+    },
+    include_phi: {
+      type: 'boolean',
+      description: 'Store phi, the 2×2 effect size.',
+      default: 'true',
+    },
+    include_cramers_v: {
+      type: 'boolean',
+      description: 'Store Cramér’s V. On a 2×2 table it equals phi.',
+      default: 'true',
+    },
+    use_fishers_exact: {
+      type: 'boolean',
+      description: 'Run Fisher’s exact instead of chi-square.',
+      default: 'false',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Gender and writing hand in the class. The two were drawn independently.
+
+| gender | Left | Right |
+| --- | ---: | ---: |
+| Man | 5 | 42 |
+| Woman | 12 | 37 |
+
+Chi-square test of independence between `gender` and `hand`, 96 complete rows. The primary result is not significant (p = .131). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: χ² = 2.28; df = 1; p-value = .131.
+
+## Reporting (APA 7)
+
+Chi-square test of independence between `gender` and `hand`, 96 complete rows. This result is not significant (p = .131). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+Analyze → Descriptive Statistics → Crosstabs, with Chi-square, Phi, and Cramér’s V. SPSS prints expected counts in the crosstab. Tensr stores them on `expected_counts` and counts how many fall under 5.

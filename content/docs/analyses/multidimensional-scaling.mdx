@@ -1,0 +1,65 @@
+---
+title: Multidimensional scaling
+description: Place cases on a map so that distances reflect how different they are.
+category: Reliability & factor analysis
+---
+
+## When to use it
+
+Use multidimensional scaling when you want a picture of cases, not a picture of variables. People who gave similar answers land near each other. Two dimensions is the usual map. This is not a factor analysis of the items.
+
+## Assumptions
+
+Columns are numeric. Distance is Euclidean after listwise deletion. The request does not standardize the columns, so a column with a much larger scale dominates the distances. You need at least two more complete rows than the number of dimensions.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Scale → Multidimensional Scaling. In chat: “MDS of these four items in two dimensions.”</Step>
+<Step>Select at least two columns. Dimensions default to 2, from 1 to 10.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    columns: {
+      type: 'string[]',
+      description: 'Variables used to measure how far apart two cases are. At least two.',
+    },
+    n_components: {
+      type: 'integer',
+      description: 'Dimensions in the map.',
+      default: '2',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Five scale items placed in two dimensions from their distances. Items that share the factor should sit nearer each other than a pure noise pair would.
+
+Multidimensional scaling on 5 variables, n = 120. Multidimensional scaling on 5 variables, n = 120. Metrics: Stress = 5333; Dimensions = 2.
+
+## Reporting (APA 7)
+
+Multidimensional scaling on 5 variables, n = 120. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+Analyze → Scale → Multidimensional Scaling (PROXSCAL / ALSCAL). SPSS stress is usually scaled to a 0-to-1 range. Tensr reports the unscaled stress from the fit.

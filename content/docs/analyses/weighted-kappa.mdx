@@ -1,0 +1,75 @@
+---
+title: Weighted kappa
+description: Agreement that treats nearby categories as partial agreement.
+category: Categorical
+---
+
+## When to use it
+
+Use weighted kappa when two raters use ordered categories and a near miss should count more than a complete miss. Linear weights treat each step the same. Quadratic weights punish larger misses more.
+
+## Assumptions
+
+Both columns are ordered categories. Tensr sorts the level names alphabetically and then treats that order as the scale, so name levels so alphabetical order is the real order (`1`, `2`, `3`, or `low`, `mid`, `high` does not sort as low-mid-high).
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Scale → Weighted Kappa. In chat: “Weighted kappa for rater A and rater B.”</Step>
+<Step>Weights start at linear. Quadratic is the other choice.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    column_a: {
+      type: 'string',
+      description: 'First rater.',
+    },
+    column_b: {
+      type: 'string',
+      description: 'Second rater.',
+    },
+    weights: {
+      type: 'linear | quadratic',
+      description: 'How far apart a disagreement is.',
+      default: 'linear',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The same two raters. Linear weights give partial credit for a one-step miss. Categories are numeric, so sort order matches the scale.
+
+| rater_a | 1 | 2 | 3 |
+| ---: | ---: | ---: | ---: |
+| 1 | 13 | 4 | 0 |
+| 2 | 12 | 17 | 7 |
+| 3 | 1 | 8 | 18 |
+
+Weighted κ (linear) for `rater_a` vs `rater_b`, n = 80. Moderate agreement (κ < 0 poor, 0 ≤ κ < 0.2 slight, 0.2 ≤ κ < 0.4 fair, 0.4 ≤ κ < 0.6 moderate, 0.6 ≤ κ < 0.8 substantial, κ ≥ 0.8 almost perfect). Cutoffs: Landis & Koch, 1977. The primary result is significant (p = < .001). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: Weighted κ = 0.508; Unweighted κ = 0.396; SE = 0.084; z = 6.044; p-value = < .001.
+
+## Reporting (APA 7)
+
+Weighted κ (linear) for `rater_a` vs `rater_b`, n = 80. Moderate agreement (κ < 0 poor, 0 ≤ κ < 0.2 slight, 0.2 ≤ κ < 0.4 fair, 0.4 ≤ κ < 0.6 moderate, 0.6 ≤ κ < 0.8 substantial, κ ≥ 0.8 almost perfect). Cutoffs: Landis & Koch, 1977. This result is significant (p = < .001). The effect is moderate, so report its size with the p-value.
+
+## Coming from SPSS
+
+Analyze → Scale → Weighted Kappa. SPSS asks for linear or quadratic weights.

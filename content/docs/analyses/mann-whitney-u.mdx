@@ -1,0 +1,67 @@
+---
+title: Mann–Whitney U test
+description: Compare two independent groups without assuming normality.
+category: Non-parametric
+---
+
+## When to use it
+
+Use Mann–Whitney U instead of an [independent-samples t-test](/docs/analyses/ttest-independent) when the outcome is ordinal or the scores are skewed. It asks whether one group tends to rank higher than the other.
+
+## Assumptions
+
+The two groups are independent. The outcome is at least ordinal. Tensr does not run a normality check for this test.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Nonparametric Tests → 2 Independent Samples. In chat: “Mann–Whitney U of score by method.”</Step>
+<Step>Group column is the two groups. Value column is the score.</Step>
+<Step>Confidence level starts at 0.95. There is no effect-size option on this request.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: { type: 'string', description: 'The two groups.' },
+    value_column: { type: 'string', description: 'Score to rank.' },
+    confidence_level: { type: 'number', description: 'Accepted on the request.', default: '0.95' },
+    hypothesized_difference: { type: 'number', description: 'Difference from zero to test.', default: '0' },
+    group_values: { type: 'string[]', description: 'Optional pair of group labels to compare.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Lecture versus workshop ranks on the exam. The workshop scores tend to sit higher, and the two lists still overlap, so U is not zero.
+
+| Group | n | Median | Mean rank | Rank sum | Status |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Lecture | 32 | 69.1 | 26.312 | 842 | included |
+| Workshop | 32 | 72.95 | 38.688 | 1,238 | included |
+
+Significant difference in `score` between Workshop and Lecture (U = 314, p = .008, r = 0.332). Effect size (medium; r < 0.1 negligible, 0.1 ≤ r < 0.3 small, 0.3 ≤ r < 0.5 medium, r ≥ 0.5 large). Cutoffs: Cohen, 1988. The primary result is significant (p = .008). This is large enough, in this sample, to treat the comparison this page is about as a real association rather than noise. Metrics: U statistic = 314; p-value = .008; Effect size r = 0.332; Effect size = medium.
+
+## Reporting (APA 7)
+
+Significant difference in `score` between Workshop and Lecture (U = 314, p = .008, r = 0.332). Effect size (medium; r < 0.1 negligible, 0.1 ≤ r < 0.3 small, 0.3 ≤ r < 0.5 medium, r ≥ 0.5 large). Cutoffs: Cohen, 1988. This result is significant (p = .008). The effect is moderate, so report its size with the p-value.
+
+## Coming from SPSS
+
+Analyze → Nonparametric Tests → 2 Independent Samples. SPSS often prints Wilcoxon W and a z alongside U.

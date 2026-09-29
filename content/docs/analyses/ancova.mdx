@@ -1,0 +1,92 @@
+---
+title: ANCOVA
+description: Compare group means on one outcome while holding a numeric covariate constant.
+category: Compare means
+---
+
+## When to use it
+
+Use ANCOVA when groups might differ on an outcome partly because they already differed on something you measured first. For example: do lecture and workshop students differ on the exam after you account for their pretest?
+
+The covariate should be related to the outcome and measured before the grouping, or at least not caused by it. ANCOVA does not fix a badly designed study. It adjusts the group comparison for a linear relationship with the covariate.
+
+## Assumptions
+
+The outcome and the covariate are numeric. The groups are separate. The slope that links the covariate to the outcome should be roughly the same in every group. That is homogeneity of regression slopes.
+
+Tensr does not test that assumption for you. The option `include_interaction` fits a group × covariate term, which is the check, and it starts off. Turn it on if you need to see whether the slopes differ. If that term is significant, a single adjusted group difference is hard to defend.
+
+There is no Levene test, no Shapiro–Wilk test, and no partial η² column. The featured metric is R².
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → General Linear Model → ANCOVA. In chat: “ANCOVA of score by method, controlling for pretest.”</Step>
+<Step>Group column is the grouping variable. Outcome column is the numeric result. Covariate column is the numeric control.</Step>
+<Step>Include interaction starts off, so the default model is group plus covariate, without a product term.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: {
+      type: 'string',
+      description: 'Grouping factor. At least two categories.',
+    },
+    outcome_column: {
+      type: 'string',
+      description: 'Numeric outcome.',
+    },
+    covariate_column: {
+      type: 'string',
+      description: 'Numeric covariate the model holds constant.',
+    },
+    include_interaction: {
+      type: 'boolean',
+      description: 'Also fit group × covariate. Use this to inspect equal slopes.',
+      default: 'false',
+    },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style tables.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. This procedure does not add its own chart.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Teaching method on the exam, with study hours as the covariate. Hours and method both have a moderate link to the score.
+
+| Source | Sum of squares | df | F | p-value |
+| --- | ---: | ---: | ---: | ---: |
+| method | 294.54 | 2 | 2.436 | .093 |
+| hours | 472.674 | 1 | 7.819 | .006 |
+| Residual | 5,561.762 | 92 | — | — |
+
+ANCOVA of `score` by `method` controlling for `hours`, n = 96. ANCOVA of `score` by `method` controlling for `hours`, n = 96. Metrics: R² = 0.152.
+
+## Reporting (APA 7)
+
+ANCOVA of `score` by `method` controlling for `hours`, n = 96. Report the estimate in the table. This procedure is not summarised by one p-value.
+
+## Coming from SPSS
+
+Analyze → General Linear Model → Univariate, with the group as a fixed factor and the pretest as a covariate.
+
+SPSS can print estimated marginal means and a homogeneity-of-slopes test if you add the interaction. Tensr’s default leaves that interaction off. Turn on `include_interaction` for the slopes check. Tensr does not print adjusted means.
+
+## Related
+
+No covariate: [one-way ANOVA](/docs/analyses/anova-oneway) or [two-way ANOVA](/docs/analyses/anova-twoway). Several outcomes at once: [MANOVA](/docs/analyses/manova).

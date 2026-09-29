@@ -1,0 +1,63 @@
+---
+title: Median test
+description: Compare groups by how many scores sit above a shared median.
+category: Non-parametric
+---
+
+## When to use it
+
+Use the median test when you want a simple check of whether groups differ in the chance of landing above the combined median. Kruskal–Wallis uses the full ranking and is usually more informative.
+
+## Assumptions
+
+At least two groups, each with enough scores to compare. The outcome is numeric.
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Compare Means → Median Test. In chat: “Median test of score by method.”</Step>
+<Step>Group column and value column are required.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    group_column: { type: 'string', description: 'Groups to compare.' },
+    value_column: { type: 'string', description: 'Numeric score.' },
+    decimal_places: {
+      type: '0–6',
+      description: 'Report output. Decimal places.',
+      default: '3',
+    },
+    apa_format: {
+      type: 'boolean',
+      description: 'Report output. APA-style p-values.',
+      default: 'true',
+    },
+    include_charts: {
+      type: 'boolean',
+      description: 'Report output. Shared chart switch.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+Two tutorial groups drawn from the same distribution, compared on how many sit above the combined median.
+
+| Group | n | Status |
+| --- | ---: | --- |
+| A | 40 | included |
+| B | 40 | included |
+
+Median test of `score` by `group` (2 groups) on 80 rows. The primary result is not significant (p = .823). This is not large enough to treat the comparison this page is about as a reliable association. The result is non-significant: the data are still compatible with no effect. Metrics: χ² = 0.05; p-value = .823; Grand median = 69.35.
+
+## Reporting (APA 7)
+
+Median test of `score` by `group` (2 groups) on 80 rows. This result is not significant (p = .823). Report the estimate with that p, and do not describe the pattern as a reliable effect.
+
+## Coming from SPSS
+
+Analyze → Compare Means → Median Test.
