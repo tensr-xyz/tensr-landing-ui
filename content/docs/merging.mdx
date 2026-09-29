@@ -15,7 +15,7 @@ Data → Data preparation → Merge Datasets joins the open file to one other da
 
 **Join on keys** matches on columns that exist on both files (`_row_uid`, `_source_row_uids`, and `_weight` are not offered as keys). Inner (default), Left, Right, or Outer.
 
-The Merge Datasets dialog offers join-on-keys and stack. Add variables is available from the agent when you ask to add columns beside the open file.
+The Merge Datasets dialog offers join-on-keys, add variables, and stack. If both files share an obvious ID column, the dialog defaults to a keyed join on that column. Add variables warns that rows are matched by position.
 
 ## Unmatched report
 
@@ -38,4 +38,4 @@ Data → Data preparation → **Fuse Waves** (tracker files) or **Fuse Datasets*
 
 With a key, files are outer-merged one after another. Without a key, rows are stacked and a `_wave` column is added.
 
-Fuse does not open the result the way Merge Datasets does. It toasts the fused row count. Open the fused dataset from the project list.
+Fuse opens the result the same way Merge Datasets does.
