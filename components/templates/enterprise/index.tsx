@@ -10,13 +10,13 @@ export const EnterpriseTemplate = () => {
       id: 'q1',
       question: 'How do usage limits work for enterprises?',
       answer:
-        'Enterprise plans include 100,000 operations per month and 100 GB of data processed. Usage can be monitored through your organization dashboard, and custom limits can be configured for specific teams or users.',
+        'Published plans are Trial, Pro, Pro+ and Teams. Row caps and monthly assistant and report limits are on the pricing page and enforced in billing. Contact sales to discuss a custom arrangement.',
     },
     {
       id: 'q2',
       question: 'How does Tensr handle large-scale datasets?',
       answer:
-        'Tensr is built on cloud-native architecture designed to handle large datasets efficiently. Enterprise plans support up to 100 GB of data processed per month with scalable infrastructure that can accommodate your research needs.',
+        'Datasets are stored in Amazon S3. Trial datasets are capped at 100,000 rows. Paid plans are capped at 1,000,000 rows per dataset.',
     },
     {
       id: 'q3',
@@ -74,51 +74,6 @@ export const EnterpriseTemplate = () => {
                 Contact sales
                 <ArrowRight className="h-4 w-4 ml-2" aria-hidden="true" />
               </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Plan scale */}
-      <section className="py-12 px-4 md:px-8 bg-background text-font">
-        <div className="container mx-auto">
-          <div className="flex flex-col gap-12">
-            <div className="text-center mx-auto mb-8 max-w-[65ch]">
-              <h2 className="text-2xl md:text-3xl text-balance mx-auto font-medium">
-                Modern statistical analysis for enterprise research teams.
-              </h2>
-            </div>
-            <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-              <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 md:aspect-[2/1] lg:aspect-video">
-                <div className="col-span-full row-span-full flex flex-col">
-                  <div className="mb-4 flex-grow">
-                    <div className="text-4xl font-medium text-font">100+</div>
-                  </div>
-                  <div className="text-base text-font">
-                    Concurrent users supported per enterprise organization.
-                  </div>
-                </div>
-              </div>
-              <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 md:aspect-[2/1] lg:aspect-video">
-                <div className="col-span-full row-span-full flex flex-col">
-                  <div className="mb-4 flex-grow">
-                    <div className="text-4xl font-medium text-font">100,000+</div>
-                  </div>
-                  <div className="text-base text-font">
-                    Statistical operations per month on enterprise plans.
-                  </div>
-                </div>
-              </div>
-              <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 md:aspect-[2/1] lg:aspect-video">
-                <div className="col-span-full row-span-full flex flex-col">
-                  <div className="mb-4 flex-grow">
-                    <div className="text-4xl font-medium text-font">100 GB</div>
-                  </div>
-                  <div className="text-base text-font">
-                    Data processed per month for enterprise teams.
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>

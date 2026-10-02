@@ -77,10 +77,9 @@ const deepFeatures = [
     chips: [
       'Multiplayer presence',
       'Comments & annotations',
-      'Plugin marketplace',
-      'SSO-ready',
-      'Custom roles',
+      'Shared workspaces',
       'Export & share',
+      'Email sign-in',
     ],
   },
 ];
@@ -364,9 +363,10 @@ export const HomeTemplate = () => {
                     </svg>
                   </span>
                 </div>
-                <h4 className="mb-2 text-base font-medium text-text-primary">Enterprise-ready</h4>
+                <h4 className="mb-2 text-base font-medium text-text-primary">Team workspaces</h4>
                 <p className="text-[15px] leading-relaxed text-text-muted">
-                  SSO, custom roles, and team workflows for labs that need control without friction.
+                  Organisation owners invite members and group them into teams. Sign-in is email
+                  one-time codes. SAML SSO is not available.
                 </p>
               </div>
             </div>
