@@ -85,7 +85,7 @@ const plans = [
       'Real‑time collaboration & presence',
       'Tensr Agent — 10,000 runs / month',
       '3,000 AI reports / month',
-      'Shared workspaces & plugin library',
+      'Shared workspaces',
     ],
   },
 ];
@@ -143,7 +143,7 @@ const comparison = [
         teams: true,
       },
       {
-        feature: 'Shared plugin library',
+        feature: 'Shared workspaces',
         pro: false,
         proPlus: false,
         teams: true,
