@@ -342,8 +342,8 @@ export const HomeTemplate = () => {
                   Encrypted by default
                 </h4>
                 <p className="text-[15px] leading-relaxed text-text-muted">
-                  Datasets are encrypted at rest and in transit. Your research data is never used to
-                  train models.
+                  Datasets are encrypted at rest (S3 AES-256) and in transit (HTTPS). Tensr does not
+                  train models on your data. OpenAI does not train on API data by default.
                 </p>
               </div>
 
