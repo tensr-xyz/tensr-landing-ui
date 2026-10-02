@@ -198,7 +198,7 @@ const faqItems = [
     id: 'security',
     question: 'Where does my data live, and is it secure?',
     answer:
-      'Datasets are encrypted at rest and in transit. Your data is never used to train models. Contact us if you need SSO, audit logs, or a signed DPA.',
+      'Datasets are stored in AWS us-east-1, encrypted at rest with S3 AES-256 and sent over HTTPS. Tensr does not train models on your data. OpenAI does not train on API data by default. SSO and SCIM are not available. Contact us for a DPA.',
   },
   {
     id: 'academic',
