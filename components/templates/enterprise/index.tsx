@@ -39,20 +39,19 @@ export const EnterpriseTemplate = () => {
     {
       id: 'q6',
       question: 'Does Tensr support on-premises or VPC deployment?',
-      answer:
-        'Enterprise customers can discuss custom deployment options including VPC deployments. Please contact our sales team to discuss your specific infrastructure requirements.',
+      answer: 'No. Tensr runs in AWS us-east-1. On-premises and VPC deployment are not available.',
     },
     {
       id: 'q7',
       question: 'What admin controls are available?',
       answer:
-        'Enterprise plans include centralized security controls allowing you to configure access levels, manage users and groups, set usage limits, and monitor organization-wide activity through comprehensive admin dashboards.',
+        'Organisation owners invite members and set their role. There is no separate admin dashboard, and SAML SSO and SCIM are not available.',
     },
     {
       id: 'q8',
       question: 'How can I track usage across my organization?',
       answer:
-        'Enterprise plans include detailed analytics and reporting dashboards that provide insights into usage patterns, popular features, and team activity, helping you understand adoption and optimize your statistical analysis workflows.',
+        'Plan caps are the Trial, Pro, Pro+ and Teams limits on the pricing page. Tensr does not provide a separate organisation usage-analytics dashboard.',
     },
   ];
 
@@ -64,7 +63,7 @@ export const EnterpriseTemplate = () => {
           <div className="text-left mb-4 max-w-prose">
             <small className="text-base text-muted-foreground block mb-2">Enterprise</small>
             <h1 className="text-4xl font-normal text-balance mb-4">
-              Develop enduring software at scale.
+              One workspace for the research team.
             </h1>
             <div className="flex items-center justify-start gap-4 mt-6">
               <Link
@@ -96,22 +95,6 @@ export const EnterpriseTemplate = () => {
         <section className="py-12 px-4 md:px-8 bg-background text-font pt-0 pb-0">
           <div className="container mx-auto my-8">
             <div className="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 items-stretch mb-4">
-              <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 flex h-full flex-col lg:min-h-[102.4px]">
-                <div className="flex-grow">
-                  <h2 className="text-base font-medium mb-2">Dedicated guidance</h2>
-                  <div className="text-muted-foreground">
-                    <p>Deploy AI at scale with professional expertise.</p>
-                  </div>
-                </div>
-              </div>
-              <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 flex h-full flex-col lg:min-h-[102.4px]">
-                <div className="flex-grow">
-                  <h2 className="text-base font-medium mb-2">Premium support</h2>
-                  <div className="text-muted-foreground">
-                    <p>Tailored support for teams with specialized needs.</p>
-                  </div>
-                </div>
-              </div>
               <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 flex h-full flex-col lg:min-h-[102.4px]">
                 <div className="flex-grow">
                   <h2 className="text-base font-medium mb-2">Stored for your analysis</h2>
@@ -193,14 +176,11 @@ export const EnterpriseTemplate = () => {
         <div className="container mx-auto">
           <div className="text-left mb-8 max-w-prose">
             <h2 className="text-2xl md:text-3xl text-balance font-medium mb-4">
-              Powerful, yet customizable
+              The same tools for the whole team
             </h2>
             <div className="flex justify-start mb-4">
               <div className="text-lg text-muted-foreground flex flex-col text-balance">
-                <p>
-                  Standardize your research team on the same statistical analysis tools and best
-                  practices.
-                </p>
+                <p>Organisation owners invite members and group them into teams.</p>
               </div>
             </div>
             <div className="flex items-center justify-start gap-4">
@@ -245,29 +225,6 @@ export const EnterpriseTemplate = () => {
                   <div className="mt-2">
                     <span className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-full transition-all border border-border bg-transparent text-font no-underline hover:bg-hover">
                       View all methods →
-                    </span>
-                  </div>
-                </div>
-              </Link>
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 flex h-full flex-grow flex-col"
-                href="/features"
-              >
-                <div className="text-base flex max-w-prose flex-grow flex-col justify-between">
-                  <div>
-                    <h2 className="text-base font-medium mb-2">Plugin architecture</h2>
-                    <div className="text-muted-foreground text-pretty">
-                      <p>
-                        Extend Tensr with custom plugins and integrate with external data sources
-                        and analysis tools.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="mt-2">
-                    <span className="inline-flex items-center px-4 py-2 text-sm font-medium rounded-full transition-all border border-border bg-transparent text-font no-underline hover:bg-hover">
-                      Learn about plugins →
                     </span>
                   </div>
                 </div>
