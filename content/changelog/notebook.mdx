@@ -1,0 +1,12 @@
+---
+title: Notebook R loads the dataset
+date: 2026-10-16
+version: 0.4.3
+tags: [fix]
+---
+
+R cells load the open dataset on the server, with the column types from the file. A long sheet no longer gets pasted into the cell, and a failed cell shows the last line of the error.
+
+- Shift+Enter and Cmd/Ctrl+Enter run the cell
+- Internal columns such as _row_uid stay out of df
+- The full traceback is under Details
