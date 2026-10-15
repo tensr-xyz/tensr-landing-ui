@@ -1,0 +1,12 @@
+---
+title: Notebook R loads the dataset
+date: 2026-10-15
+version: 0.4.4
+tags: [fix]
+---
+
+R cells load the open dataset on the server, with the column types from the file. A long sheet no longer gets pasted into the cell. Every print comes back in order. A failed cell shows the R error, and the full text is under Details.
+
+- Shift+Enter and Cmd/Ctrl+Enter run the text in the editor
+- Two prints on one line both come back
+- Internal columns such as _row_uid stay out of df
