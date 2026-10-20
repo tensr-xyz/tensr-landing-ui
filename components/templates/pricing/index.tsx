@@ -1,6 +1,6 @@
 'use client';
 
-import Link from 'next/link';
+import { AppCtaLink } from '@/components/app-cta-link';
 import { Check } from 'lucide-react';
 import { Fragment, useState } from 'react';
 import { Accordion } from '@/components/accordion';
@@ -307,8 +307,10 @@ export const PricingTemplate = () => {
                   </p>
                 )}
                 <p className="mt-2 text-xs text-text-faint">{plan.note}</p>
-                <Link
+                <AppCtaLink
                   href={plan.href}
+                  location="pricing"
+                  label={`${plan.name}: ${plan.cta}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className={`mt-6 inline-flex items-center justify-center rounded-full px-4 py-2.5 text-sm font-medium transition-opacity hover:opacity-90 ${
@@ -318,7 +320,7 @@ export const PricingTemplate = () => {
                   }`}
                 >
                   {plan.cta}
-                </Link>
+                </AppCtaLink>
                 <ul className="mt-8 space-y-3 border-t border-border-default pt-6">
                   {plan.features.map((feature, i) => (
                     <li key={feature} className="flex gap-3 text-sm text-text-secondary">

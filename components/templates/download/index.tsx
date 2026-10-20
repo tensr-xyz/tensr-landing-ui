@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { AppCtaLink } from '@/components/app-cta-link';
 import Image from 'next/image';
 import { Accordion } from '@/components/accordion';
 import { Download, ArrowRight } from 'lucide-react';
@@ -23,8 +24,10 @@ export const DownloadTemplate = () => {
                 <h3 className="text-base font-medium">Web App</h3>
               </div>
               <div className="divide-border flex-1 divide-y">
-                <Link
+                <AppCtaLink
                   href="https://app.tensr.xyz"
+                  location="download"
+                  label="Access Web Platform"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pt-4 pb-4 block w-full hover:opacity-75"
@@ -33,7 +36,7 @@ export const DownloadTemplate = () => {
                     <span>Access Web Platform</span>
                     <ArrowRight className="h-4 w-4" />
                   </div>
-                </Link>
+                </AppCtaLink>
               </div>
             </div>
 
@@ -57,8 +60,10 @@ export const DownloadTemplate = () => {
                     <ArrowRight className="h-4 w-4" />
                   </div>
                 </Link>
-                <Link
+                <AppCtaLink
                   href="https://app.tensr.xyz"
+                  location="download"
+                  label="Get API Key"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pt-4 pb-4 block w-full hover:opacity-75"
@@ -67,7 +72,7 @@ export const DownloadTemplate = () => {
                     <span>Get API Key</span>
                     <ArrowRight className="h-4 w-4" />
                   </div>
-                </Link>
+                </AppCtaLink>
               </div>
             </div>
 
@@ -159,26 +164,30 @@ export const DownloadTemplate = () => {
               <div className="mb-6">
                 <div className="space-y-3">
                   <div className="hidden md:block">
-                    <Link
+                    <AppCtaLink
                       href="https://app.tensr.xyz"
+                      location="download_hero"
+                      label="Access Web Platform"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
                     >
                       Access Web Platform
                       <Download className="ml-2 h-4 w-4" aria-hidden="true" />
-                    </Link>
+                    </AppCtaLink>
                   </div>
                   <div className="block md:hidden">
-                    <Link
+                    <AppCtaLink
                       href="https://app.tensr.xyz"
+                      location="download_hero"
+                      label="Get Started"
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center px-6 py-3 bg-[var(--color-button-primary-bg)] text-[var(--color-button-primary-text)] rounded-full hover:opacity-90 transition-colors text-sm font-medium"
                     >
                       Get Started
                       <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                    </Link>
+                    </AppCtaLink>
                   </div>
                 </div>
               </div>

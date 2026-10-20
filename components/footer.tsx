@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { AppCtaLink } from '@/components/app-cta-link';
 
 const askQuery = encodeURIComponent('What does Tensr (the startup) do?');
 
@@ -118,14 +119,16 @@ export const Footer = () => {
               </span>
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-3">
-              <Link
+              <AppCtaLink
                 href="https://app.tensr.xyz"
+                location="footer"
+                label="Get started"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex min-w-[10rem] items-center justify-center rounded-full bg-component px-5 py-3 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
               >
                 Get started
-              </Link>
+              </AppCtaLink>
               <Link
                 href="mailto:help@tensr.xyz?subject=Demo%20request"
                 className="inline-flex min-w-[10rem] items-center justify-center rounded-full bg-inverted px-5 py-3 text-sm font-medium text-[var(--inverted-fg)] transition-opacity hover:opacity-90"

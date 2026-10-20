@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { AppCtaLink } from '@/components/app-cta-link';
 import { StepVisual } from '@/components/asset-library/step-assets';
 import {
   CollabProductMock,
@@ -113,14 +114,16 @@ export const HomeTemplate = () => {
                 mid-size research agencies comparing Tensr to Displayr and Q, not IBM.
               </p>
               <div className="flex flex-wrap items-center gap-3">
-                <Link
+                <AppCtaLink
                   href="https://app.tensr.xyz"
+                  location="home_hero"
+                  label="Start 30-day trial"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center rounded-full bg-component px-4 py-2.5 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
                 >
                   Start 30-day trial
-                </Link>
+                </AppCtaLink>
                 <Link
                   href="mailto:help@tensr.xyz?subject=Demo%20request"
                   className="inline-flex items-center rounded-full bg-inverted px-4 py-2.5 text-sm font-medium text-[var(--inverted-fg)] transition-opacity hover:opacity-90"
