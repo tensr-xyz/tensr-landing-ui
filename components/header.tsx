@@ -4,6 +4,7 @@ import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { type ReactNode, useEffect, useState } from 'react';
+import { AppCtaLink, captureLandingCta } from '@/components/app-cta-link';
 
 const navLinks = [
   { href: '/features', label: 'Product' },
@@ -38,6 +39,7 @@ export const Header = ({ extra }: { extra?: ReactNode }) => {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.key.toLowerCase() === 'l' && !e.metaKey && !e.ctrlKey) {
+        captureLandingCta('keyboard', 'Login');
         window.open('https://app.tensr.xyz', '_blank');
       }
       if (e.key.toLowerCase() === 'd' && !e.metaKey && !e.ctrlKey) {
@@ -75,15 +77,17 @@ export const Header = ({ extra }: { extra?: ReactNode }) => {
           </nav>
 
           <div className="flex items-center gap-2">
-            <Link
+            <AppCtaLink
               href="https://app.tensr.xyz"
+              location="header"
+              label="Login"
               target="_blank"
               rel="noopener noreferrer"
               className="hidden items-center gap-2 px-2 py-1.5 text-[13px] text-text-secondary transition-colors hover:text-text-primary sm:inline-flex"
             >
               Login
               <span className="kbd">L</span>
-            </Link>
+            </AppCtaLink>
             <Link
               href="mailto:help@tensr.xyz?subject=Demo%20request"
               className="hidden items-center gap-2 rounded-full bg-component px-4 py-1.5 text-[13px] text-text-primary transition-colors hover:bg-[var(--component-hover)] sm:inline-flex"
@@ -141,15 +145,17 @@ export const Header = ({ extra }: { extra?: ReactNode }) => {
               </li>
             ))}
             <li>
-              <Link
+              <AppCtaLink
                 href="https://app.tensr.xyz"
+                location="header_mobile"
+                label="Login"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block py-3 text-lg text-text-primary"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Login
-              </Link>
+              </AppCtaLink>
             </li>
             <li className="pt-4">
               <Link

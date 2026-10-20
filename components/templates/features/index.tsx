@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { AppCtaLink } from '@/components/app-cta-link';
 import { Check } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import {
@@ -314,14 +315,16 @@ export const FeaturesTemplate = () => {
                 the original respondents — that is the comparison against Displayr and Q.
               </p>
               <div className="flex flex-wrap items-center gap-3">
-                <Link
+                <AppCtaLink
                   href="https://app.tensr.xyz"
+                  location="features_hero"
+                  label="Start 30-day trial"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center rounded-full bg-component px-5 py-3 text-sm text-text-primary transition-colors hover:bg-[var(--component-hover)]"
                 >
                   Start 30-day trial
-                </Link>
+                </AppCtaLink>
                 <Link
                   href="mailto:help@tensr.xyz?subject=Demo%20request"
                   className="inline-flex items-center rounded-full bg-inverted px-5 py-3 text-sm font-medium text-[var(--inverted-fg)] transition-opacity hover:opacity-90"
