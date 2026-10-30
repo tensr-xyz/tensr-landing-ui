@@ -6,10 +6,12 @@ import Link from 'next/link';
 import { type ReactNode, useEffect, useState } from 'react';
 
 const navLinks = [
-  { href: '/features', label: 'Product' },
+  { href: '/product', label: 'Product' },
+  { href: '/integrations', label: 'Integrations' },
+  { href: '/agencies', label: 'Agencies' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/docs', label: 'Docs' },
-  { href: '/changelog', label: 'Changelog' },
+  { href: '/security', label: 'Security' },
 ];
 
 const BrandMark = () => (

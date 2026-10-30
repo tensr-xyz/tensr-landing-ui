@@ -1,40 +1,38 @@
 import type { Metadata } from 'next';
-import HomeTemplate from '@/components/templates/home';
+import Link from 'next/link';
+import { PaperPage, Soon } from '@/components/paper/chrome';
 
 export const metadata: Metadata = {
   title: 'Banner tables that trace to the respondents › Tensr',
   description:
-    'Weighted crosstabs and banner tables for research agencies — significance-tested, delivered as Excel and PowerPoint, every number traced to the original respondents.',
-  keywords: [
-    'tensr',
-    'banner tables',
-    'weighted crosstabs',
-    'survey research software',
-    'Displayr alternative',
-    'Q alternative',
-    'significance testing',
-    'rim weighting',
-    'market research tables',
-    'provenance',
-  ],
-  alternates: {
-    canonical: 'https://www.tensr.xyz',
-  },
-  openGraph: {
-    type: 'website',
-    title: 'Banner tables that trace to the respondents › Tensr',
-    description:
-      'Weighted crosstabs and banner tables for research agencies — significance-tested, Excel and PowerPoint, every number traced to the respondents.',
-    url: 'https://www.tensr.xyz',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Banner tables that trace to the respondents › Tensr',
-    description:
-      'Weighted crosstabs and banner tables for research agencies. Every number traces to the respondents.',
-  },
+    'Weighted crosstabs and banner tables for research agencies. Significance letters, Excel and PowerPoint, every number traced to the respondents.',
 };
 
 export default function HomePage() {
-  return <HomeTemplate />;
+  return (
+    <PaperPage
+      title="Banner tables that trace to the respondents."
+      lede="Build a crosstab, weight it, and export the deck. The chat agent runs the same analyses. Fielding and live survey sync are not in this version."
+    >
+      <div className="flex gap-3">
+        <Link href="/signin" className="bg-[#14473A] px-4 py-3 text-[#F9F4EB]">
+          Sign in
+        </Link>
+        <Link href="/demo" className="border border-[#14473A] px-4 py-3">
+          Book a demo
+        </Link>
+      </div>
+      <ul className="flex flex-col gap-3 text-[16px] leading-6">
+        <li>Upload .sav, .csv, and .xlsx, then stack waves with a column map.</li>
+        <li>Column percent tables with significance letters when a contrast is significant.</li>
+        <li>Rake weights, code frames, and exports to Excel, PowerPoint, and Word.</li>
+        <li>
+          Prolific fielding <Soon>coming soon</Soon>
+        </li>
+        <li>
+          Live Qualtrics, Decipher, and Alchemer sync <Soon>coming soon</Soon>
+        </li>
+      </ul>
+    </PaperPage>
+  );
 }
