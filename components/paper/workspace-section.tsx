@@ -11,7 +11,7 @@ export function WorkspaceSection() {
       </div>
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="text-[56px] leading-14.5 tracking-[-0.04em] w-180 shrink-0 text-[#14473A]">
-          Five tabs. One study. Nothing exported halfway through.
+          Your whole study in one place, from raw data to the client deck.
         </div>
         <div className="flex flex-wrap gap-1.5">
           <div className="py-2.25 px-4 border border-solid border-[#14473A]">

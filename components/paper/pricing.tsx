@@ -10,14 +10,14 @@ const plans = [
     monthly: 79,
     annual: 63,
     year: 756,
-    lines: ['1,200 agent runs a month', '300 reports a month', '1,000,000 rows per dataset'],
+    lines: ['For one researcher running their own studies.', '1,200 agent runs a month', '300 reports a month', 'Weighted analysis and sig tests', 'Excel and PowerPoint export', 'Full data provenance', '.sav, .dta and CSV import'],
   },
   {
     name: 'Pro+',
     monthly: 149,
     annual: 119,
     year: 1428,
-    lines: ['5,000 agent runs a month', '1,200 reports a month', '1,000,000 rows per dataset'],
+    lines: ['For researchers who lean on the agent every day.', 'Everything in Pro, plus', '5,000 agent runs a month', '1,200 reports a month'],
   },
   {
     name: 'Teams',
@@ -25,7 +25,7 @@ const plans = [
     annual: 95,
     year: 1140,
     perSeat: true,
-    lines: ['£119 a seat, 3 seats minimum', '10,000 agent runs a month', '3,000 reports a month', 'Billed to the organisation'],
+    lines: ['For research teams sharing workspaces.', 'Everything in Pro+, plus', '10,000 agent runs a month', '3,000 reports a month', 'Organisation billing and shared seats', 'Shared workspaces and presence', '3-seat minimum, £3,420 a year'],
   },
 ] as const;
 
@@ -44,14 +44,14 @@ export function PricingPage() {
   return (
     <PaperShell>
       <section className="flex flex-col gap-7 px-10 pb-16 pt-14">
-        <p className="w-fit rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">Pricing · GBP</p>
+        <p className="w-fit rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">30-day free trial on every plan</p>
         <div className="flex items-end justify-between gap-10">
           <div className="flex flex-col gap-7">
             <h1 className="whitespace-pre-wrap text-[96px] leading-24 tracking-[-0.045em]">
               Pay per researcher,{'\n'}not per table
             </h1>
             <p className="w-175 text-[22px] leading-8 text-[#3D6A5E]">
-              Pro £79 a month, or £63 if you pay annually. Pro+ £149, or £119 annually. Teams £119 a seat, three seats to start, or £95 a seat annually. Annual is 20% off.
+              Every plan gets weighted tables, banner books, sig testing and the agent. Pick the one that matches how much you lean on it. Prices are in pounds.
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-1 border border-[#14473A] p-1">
@@ -71,7 +71,7 @@ export function PricingPage() {
           <div className="flex items-center gap-10">
             <div>
               <p className="text-[30px] leading-9 tracking-[-0.02em]">Trial</p>
-              <p className="text-[15px] leading-5 text-[#3D6A5E]">£0 for 30 days · no card</p>
+              <p className="text-[15px] leading-5 text-[#3D6A5E]">£0 for 30 days · no card needed</p>
             </div>
             <div className="h-14 w-px bg-[#14473A33]" />
             <div className="flex gap-8">
@@ -126,17 +126,18 @@ export function PricingPage() {
         <div className="flex items-center justify-between bg-[#14473A] px-9 py-7 text-[#F9F4EB]">
           <div>
             <p className="text-[30px] leading-9 tracking-[-0.02em]">Agencies</p>
-            <p className="text-[16px] leading-6 text-[#BFD3C8]">Teams is the plan for an organisation. Book a demo and we&apos;ll walk through it on your file.</p>
+            <p className="text-[16px] leading-6 text-[#BFD3C8]">Bigger teams, procurement paperwork or questions about data and security. Email help@tensr.xyz and we&apos;ll scope it around how you work.</p>
           </div>
           <Link href="/demo" className="border border-[#F9F4EB] px-6 py-3 text-[17px] leading-5.5">
-            Book a demo
+            Talk to us
           </Link>
         </div>
       </section>
 
       <section className="flex flex-col gap-10 px-10 pb-20">
-        <SectionRule left="Compare" right="Plans" />
-        <h2 className="text-[56px] leading-14.5 tracking-[-0.04em]">What each plan includes</h2>
+        <SectionRule left="Compare plans" right="What's in each plan" />
+        <h2 className="text-[56px] leading-14.5 tracking-[-0.04em]">What&apos;s in each plan</h2>
+        <p className="max-w-[720px] text-[18px] leading-7 text-[#3D6A5E]">The analysis is the same on every plan. The difference is how much you use the agent, and working as a team.</p>
         <div className="border-t border-[#14473A]">
           <div className="grid grid-cols-4 py-3 text-[15px] leading-5 text-[#3D6A5E]">
             <span />
@@ -156,11 +157,15 @@ export function PricingPage() {
       </section>
 
       <section className="flex flex-col gap-8 px-10 pb-24">
-        <SectionRule left="Questions" right="Questions" />
+        <SectionRule left="Questions" right="Pricing questions" />
         {[
-          ['What happens after the trial?', 'The trial lasts 30 days. After that, pick Pro, Pro+, or Teams.'],
-          ['How does annual billing work?', 'Annual is 20% off the monthly price, shown in pounds.'],
-          ['Which currency?', 'Prices on this page are in pounds.'],
+          ['What\'s the difference between the plans?', 'The analysis is the same on every plan. Pro includes 300 reports a month. Pro+ raises that to 1,200 reports and 5,000 agent runs. Teams adds organisation billing, shared seats, shared workspaces and real-time collaboration, with 3,000 reports and 10,000 agent runs.'],
+          ['What is an agent run?', 'One task you hand to the agent in chat, like building a banner book or running a driver analysis. Pro includes 1,200 a month, Pro+ 5,000 and Teams 10,000.'],
+          ['Can I switch between monthly and annual?', 'Yes. Annual is 20% off the monthly price.'],
+          ['How does Teams seat pricing work?', 'Teams is £119 per seat a month, or £95 per seat a month billed annually (£1,140 per seat a year). There\'s a 3-seat minimum, so the smallest team is £3,420 a year.'],
+          ['Is there a free plan?', 'There\'s a 30-day trial with no card needed. You get 5 datasets of up to 100,000 rows, 150 tables, 150 agent runs and 150 reports.'],
+          ['Where is my data stored, and is it secure?', 'Your data is encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Tensr never trains models on it, and private mode keeps respondents\' answers away from the AI entirely.'],
+          ['Do you offer academic or non-profit pricing?', 'Ask us at help@tensr.xyz and tell us a bit about what you\'re working on.'],
         ].map(([q, a]) => (
           <div key={q} className="border-t border-[#14473A] pt-4">
             <h3 className="text-[24px] leading-8 tracking-[-0.02em]">{q}</h3>

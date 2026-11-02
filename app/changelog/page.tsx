@@ -27,7 +27,7 @@ export default function ChangelogPage() {
           <p className="w-fit rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">Changelog</p>
           <h1 className="text-[96px] leading-24 tracking-[-0.045em]">Changelog</h1>
           <p className="w-175 text-[22px] leading-8 text-[#3D6A5E]">
-            The published notes, newest first. Subscribe with RSS.
+            What we shipped and when. Mostly fixes and features researchers asked for, with the statistics checked against R before they go out. Newest first. Subscribe with RSS.
           </p>
         </div>
         <Link href="/changelog/rss.xml" className="shrink-0 border border-[#14473A] bg-[#14473A] px-5.5 py-3.75 text-[17px] leading-5.5 text-[#F9F4EB]">

@@ -13,30 +13,15 @@ export const metadata: Metadata = {
 const blocks: { kicker: string; title: string; body: ReactNode }[] = [
   {
     kicker: 'Encryption',
-    title: 'AES-256 at rest',
-    body: 'Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East.',
+    title: 'Encrypted at rest with AES-256',
+    body: 'Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Everything you upload is encrypted, whether it is sitting in storage or moving between your browser and our servers.',
   },
   {
-    kicker: 'Region',
-    title: 'AWS US East',
-    body: 'Datasets, exports, and account data are hosted in AWS US East (us-east-1).',
-  },
-  {
-    kicker: 'Retention',
-    title: 'Older copies drop off',
-    body: 'Older copies of a file drop after 30 days. Unfinished uploads are cleared after 7 days. Dataset logs are kept for 90 days.',
-  },
-  {
-    kicker: 'Private mode',
-    title: 'Column names and types',
-    body: 'Private mode sends the AI only column names and types, never your respondents’ answers. You still see the full table. Open ends are coded with keywords, and category suggestions stay in Tensr.',
-  },
-  {
-    kicker: 'The agent',
-    title: 'Anthropic, and OpenAI on the earlier agent',
+    kicker: 'Your data stays yours',
+    title: 'Tensr never trains models on your data',
     body: (
       <>
-        The current agent calls Anthropic. The earlier agent still calls OpenAI. The data-trust note says Tensr does not train models on customer data.{' '}
+        Respondent data is there to answer your questions. Tensr does not train models on customer data. Private mode sends the AI only column names and types, never your respondents&apos; answers.{' '}
         <a className="underline" href={ANTHROPIC_POLICY}>
           See Anthropic&apos;s policy
         </a>
@@ -49,14 +34,24 @@ const blocks: { kicker: string; title: string; body: ReactNode }[] = [
     ),
   },
   {
-    kicker: 'Plugins',
-    title: 'No network from a plugin',
-    body: 'Plugins run inside Tensr, with no network access.',
+    kicker: 'Access',
+    title: 'You decide who gets in',
+    body: 'Sign in with an email one-time code. A workspace has an owner and members. Team workspaces have shared seats and live presence, so you can see who is in.',
   },
   {
-    kicker: 'Sign-in',
-    title: 'Email codes',
-    body: 'Sign in with an email code. A workspace has an owner and members.',
+    kicker: 'Provenance',
+    title: 'When a client asks where a number came from',
+    body: 'Every number traces back to the respondents and rows behind it. Each analysis comes with a reproducible R script you can take away. Weights are versioned, so you can see which one a table used.',
+  },
+  {
+    kicker: 'Plugins',
+    title: 'Plugins run sandboxed',
+    body: 'Plugins run inside Tensr, with no network access. They are installed per workspace.',
+  },
+  {
+    kicker: 'Retention',
+    title: 'Older copies drop off',
+    body: 'Older copies of a file drop after 30 days. Unfinished uploads are cleared after 7 days. Dataset logs are kept for 90 days.',
   },
 ];
 
@@ -71,7 +66,7 @@ export default function SecurityPage() {
               Your client&apos;s data{'\n'}stays your client&apos;s
             </h1>
             <p className="w-180 text-[22px] leading-8 text-[#3D6A5E]">
-              Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Private mode sends the AI only column names and types, never your respondents&apos; answers.
+              Research agencies hold respondent data under NDAs and client contracts. Here is how Tensr stores it, who can see it, and what the agent does with it.
             </p>
           </div>
           <dl className="w-90 shrink-0 border-t border-[#14473A]">
@@ -103,6 +98,7 @@ export default function SecurityPage() {
       </section>
       <section className="flex flex-col gap-8 bg-[#14473A] px-10 pb-26 pt-24 text-[#F9F4EB]">
         <h2 className="max-w-[900px] text-[72px] leading-none tracking-[-0.045em]">Questions from your client&apos;s IT team?</h2>
+        <p className="max-w-[640px] text-[18px] leading-7 text-[#F9F4EB]/85">Send us their security questionnaire or a list of questions. You&apos;ll get straight answers from the people who built Tensr.</p>
         <Link href="mailto:help@tensr.xyz?subject=Security%20questions" className="w-fit bg-[#F9F4EB] px-6 py-4 text-[17px] leading-5.5 text-[#14473A]">
           Email help@tensr.xyz
         </Link>

@@ -111,14 +111,14 @@ function HeroPanels() {
       <div className="flex flex-col justify-between bg-[#5E8A74] p-5">
         <div className="flex h-[306px] flex-col items-center justify-between px-5 pt-6">
           <p className="text-center text-[14px] leading-4 text-[#F9F4EB]">
-            Every dot is a respondent.
+            Every dot is a person. 9 said price.
           </p>
           <PersonDots />
         </div>
         <div className="flex w-[320px] flex-col gap-2 bg-[#FCFAF5] px-4.5 py-4 text-[#14473A]">
           <p className="text-[14px] leading-4.5">Open-end · coded</p>
-          <p className="text-[18px] leading-6.5">Haiku codes each answer. You can edit the themes.</p>
-          <p className="text-[14px] leading-4.5">A weighted multi-response, with letters, back to the verbatims.</p>
+          <p className="text-[18px] leading-6.5">&ldquo;Bills went up again and nobody explained why.&rdquo;</p>
+          <p className="text-[14px] leading-4.5">Coded to Price · 31% of switchers</p>
         </div>
       </div>
       <div className="flex flex-col justify-between bg-[#7895A8] p-5">
@@ -126,17 +126,17 @@ function HeroPanels() {
           <WaveBars />
         </div>
         <div className="flex w-[340px] flex-col gap-2 bg-[#FCFAF5] px-4.5 py-4">
-          <p className="text-[14px] leading-4.5">Unaided awareness · wave on wave</p>
+          <p className="text-[14px] leading-4.5">Unaided awareness · W3 → W4</p>
           <div className="flex items-center justify-between text-[15px]">
-            <span>One region</span>
-            <span className="text-[#3D6A5E]">sig letter when it differs</span>
+            <span>Scotland</span>
+            <span className="text-[#3D6A5E]">42% A</span>
           </div>
           <div className="h-1.5 bg-[#E7E1D4]">
             <div className="h-full w-[62%] bg-[#14473A]" />
           </div>
           <div className="flex items-center justify-between text-[15px]">
-            <span>Another region</span>
-            <span className="text-[#3D6A5E]">same weight</span>
+            <span>North East</span>
+            <span className="text-[#3D6A5E]">sig letter when it differs</span>
           </div>
           <div className="h-1.5 bg-[#E7E1D4]">
             <div className="h-full w-[40%] bg-[#C9B48F]" />
@@ -145,11 +145,12 @@ function HeroPanels() {
       </div>
       <div className="flex flex-col justify-between bg-[#C9B48F] p-5">
         <div className="flex h-[270px] flex-col justify-end px-6 pb-6">
-          <p className="text-[16px] leading-5 text-[#14473A]">Prolific: coming soon</p>
+          <p className="text-[16px] leading-5 text-[#14473A]">Findings written up for you.</p>
         </div>
         <div className="flex w-[300px] flex-col gap-1 bg-[#FCFAF5] px-4.5 py-4">
-          <p className="text-[14px] leading-4.5">Live Qualtrics, Decipher, Alchemer</p>
-          <p className="text-[20px] leading-6">Coming soon</p>
+          <p className="text-[14px] leading-4.5">Report · key finding</p>
+          <p className="text-[20px] leading-6">+11 pts</p>
+          <p className="text-[14px] leading-4.5">42% in Scotland comes from 89 respondents. Open any one to see their answers.</p>
         </div>
       </div>
     </section>
@@ -157,24 +158,24 @@ function HeroPanels() {
 }
 
 const steps = [
-  ['01', 'Connect', 'Upload a .sav, .csv or .xlsx. Labels and missing codes come with a .sav.'],
+  ['01', 'Upload', 'Drop in a survey file from SPSS, Stata, Excel or a Qualtrics export. Labels and weights come with it.'],
   ['02', 'Clean', 'Speeders, routing faults and missing data get flagged before they reach a table.'],
-  ['03', 'Ask', 'Weighted banners, nets, sig letters and coded open-ends from plain English.'],
-  ['04', 'Deliver', 'Reports, banner books and decks, every number traceable to a respondent.'],
+  ['03', 'Ask', 'Ask for weighted tables, nets, sig tests and coded open ends in plain English.'],
+  ['04', 'Deliver', 'Banner books, decks and reports, with every number linked to the respondents behind it.'],
 ];
 
 const uses = [
   ['01', 'Brand tracking', 'Fuse waves, rake to targets and rerun the book. Wave-on-wave sig flags included.', false],
-  ['02', 'Concept testing', 'Monadic or sequential layouts, with top-2 box nets and drivers.', false],
-  ['03', 'Pricing', 'Van Westendorp and Gabor-Granger, in the same project as the banner.', false],
-  ['04', 'MaxDiff & conjoint', 'MaxDiff and conjoint, as counts, MNL, and hierarchical Bayes.', false],
-  ['05', 'Open-end coding', 'Verbatims coded to a frame you can edit, and usable as a banner straight away.', false],
+  ['02', 'Concept testing', 'Monadic or sequential, with top-2 box nets and drivers in minutes.', false],
+  ['03', 'Pricing', 'Van Westendorp and Gabor-Granger without the spreadsheet gymnastics.', false],
+  ['04', 'MaxDiff & conjoint', 'Run MaxDiff and conjoint on your own data, with no extra tools.', false],
+  ['05', 'Open-end coding', 'Open ends coded into themes you can edit, ready to cut by any group.', false],
   ['06', 'Agency tab books', 'Hundreds of tables, Excel and PowerPoint out. Same spec every wave.', true],
 ] as const;
 
 const releases = [
   ['20 Oct 2026', 'v0.5.1', 'Filters, comparisons, and stacking', 'A filter stays on that run. Stack and append find Merge Datasets.'],
-  ['19 Oct 2026', 'v0.5.0', 'The new agent is on for every workspace', 'Microsoft sign-in asks for an email once when the account has none.'],
+  ['19 Oct 2026', 'v0.5.0', 'The new agent is on for every workspace', 'Microsoft sign-in now asks for your email only once.'],
   ['18 Oct 2026', 'v0.4.9', 'Tables, nets, and the columns you named', 'Nets hold on re-run and tables keep your column names.'],
 ];
 
@@ -183,14 +184,13 @@ export function LandingPage() {
     <PaperShell>
       <section className="flex flex-col items-start gap-7 px-10 pt-14 pb-12">
         <p className="rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">
-          Import .sav today. Prolific, live Qualtrics, Decipher and Alchemer: coming soon
+          Works with SPSS, Stata, Excel, CSV and Qualtrics exports
         </p>
         <h1 className="max-w-[841px] text-[96px] leading-24 tracking-[-0.045em]">
           Every number, traced to the people behind it
         </h1>
         <p className="w-175 text-[22px] leading-8 text-[#3D6A5E]">
-          Bring survey data from the tools you already use. Ask in plain English and get weighted,
-          sig-tested tables, with every cell traceable to its respondents.
+          Upload your survey data and ask in plain English. Tensr builds the weighted tables, codes the open ends and writes up the findings, and every number links back to the people who gave it.
         </p>
         <form action={APP_LOGIN} method="get" className="flex w-full max-w-[720px] flex-wrap pt-1.5">
           <label className="sr-only" htmlFor="hero-email">
@@ -216,16 +216,16 @@ export function LandingPage() {
       <section className="flex flex-col gap-14 px-10 pt-10 pb-24">
         <SectionRule left="Works with your stack" />
         <h2 className="text-center text-[52px] leading-14.5 tracking-[-0.035em]">
-          Plugs into how research
+          Bring your data
           <br />
-          already gets done
+          from anywhere
         </h2>
         <div className="flex gap-2">
           <div className="flex grow basis-0 flex-col gap-2">
             {[
-              ['Prolific', true],
-              ['Qualtrics', false],
-              ['SPSS .sav', false],
+              ['Stata', false],
+              ['Qualtrics exports', false],
+              ['SPSS', false],
             ].map(([label, soon]) => (
               <div key={String(label)} className="flex h-30 flex-col items-center justify-center bg-[#EEE8DC]">
                 <p className="text-[30px] leading-9 tracking-[-0.02em]">{label}</p>
@@ -246,7 +246,7 @@ export function LandingPage() {
             </div>
             <div className="flex h-30 flex-col justify-center gap-1 bg-[#14473A] px-6 text-[#F9F4EB]">
               <p className="text-[30px] leading-9 tracking-[-0.02em]">1 project</p>
-              <p className="text-[15px] leading-4.5 text-[#BFD3C8]">fieldwork to deck</p>
+              <p className="text-[15px] leading-4.5 text-[#BFD3C8]">data to deck</p>
             </div>
           </div>
         </div>
@@ -277,7 +277,7 @@ export function LandingPage() {
             ['No syntax', 'Just ask', 'Type the question, get the weighted, sig-tested table and the syntax behind it.', 'bg-[#14473A] text-[#F9F4EB]', 'text-[#F9F4EB]/80'],
             ['Rerun a wave', '1 click', "Last wave's banner book, on this wave's data.", 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
             ['Traceable', 'Every cell', 'Click any number to see the respondents and the syntax behind it.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
-            ['Your files', '.sav in', 'Labels, missing codes and measurement levels come across intact.', 'bg-[#C9B48F]', 'text-[#14473A]'],
+            ['Your files', 'Any file in', 'SPSS, Stata, Excel or CSV. Labels, missing codes and weights come across intact.', 'bg-[#C9B48F]', 'text-[#14473A]'],
           ].map(([kicker, title, body, card, kickerClass]) => (
             <div key={title} className={`flex h-75 grow basis-0 flex-col justify-between p-7 ${card}`}>
               <p className={`text-[15px] leading-4.5 ${kickerClass}`}>{kicker}</p>
@@ -358,8 +358,8 @@ export function LandingPage() {
           {[
             ['At rest', 'AES-256', 'Every dataset is encrypted where it is stored.', 'bg-[#14473A] text-[#F9F4EB]', 'text-[#F9F4EB]/80'],
             ['In transit', 'HTTPS', 'Files and results only move over encrypted connections.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
-            ['Private mode', 'Names only', 'Private mode sends the AI only column names and types, never your respondents\u2019 answers.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
-            ['Sign-in', 'Email code', 'A workspace has an owner and members.', 'bg-[#C9B48F]', 'text-[#14473A]'],
+            ['Training', 'Private', 'Tensr never trains models on your data.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
+            ['Team sign-in', 'By code', 'Team workspaces sign in with an emailed one-time code.', 'bg-[#C9B48F]', 'text-[#14473A]'],
           ].map(([kicker, title, body, card, kickerClass]) => (
             <div key={title} className={`flex h-60 grow basis-0 flex-col justify-between p-7 ${card}`}>
               <p className={`text-[15px] leading-4.5 ${kickerClass}`}>{kicker}</p>
@@ -398,7 +398,7 @@ export function LandingPage() {
       </section>
 
       <section className="flex flex-col gap-10 bg-[#14473A] px-10 pt-24 pb-26 text-[#F9F4EB]">
-        <h2 className="w-275 text-[120px] leading-28 tracking-[-0.055em]">Bring a .sav. Leave with the tables.</h2>
+        <h2 className="w-275 text-[120px] leading-28 tracking-[-0.055em]">Bring a dataset. Leave with the tables.</h2>
         <div className="flex items-end justify-between gap-10">
           <p className="w-130 shrink-0 text-[20px] leading-7.5 text-[#F9F4EB]/85">
             Send us last wave&apos;s file and we&apos;ll rebuild your tab book in Tensr on the call.

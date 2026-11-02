@@ -115,7 +115,7 @@ export function AgenciesPage() {
             <p className="text-[15px] leading-4.5">What leaves the project</p>
             <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">Excel, PowerPoint, and a Word note</h3>
             <p className="max-w-[520px] text-[17px] leading-6.5">
-              You export the banner you signed off, as Excel, PowerPoint, and a Word note.
+              Banner books are a spec. Add a break, change a net or swap a base and the book reruns, out to Excel, PowerPoint and Word.
             </p>
           </div>
           <div className="flex grow flex-col justify-between bg-[#EEE8DC] p-10">
@@ -142,7 +142,7 @@ export function AgenciesPage() {
             <div className="flex flex-col gap-4.5">
               <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">Check the work without redoing it</h3>
               <p className="text-[17px] leading-6.5 text-[#3D6A5E]">
-                Open a cell to see the filter, the weight, the base, and the respondents behind it, when provenance is complete. An R script comes with the analyses that have one.
+                Click any number to see the filter, the weight, the base and the respondents behind it. The R script for that run comes with it.
               </p>
               <Points
                 items={[
@@ -204,7 +204,7 @@ export function AgenciesPage() {
             <div className="flex flex-col gap-4.5">
               <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">One project, not three versions of it</h3>
               <p className="text-[17px] leading-6.5 text-[#3D6A5E]">
-                Teams includes shared workspaces and presence. A workspace has an owner and members. Sign in with an email code.
+                The team works in the same project. You can see who is in, and a workspace has an owner and members.
               </p>
               <Points
                 items={[
@@ -229,7 +229,7 @@ export function AgenciesPage() {
           </div>
           <div className="flex gap-2">
             {[
-              ['Encrypted at rest', 'Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East.'],
+              ['Encrypted at rest', 'Uploaded files and outputs are encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East.'],
               [
                 'Who the agent calls',
                 <>
@@ -260,7 +260,7 @@ export function AgenciesPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-225 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">How agencies roll it out</h2>
           <p className="w-95 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Start with one study, then move the rest when the team is ready.
+            No big switch-over. Prove it on one study, then move the rest when the team is ready.
           </p>
         </div>
         <div className="flex gap-10">
@@ -291,7 +291,7 @@ export function AgenciesPage() {
           <div className="flex grow flex-col justify-between bg-[#EEE8DC] p-10">
             <p className="text-[15px] leading-4.5 text-[#3D6A5E]">Join as a design partner</p>
             <h2 className="w-190 text-[40px] leading-12 tracking-[-0.025em]">
-              Bring a study, tell us what slows you down, and we&apos;ll build against that.
+              Bring a live study, tell us what slows you down, and we&apos;ll build it with you.
             </h2>
             <div className="flex items-center justify-between gap-8">
               <p className="text-[16px] leading-5.5 text-[#3D6A5E]">A working session on your file, and a direct line when you book the demo.</p>

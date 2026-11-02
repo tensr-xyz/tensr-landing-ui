@@ -15,13 +15,13 @@ export default function DemoPage() {
             See it on your{'\n'}own data
           </h1>
           <p className="text-[22px] leading-8 text-[#3D6A5E]">
-            Tell us what you want to see. We&apos;ll write back from help@tensr.xyz.
+            Thirty minutes with the people who build Tensr. No slides. We work on a real file, and we&apos;ll write back from help@tensr.xyz.
           </p>
           <ol className="border-t border-[#14473A33]">
             {[
-              ['01', 'From a file to weighted tables', 'Import, then rake. The file you uploaded stays. Build a banner with significance letters and nets.'],
-              ['02', 'Ask the agent', 'Ask answers from the data. Plan lays out the steps for you to approve. A complete cell opens the respondents behind it.'],
-              ['03', 'Out as Excel or PowerPoint', 'Excel is the audit record. PowerPoint is the deck you send. Word is the methodology note.'],
+              ['01', 'From raw file to weighted tables', 'Import, clean, rake to your targets and build a banner book with sig letters and nets.'],
+              ['02', 'Ask the agent a real question', 'Watch it plan, check with you, run the analysis and trace each number back to the respondents.'],
+              ['03', 'Out as Excel, PowerPoint or Word', 'Excel is the audit record. PowerPoint is the deck you send. Word is the methodology note. You export the banner you signed off.'],
             ].map(([index, title, body]) => (
               <li key={index} className="flex gap-6 border-b border-[#14473A33] py-5.5">
                 <span className="w-8 shrink-0 text-[15px] leading-7.5 text-[#3D6A5E]">{index}</span>
@@ -33,7 +33,7 @@ export default function DemoPage() {
             ))}
           </ol>
           <p className="bg-[#14473A] px-6 py-5 text-[17px] leading-6 text-[#F9F4EB]">
-            Bring a .sav, .dta, CSV, or Excel file and we&apos;ll look at it together.
+            Bring a .sav or a Qualtrics export. We&apos;ll look at it together.
           </p>
           <p className="text-[15px] leading-5.5 text-[#3D6A5E]">
             Files are encrypted at rest with AES-256 and hosted in AWS US East.
@@ -42,7 +42,7 @@ export default function DemoPage() {
 
         <form action="mailto:help@tensr.xyz" method="post" encType="text/plain" className="flex grow flex-col gap-6 bg-[#EEE8DC] p-10">
           <div>
-            <h2 className="text-[30px] leading-9 tracking-[-0.02em]">Email the team</h2>
+            <h2 className="text-[30px] leading-9 tracking-[-0.02em]">Tell us what you want to see</h2>
             <p className="mt-2 text-[16px] leading-6 text-[#3D6A5E]">A short note is enough. We&apos;ll reply from help@tensr.xyz.</p>
           </div>
           <div className="grid grid-cols-2 gap-3">

@@ -2,23 +2,23 @@ import Link from 'next/link';
 import { APP_LOGIN, Arrow, PaperShell, SectionRule } from '@/components/paper/shell';
 
 const analyses = [
-  ['01', 'Tabulation', 'Crosstabs, banner books, nets, means, and Top 2 box on a 1 to 5, 1 to 7, or 1 to 10 scale.'],
-  ['02', 'Significance', 'Column letters on a weighted banner, t-tests, chi-square, and ANOVA.'],
-  ['03', 'Regression', 'Linear, logistic, and ordinal models, among the regression pages in the docs.'],
-  ['04', 'Drivers', 'Drivers leave out identifiers, free text, and multi-response text.'],
-  ['05', 'Choice modelling', 'MaxDiff and conjoint: counts, multinomial logit, and hierarchical Bayes.'],
-  ['06', 'Segmentation', 'Factor, cluster, and correspondence analysis.'],
-  ['07', 'Pricing', 'Van Westendorp and Gabor-Granger.'],
+  ['01', 'Tabulation', 'Crosstabs, banner books, nets, means and Top 2 / Bottom 2 box on scales.'],
+  ['02', 'Significance', 'Column proportions, t-tests, chi-square, ANOVA and post-hoc.'],
+  ['03', 'Regression', 'Linear, logistic and ordinal models with diagnostics.'],
+  ['04', 'Drivers', 'Key driver and relative importance analysis.'],
+  ['05', 'Choice modelling', 'MaxDiff and conjoint, as counts, multinomial logit, and hierarchical Bayes.'],
+  ['06', 'Segmentation', 'Factor, cluster and correspondence analysis.'],
+  ['07', 'Pricing', 'Van Westendorp and Gabor-Granger curves.'],
 ] as const;
 
 const details = [
-  ['Analysis report', 'Checked, then explained', 'A plain-language data quality note, and the test the method prints. Analysis pages include an APA-style write-up.'],
+  ['Analysis report', 'Checked, then explained', 'Assumption checks, effect sizes, post-hoc tests and a plain-language read.'],
   ['Exports', 'Out in the shapes that exist', 'Banners go to Excel or PowerPoint. A write-up goes to CSV, Markdown, or the browser print dialog. A .sav comes back with an .sps weight file.'],
-  ['Weights', 'The file stays put', 'Rake to targets. A weight is saved as a new version, and the file you uploaded stays.'],
-  ['Filters', 'On that run', 'A filter used for one analysis stays on that run. Naming two groups keeps a two-group comparison.'],
+  ['Weights', 'Versions, not overwrites', 'Rake to targets as a new weight version. The one you uploaded stays, and so does the earlier weight.'],
+  ['Charts', 'From the table', 'Bar charts from a table, and a chart you can export.'],
   ['Notebook', 'R, on the open file', 'R cells load the open dataset. An R script is there for the analyses that have one.'],
-  ['Collaboration', 'Teams', 'Teams includes shared workspaces and presence. Sign in with an email code. A workspace has an owner and members.'],
-  ['Plugins', 'In the product', 'Plugins run inside Tensr, with no network access.'],
+  ['Collaboration', 'The team, live', 'Shared workspaces and presence. A workspace has an owner and members.'],
+  ['Plugins', 'In the product', 'Plugins run inside Tensr, with no network access. The agent and ⌘K can use them.'],
 ] as const;
 
 function PaperScreen({ src, caption }: { src: string; caption: string }) {
@@ -92,12 +92,12 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Every wave, every market, one dataset you can trust</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Drop in the file you already have. Tensr reads SPSS, Excel, and the rest, and turns them into tables you can send.
+            Connect the tools you already use, or drop in a file. Tensr reads them. Prolific fielding and live Qualtrics sync are coming soon.
           </p>
         </div>
         <FeatureRow
           items={[
-            ['Bring data in', '.sav, .dta, CSV, Excel, Triple-S, and Parquet. Labels, missing codes, and measurement levels come across on a .sav.'],
+            ['Bring data in', '.sav, .dta, CSV, Excel, Triple-S and Parquet. Labels, missing codes and measurement levels come across intact.'],
             ['Merge waves', 'Join or stack files. Stack and append find Merge Datasets, and stacking says when those rows are already in the file.'],
             ['The file stays the file', 'A weight, a recode, or a merge saves a new version. The file you uploaded stays.'],
           ]}
@@ -109,14 +109,14 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Clean it before it reaches a table</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            The sheet shows the column labels. Blanks stay empty. The data quality note is in plain language.
+            A live sheet of your data with the checks already run. Fix it here once and every table downstream picks it up.
           </p>
         </div>
         <FeatureRow
           items={[
-            ['Labels', 'A .sav keeps variable labels, value labels, and missing codes.'],
-            ['Filters', 'A filter used for one analysis stays on that run.'],
-            ['Quality', 'The data quality report says what it found, in plain language.'],
+            ['Sheet and filters', 'Labels or values, click a code to filter.'],
+            ['Weighting', 'Rake to targets, see the effective base.'],
+            ['Quality checks', 'Speeders and routing faults flagged early.'],
           ]}
         />
         <PaperScreen
@@ -128,7 +128,7 @@ export function ProductPage() {
       <section className="flex flex-col gap-12 px-10 pb-30">
         <SectionRule left="Open ends" right="Haiku, then keywords" />
         <div className="flex items-end justify-between gap-10">
-          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Haiku codes the answers. You can edit the themes.</h2>
+          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Codeframes you can edit, usable as a banner</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
             Haiku proposes a code frame from a sample of the answers, then codes every answer with a confidence score. A score under 0.6, or no code, goes to the review queue for you to edit. Keyword coding is the fallback. In private mode, open ends are coded with keywords. Themes tabulate as a weighted multi-response, with significance letters, and a cell opens the verbatims.
           </p>
@@ -144,12 +144,12 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">An analyst that plans first, asks when it is not sure, and shows its working</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Type the question. Ask answers from the data. Plan lays out the steps for you to approve. Agent runs them and pauses when a choice is yours.
+            Type the question the client asked. The agent picks the method and tells you what it did, step by step.
           </p>
         </div>
         <div className="flex gap-2">
           {[
-            ['Mode 1', 'Ask', 'Quick answers about the data.', false],
+            ['Mode 1', 'Ask', 'Quick answers about the data. Reads, and leaves the file as it is.', false],
             ['Mode 2', 'Plan', 'Lays out the steps first. You approve or edit before anything runs.', false],
             ['Mode 3', 'Agent', 'Merges, weights, and builds the book, pausing when a choice is yours.', true],
             ['Every mode', 'Shown', 'Each step lists the weight, base, and test it used, so you can check it.', false],
@@ -168,9 +168,9 @@ export function ProductPage() {
       <section className="flex flex-col gap-12 px-10 pb-30">
         <SectionRule left="04 · Tables" right="Banner books" />
         <div className="flex items-end justify-between gap-10">
-          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">The banner, with the letters on it</h2>
+          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">The tab book, the way you&apos;d spec it</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Column percents, nets, and significance letters. A net stays on that table. Excel and PowerPoint take the grid you signed off.
+            Drag a stub and a banner or just describe the table. Save the spec and rerun it on the next wave&apos;s data. Excel and PowerPoint take the grid you signed off.
           </p>
         </div>
         <PaperScreen
@@ -184,7 +184,7 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">The book you signed off, ready to send</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Excel and PowerPoint for the banner. CSV, Markdown, or print for the analysis write-up. You export the banner you signed off.
+            Excel and PowerPoint for the banner. CSV, Markdown, or print for the write-up. You export the banner you signed off.
           </p>
         </div>
       </section>
@@ -194,7 +194,7 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Open a cell. See the people.</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            When provenance is complete, a cell opens the respondents behind that stub and banner. An incomplete run says so.
+            Click any cell and see the respondents, rows, weight and test that produced it.
           </p>
         </div>
         <PaperScreen
@@ -208,7 +208,7 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">The methods you reach for, without the syntax</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Run one from the ⌘K palette, a dialog, or a sentence in chat. The list is the 83 documented analyses.
+            Run any of them from the ⌘K palette, a dialog, or a sentence in chat. The list is the 83 documented analyses.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -247,8 +247,8 @@ export function ProductPage() {
           ))}
           <div className="flex w-[calc(25%-6px)] flex-col gap-3.5 bg-[#14473A] px-7 pb-8 pt-7 text-[#F9F4EB]">
             <p className="text-[15px] leading-4.5 opacity-80">Security</p>
-            <h3 className="text-[30px] leading-9 tracking-[-0.02em]">Encrypted, in US East</h3>
-            <p className="text-[16px] leading-6 opacity-85">Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Private mode sends the AI only column names and types.</p>
+            <h3 className="text-[30px] leading-9 tracking-[-0.02em]">Encrypted, and never for training</h3>
+            <p className="text-[16px] leading-6 opacity-85">AES-256 at rest, HTTPS in transit, hosted in AWS US East. Tensr never trains models on your data.</p>
           </div>
         </div>
       </section>

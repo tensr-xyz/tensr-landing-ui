@@ -15,7 +15,7 @@ const cards: {
     badge: 'File import',
     kicker: 'Survey platform',
     title: 'Qualtrics',
-    body: 'Import a Qualtrics CSV or a definition file. Labels on that file come with it.',
+    body: 'Import a Qualtrics CSV or a definition file. Question text and labels come with the file.',
   },
   {
     mark: '.sav',
@@ -31,7 +31,7 @@ const cards: {
     badge: 'Import',
     kicker: 'File',
     title: 'Stata .dta',
-    body: 'Stata variable labels and value labels are kept.',
+    body: 'Open Stata datasets directly, no conversion step in between.',
   },
   {
     mark: 'SSS',
@@ -39,7 +39,7 @@ const cards: {
     badge: 'Import',
     kicker: 'File',
     title: 'Triple-S',
-    body: '.sss is on Import Data. A legacy Triple-S import is there too.',
+    body: 'The survey interchange format, with metadata and data arriving together.',
   },
   {
     mark: 'PQ',
@@ -47,7 +47,7 @@ const cards: {
     badge: 'Import',
     kicker: 'File',
     title: 'Parquet',
-    body: 'Columns come through as stored.',
+    body: 'Large columnar files, loaded as they are stored.',
   },
   {
     mark: 'XL',
@@ -55,7 +55,7 @@ const cards: {
     badge: 'Import · Export',
     kicker: 'File',
     title: 'Excel & CSV',
-    body: 'Bring in a spreadsheet or CSV. Send a signed-off banner out to Excel.',
+    body: 'Bring in raw exports, send out tables to Excel with value labels kept.',
   },
   {
     mark: 'PP',
@@ -63,7 +63,7 @@ const cards: {
     badge: 'Export',
     kicker: 'Deliverable',
     title: 'PowerPoint',
-    body: 'A banner can go out as PowerPoint. The Excel file is the audit record.',
+    body: 'Charts and tables for the client deck. Excel is the audit record.',
   },
   {
     mark: 'PDF',
@@ -71,7 +71,7 @@ const cards: {
     badge: 'Print',
     kicker: 'Deliverable',
     title: 'Print',
-    body: 'Print the write-up from the browser.',
+    body: 'Print the write-up from the browser, with the test tables and a plain-language read.',
   },
   {
     mark: 'Fn',
@@ -79,7 +79,7 @@ const cards: {
     badge: 'In the product',
     kicker: 'Plugins',
     title: 'Plugins',
-    body: 'Plugins run inside Tensr, with no network access.',
+    body: 'Plugins run inside Tensr, with no network access. They show up in ⌘K and the agent can call them.',
   },
   {
     mark: '.sps',
@@ -87,7 +87,7 @@ const cards: {
     badge: 'Export',
     kicker: 'File',
     title: '.sav with weights',
-    body: 'A companion .sps file applies the weight.',
+    body: 'Send the data back as .sav with an .sps file that applies your weight.',
   },
   {
     mark: 'R',
@@ -119,7 +119,7 @@ export function IntegrationsPage() {
         </h1>
         <div className="flex w-full items-end justify-between gap-10">
           <p className="w-175 shrink-0 text-[22px] leading-8 text-[#3D6A5E]">
-            Open a .sav, .dta, CSV, Excel, Triple-S, or Parquet file. Send the banner to Excel or PowerPoint, the note to Word, and the script to R.
+            Open a .sav, .dta, CSV, Excel, Triple-S or Parquet file, and send the banner to Excel or PowerPoint. Prolific fielding, live Qualtrics, Decipher and Alchemer are coming soon.
           </p>
           <div className="flex shrink-0">
             <Link href={APP_LOGIN} className="flex h-17 items-center gap-3.5 bg-[#14473A] px-6.5 text-[20px] leading-6 text-[#F9F4EB]">
@@ -136,9 +136,9 @@ export function IntegrationsPage() {
       <section className="flex flex-col gap-12 px-10 pb-30">
         <SectionRule left="Integrations" right="In and out" />
         <div className="flex items-end justify-between gap-10">
-          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Data comes in from the file, and goes out where it is read</h2>
+          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Data comes in from where it&apos;s collected and goes out where it&apos;s read</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            On a .sav, labels, value codes, and missing values travel with the data. A recode saves a new version.
+            Labels, value codes and missing values travel with the data, so nothing has to be rebuilt by hand. A recode saves a new version.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -161,7 +161,7 @@ export function IntegrationsPage() {
             <p className="text-[15px] leading-4.5 opacity-80">On the roadmap</p>
             <div className="flex flex-col gap-2.5">
               <h3 className="text-[30px] leading-9 tracking-[-0.02em]">Coming next</h3>
-              <p className="text-[16px] leading-6 opacity-85">Prolific: coming soon. Live Qualtrics: coming soon. Decipher: coming soon. Alchemer: coming soon.</p>
+              <p className="text-[16px] leading-6 opacity-85">Prolific: coming soon. Live Qualtrics: coming soon. Decipher: coming soon. Alchemer: coming soon. Tell us which tool you use.</p>
             </div>
           </article>
         </div>
@@ -170,7 +170,7 @@ export function IntegrationsPage() {
       <section className="flex flex-col gap-12 px-10 pb-30">
         <SectionRule left="Data handling" right="Your respondents, your data" />
         <div className="flex items-end justify-between gap-10">
-          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Your file stays yours</h2>
+          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Your respondents, your data</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
             Respondent data is sensitive. Here is what happens to a file once it is in Tensr.
           </p>
