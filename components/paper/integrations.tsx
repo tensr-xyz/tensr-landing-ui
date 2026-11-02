@@ -83,6 +83,14 @@ const cards: {
     body: 'An analysis write-up can be printed from the browser. There is no separate PDF file.',
   },
   {
+    mark: 'Fn',
+    markClass: 'bg-[#14473A] text-[#F9F4EB]',
+    badge: 'In the product',
+    kicker: 'Plugins',
+    title: 'Plugins',
+    body: 'A plugin runs with no network access. This version does not charge for a toolkit.',
+  },
+  {
     mark: '.sps',
     markClass: 'bg-[#C9B48F] text-[#14473A]',
     badge: 'Export',
