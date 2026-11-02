@@ -169,7 +169,7 @@ const uses = [
   ['02', 'Concept testing', 'Monadic or sequential, with top-2 box nets and drivers in minutes.', false],
   ['03', 'Pricing', 'Van Westendorp and Gabor-Granger without the spreadsheet gymnastics.', false],
   ['04', 'MaxDiff & conjoint', 'Run MaxDiff and conjoint on your own data, with no extra tools.', false],
-  ['05', 'Open-end coding', 'Open ends coded into themes you can edit, ready to cut by any group.', false],
+  ['05', 'Open-end coding', 'Hundreds of open ends coded into themes in about a minute, ready to cut by any group.', false],
   ['06', 'Agency tab books', 'Hundreds of tables, Excel and PowerPoint out. Same spec every wave.', true],
 ] as const;
 
@@ -359,7 +359,7 @@ export function LandingPage() {
             ['At rest', 'AES-256', 'Every dataset is encrypted where it is stored.', 'bg-[#14473A] text-[#F9F4EB]', 'text-[#F9F4EB]/80'],
             ['In transit', 'HTTPS', 'Files and results only move over encrypted connections.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
             ['Training', 'Private', 'Tensr never trains models on your data.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
-            ['Team sign-in', 'By code', 'Team workspaces sign in with an emailed one-time code.', 'bg-[#C9B48F]', 'text-[#14473A]'],
+            ['Team sign-in', 'By code', 'Team workspaces sign in with an emailed one-time code, or Google, Microsoft or GitHub. SSO is on the roadmap.', 'bg-[#C9B48F]', 'text-[#14473A]'],
           ].map(([kicker, title, body, card, kickerClass]) => (
             <div key={title} className={`flex h-60 grow basis-0 flex-col justify-between p-7 ${card}`}>
               <p className={`text-[15px] leading-4.5 ${kickerClass}`}>{kicker}</p>

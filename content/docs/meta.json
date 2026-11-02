@@ -6,11 +6,16 @@
     "---Product---",
     "import",
     "merging",
+    "levelled-data",
     "weights",
     "agent",
     "significance",
     "export",
     "r-script",
+    "---Collaboration---",
+    "sharing",
+    "using-plugins",
+    "building-a-plugin",
     "analyses"
   ]
 }

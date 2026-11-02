@@ -34,7 +34,7 @@ export const EnterpriseTemplate = () => {
       id: 'q5',
       question: 'Does Tensr support SSO and SCIM?',
       answer:
-        'Sign in with an email code. A workspace has an owner and members.',
+        'Sign in with an emailed code, or Google, Microsoft or GitHub. SSO is on the roadmap. SCIM is not available.',
     },
     {
       id: 'q6',
@@ -118,7 +118,7 @@ export const EnterpriseTemplate = () => {
                 <div className="flex-grow">
                   <h2 className="text-base font-medium mb-2">Sign-in</h2>
                   <div className="text-muted-foreground">
-                    <p>Sign in with an email code. A workspace has an owner and members.</p>
+                    <p>Sign in with an emailed code, or Google, Microsoft or GitHub. SSO is on the roadmap.</p>
                   </div>
                 </div>
               </div>

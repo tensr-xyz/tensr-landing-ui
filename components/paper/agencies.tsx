@@ -204,7 +204,7 @@ export function AgenciesPage() {
             <div className="flex flex-col gap-4.5">
               <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">One project, not three versions of it</h3>
               <p className="text-[17px] leading-6.5 text-[#3D6A5E]">
-                The team works in the same project. You can see who is in, and a workspace has an owner and members.
+                The team works in the same project. Sign in with an emailed code, or Google, Microsoft or GitHub. You can see who is in. SSO is on the roadmap.
               </p>
               <Points
                 items={[

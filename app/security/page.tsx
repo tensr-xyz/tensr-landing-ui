@@ -36,7 +36,7 @@ const blocks: { kicker: string; title: string; body: ReactNode }[] = [
   {
     kicker: 'Access',
     title: 'You decide who gets in',
-    body: 'Sign in with an email one-time code. A workspace has an owner and members. Team workspaces have shared seats and live presence, so you can see who is in.',
+    body: 'Sign in with an email one-time code, or Google, Microsoft or GitHub. Share a session by link as a viewer or an editor. Team workspaces have shared seats and live presence, so you can see who is in. SSO is on the roadmap.',
   },
   {
     kicker: 'Provenance',
@@ -46,7 +46,7 @@ const blocks: { kicker: string; title: string; body: ReactNode }[] = [
   {
     kicker: 'Plugins',
     title: 'Plugins run sandboxed',
-    body: 'Plugins run inside Tensr, with no network access. They are installed per workspace.',
+    body: 'Plugins from the marketplace add toolkits the agent and ⌘K can call. You can publish one and charge for it. Plugins run in a sandbox with no network access, installed per workspace.',
   },
   {
     kicker: 'Retention',

@@ -79,7 +79,7 @@ const cards: {
     badge: 'In the product',
     kicker: 'Plugins',
     title: 'Plugins',
-    body: 'Plugins run inside Tensr, with no network access. They show up in ⌘K and the agent can call them.',
+    body: 'Build a toolkit, publish it, and charge for it in pounds. It shows up in ⌘K and the agent can call it. Plugins run with no network access.',
   },
   {
     mark: '.sps',
@@ -201,7 +201,7 @@ export function IntegrationsPage() {
             <p className="text-[15px] leading-4.5 text-[#3D6A5E]">Access</p>
             <div>
               <h3 className="text-[36px] leading-10 tracking-[-0.03em]">Teams shares a workspace</h3>
-              <p className="mt-2.5 text-[16px] leading-5.75 text-[#3D6A5E]">Teams includes shared workspaces and presence. Sign in with an email code.</p>
+              <p className="mt-2.5 text-[16px] leading-5.75 text-[#3D6A5E]">Teams includes shared workspaces and presence. Sign in with an emailed code, or Google, Microsoft or GitHub. SSO is on the roadmap.</p>
             </div>
           </article>
         </div>

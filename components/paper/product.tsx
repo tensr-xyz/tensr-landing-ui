@@ -17,8 +17,8 @@ const details = [
   ['Weights', 'Versions, not overwrites', 'Rake to targets as a new weight version. The one you uploaded stays, and so does the earlier weight.'],
   ['Charts', 'From the table', 'Bar charts from a table, and a chart you can export.'],
   ['Notebook', 'R, on the open file', 'R cells load the open dataset. An R script is there for the analyses that have one.'],
-  ['Collaboration', 'The team, live', 'Shared workspaces and presence. A workspace has an owner and members.'],
-  ['Plugins', 'In the product', 'Plugins run inside Tensr, with no network access. The agent and ⌘K can use them.'],
+  ['Collaboration', 'The team, live', 'Live presence. Comment on a cell, a chart, or a section, reply, and resolve. Share a session by link as a viewer or an editor.'],
+  ['Plugins', 'Build, publish, earn', 'Write a toolkit in Python, R, JavaScript or TypeScript. The agent and ⌘K can use it, and you can charge for it. Plugins run with no network access.'],
 ] as const;
 
 function PaperScreen({ src, caption }: { src: string; caption: string }) {
@@ -50,9 +50,9 @@ function WorkspaceFrame() {
 
 function FeatureRow({ items }: { items: readonly [string, string][] }) {
   return (
-    <div className="flex gap-10">
+    <div className="flex flex-wrap gap-10">
       {items.map(([title, body]) => (
-        <div key={title} className="flex grow basis-0 flex-col gap-3 border-t border-[#14473A33] pt-5">
+        <div key={title} className="flex min-w-[260px] grow basis-0 flex-col gap-3 border-t border-[#14473A33] pt-5">
           <h3 className="text-[30px] leading-9 tracking-[-0.02em] text-[#14473A]">{title}</h3>
           <p className="text-[18px] leading-6.75 text-[#3D6A5E]">{body}</p>
         </div>
@@ -98,7 +98,8 @@ export function ProductPage() {
         <FeatureRow
           items={[
             ['Bring data in', '.sav, .dta, CSV, Excel, Triple-S and Parquet. Labels, missing codes and measurement levels come across intact.'],
-            ['Merge waves', 'Join or stack files. Stack and append find Merge Datasets, and stacking says when those rows are already in the file.'],
+            ['Merge waves', 'Join or stack two files, or fuse three or more. You see every variable it re-mapped.'],
+            ['Levelled data', 'Loops and hierarchies, like brands per respondent, analysed at the right level without reshaping by hand.'],
             ['The file stays the file', 'A weight, a recode, or a merge saves a new version. The file you uploaded stays.'],
           ]}
         />
@@ -126,11 +127,11 @@ export function ProductPage() {
       </section>
 
       <section className="flex flex-col gap-12 px-10 pb-30">
-        <SectionRule left="Open ends" right="Haiku, then keywords" />
+        <SectionRule left="Open-end coding" right="In about a minute" />
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Codeframes you can edit, usable as a banner</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Haiku proposes a code frame from a sample of the answers, then codes every answer with a confidence score. A score under 0.6, or no code, goes to the review queue for you to edit. Keyword coding is the fallback. In private mode, open ends are coded with keywords. Themes tabulate as a weighted multi-response, with significance letters, and a cell opens the verbatims.
+            Hundreds of open ends coded into themes in about a minute. The AI proposes a code frame you can edit, then the themes are ready to cut by any group.
           </p>
         </div>
         <PaperScreen
