@@ -105,25 +105,6 @@ function WaveBars() {
   );
 }
 
-function QuotaBars() {
-  const bars = [
-    ['97%', '#14473A'],
-    ['79%', '#14473A'],
-    ['89%', '#14473A'],
-    ['78%', '#14473A'],
-    ['45%', '#A15C12'],
-  ] as const;
-  return (
-    <div className="flex h-50 items-end gap-3.5">
-      {bars.map(([height, color]) => (
-        <div key={height + color} className="flex h-full grow basis-0 flex-col justify-end bg-[#14473A]/10">
-          <div style={{ height, background: color }} />
-        </div>
-      ))}
-    </div>
-  );
-}
-
 function HeroPanels() {
   return (
     <section className="grid h-[560px] grid-cols-3">
@@ -163,18 +144,12 @@ function HeroPanels() {
         </div>
       </div>
       <div className="flex flex-col justify-between bg-[#C9B48F] p-5">
-        <div className="flex h-[270px] flex-col gap-3.5 px-10 pt-10">
-          <p className="text-[13px] leading-4 tracking-[0.02em] text-[#14473A]">
-            Prolific quotas · coming soon
-          </p>
-          <QuotaBars />
+        <div className="flex h-[270px] flex-col justify-end px-6 pb-6">
+          <p className="text-[16px] leading-5 text-[#14473A]">Prolific: coming soon</p>
         </div>
         <div className="flex w-[300px] flex-col gap-1 bg-[#FCFAF5] px-4.5 py-4">
-          <p className="text-[14px] leading-4.5">Prolific · fielding</p>
-          <p className="text-[40px] leading-none tracking-[-0.04em]">Coming soon</p>
-          <div className="mt-1 h-1.5 bg-[#E7E1D4]">
-            <div className="h-full w-0 bg-[#14473A]" />
-          </div>
+          <p className="text-[14px] leading-4.5">Live Qualtrics, Decipher, Alchemer</p>
+          <p className="text-[20px] leading-6">Coming soon</p>
         </div>
       </div>
     </section>
@@ -182,7 +157,7 @@ function HeroPanels() {
 }
 
 const steps = [
-  ['01', 'Connect', 'Upload a .sav, .csv or .xlsx. Live Prolific and Qualtrics sync is coming soon.'],
+  ['01', 'Connect', 'Upload a .sav, .csv or .xlsx. Labels and missing codes come with a .sav.'],
   ['02', 'Clean', 'Speeders, routing faults and missing data get flagged before they reach a table.'],
   ['03', 'Ask', 'Weighted banners, nets, sig letters and coded open-ends from plain English.'],
   ['04', 'Deliver', 'Reports, banner books and decks, every number traceable to a respondent.'],
@@ -208,7 +183,7 @@ export function LandingPage() {
     <PaperShell>
       <section className="flex flex-col items-start gap-7 px-10 pt-14 pb-12">
         <p className="rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">
-          Import .sav today. Prolific fielding, live Qualtrics, Decipher and Alchemer coming soon
+          Import .sav today. Prolific, live Qualtrics, Decipher and Alchemer: coming soon
         </p>
         <h1 className="max-w-[841px] text-[96px] leading-24 tracking-[-0.045em]">
           Every number, traced to the people behind it
@@ -217,15 +192,23 @@ export function LandingPage() {
           Bring survey data from the tools you already use. Ask in plain English and get weighted,
           sig-tested tables, with every cell traceable to its respondents.
         </p>
-        <div className="flex pt-1.5">
-          <div className="flex h-17 w-110 items-center border border-[#14473A] bg-[#FCFAF5] px-5.5 text-[20px] leading-6 text-[#14473A]/70">
-            What&apos;s your work email?
-          </div>
-          <Link href={APP_LOGIN} className="flex h-17 items-center gap-3.5 bg-[#14473A] px-6.5 text-[20px] leading-6 text-[#F9F4EB]">
+        <form action={APP_LOGIN} method="get" className="flex w-full max-w-[720px] flex-wrap pt-1.5">
+          <label className="sr-only" htmlFor="hero-email">
+            Work email
+          </label>
+          <input
+            id="hero-email"
+            type="email"
+            name="email"
+            required
+            placeholder="What's your work email?"
+            className="h-17 w-110 border border-[#14473A] bg-[#FCFAF5] px-5.5 text-[20px] leading-6 text-[#14473A] placeholder:text-[#14473A]/70"
+          />
+          <button type="submit" className="flex h-17 items-center gap-3.5 bg-[#14473A] px-6.5 text-[20px] leading-6 text-[#F9F4EB]">
             Start free trial
             <Arrow light />
-          </Link>
-        </div>
+          </button>
+        </form>
       </section>
 
       <HeroPanels />
@@ -339,14 +322,14 @@ export function LandingPage() {
             <div className="flex flex-col gap-3">
               <p className="text-[56px] leading-14.5 tracking-[-0.04em]">File in. Tables out.</p>
               <p className="text-[18px] leading-6.5">
-                A .sav or spreadsheet, weighted and bannered in the same project. No client name attached.
+                A .sav or spreadsheet, weighted and bannered in the same project.
               </p>
             </div>
           </div>
           <ol className="flex grow basis-0 flex-col justify-between bg-[#EEE8DC] p-10">
             {[
               ['01', 'Bring the file in', 'Upload a .sav, .csv, or .xlsx. Labels and missing codes come with a .sav.'],
-              ['02', 'Weight it', 'Rake to targets. A weighted table does not change the dataset.'],
+              ['02', 'Weight it', 'Rake to targets. The file you uploaded stays.'],
               ['03', 'Banner it', 'Column percents, nets, and significance letters when a contrast is significant.'],
               ['04', 'Export it', 'Excel or PowerPoint. Open a cell to see the respondents behind it.'],
             ].map(([index, title, body]) => (
@@ -375,8 +358,8 @@ export function LandingPage() {
           {[
             ['At rest', 'AES-256', 'Every dataset is encrypted where it is stored.', 'bg-[#14473A] text-[#F9F4EB]', 'text-[#F9F4EB]/80'],
             ['In transit', 'HTTPS', 'Files and results only move over encrypted connections.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
-            ['Training', 'Never', 'Your data is never used to train models.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
-            ['Team sign-in', 'By code', 'Email one-time codes. SAML SSO is not available.', 'bg-[#C9B48F]', 'text-[#14473A]'],
+            ['Private mode', 'Names only', 'Private mode sends the AI only column names and types, never your respondents\u2019 answers.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
+            ['Sign-in', 'Email code', 'A workspace has an owner and members.', 'bg-[#C9B48F]', 'text-[#14473A]'],
           ].map(([kicker, title, body, card, kickerClass]) => (
             <div key={title} className={`flex h-60 grow basis-0 flex-col justify-between p-7 ${card}`}>
               <p className={`text-[15px] leading-4.5 ${kickerClass}`}>{kicker}</p>
@@ -420,14 +403,9 @@ export function LandingPage() {
           <p className="w-130 shrink-0 text-[20px] leading-7.5 text-[#F9F4EB]/85">
             Send us last wave&apos;s file and we&apos;ll rebuild your tab book in Tensr on the call.
           </p>
-          <div className="flex">
-            <div className="flex h-14 w-90 items-center border border-[#F9F4EB] px-5 text-[17px] leading-5.5 text-[#F9F4EB]/90">
-              What&apos;s your work email?
-            </div>
-            <Link href="/demo" className="flex h-14 items-center bg-[#F9F4EB] px-6 text-[17px] leading-5.5 text-[#14473A]">
-              Book a demo →
-            </Link>
-          </div>
+          <Link href="/demo" className="flex h-14 items-center bg-[#F9F4EB] px-6 text-[17px] leading-5.5 text-[#14473A]">
+            Book a demo →
+          </Link>
         </div>
       </section>
     </PaperShell>

@@ -9,11 +9,11 @@ export function WorkspaceSection() {
           The workspace
         </div>
       </div>
-      <div className="flex items-end justify-between gap-10">
+      <div className="flex flex-wrap items-end justify-between gap-4">
         <div className="text-[56px] leading-14.5 tracking-[-0.04em] w-180 shrink-0 text-[#14473A]">
           Five tabs. One study. Nothing exported halfway through.
         </div>
-        <div className="flex gap-1.5">
+        <div className="flex flex-wrap gap-1.5">
           <div className="py-2.25 px-4 border border-solid border-[#14473A]">
             <div className="text-[15px] leading-4.5 text-[#14473A]">
               Chat
@@ -42,8 +42,8 @@ export function WorkspaceSection() {
         </div>
       </div>
       <div className="flex h-175 pt-10 overflow-clip shrink-0 px-10 bg-[#5E8A74]">
-        <div className="relative h-[660px] w-full overflow-hidden [box-shadow:#14473A40_0px_24px_60px] rounded-t-[12px]">
-          <div className="absolute top-0 left-0 w-[1680px] origin-top-left" style={{ transform: 'scale(0.7619)' }}>
+        <div className="workspace-scale-box relative h-[660px] w-full overflow-hidden [box-shadow:#14473A40_0px_24px_60px] rounded-t-[12px]">
+          <div className="workspace-scale absolute top-0 left-0 w-[1680px] origin-top-left" style={{ transform: 'scale(0.7619)' }}>
           <div className="flex h-[860px] w-[1680px] flex-col overflow-clip pb-3 px-3 bg-[#F1F1EE]">
             <div className="flex flex-col pt-3 pb-2.5 gap-1.5 px-1">
               <div className="flex items-center justify-between h-9 shrink-0">

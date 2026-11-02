@@ -46,12 +46,12 @@ export function Arrow({ light = false }: { light?: boolean }) {
 
 export function PaperNav() {
   return (
-    <header className="flex h-21 items-center justify-between px-10">
+    <header className="flex min-h-21 flex-wrap items-center justify-between gap-4 px-5 py-4 lg:px-10">
       <Link href="/" className="flex items-center gap-2.25" aria-label="Tensr homepage">
         <Mark />
         <span className="text-[28px] leading-7 font-semibold tracking-[-0.04em]">tensr</span>
       </Link>
-      <nav className="flex items-center gap-9 text-[16px] leading-5">
+      <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[16px] leading-5 lg:gap-9">
         {nav.map(([href, label]) => (
           <Link key={href} href={href}>
             {label}
@@ -99,7 +99,6 @@ const footerColumns: { title: string; links: { label: string; href: string }[] }
   {
     title: 'Company',
     links: [
-      { label: 'About', href: '/' },
       { label: 'Switching from SPSS', href: '/product' },
       { label: 'Docs', href: '/docs' },
       {
@@ -116,9 +115,9 @@ const footerColumns: { title: string; links: { label: string; href: string }[] }
 
 export function PaperFooter() {
   return (
-    <footer className="flex flex-col gap-16 bg-[#F9F4EB] px-10 pt-16 pb-10">
-      <div className="flex gap-10">
-        <div className="flex w-85 shrink-0 flex-col gap-3.5">
+    <footer className="flex flex-col gap-16 bg-[#F9F4EB] px-5 pt-16 pb-10 lg:px-10">
+      <div className="flex flex-wrap gap-10">
+        <div className="flex w-full max-w-85 flex-col gap-3.5 sm:w-85">
           <Link href="/" className="flex items-center gap-2.25">
             <Mark size={26} />
             <span className="text-[26px] leading-6.5 font-semibold tracking-[-0.04em]">tensr</span>
@@ -138,7 +137,7 @@ export function PaperFooter() {
           </div>
         ))}
       </div>
-      <div className="flex justify-between border-t border-[#14473A] pt-4 text-[14px] leading-4.5 text-[#3D6A5E]">
+      <div className="flex flex-wrap justify-between gap-4 border-t border-[#14473A] pt-4 text-[14px] leading-4.5 text-[#3D6A5E]">
         <p>© 2026 Tensr · Made in Preston</p>
         <div className="flex gap-6">
           <span>LinkedIn</span>
@@ -152,10 +151,10 @@ export function PaperFooter() {
 
 export function AskStrip() {
   return (
-    <div className="bg-[#F9F4EB] px-10 pt-10">
-      <div className="flex items-center justify-between border-y border-[#14473A] py-5">
+    <div className="bg-[#F9F4EB] px-5 pt-10 lg:px-10">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-y border-[#14473A] py-5">
         <p className="text-[17px] leading-5.5">Ask about Tensr on</p>
-        <div className="flex items-center gap-3.5 text-[17px] leading-5.5">
+        <div className="flex flex-wrap items-center gap-x-3.5 gap-y-2 text-[17px] leading-5.5">
           {askLinks.map((link, index) => (
             <span key={link.label} className="flex items-center gap-3.5">
               {index > 0 ? <span className="text-[#3D6A5E]">·</span> : null}

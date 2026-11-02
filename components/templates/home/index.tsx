@@ -373,8 +373,7 @@ export const HomeTemplate = () => {
                 </div>
                 <h4 className="mb-2 text-base font-medium text-text-primary">Team workspaces</h4>
                 <p className="text-[15px] leading-relaxed text-text-muted">
-                  Organisation owners invite members and group them into teams. Sign-in is email
-                  one-time codes. SAML SSO is not available.
+                  Organisation owners invite members and group them into teams. Sign in with an email code.
                 </p>
               </div>
             </div>
