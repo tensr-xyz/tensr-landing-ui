@@ -115,7 +115,7 @@ export function AgenciesPage() {
             <p className="text-[15px] leading-4.5">What leaves the project</p>
             <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">Excel, PowerPoint, and a Word note</h3>
             <p className="max-w-[520px] text-[17px] leading-6.5">
-              No client template is applied for you, and a deck does not fill in while fieldwork is open. You export the banner you signed off.
+              You export the banner you signed off, as Excel, PowerPoint, and a Word note.
             </p>
           </div>
           <div className="flex grow flex-col justify-between bg-[#EEE8DC] p-10">
@@ -175,7 +175,7 @@ export function AgenciesPage() {
                 ))}
               </div>
               <p className="bg-[#14473A] px-6 py-5 font-mono text-[13px] leading-5 text-[#F9F4EB]">
-                The R script for that run. It does not invent a result.
+                The R script for that run.
               </p>
             </div>
           </div>
@@ -186,7 +186,7 @@ export function AgenciesPage() {
             <div className="w-150 bg-[#FCFAF5] shadow-[0_18px_48px_#14473A40]">
               <div className="border-b border-[#14473A1F] px-6 py-5">
                 <p className="text-[18px] leading-5.5">Sample project</p>
-                <p className="text-[13px] leading-4 text-[#3D6A5E]">Shared workspace · not a named client</p>
+                <p className="text-[13px] leading-4 text-[#3D6A5E]">Shared workspace</p>
               </div>
               {[
                 ['One person', 'Owner'],
@@ -204,7 +204,7 @@ export function AgenciesPage() {
             <div className="flex flex-col gap-4.5">
               <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">One project, not three versions of it</h3>
               <p className="text-[17px] leading-6.5 text-[#3D6A5E]">
-                Teams includes shared workspaces and presence. An organisation member is an owner or a member. SAML SSO is not available.
+                Teams includes shared workspaces and presence. A workspace has an owner and members. Sign in with an email code.
               </p>
               <Points
                 items={[
@@ -229,7 +229,7 @@ export function AgenciesPage() {
           </div>
           <div className="flex gap-2">
             {[
-              ['Encrypted at rest', 'Files are stored in AWS us-east-1 with S3 SSE-S3 AES-256, and sent over HTTPS.'],
+              ['Encrypted at rest', 'Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East.'],
               [
                 'Who the agent calls',
                 <>
@@ -260,7 +260,7 @@ export function AgenciesPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-225 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">How agencies roll it out</h2>
           <p className="w-95 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            No big switch-over. Prove it on one study, then move the rest when the team is ready.
+            Start with one study, then move the rest when the team is ready.
           </p>
         </div>
         <div className="flex gap-10">
@@ -285,13 +285,13 @@ export function AgenciesPage() {
             <p className="text-[15px] leading-4.5">Small group, on purpose</p>
             <div>
               <p className="text-[96px] leading-22.5 tracking-[-0.05em]">Few</p>
-              <p className="text-[18px] leading-6.5">seats for agencies and independent researchers. No names, and no count, until someone is on the record.</p>
+              <p className="text-[18px] leading-6.5">seats for agencies and independent researchers.</p>
             </div>
           </div>
           <div className="flex grow flex-col justify-between bg-[#EEE8DC] p-10">
             <p className="text-[15px] leading-4.5 text-[#3D6A5E]">Join as a design partner</p>
             <h2 className="w-190 text-[40px] leading-12 tracking-[-0.025em]">
-              Bring a study, tell us what slows you down, and we&apos;ll build against that. This is an invitation, not a list of clients.
+              Bring a study, tell us what slows you down, and we&apos;ll build against that.
             </h2>
             <div className="flex items-center justify-between gap-8">
               <p className="text-[16px] leading-5.5 text-[#3D6A5E]">A working session on your file, and a direct line when you book the demo.</p>
@@ -309,14 +309,9 @@ export function AgenciesPage() {
           <p className="w-130 shrink-0 text-[20px] leading-7.5 opacity-85">
             Send us last wave&apos;s file and we&apos;ll rebuild your tab book in Tensr on the call.
           </p>
-          <div className="flex">
-            <div className="flex h-14 w-90 items-center border border-[#F9F4EB] px-5 opacity-90">
-              <p className="text-[17px] leading-5.5">What&apos;s your work email?</p>
-            </div>
-            <Link href="/demo" className="flex h-14 items-center bg-[#F9F4EB] px-6 text-[17px] leading-5.5 text-[#14473A]">
-              Book a demo →
-            </Link>
-          </div>
+          <Link href="/demo" className="flex h-14 items-center bg-[#F9F4EB] px-6 text-[17px] leading-5.5 text-[#14473A]">
+            Book a demo →
+          </Link>
         </div>
       </section>
     </PaperShell>
