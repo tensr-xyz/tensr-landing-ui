@@ -105,6 +105,39 @@ function WaveBars() {
   );
 }
 
+function FindingBars() {
+  return (
+    <div className="flex h-full flex-col gap-5 px-4 pt-4">
+      <p className="text-[16px] leading-5 text-[#14473A]">Findings written up for you.</p>
+      <div className="flex flex-col gap-3">
+        <p className="text-[13px] leading-4 tracking-[0.02em] text-[#14473A]">Scotland · W3 → W4</p>
+        <div className="flex items-center gap-3">
+          <span className="w-7 shrink-0 text-[13px] leading-4 text-[#14473A]">W3</span>
+          <div className="h-5.5 w-[52%] bg-[#14473A] opacity-35" />
+        </div>
+        <div className="flex items-center gap-3">
+          <span className="w-7 shrink-0 text-[13px] leading-4 text-[#14473A]">W4</span>
+          <div className="h-5.5 w-[70%] bg-[#14473A]" />
+        </div>
+      </div>
+      <ul className="flex flex-col gap-2.5 text-[15px] leading-5 text-[#14473A]">
+        <li className="flex items-center justify-between border-b border-[#14473A33] pb-2">
+          <span>Scotland</span>
+          <span>+11 pts</span>
+        </li>
+        <li className="flex items-center justify-between border-b border-[#14473A33] pb-2">
+          <span>Open ends</span>
+          <span>Coded to Price</span>
+        </li>
+        <li className="flex items-center justify-between">
+          <span>Sig letter</span>
+          <span>Where it differs</span>
+        </li>
+      </ul>
+    </div>
+  );
+}
+
 function HeroPanels() {
   return (
     <section className="grid h-[560px] grid-cols-3">
@@ -144,8 +177,8 @@ function HeroPanels() {
         </div>
       </div>
       <div className="flex flex-col justify-between bg-[#C9B48F] p-5">
-        <div className="flex h-[270px] flex-col justify-end px-6 pb-6">
-          <p className="text-[16px] leading-5 text-[#14473A]">Findings written up for you.</p>
+        <div className="h-[270px]">
+          <FindingBars />
         </div>
         <div className="flex w-[300px] flex-col gap-1 bg-[#FCFAF5] px-4.5 py-4">
           <p className="text-[14px] leading-4.5">Report · key finding</p>
