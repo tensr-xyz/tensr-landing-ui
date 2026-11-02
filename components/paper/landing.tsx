@@ -1,0 +1,430 @@
+import Link from 'next/link';
+import { APP_LOGIN, Arrow, PaperShell, SectionRule } from '@/components/paper/shell';
+import { WorkspaceSection } from '@/components/paper/workspace-section';
+
+function PersonDots() {
+  return (
+    <svg width="380" height="266" viewBox="0 0 380 266" aria-hidden="true" className="h-[238px] w-[340px] shrink-0">
+      <circle cx="19" cy="19" r="7" fill="#F9F4EB47" />
+      <circle cx="57" cy="19" r="7" fill="#F9F4EB47" />
+      <circle cx="95" cy="19" r="7" fill="#F9F4EB47" />
+      <circle cx="133" cy="19" r="7" fill="#F9F4EB47" />
+      <circle cx="171" cy="19" r="7" fill="#F9F4EB47" />
+      <circle cx="209" cy="19" r="7" fill="#F9F4EB47" />
+      <circle cx="247" cy="19" r="11" fill="#F9F4EB" />
+      <circle cx="285" cy="19" r="7" fill="#F9F4EB47" />
+      <circle cx="323" cy="19" r="7" fill="#F9F4EB47" />
+      <circle cx="361" cy="19" r="7" fill="#F9F4EB47" />
+      <circle cx="19" cy="57" r="7" fill="#F9F4EB47" />
+      <circle cx="57" cy="57" r="7" fill="#F9F4EB47" />
+      <circle cx="95" cy="57" r="11" fill="#F9F4EB" />
+      <circle cx="133" cy="57" r="7" fill="#F9F4EB47" />
+      <circle cx="171" cy="57" r="7" fill="#F9F4EB47" />
+      <circle cx="209" cy="57" r="7" fill="#F9F4EB47" />
+      <circle cx="247" cy="57" r="7" fill="#F9F4EB47" />
+      <circle cx="285" cy="57" r="7" fill="#F9F4EB47" />
+      <circle cx="323" cy="57" r="7" fill="#F9F4EB47" />
+      <circle cx="361" cy="57" r="7" fill="#F9F4EB47" />
+      <circle cx="19" cy="95" r="7" fill="#F9F4EB47" />
+      <circle cx="57" cy="95" r="7" fill="#F9F4EB47" />
+      <circle cx="95" cy="95" r="7" fill="#F9F4EB47" />
+      <circle cx="133" cy="95" r="7" fill="#F9F4EB47" />
+      <circle cx="171" cy="95" r="7" fill="#F9F4EB47" />
+      <circle cx="209" cy="95" r="7" fill="#F9F4EB47" />
+      <circle cx="247" cy="95" r="7" fill="#F9F4EB47" />
+      <circle cx="285" cy="95" r="7" fill="#F9F4EB47" />
+      <circle cx="323" cy="95" r="11" fill="#F9F4EB" />
+      <circle cx="361" cy="95" r="7" fill="#F9F4EB47" />
+      <circle cx="19" cy="133" r="7" fill="#F9F4EB47" />
+      <circle cx="57" cy="133" r="7" fill="#F9F4EB47" />
+      <circle cx="95" cy="133" r="7" fill="#F9F4EB47" />
+      <circle cx="133" cy="133" r="7" fill="#F9F4EB47" />
+      <circle cx="171" cy="133" r="7" fill="#F9F4EB47" />
+      <circle cx="209" cy="133" r="11" fill="#F9F4EB" />
+      <circle cx="247" cy="133" r="7" fill="#F9F4EB47" />
+      <circle cx="285" cy="133" r="7" fill="#F9F4EB47" />
+      <circle cx="323" cy="133" r="7" fill="#F9F4EB47" />
+      <circle cx="361" cy="133" r="7" fill="#F9F4EB47" />
+      <circle cx="19" cy="171" r="7" fill="#F9F4EB47" />
+      <circle cx="57" cy="171" r="11" fill="#F9F4EB" />
+      <circle cx="95" cy="171" r="7" fill="#F9F4EB47" />
+      <circle cx="133" cy="171" r="7" fill="#F9F4EB47" />
+      <circle cx="171" cy="171" r="7" fill="#F9F4EB47" />
+      <circle cx="209" cy="171" r="7" fill="#F9F4EB47" />
+      <circle cx="247" cy="171" r="7" fill="#F9F4EB47" />
+      <circle cx="285" cy="171" r="7" fill="#F9F4EB47" />
+      <circle cx="323" cy="171" r="7" fill="#F9F4EB47" />
+      <circle cx="361" cy="171" r="7" fill="#F9F4EB47" />
+      <circle cx="19" cy="209" r="7" fill="#F9F4EB47" />
+      <circle cx="57" cy="209" r="7" fill="#F9F4EB47" />
+      <circle cx="95" cy="209" r="7" fill="#F9F4EB47" />
+      <circle cx="133" cy="209" r="7" fill="#F9F4EB47" />
+      <circle cx="171" cy="209" r="7" fill="#F9F4EB47" />
+      <circle cx="209" cy="209" r="7" fill="#F9F4EB47" />
+      <circle cx="247" cy="209" r="7" fill="#F9F4EB47" />
+      <circle cx="285" cy="209" r="7" fill="#F9F4EB47" />
+      <circle cx="323" cy="209" r="7" fill="#F9F4EB47" />
+      <circle cx="361" cy="209" r="11" fill="#F9F4EB" />
+      <circle cx="19" cy="247" r="11" fill="#F9F4EB" />
+      <circle cx="57" cy="247" r="7" fill="#F9F4EB47" />
+      <circle cx="95" cy="247" r="7" fill="#F9F4EB47" />
+      <circle cx="133" cy="247" r="11" fill="#F9F4EB" />
+      <circle cx="171" cy="247" r="7" fill="#F9F4EB47" />
+      <circle cx="209" cy="247" r="7" fill="#F9F4EB47" />
+      <circle cx="247" cy="247" r="7" fill="#F9F4EB47" />
+      <circle cx="285" cy="247" r="7" fill="#F9F4EB47" />
+      <circle cx="323" cy="247" r="7" fill="#F9F4EB47" />
+      <circle cx="361" cy="247" r="7" fill="#F9F4EB47" />
+    </svg>
+  );
+}
+
+function WaveBars() {
+  return (
+    <div className="flex flex-col gap-4.5 px-10 pt-10">
+      <p className="text-[13px] leading-4 tracking-[0.02em] text-[#F9F4EB]">
+        Wave on wave, weighted, tested.
+      </p>
+      <div className="flex flex-col gap-1.5">
+        <div className="h-5.5 w-[62%] shrink-0 bg-[#F9F4EB] opacity-35" />
+        <div className="h-5.5 w-[84%] shrink-0 bg-[#F9F4EB]" />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <div className="h-5.5 w-[76%] shrink-0 bg-[#F9F4EB] opacity-35" />
+        <div className="h-5.5 w-[58%] shrink-0 bg-[#F9F4EB]" />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <div className="h-5.5 w-[70%] shrink-0 bg-[#F9F4EB] opacity-35" />
+        <div className="h-5.5 w-[72%] shrink-0 bg-[#F9F4EB]" />
+      </div>
+      <div className="flex flex-col gap-1.5">
+        <div className="h-5.5 w-[48%] shrink-0 bg-[#F9F4EB] opacity-35" />
+        <div className="h-5.5 w-[52%] shrink-0 bg-[#F9F4EB]" />
+      </div>
+    </div>
+  );
+}
+
+function QuotaBars() {
+  const bars = [
+    ['97%', '#14473A'],
+    ['79%', '#14473A'],
+    ['89%', '#14473A'],
+    ['78%', '#14473A'],
+    ['45%', '#A15C12'],
+  ] as const;
+  return (
+    <div className="flex h-50 items-end gap-3.5">
+      {bars.map(([height, color]) => (
+        <div key={height + color} className="flex h-full grow basis-0 flex-col justify-end bg-[#14473A]/10">
+          <div style={{ height, background: color }} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function HeroPanels() {
+  return (
+    <section className="grid h-[560px] grid-cols-3">
+      <div className="flex flex-col justify-between bg-[#5E8A74] p-5">
+        <div className="flex flex-col items-center">
+          <p className="pt-4 text-center text-[14px] text-[#F9F4EB]/80">
+            Every dot is a person. 9 said price.
+          </p>
+          <PersonDots />
+        </div>
+        <div className="flex w-[320px] flex-col gap-2 bg-[#FCFAF5] px-4.5 py-4 text-[#14473A]">
+          <p className="text-[14px] leading-4.5">Open-end · coded</p>
+          <p className="text-[18px] leading-6.5">“Bills went up again and nobody explained why.”</p>
+          <p className="text-[14px] leading-4.5">Coded to Price · 31% of switchers</p>
+        </div>
+      </div>
+      <div className="flex flex-col justify-between bg-[#7895A8] p-5">
+        <WaveBars />
+        <div className="flex flex-col gap-2 bg-[#FCFAF5] px-4.5 py-4">
+          <p className="text-[14px] leading-4.5">Unaided awareness · W3 → W4</p>
+          <div className="flex items-center justify-between text-[15px]">
+            <span>Scotland</span>
+            <span>42% A</span>
+          </div>
+          <div className="h-1.5 bg-[#E7E1D4]">
+            <div className="h-full w-[42%] bg-[#14473A]" />
+          </div>
+          <div className="flex items-center justify-between text-[15px]">
+            <span>North East</span>
+            <span>29%</span>
+          </div>
+          <div className="h-1.5 bg-[#E7E1D4]">
+            <div className="h-full w-[29%] bg-[#C9B48F]" />
+          </div>
+        </div>
+      </div>
+      <div className="flex flex-col justify-between bg-[#C9B48F] p-5">
+        <div className="flex flex-col gap-3.5 px-10 pt-10">
+          <p className="text-[13px] leading-4 tracking-[0.02em] text-[#14473A]">
+            Prolific quotas · coming soon
+          </p>
+          <QuotaBars />
+        </div>
+        <div className="flex w-[300px] flex-col gap-1 bg-[#FCFAF5] px-4.5 py-4">
+          <p className="text-[14px] leading-4.5">Prolific · fielding</p>
+          <p className="text-[40px] leading-none tracking-[-0.04em]">312 / 400</p>
+          <div className="mt-1 h-1.5 bg-[#E7E1D4]">
+            <div className="h-full w-[78%] bg-[#14473A]" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const steps = [
+  ['01', 'Connect', 'Upload a .sav, .csv or .xlsx. Live Prolific and Qualtrics sync is coming soon.'],
+  ['02', 'Clean', 'Speeders, routing faults and missing data get flagged before they reach a table.'],
+  ['03', 'Ask', 'Weighted banners, nets, sig letters and coded open-ends from plain English.'],
+  ['04', 'Deliver', 'Reports, banner books and decks, every number traceable to a respondent.'],
+];
+
+const uses = [
+  ['01', 'Brand tracking', 'Fuse waves, rake to targets and rerun the book. Wave-on-wave sig flags included.', false],
+  ['02', 'Concept testing', 'Monadic or sequential layouts, with top-2 box nets and drivers.', false],
+  ['03', 'Pricing', 'Price questions sit in the same weighted banner as the rest of the study.', false],
+  ['04', 'MaxDiff & conjoint', 'Coming soon. Choice models are not in this version.', false],
+  ['05', 'Open-end coding', 'Verbatims coded to a frame you can edit, and usable as a banner straight away.', false],
+  ['06', 'Agency tab books', 'Hundreds of tables, Excel and PowerPoint out. Same spec every wave.', true],
+] as const;
+
+const releases = [
+  ['20 Oct 2026', 'v0.5.1', 'Filters, comparisons, and stacking', 'A filter stays on that run. Stack and append find Merge Datasets.'],
+  ['19 Oct 2026', 'v0.5.0', 'The new agent is on for every workspace', 'Microsoft sign-in asks for an email once when the account has none.'],
+  ['18 Oct 2026', 'v0.4.9', 'Tables, nets, and the columns you named', 'Nets hold on re-run and tables keep your column names.'],
+];
+
+export function LandingPage() {
+  return (
+    <PaperShell>
+      <section className="flex flex-col items-start gap-7 px-10 pt-14 pb-12">
+        <p className="rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">
+          Import .sav today. Qualtrics, Prolific and Decipher coming soon
+        </p>
+        <h1 className="max-w-[841px] text-[96px] leading-24 tracking-[-0.045em]">
+          Every number, traced to the people behind it
+        </h1>
+        <p className="w-175 text-[22px] leading-8 text-[#3D6A5E]">
+          Bring survey data from the tools you already use. Ask in plain English and get weighted,
+          sig-tested tables, with every cell traceable to its respondents.
+        </p>
+        <div className="flex pt-1.5">
+          <div className="flex h-17 w-110 items-center border border-[#14473A] bg-[#FCFAF5] px-5.5 text-[20px] leading-6 text-[#14473A]/70">
+            What&apos;s your work email?
+          </div>
+          <Link href={APP_LOGIN} className="flex h-17 items-center gap-3.5 bg-[#14473A] px-6.5 text-[20px] leading-6 text-[#F9F4EB]">
+            Start free trial
+            <Arrow light />
+          </Link>
+        </div>
+      </section>
+
+      <HeroPanels />
+
+      <section className="flex flex-col gap-14 px-10 pt-10 pb-24">
+        <SectionRule left="Works with your stack" />
+        <h2 className="text-center text-[52px] leading-14.5 tracking-[-0.035em]">
+          Plugs into how research
+          <br />
+          already gets done
+        </h2>
+        <div className="flex gap-2">
+          <div className="flex grow basis-0 flex-col gap-2">
+            {[
+              ['Prolific', true],
+              ['Qualtrics', true],
+              ['SPSS .sav', false],
+            ].map(([label, soon]) => (
+              <div key={String(label)} className="flex h-30 flex-col items-center justify-center bg-[#EEE8DC]">
+                <p className="text-[30px] leading-9 tracking-[-0.02em]">{label}</p>
+                {soon ? <p className="text-[14px] text-[#3D6A5E]">Coming soon</p> : null}
+              </div>
+            ))}
+          </div>
+          <div className="flex grow-2 basis-0 flex-col justify-end gap-2 bg-[#EEE8DC] p-9">
+            <p className="text-[120px] leading-27.5 tracking-[-0.05em]">83</p>
+            <p className="text-[20px] leading-6">analyses, from crosstabs and nets to regression and SEM</p>
+          </div>
+          <div className="flex grow basis-0 flex-col gap-2">
+            <div className="flex h-30 items-center justify-center bg-[#EEE8DC] text-[30px] tracking-[-0.02em]">
+              Excel
+            </div>
+            <div className="flex h-30 items-center justify-center bg-[#EEE8DC] text-[30px] tracking-[-0.02em]">
+              PowerPoint
+            </div>
+            <div className="flex h-30 flex-col justify-center gap-1 bg-[#14473A] px-6 text-[#F9F4EB]">
+              <p className="text-[30px] leading-9 tracking-[-0.02em]">1 project</p>
+              <p className="text-[15px] leading-4.5 text-[#BFD3C8]">fieldwork to deck</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-14 px-10 pb-30">
+        <SectionRule left="How it works" />
+        <div className="flex gap-10">
+          {steps.map(([index, title, body]) => (
+            <div key={index} className="flex grow basis-0 flex-col gap-3.5">
+              <p className="text-[88px] leading-22 tracking-[-0.05em]">{index}</p>
+              <p className="text-[30px] leading-9 tracking-[-0.02em]">{title}</p>
+              <p className="text-[18px] leading-6.75 text-[#3D6A5E]">{body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <WorkspaceSection />
+
+      <section className="flex flex-col gap-12 px-10 pb-30">
+        <SectionRule left="Why teams switch" />
+        <h2 className="w-205 text-[56px] leading-14.5 tracking-[-0.04em]">
+          The rigour of SPSS and Q, without the week of syntax.
+        </h2>
+        <div className="flex gap-2">
+          {[
+            ['No syntax', 'Just ask', 'Type the question, get the weighted, sig-tested table and the syntax behind it.', 'bg-[#14473A] text-[#F9F4EB]', 'text-[#F9F4EB]/80'],
+            ['Rerun a wave', '1 click', "Last wave's banner book, on this wave's data.", 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
+            ['Traceable', 'Every cell', 'Click any number to see the respondents and the syntax behind it.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
+            ['Your files', '.sav in', 'Labels, missing codes and measurement levels come across intact.', 'bg-[#C9B48F]', 'text-[#14473A]'],
+          ].map(([kicker, title, body, card, kickerClass]) => (
+            <div key={title} className={`flex h-75 grow basis-0 flex-col justify-between p-7 ${card}`}>
+              <p className={`text-[15px] leading-4.5 ${kickerClass}`}>{kicker}</p>
+              <div className="flex flex-col gap-2.5">
+                <p className="text-[72px] leading-18 tracking-[-0.05em]">{title}</p>
+                <p className="text-[16px] leading-5.75">{body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-12 px-10 pb-30">
+        <SectionRule left="Use cases" />
+        <div className="flex items-end justify-between gap-10">
+          <h2 className="w-225 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">
+            Built for the studies you already run
+          </h2>
+          <p className="w-95 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
+            From a one-off concept test to a tracker on its twentieth wave.
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {uses.map(([index, title, body, dark]) => (
+            <div
+              key={index}
+              className={`flex w-[calc(33.33%-6px)] flex-col gap-3.5 px-7 pt-7 pb-8 ${dark ? 'bg-[#14473A] text-[#F9F4EB]' : 'bg-[#EEE8DC]'}`}
+            >
+              <p className={`text-[15px] leading-4.5 ${dark ? 'text-[#F9F4EB]/80' : 'text-[#3D6A5E]'}`}>{index}</p>
+              <p className="text-[30px] leading-9 tracking-[-0.02em]">{title}</p>
+              <p className={`text-[16px] leading-6 ${dark ? 'text-[#F9F4EB]/85' : 'text-[#3D6A5E]'}`}>{body}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-12 px-10 pb-30">
+        <SectionRule left="Case studies" />
+        <div className="flex h-115 gap-2">
+          <div className="flex w-115 shrink-0 flex-col justify-between bg-[#7895A8] p-8 text-[#F9F4EB]">
+            <p className="text-[15px] leading-4.5">[Agency name]</p>
+            <div className="flex flex-col gap-2">
+              <p className="text-[96px] leading-22.5 tracking-[-0.05em]">[X]</p>
+              <p className="text-[18px] leading-6.5">[Headline result, e.g. days saved per wave]</p>
+            </div>
+          </div>
+          <div className="flex grow basis-0 flex-col justify-between bg-[#EEE8DC] p-10">
+            <p className="self-start border border-dashed border-[#3D6A5E] px-2.5 py-1 text-[13px] leading-4 text-[#3D6A5E]">
+              Placeholder until a design partner signs off a quote
+            </p>
+            <p className="text-[40px] leading-12 tracking-[-0.025em]">
+              “[Their words on what changed: how long a wave used to take, what they do now.]”
+            </p>
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-[17px] leading-5.5">[Name]</p>
+                <p className="text-[15px] leading-4.5 text-[#3D6A5E]">[Role, agency]</p>
+              </div>
+              <p className="border-b border-[#14473A] pb-0.5 text-[16px] leading-5">Read the case study →</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-12 px-10 pb-30">
+        <SectionRule left="Security" />
+        <div className="flex items-end justify-between gap-10">
+          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Your data stays yours.</h2>
+          <Link href="/security" className="flex items-center gap-2 pb-2 text-[17px] leading-5.5 underline">
+            Read about security
+            <Arrow />
+          </Link>
+        </div>
+        <div className="flex gap-2">
+          {[
+            ['At rest', 'AES-256', 'Every dataset is encrypted where it is stored.', 'bg-[#14473A] text-[#F9F4EB]', 'text-[#F9F4EB]/80'],
+            ['In transit', 'HTTPS', 'Files and results only move over encrypted connections.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
+            ['Training', 'Never', 'Your data is never used to train models.', 'bg-[#EEE8DC]', 'text-[#3D6A5E]'],
+            ['Team sign-in', 'By code', 'Email one-time codes. SAML SSO is not available.', 'bg-[#C9B48F]', 'text-[#14473A]'],
+          ].map(([kicker, title, body, card, kickerClass]) => (
+            <div key={title} className={`flex h-60 grow basis-0 flex-col justify-between p-7 ${card}`}>
+              <p className={`text-[15px] leading-4.5 ${kickerClass}`}>{kicker}</p>
+              <div className="flex flex-col gap-2.5">
+                <p className="text-[56px] leading-14.5 tracking-[-0.05em]">{title}</p>
+                <p className="text-[16px] leading-5.75">{body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-10 px-10 pb-30">
+        <SectionRule left="The latest" right="Changelog" />
+        <div className="flex items-end justify-between gap-10">
+          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Shipped this month.</h2>
+          <Link href="/changelog" className="flex items-center gap-2 pb-2 text-[17px] leading-5.5 underline">
+            See all releases
+            <Arrow />
+          </Link>
+        </div>
+        <div className="flex gap-2">
+          {releases.map(([date, version, title, body]) => (
+            <Link key={version} href="/changelog" className="flex h-58 grow basis-0 flex-col justify-between bg-[#EEE8DC] p-7">
+              <div className="flex justify-between text-[15px] leading-4.5 text-[#3D6A5E]">
+                <span>{date}</span>
+                <span>{version}</span>
+              </div>
+              <div className="flex flex-col gap-2.5">
+                <p className="text-[28px] leading-8 tracking-[-0.03em]">{title}</p>
+                <p className="text-[16px] leading-5.75 text-[#3D6A5E]">{body}</p>
+              </div>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="flex flex-col gap-10 bg-[#14473A] px-10 pt-24 pb-26 text-[#F9F4EB]">
+        <h2 className="w-275 text-[120px] leading-28 tracking-[-0.055em]">Bring a .sav. Leave with the tables.</h2>
+        <div className="flex items-end justify-between gap-10">
+          <p className="w-130 shrink-0 text-[20px] leading-7.5 text-[#F9F4EB]/85">
+            Send us last wave&apos;s file and we&apos;ll rebuild your tab book in Tensr on the call.
+          </p>
+          <div className="flex">
+            <div className="flex h-14 w-90 items-center border border-[#F9F4EB] px-5 text-[17px] leading-5.5 text-[#F9F4EB]/90">
+              What&apos;s your work email?
+            </div>
+            <Link href="/demo" className="flex h-14 items-center bg-[#F9F4EB] px-6 text-[17px] leading-5.5 text-[#14473A]">
+              Book a demo →
+            </Link>
+          </div>
+        </div>
+      </section>
+    </PaperShell>
+  );
+}
