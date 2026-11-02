@@ -10,6 +10,7 @@ import {
   EditOnGitHub,
   MarkdownCopyButton,
 } from 'fumadocs-ui/layouts/docs/page';
+import { DocsIndex } from '@/components/paper/docs-index';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
@@ -24,6 +25,22 @@ export default async function Page(props: DocsRouteProps) {
 
   const MDX = page.data.body;
   const markdownUrl = getPageMarkdownUrl(page).url;
+
+  if (!params.slug?.length) {
+    return (
+      <DocsIndex
+        title={page.data.title}
+        description={page.data.description}
+        body={
+          <MDX
+            components={getMDXComponents({
+              a: createRelativeLink(source, page),
+            })}
+          />
+        }
+      />
+    );
+  }
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full}>

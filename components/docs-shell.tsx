@@ -1,6 +1,7 @@
 'use client';
 
-import { Header } from '@/components/header';
+import { PaperNav } from '@/components/paper/shell';
+import { usePathname } from 'next/navigation';
 import { baseOptions } from '@/lib/layout.shared';
 import { DocsLayout } from 'fumadocs-ui/layouts/docs';
 import { SidebarTrigger } from 'fumadocs-ui/layouts/docs/slots/sidebar';
@@ -11,22 +12,13 @@ import { PanelLeft } from 'lucide-react';
 function DocsSiteHeader() {
   return (
     <div className="[grid-area:header] h-0 overflow-visible">
-      <Header
-        extra={
-          <div className="flex items-center md:hidden">
-            <SearchTrigger
-              hideIfDisabled
-              className="inline-flex h-8 w-8 items-center justify-center text-text-primary"
-            />
-            <SidebarTrigger
-              className="inline-flex h-8 w-8 items-center justify-center text-text-primary"
-              aria-label="Open docs sidebar"
-            >
-              <PanelLeft className="h-5 w-5" />
-            </SidebarTrigger>
-          </div>
-        }
-      />
+      <PaperNav />
+      <div className="flex items-center md:hidden">
+        <SearchTrigger hideIfDisabled className="inline-flex h-8 w-8 items-center justify-center text-[#14473A]" />
+        <SidebarTrigger className="inline-flex h-8 w-8 items-center justify-center text-[#14473A]" aria-label="Open docs sidebar">
+          <PanelLeft className="h-5 w-5" />
+        </SidebarTrigger>
+      </div>
     </div>
   );
 }
@@ -38,6 +30,9 @@ function DocsNavTitle() {
 type DocsTree = ComponentProps<typeof DocsLayout>['tree'];
 
 export function DocsShell({ children, tree }: { children: React.ReactNode; tree: DocsTree }) {
+  const pathname = usePathname();
+  if (pathname === '/docs') return children;
+
   const options = baseOptions();
 
   return (
