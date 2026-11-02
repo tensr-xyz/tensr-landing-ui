@@ -230,7 +230,20 @@ export function AgenciesPage() {
           <div className="flex gap-2">
             {[
               ['Encrypted at rest', 'Files are stored in AWS us-east-1 with S3 SSE-S3 AES-256, and sent over HTTPS.'],
-              ['Who the agent calls', 'The current agent calls Anthropic. The earlier agent still calls OpenAI. A provider training policy is not stated here.'],
+              [
+                'Who the agent calls',
+                <>
+                  The current agent calls Anthropic. The earlier agent still calls OpenAI.{' '}
+                  <a className="underline" href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training">
+                    See Anthropic&apos;s policy
+                  </a>
+                  .{' '}
+                  <a className="underline" href="https://developers.openai.com/api/docs/guides/your-data">
+                    See OpenAI&apos;s policy
+                  </a>
+                  .
+                </>,
+              ],
               ['Where it lives', 'The store today is us-east-1. Ask before you upload if a contract needs somewhere else.'],
             ].map(([title, body]) => (
               <div key={title} className="flex grow basis-0 flex-col gap-10 border border-[#F9F4EB33] p-7">

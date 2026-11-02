@@ -22,7 +22,7 @@ export const EnterpriseTemplate = () => {
       id: 'q3',
       question: 'How does Tensr use my data?',
       answer:
-        'Datasets are stored so you can analyse them. They are encrypted at rest with Amazon S3 SSE-S3 (AES-256) and sent over HTTPS. Tensr does not train models on your data. Text sent to the OpenAI API is not used by OpenAI to train their models by default.',
+        'Datasets are stored so you can analyse them. They are encrypted at rest with Amazon S3 SSE-S3 (AES-256) and sent over HTTPS. Provider data-use terms are linked from the security page.',
     },
     {
       id: 'q4',
@@ -100,8 +100,16 @@ export const EnterpriseTemplate = () => {
                   <h2 className="text-base font-medium mb-2">Stored for your analysis</h2>
                   <div className="text-muted-foreground">
                     <p>
-                      Datasets stay in your account so you can reopen them. Tensr does not train
-                      models on them. OpenAI does not train on API data by default.
+                      Datasets stay in your account so you can reopen them. The data-trust note says
+                      Tensr does not train models on customer data.{' '}
+                      <a className="underline" href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training">
+                        See Anthropic&apos;s policy
+                      </a>
+                      .{' '}
+                      <a className="underline" href="https://developers.openai.com/api/docs/guides/your-data">
+                        See OpenAI&apos;s policy
+                      </a>
+                      .
                     </p>
                   </div>
                 </div>

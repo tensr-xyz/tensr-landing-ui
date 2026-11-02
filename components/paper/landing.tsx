@@ -136,8 +136,8 @@ function HeroPanels() {
         </div>
         <div className="flex w-[320px] flex-col gap-2 bg-[#FCFAF5] px-4.5 py-4 text-[#14473A]">
           <p className="text-[14px] leading-4.5">Open-end · coded</p>
-          <p className="text-[18px] leading-6.5">A verbatim, coded to a theme you can edit.</p>
-          <p className="text-[14px] leading-4.5">Usable as a banner afterwards.</p>
+          <p className="text-[18px] leading-6.5">Haiku codes each answer. You can edit the themes.</p>
+          <p className="text-[14px] leading-4.5">A weighted multi-response, with letters, back to the verbatims.</p>
         </div>
       </div>
       <div className="flex flex-col justify-between bg-[#7895A8] p-5">

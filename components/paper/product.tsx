@@ -126,11 +126,11 @@ export function ProductPage() {
       </section>
 
       <section className="flex flex-col gap-12 px-10 pb-30">
-        <SectionRule left="Open ends" right="Keyword lexicon" />
+        <SectionRule left="Open ends" right="Haiku, then keywords" />
         <div className="flex items-end justify-between gap-10">
-          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">An open end stays a keyword match</h2>
+          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Haiku codes the answers. You can edit the themes.</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Verbatim coding is a keyword lexicon. It is not a model that writes themes. The layout below has the result figures taken off.
+            Haiku proposes a code frame from a sample of the answers, then codes every answer with a confidence score. A score under 0.6, or no code, goes to the review queue. Keyword coding is the fallback, and a schema-only study uses it automatically. Themes tabulate as a weighted multi-response, with significance letters, and a cell opens the verbatims. The layout below has the result figures taken off.
           </p>
         </div>
         <PaperScreen

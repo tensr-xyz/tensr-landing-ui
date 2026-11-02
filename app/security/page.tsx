@@ -1,31 +1,57 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import Link from 'next/link';
 import { PaperShell, SectionRule } from '@/components/paper/shell';
+
+const ANTHROPIC_POLICY = 'https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training';
+const OPENAI_POLICY = 'https://developers.openai.com/api/docs/guides/your-data';
 
 export const metadata: Metadata = {
   title: { absolute: "Your client's data stays your client's · Tensr" },
 };
 
-const blocks = [
+const blocks: { kicker: string; title: string; body: ReactNode }[] = [
   {
     kicker: 'Encryption',
     title: 'S3 SSE-S3, not a customer key',
-    body: 'File, project, and plugin buckets use BucketEncryption.S3_MANAGED. That is Amazon S3-managed AES-256 (SSE-S3). It is not a customer-managed KMS key.',
+    body: 'The datasets bucket uses BucketEncryption.S3_MANAGED and enforce_ssl. That is Amazon S3-managed AES-256 (SSE-S3). The table definition does not set a customer-managed KMS key. The data-trust note says the same.',
   },
   {
     kicker: 'Region',
     title: 'AWS us-east-1',
-    body: 'The CDK app sets the pipeline stack to us-east-1. On-premises and a customer VPC are not in that stack.',
+    body: 'The data-trust note and the CDK app put datasets, exports, and the business table in us-east-1.',
+  },
+  {
+    kicker: 'Retention',
+    title: 'What the bucket and the table expire',
+    body: 'Noncurrent dataset versions expire after 30 days. Incomplete multipart uploads abort after 7 days. Dataset Lambda logs are kept for 90 days. The business table has point-in-time recovery, and an item with a ttl attribute expires on that clock.',
   },
   {
     kicker: 'In transit',
     title: 'HTTPS',
-    body: 'The API stack is an API Gateway HTTP API. Those endpoints are HTTPS.',
+    body: 'The API stack is an API Gateway HTTP API. The datasets bucket sets enforce_ssl.',
   },
   {
     kicker: 'The agent',
     title: 'Anthropic, and OpenAI where v1 still runs',
-    body: 'The v2 agent defaults to Anthropic at api.anthropic.com. The v1 agent defaults to api.openai.com. A no-training clause is not in the repo, so this page does not state one.',
+    body: (
+      <>
+        The v2 agent defaults to Anthropic. The v1 agent still calls OpenAI, and those requests set store to false. The data-trust note says Tensr does not train models on customer data.{' '}
+        <a className="underline" href={ANTHROPIC_POLICY}>
+          See Anthropic&apos;s policy
+        </a>
+        .{' '}
+        <a className="underline" href={OPENAI_POLICY}>
+          See OpenAI&apos;s policy
+        </a>
+        .
+      </>
+    ),
+  },
+  {
+    kicker: 'Schema-only',
+    title: 'Names and ranges, not the cells',
+    body: 'When privacy_mode is schema_only, the model payload keeps column names, types, missing counts, and numeric ranges. Category levels, value labels, sample rows, and the full table stay out. The user still sees the full table. Open-end coding does not call the model and uses keywords. Category-label suggestions do not call the model. A report sent for synthesis leaves out the prep log, chart assets, and execution summary.',
   },
   {
     kicker: 'Plugins',
@@ -37,7 +63,7 @@ const blocks = [
     title: 'Not SAML',
     body: 'Organisation roles in the API are owner or member. SAML SSO and SCIM are not in that role model, and this page does not claim them.',
   },
-] as const;
+];
 
 export default function SecurityPage() {
   return (
