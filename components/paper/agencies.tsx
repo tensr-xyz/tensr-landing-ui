@@ -230,7 +230,7 @@ export function AgenciesPage() {
           <div className="flex gap-2">
             {[
               ['Encrypted at rest', 'Files are stored in AWS us-east-1 with S3 SSE-S3 AES-256, and sent over HTTPS.'],
-              ['Never used for training', 'Your data is never used to train models. OpenAI does not train on API data by default.'],
+              ['Who the agent calls', 'The current agent calls Anthropic. The earlier agent still calls OpenAI. A provider training policy is not stated here.'],
               ['Where it lives', 'The store today is us-east-1. Ask before you upload if a contract needs somewhere else.'],
             ].map(([title, body]) => (
               <div key={title} className="flex grow basis-0 flex-col gap-10 border border-[#F9F4EB33] p-7">
