@@ -51,7 +51,7 @@ export function PricingPage() {
               Pay per researcher,{'\n'}not per table
             </h1>
             <p className="w-175 text-[22px] leading-8 text-[#3D6A5E]">
-              Prices are the live catalog: Pro £79, Pro+ £149, Teams £119 a seat. Annual is 20% off, rounded to the pound.
+              Pro £79 a month, or £63 if you pay annually. Pro+ £149, or £119 annually. Teams £119 a seat, three seats to start, or £95 a seat annually. Annual is 20% off.
             </p>
           </div>
           <div className="flex shrink-0 items-center gap-1 border border-[#14473A] p-1">
@@ -126,7 +126,7 @@ export function PricingPage() {
         <div className="flex items-center justify-between bg-[#14473A] px-9 py-7 text-[#F9F4EB]">
           <div>
             <p className="text-[30px] leading-9 tracking-[-0.02em]">Agencies</p>
-            <p className="text-[16px] leading-6 text-[#BFD3C8]">No separate enterprise price in the catalog. Teams is the organisation plan.</p>
+            <p className="text-[16px] leading-6 text-[#BFD3C8]">Teams is the plan for an organisation. Book a demo and we&apos;ll walk through it on your file.</p>
           </div>
           <Link href="/demo" className="border border-[#F9F4EB] px-6 py-3 text-[17px] leading-5.5">
             Book a demo
@@ -135,8 +135,8 @@ export function PricingPage() {
       </section>
 
       <section className="flex flex-col gap-10 px-10 pb-20">
-        <SectionRule left="Compare" right="From the billing catalog" />
-        <h2 className="text-[56px] leading-14.5 tracking-[-0.04em]">What the plans actually cap</h2>
+        <SectionRule left="Compare" right="Plans" />
+        <h2 className="text-[56px] leading-14.5 tracking-[-0.04em]">What each plan includes</h2>
         <div className="border-t border-[#14473A]">
           <div className="grid grid-cols-4 py-3 text-[15px] leading-5 text-[#3D6A5E]">
             <span />
@@ -158,9 +158,9 @@ export function PricingPage() {
       <section className="flex flex-col gap-8 px-10 pb-24">
         <SectionRule left="Questions" right="Questions" />
         {[
-          ['Where do the prices come from?', 'app/plan_catalog.json. Annual is nearest pound after 20% off, then times 12.'],
-          ['What happens after the trial?', 'The catalog sets 30 days. A paid plan is Pro, Pro+, or Teams.'],
-          ['Is there a USD price?', 'USD figures in the catalog are marked proposed, not live. This page shows GBP only.'],
+          ['What happens after the trial?', 'The trial lasts 30 days. After that, pick Pro, Pro+, or Teams.'],
+          ['How does annual billing work?', 'Annual is 20% off the monthly price, shown in pounds.'],
+          ['Which currency?', 'Prices on this page are in pounds.'],
         ].map(([q, a]) => (
           <div key={q} className="border-t border-[#14473A] pt-4">
             <h3 className="text-[24px] leading-8 tracking-[-0.02em]">{q}</h3>
