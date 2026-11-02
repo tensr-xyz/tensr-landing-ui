@@ -13,6 +13,8 @@ const bareChrome = (pathname: string) =>
   pathname === '/agencies' ||
   pathname === '/security' ||
   pathname === '/demo' ||
+  pathname === '/pricing' ||
+  pathname === '/changelog' ||
   pathname.startsWith('/signin');
 
 export const SiteChrome = ({ children }: { children: React.ReactNode }) => {
