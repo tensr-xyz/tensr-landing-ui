@@ -22,36 +22,36 @@ export const EnterpriseTemplate = () => {
       id: 'q3',
       question: 'How does Tensr use my data?',
       answer:
-        'Datasets are stored so you can analyse them. They are encrypted at rest with Amazon S3 SSE-S3 (AES-256) and sent over HTTPS. Tensr does not train models on your data. Text sent to the OpenAI API is not used by OpenAI to train their models by default.',
+        'Datasets are stored so you can analyse them. They are encrypted at rest with Amazon S3 SSE-S3 (AES-256) and sent over HTTPS. Provider data-use terms are linked from the security page.',
     },
     {
       id: 'q4',
       question: 'What security certifications does Tensr have?',
       answer:
-        'Tensr does not hold a SOC 2 report and does not run a published annual penetration test. Datasets are encrypted at rest with Amazon S3 SSE-S3 (AES-256) and sent over HTTPS. A DPA is available on request.',
+        'Datasets are encrypted at rest with AES-256 and sent over HTTPS, hosted in AWS US East. A DPA is available on request.',
     },
     {
       id: 'q5',
       question: 'Does Tensr support SSO and SCIM?',
       answer:
-        'No. Sign-in is email one-time codes through Stytch. SAML SSO and SCIM provisioning are not available.',
+        'Sign in with an emailed code, or Google, Microsoft or GitHub. SSO is on the roadmap. SCIM is not available.',
     },
     {
       id: 'q6',
       question: 'Does Tensr support on-premises or VPC deployment?',
-      answer: 'No. Tensr runs in AWS us-east-1. On-premises and VPC deployment are not available.',
+      answer: 'Tensr is hosted in AWS US East (us-east-1).',
     },
     {
       id: 'q7',
       question: 'What admin controls are available?',
       answer:
-        'Organisation owners invite members and set their role. There is no separate admin dashboard, and SAML SSO and SCIM are not available.',
+        'Organisation owners invite members and set their role. A workspace has an owner and members.',
     },
     {
       id: 'q8',
       question: 'How can I track usage across my organization?',
       answer:
-        'Plan caps are the Trial, Pro, Pro+ and Teams limits on the pricing page. Tensr does not provide a separate organisation usage-analytics dashboard.',
+        'Plan caps are the Trial, Pro, Pro+ and Teams limits on the pricing page.',
     },
   ];
 
@@ -87,7 +87,7 @@ export const EnterpriseTemplate = () => {
             </h2>
             <div className="flex justify-center">
               <div className="text-lg text-muted-foreground flex flex-col text-balance">
-                <p>What is in place today, and what is not.</p>
+                <p>What is in place today.</p>
               </div>
             </div>
           </div>
@@ -100,8 +100,16 @@ export const EnterpriseTemplate = () => {
                   <h2 className="text-base font-medium mb-2">Stored for your analysis</h2>
                   <div className="text-muted-foreground">
                     <p>
-                      Datasets stay in your account so you can reopen them. Tensr does not train
-                      models on them. OpenAI does not train on API data by default.
+                      Datasets stay in your account so you can reopen them. The data-trust note says
+                      Tensr does not train models on customer data.{' '}
+                      <a className="underline" href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training">
+                        See Anthropic&apos;s policy
+                      </a>
+                      .{' '}
+                      <a className="underline" href="https://developers.openai.com/api/docs/guides/your-data">
+                        See OpenAI&apos;s policy
+                      </a>
+                      .
                     </p>
                   </div>
                 </div>
@@ -110,15 +118,15 @@ export const EnterpriseTemplate = () => {
                 <div className="flex-grow">
                   <h2 className="text-base font-medium mb-2">Sign-in</h2>
                   <div className="text-muted-foreground">
-                    <p>Email one-time codes through Stytch. SAML SSO is not available.</p>
+                    <p>Sign in with an emailed code, or Google, Microsoft or GitHub. SSO is on the roadmap.</p>
                   </div>
                 </div>
               </div>
               <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 flex h-full flex-col lg:min-h-[102.4px]">
                 <div className="flex-grow">
-                  <h2 className="text-base font-medium mb-2">No SCIM</h2>
+                  <h2 className="text-base font-medium mb-2">Members</h2>
                   <div className="text-muted-foreground">
-                    <p>User provisioning is manual. SCIM is not available.</p>
+                    <p>Owners invite members into the workspace.</p>
                   </div>
                 </div>
               </div>
@@ -140,9 +148,9 @@ export const EnterpriseTemplate = () => {
               </div>
               <div className="block bg-card border border-border rounded transition-all hover:bg-hover p-6 flex h-full flex-col lg:min-h-[102.4px]">
                 <div className="flex-grow">
-                  <h2 className="text-base font-medium mb-2">No SOC 2 report</h2>
+                  <h2 className="text-base font-medium mb-2">Encryption</h2>
                   <div className="text-muted-foreground">
-                    <p>Tensr is not SOC 2 certified and does not publish an annual pen test.</p>
+                    <p>Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East.</p>
                   </div>
                 </div>
               </div>

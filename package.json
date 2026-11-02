@@ -16,6 +16,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@stytch/nextjs": "^21.18.1",
     "@types/mdx": "^2.0.14",
     "@vercel/analytics": "^2.0.1",
     "fumadocs-core": "^16.15.14",

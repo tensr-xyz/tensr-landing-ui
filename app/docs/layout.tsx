@@ -1,6 +1,6 @@
-import { DocsShell } from '@/components/docs-shell';
+import { DocsFrame } from '@/components/paper/docs-frame';
 import { source } from '@/lib/source';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  return <DocsShell tree={source.getPageTree()}>{children}</DocsShell>;
+  return <DocsFrame tree={source.getPageTree()}>{children}</DocsFrame>;
 }

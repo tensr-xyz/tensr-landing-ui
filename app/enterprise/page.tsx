@@ -4,7 +4,7 @@ import EnterpriseTemplate from '@/components/templates/enterprise';
 export const metadata: Metadata = {
   title: 'Enterprise',
   description:
-    'Tensr Enterprise: statistical analysis for research teams, with datasets encrypted at rest and in transit. SSO and SCIM are not available.',
+    'Tensr Enterprise: statistical analysis for research teams, with datasets encrypted at rest and in transit. Sign in with an emailed code, Google, Microsoft or GitHub. SSO is on the roadmap.',
   keywords: [
     'enterprise statistical analysis',
     'enterprise research software',
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     type: 'website',
     title: 'Enterprise | Tensr',
     description:
-      'Statistical analysis for research teams. Datasets are encrypted at rest and in transit. SSO and SCIM are not available.',
+      'Statistical analysis for research teams. Datasets are encrypted at rest and in transit. Sign in with an emailed code, Google, Microsoft or GitHub. SSO is on the roadmap.',
     url: 'https://www.tensr.xyz/enterprise',
   },
   twitter: {
