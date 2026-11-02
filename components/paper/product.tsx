@@ -8,9 +8,9 @@ const analyses = [
   ['02', 'Significance', 'Column letters on a weighted banner, t-tests, chi-square, and ANOVA.'],
   ['03', 'Regression', 'Linear, logistic, and ordinal models, among the regression pages in the docs.'],
   ['04', 'Drivers', 'Drivers leave out identifiers, free text, and multi-response text.'],
-  ['05', 'Choice modelling', 'Coming soon. MaxDiff and conjoint are not in this version.'],
+  ['05', 'Choice modelling', 'MaxDiff and conjoint: counts, multinomial logit, and hierarchical Bayes.'],
   ['06', 'Segmentation', 'Factor, cluster, and correspondence analysis.'],
-  ['07', 'Pricing curves', 'Coming soon. Van Westendorp and Gabor-Granger are not in this version.'],
+  ['07', 'Pricing', 'Van Westendorp and Gabor-Granger.'],
 ] as const;
 
 const details = [

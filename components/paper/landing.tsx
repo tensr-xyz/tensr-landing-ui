@@ -191,8 +191,8 @@ const steps = [
 const uses = [
   ['01', 'Brand tracking', 'Fuse waves, rake to targets and rerun the book. Wave-on-wave sig flags included.', false],
   ['02', 'Concept testing', 'Monadic or sequential layouts, with top-2 box nets and drivers.', false],
-  ['03', 'Pricing', 'Price questions sit in the same weighted banner as the rest of the study.', false],
-  ['04', 'MaxDiff & conjoint', 'Coming soon. Choice models are not in this version.', false],
+  ['03', 'Pricing', 'Van Westendorp and Gabor-Granger, in the same project as the banner.', false],
+  ['04', 'MaxDiff & conjoint', 'MaxDiff and conjoint, as counts, MNL, and hierarchical Bayes.', false],
   ['05', 'Open-end coding', 'Verbatims coded to a frame you can edit, and usable as a banner straight away.', false],
   ['06', 'Agency tab books', 'Hundreds of tables, Excel and PowerPoint out. Same spec every wave.', true],
 ] as const;
@@ -208,7 +208,7 @@ export function LandingPage() {
     <PaperShell>
       <section className="flex flex-col items-start gap-7 px-10 pt-14 pb-12">
         <p className="rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">
-          Import .sav today. Qualtrics, Prolific and Decipher coming soon
+          Import .sav today. Prolific fielding, live Qualtrics, Decipher and Alchemer coming soon
         </p>
         <h1 className="max-w-[841px] text-[96px] leading-24 tracking-[-0.045em]">
           Every number, traced to the people behind it
@@ -241,7 +241,7 @@ export function LandingPage() {
           <div className="flex grow basis-0 flex-col gap-2">
             {[
               ['Prolific', true],
-              ['Qualtrics', true],
+              ['Qualtrics', false],
               ['SPSS .sav', false],
             ].map(([label, soon]) => (
               <div key={String(label)} className="flex h-30 flex-col items-center justify-center bg-[#EEE8DC]">

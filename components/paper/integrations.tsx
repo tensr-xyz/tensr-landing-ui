@@ -185,7 +185,7 @@ export function IntegrationsPage() {
             {[
               ['01', 'Import the CSV', 'A Qualtrics CSV is detected from the ImportId row. That row is not treated as a case.'],
               ['02', 'Or a definition', 'Qualtrics Definition is a legacy import, not a signed-in connection.'],
-              ['03', 'Alchemer CSV', 'An Alchemer CSV can be read the same way. Live Alchemer sync is not available.'],
+              ['03', 'Alchemer', 'Coming soon. An Alchemer import is not in this version. Decipher is not either.'],
               ['04', 'Stack with a .sav', 'Join or stack the file with another upload. That does not pull new completes.'],
             ].map(([index, title, body]) => (
               <li key={index} className="flex gap-5 border-t border-[#14473A33] py-4.5 last:border-b">

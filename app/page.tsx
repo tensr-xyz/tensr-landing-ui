@@ -6,7 +6,7 @@ export const metadata: Metadata = {
     absolute: 'Every number, traced to the people behind it · Tensr',
   },
   description:
-    'Weighted, sig-tested tables from survey files you already have. Import .sav today. Qualtrics, Prolific and Decipher sync are coming soon.',
+    'Weighted, sig-tested tables from survey files you already have. Import .sav today. Prolific fielding, live Qualtrics sync, and Decipher and Alchemer imports are coming soon.',
 };
 
 export default function HomePage() {
