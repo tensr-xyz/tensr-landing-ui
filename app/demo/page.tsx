@@ -15,13 +15,13 @@ export default function DemoPage() {
             See it on your{'\n'}own data
           </h1>
           <p className="text-[22px] leading-8 text-[#3D6A5E]">
-            This form emails help@tensr.xyz. It does not book a slot, and it does not create an account.
+            Tell us what you want to see. We&apos;ll write back from help@tensr.xyz.
           </p>
           <ol className="border-t border-[#14473A33]">
             {[
-              ['01', 'From a file to weighted tables', 'Import, then rake. A weighted table does not change the dataset. Build a banner with significance letters and nets.'],
-              ['02', 'Ask the agent', 'Ask reads. Plan lays out the steps for you to approve. A complete cell can open the respondents behind it.'],
-              ['03', 'Out as Excel or PowerPoint', 'Excel is the audit record. PowerPoint is not. A Word file is the methodology note, not a second grid.'],
+              ['01', 'From a file to weighted tables', 'Import, then rake. The file you uploaded stays. Build a banner with significance letters and nets.'],
+              ['02', 'Ask the agent', 'Ask answers from the data. Plan lays out the steps for you to approve. A complete cell opens the respondents behind it.'],
+              ['03', 'Out as Excel or PowerPoint', 'Excel is the audit record. PowerPoint is the deck you send. Word is the methodology note.'],
             ].map(([index, title, body]) => (
               <li key={index} className="flex gap-6 border-b border-[#14473A33] py-5.5">
                 <span className="w-8 shrink-0 text-[15px] leading-7.5 text-[#3D6A5E]">{index}</span>
@@ -33,17 +33,17 @@ export default function DemoPage() {
             ))}
           </ol>
           <p className="bg-[#14473A] px-6 py-5 text-[17px] leading-6 text-[#F9F4EB]">
-            Bring a .sav, .dta, CSV, or Excel file. Live Qualtrics sync is not on this call.
+            Bring a .sav, .dta, CSV, or Excel file and we&apos;ll look at it together.
           </p>
           <p className="text-[15px] leading-5.5 text-[#3D6A5E]">
-            Files in the product are stored in AWS us-east-1 with S3 SSE-S3 (AES-256).
+            Files are encrypted at rest with AES-256 and hosted in AWS US East.
           </p>
         </div>
 
         <form action="mailto:help@tensr.xyz" method="post" encType="text/plain" className="flex grow flex-col gap-6 bg-[#EEE8DC] p-10">
           <div>
             <h2 className="text-[30px] leading-9 tracking-[-0.02em]">Email the team</h2>
-            <p className="mt-2 text-[16px] leading-6 text-[#3D6A5E]">Your mail app opens with this note. There is no calendar on this page.</p>
+            <p className="mt-2 text-[16px] leading-6 text-[#3D6A5E]">A short note is enough. We&apos;ll reply from help@tensr.xyz.</p>
           </div>
           <div className="grid grid-cols-2 gap-3">
             <label className="flex flex-col gap-2 text-[15px] leading-4.5">
