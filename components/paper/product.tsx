@@ -14,11 +14,11 @@ const analyses = [
 const details = [
   ['Analysis report', 'Checked, then explained', 'A plain-language data quality note, and the test the method prints. Analysis pages include an APA-style write-up.'],
   ['Exports', 'Out in the shapes that exist', 'Banners go to Excel or PowerPoint. A write-up goes to CSV, Markdown, or the browser print dialog. A .sav comes back with an .sps weight file.'],
-  ['Weights', 'The file stays put', 'Rake to targets. A weighted table does not change the dataset, and a save keeps the earlier version.'],
+  ['Weights', 'The file stays put', 'Rake to targets. A weight is saved as a new version, and the file you uploaded stays.'],
   ['Filters', 'On that run', 'A filter used for one analysis stays on that run. Naming two groups keeps a two-group comparison.'],
   ['Notebook', 'R, on the open file', 'R cells load the open dataset. An R script is there for the analyses that have one.'],
-  ['Collaboration', 'Teams', 'Teams includes shared workspaces and presence. SAML SSO is not available.'],
-  ['Plugins', 'Not a store', 'This version does not charge for a toolkit, and it does not add a method that is not in the product.'],
+  ['Collaboration', 'Teams', 'Teams includes shared workspaces and presence. Sign in with an email code. A workspace has an owner and members.'],
+  ['Plugins', 'In the product', 'Plugins run inside Tensr, with no network access.'],
 ] as const;
 
 function PaperScreen({ src, caption }: { src: string; caption: string }) {
@@ -36,7 +36,7 @@ function WorkspaceFrame() {
       <div className="overflow-hidden rounded-t-[12px] bg-[#F1F1EE] shadow-[0_24px_60px_#14473A40]">
         <img src="/paper/product/5-tables.png" alt="" className="block w-full" />
       </div>
-      <div className="flex justify-between bg-[#14473A] px-2 py-4.5 text-[17px] leading-5.5 text-[#F9F4EB]">
+      <div className="flex flex-wrap justify-between gap-2 bg-[#14473A] px-2 py-4.5 text-[17px] leading-5.5 text-[#F9F4EB]">
         {['Sources', 'Responses', 'Chat agent', 'Tables', 'Report', 'Traceability', '83 analyses'].map((item, index) => (
           <span key={item} className="flex flex-1 items-center justify-center gap-4">
             {index > 0 ? <span className="text-[#BFD3C8]">·</span> : null}
@@ -92,14 +92,14 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Every wave, every market, one dataset you can trust</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Drop in the file you already have. Live Prolific and Qualtrics sync is coming soon. Tensr reads the file. It does not replace the survey tool.
+            Drop in the file you already have. Tensr reads SPSS, Excel, and the rest, and turns them into tables you can send.
           </p>
         </div>
         <FeatureRow
           items={[
             ['Bring data in', '.sav, .dta, CSV, Excel, Triple-S, and Parquet. Labels, missing codes, and measurement levels come across on a .sav.'],
             ['Merge waves', 'Join or stack files. Stack and append find Merge Datasets, and stacking says when those rows are already in the file.'],
-            ['The file stays the file', 'A weight does not change the dataset. A save keeps the earlier version.'],
+            ['The file stays the file', 'A weight, a recode, or a merge saves a new version. The file you uploaded stays.'],
           ]}
         />
       </section>
@@ -121,7 +121,7 @@ export function ProductPage() {
         />
         <PaperScreen
           src="/paper/product/4a-responses.png"
-          caption="Responses layout. The Prolific chip and the cell figures are not on this export. A real capture replaces it later."
+          caption="Responses, in a sample project."
         />
       </section>
 
@@ -130,12 +130,12 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">Haiku codes the answers. You can edit the themes.</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Haiku proposes a code frame from a sample of the answers, then codes every answer with a confidence score. A score under 0.6, or no code, goes to the review queue. Keyword coding is the fallback, and a schema-only study uses it automatically. Themes tabulate as a weighted multi-response, with significance letters, and a cell opens the verbatims. The layout below has the result figures taken off.
+            Haiku proposes a code frame from a sample of the answers, then codes every answer with a confidence score. A score under 0.6, or no code, goes to the review queue for you to edit. Keyword coding is the fallback. In private mode, open ends are coded with keywords. Themes tabulate as a weighted multi-response, with significance letters, and a cell opens the verbatims.
           </p>
         </div>
         <PaperScreen
           src="/paper/product/4g-themes.png"
-          caption="Themes layout. Percentages, bases, and quotes are omitted."
+          caption="Themes, in a sample project."
         />
       </section>
 
@@ -144,12 +144,12 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">An analyst that plans first, asks when it is not sure, and shows its working</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Type the question. Ask reads and does not change the file. Plan lays out the steps for you to approve. Agent runs them and pauses when a choice is yours.
+            Type the question. Ask answers from the data. Plan lays out the steps for you to approve. Agent runs them and pauses when a choice is yours.
           </p>
         </div>
         <div className="flex gap-2">
           {[
-            ['Mode 1', 'Ask', 'Quick answers about the data. Reads, and does not change anything.', false],
+            ['Mode 1', 'Ask', 'Quick answers about the data.', false],
             ['Mode 2', 'Plan', 'Lays out the steps first. You approve or edit before anything runs.', false],
             ['Mode 3', 'Agent', 'Merges, weights, and builds the book, pausing when a choice is yours.', true],
             ['Every mode', 'Shown', 'Each step lists the weight, base, and test it used, so you can check it.', false],
@@ -175,7 +175,7 @@ export function ProductPage() {
         </div>
         <PaperScreen
           src="/paper/product/5-tables.png"
-          caption="Tables layout. Column percents and the side panel are omitted."
+          caption="Tables, in a sample project."
         />
       </section>
 
@@ -184,7 +184,7 @@ export function ProductPage() {
         <div className="flex items-end justify-between gap-10">
           <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">The book you signed off, ready to send</h2>
           <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
-            Excel and PowerPoint for the banner. CSV, Markdown, or print for the analysis write-up. There is no live deck that updates while fieldwork is still open.
+            Excel and PowerPoint for the banner. CSV, Markdown, or print for the analysis write-up. You export the banner you signed off.
           </p>
         </div>
       </section>
@@ -199,7 +199,7 @@ export function ProductPage() {
         </div>
         <PaperScreen
           src="/paper/product/4c-evidence.png"
-          caption="Evidence layout. The result callout, quotes, and row figures are omitted."
+          caption="Evidence, in a sample project."
         />
       </section>
 
@@ -247,8 +247,8 @@ export function ProductPage() {
           ))}
           <div className="flex w-[calc(25%-6px)] flex-col gap-3.5 bg-[#14473A] px-7 pb-8 pt-7 text-[#F9F4EB]">
             <p className="text-[15px] leading-4.5 opacity-80">Security</p>
-            <h3 className="text-[30px] leading-9 tracking-[-0.02em]">Encrypted, and never for training</h3>
-            <p className="text-[16px] leading-6 opacity-85">AES-256 at rest, HTTPS in transit. Your data is never used to train models.</p>
+            <h3 className="text-[30px] leading-9 tracking-[-0.02em]">Encrypted, in US East</h3>
+            <p className="text-[16px] leading-6 opacity-85">Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Private mode sends the AI only column names and types.</p>
           </div>
         </div>
       </section>
@@ -260,14 +260,9 @@ export function ProductPage() {
             <Link href={APP_LOGIN} className="underline decoration-1 underline-offset-2">Start a 30-day free trial</Link>
             , or send us last wave&apos;s file and we&apos;ll rebuild your tab book in Tensr on the call.
           </p>
-          <div className="flex">
-            <div className="flex h-14 w-90 items-center border border-[#F9F4EB] px-5 opacity-90">
-              <p className="text-[17px] leading-5.5">What&apos;s your work email?</p>
-            </div>
-            <Link href="/demo" className="flex h-14 items-center bg-[#F9F4EB] px-6 text-[17px] leading-5.5 text-[#14473A]">
-              Book a demo →
-            </Link>
-          </div>
+          <Link href="/demo" className="flex h-14 items-center bg-[#F9F4EB] px-6 text-[17px] leading-5.5 text-[#14473A]">
+            Book a demo →
+          </Link>
         </div>
       </section>
     </PaperShell>
