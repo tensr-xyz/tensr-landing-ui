@@ -13,30 +13,30 @@ export const metadata: Metadata = {
 const blocks: { kicker: string; title: string; body: ReactNode }[] = [
   {
     kicker: 'Encryption',
-    title: 'S3 SSE-S3, not a customer key',
-    body: 'The datasets bucket uses BucketEncryption.S3_MANAGED and enforce_ssl. That is Amazon S3-managed AES-256 (SSE-S3). The table definition does not set a customer-managed KMS key. The data-trust note says the same.',
+    title: 'AES-256 at rest',
+    body: 'Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East.',
   },
   {
     kicker: 'Region',
-    title: 'AWS us-east-1',
-    body: 'The data-trust note and the CDK app put datasets, exports, and the business table in us-east-1.',
+    title: 'AWS US East',
+    body: 'Datasets, exports, and account data are hosted in AWS US East (us-east-1).',
   },
   {
     kicker: 'Retention',
-    title: 'What the bucket and the table expire',
-    body: 'Noncurrent dataset versions expire after 30 days. Incomplete multipart uploads abort after 7 days. Dataset Lambda logs are kept for 90 days. The business table has point-in-time recovery, and an item with a ttl attribute expires on that clock.',
+    title: 'Older copies drop off',
+    body: 'Older copies of a file drop after 30 days. Unfinished uploads are cleared after 7 days. Dataset logs are kept for 90 days.',
   },
   {
-    kicker: 'In transit',
-    title: 'HTTPS',
-    body: 'The API stack is an API Gateway HTTP API. The datasets bucket sets enforce_ssl.',
+    kicker: 'Private mode',
+    title: 'Column names and types',
+    body: 'Private mode sends the AI only column names and types, never your respondents’ answers. You still see the full table. Open ends are coded with keywords, and category suggestions stay in Tensr.',
   },
   {
     kicker: 'The agent',
-    title: 'Anthropic, and OpenAI where v1 still runs',
+    title: 'Anthropic, and OpenAI on the earlier agent',
     body: (
       <>
-        The v2 agent defaults to Anthropic. The v1 agent still calls OpenAI, and those requests set store to false. The data-trust note says Tensr does not train models on customer data.{' '}
+        The current agent calls Anthropic. The earlier agent still calls OpenAI. The data-trust note says Tensr does not train models on customer data.{' '}
         <a className="underline" href={ANTHROPIC_POLICY}>
           See Anthropic&apos;s policy
         </a>
@@ -49,19 +49,14 @@ const blocks: { kicker: string; title: string; body: ReactNode }[] = [
     ),
   },
   {
-    kicker: 'Schema-only',
-    title: 'Names and ranges, not the cells',
-    body: 'When privacy_mode is schema_only, the model payload keeps column names, types, missing counts, and numeric ranges. Category levels, value labels, sample rows, and the full table stay out. The user still sees the full table. Open-end coding does not call the model and uses keywords. Category-label suggestions do not call the model. A report sent for synthesis leaves out the prep log, chart assets, and execution summary.',
-  },
-  {
     kicker: 'Plugins',
     title: 'No network from a plugin',
-    body: 'The plugin isolation note says network access is disabled. Manifests that ask for network are rejected. The executor Lambda is in private isolated subnets with no NAT and no internet route.',
+    body: 'Plugins run inside Tensr, with no network access.',
   },
   {
     kicker: 'Sign-in',
-    title: 'Not SAML',
-    body: 'Organisation roles in the API are owner or member. SAML SSO and SCIM are not in that role model, and this page does not claim them.',
+    title: 'Email codes',
+    body: 'Sign in with an email code. A workspace has an owner and members.',
   },
 ];
 
@@ -76,7 +71,7 @@ export default function SecurityPage() {
               Your client&apos;s data{'\n'}stays your client&apos;s
             </h1>
             <p className="w-180 text-[22px] leading-8 text-[#3D6A5E]">
-              What the stack and the plugin note actually say. Anything that is not in those sources is left off this page.
+              Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Private mode sends the AI only column names and types, never your respondents&apos; answers.
             </p>
           </div>
           <dl className="w-90 shrink-0 border-t border-[#14473A]">
@@ -95,7 +90,7 @@ export default function SecurityPage() {
         </div>
       </section>
       <section className="flex flex-col gap-2 px-10 pb-24">
-        <SectionRule left="What is in the stack" right="Checked against the code" />
+        <SectionRule left="How it is kept" right="Security" />
         {blocks.map((block) => (
           <article key={block.kicker} className="grid grid-cols-[280px_1fr] gap-10 border-t border-[#14473A] py-8">
             <p className="text-[15px] leading-5 text-[#3D6A5E]">{block.kicker}</p>
