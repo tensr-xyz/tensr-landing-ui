@@ -4,7 +4,7 @@ Repo: `tensr-landing-ui` pull request #24 (`agent/paper-site`), checkout `tensr-
 Dev server: `http://localhost:3001` (`next dev --port 3001`). Port 3000 is the app and is left alone.
 Paper file: Lucky waterfall `01M59W7RD1PH1ASN75MD4AQQ0W`, page ★ Flow · latest drafts.
 
-Counts: todo 8 · matched 0 · done 0
+Counts: todo 8 · matched 1 · done 0
 
 | Page | Artboard | Route | Status |
 | --- | --- | --- | --- |
@@ -33,3 +33,5 @@ Counts: todo 8 · matched 0 · done 0
 - Privacy and Terms use the GitBook URLs already in the site footer. LinkedIn and X have no URLs in the repo, so those words are not links.
 - The fourth hero panel is clipped on the 1440 artboard. The page shows the three panels that are fully visible.
 - Sample table percentages in the workspace mock are the artboard’s illustration, not a customer result.
+- Landing is the same 1440×7624 size as the artboard. Pushed as `32ae7f8`. Still open: the hero charts sit a little differently from the artboard, and the workspace “Show” row wraps one control. Copy that differs on purpose (coming soon, 83 analyses, real changelog dates, no SSO roadmap) is left as-is.
+- Product artboard export is started (hero, analyses, details, CTA, section headlines). The embedded product screens are not built yet.
