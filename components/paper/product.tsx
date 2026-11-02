@@ -1,8 +1,6 @@
 import Link from 'next/link';
 import { APP_LOGIN, Arrow, PaperShell, SectionRule } from '@/components/paper/shell';
 
-const tabs = ['Chat', 'Sources', 'Responses', 'Tables', 'Report'] as const;
-
 const analyses = [
   ['01', 'Tabulation', 'Crosstabs, banner books, nets, means, and Top 2 box on a 1 to 5, 1 to 7, or 1 to 10 scale.'],
   ['02', 'Significance', 'Column letters on a weighted banner, t-tests, chi-square, and ANOVA.'],
@@ -23,48 +21,20 @@ const details = [
   ['Plugins', 'Not a store', 'This version does not charge for a toolkit, and it does not add a method that is not in the product.'],
 ] as const;
 
+function PaperScreen({ src, caption }: { src: string; caption: string }) {
+  return (
+    <figure className="overflow-hidden rounded-[12px] border border-[#14473A33] bg-white">
+      <img src={src} alt="" className="block w-full" />
+      <figcaption className="bg-[#EEE8DC] px-5 py-3 text-[15px] leading-5 text-[#3D6A5E]">{caption}</figcaption>
+    </figure>
+  );
+}
+
 function WorkspaceFrame() {
   return (
     <section className="bg-[#5E8A74] px-10 pt-10">
       <div className="overflow-hidden rounded-t-[12px] bg-[#F1F1EE] shadow-[0_24px_60px_#14473A40]">
-        <div className="flex items-center justify-between border-b border-[#E7E6E1] px-4 py-3">
-          <p className="text-[14px] leading-4.5 text-[#1B1C1A]">Sample project</p>
-          <p className="text-[13px] leading-4 text-[#6A6B66]">Prolific fielding · coming soon</p>
-        </div>
-        <div className="flex gap-2 border-b border-[#E7E6E1] px-4 py-2.5">
-          {tabs.map((tab) => (
-            <span
-              key={tab}
-              className={`rounded-[8px] px-3 py-1.5 text-[13px] leading-4 ${tab === 'Tables' ? 'bg-white text-[#1B1C1A]' : 'text-[#6A6B66]'}`}
-            >
-              {tab}
-            </span>
-          ))}
-        </div>
-        <div className="grid grid-cols-[280px_1fr] gap-3 p-3">
-          <div className="flex flex-col justify-between bg-[#EEE8DC] p-5">
-            <div>
-              <p className="text-[13px] leading-4 text-[#3D6A5E]">Plan · you approve first</p>
-              <ol className="mt-4 flex flex-col gap-2 text-[15px] leading-5 text-[#14473A]">
-                <li>1. Bring the file in</li>
-                <li>2. Rake to targets</li>
-                <li>3. Banner the table</li>
-              </ol>
-            </div>
-            <p className="text-[13px] leading-4 text-[#3D6A5E]">Nothing here is a client result.</p>
-          </div>
-          <div className="bg-white p-5">
-            <p className="text-[18px] leading-6 text-[#1B1C1A]">Sample table</p>
-            <p className="mt-1 text-[13px] leading-4 text-[#6A6B66]">Column percents, when the file has them. No figure is printed here.</p>
-            <div className="mt-4 grid grid-cols-4 border-t border-[#E7E6E1] text-[14px] leading-5 text-[#1B1C1A]">
-              {['Stub', 'Total', 'Wave A', 'Wave B', 'A row', '—', '—', '—', 'Another row', '—', '—', '—', 'Base', 'the file', 'the file', 'the file'].map((cell, index) => (
-                <div key={`${cell}-${index}`} className={`border-b border-[#E7E6E1] py-2 ${index < 4 ? 'text-[#1B1C1A]' : 'text-[#3D6A5E]'}`}>
-                  {cell}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <img src="/paper/product/5-tables.png" alt="" className="block w-full" />
       </div>
       <div className="flex justify-between bg-[#14473A] px-2 py-4.5 text-[17px] leading-5.5 text-[#F9F4EB]">
         {['Sources', 'Responses', 'Chat agent', 'Tables', 'Report', 'Traceability', '83 analyses'].map((item, index) => (
@@ -149,6 +119,24 @@ export function ProductPage() {
             ['Quality', 'The data quality report says what it found, in plain language.'],
           ]}
         />
+        <PaperScreen
+          src="/paper/product/4a-responses.png"
+          caption="Responses layout. The Prolific chip and the cell figures are not on this export. A real capture replaces it later."
+        />
+      </section>
+
+      <section className="flex flex-col gap-12 px-10 pb-30">
+        <SectionRule left="Open ends" right="Keyword lexicon" />
+        <div className="flex items-end justify-between gap-10">
+          <h2 className="w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em]">An open end stays a keyword match</h2>
+          <p className="w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E]">
+            Verbatim coding is a keyword lexicon. It is not a model that writes themes. The layout below has the result figures taken off.
+          </p>
+        </div>
+        <PaperScreen
+          src="/paper/product/4g-themes.png"
+          caption="Themes layout. Percentages, bases, and quotes are omitted."
+        />
       </section>
 
       <section className="flex flex-col gap-12 px-10 pb-30">
@@ -185,6 +173,10 @@ export function ProductPage() {
             Column percents, nets, and significance letters. A net stays on that table. Excel and PowerPoint take the grid you signed off.
           </p>
         </div>
+        <PaperScreen
+          src="/paper/product/5-tables.png"
+          caption="Tables layout. Column percents and the side panel are omitted."
+        />
       </section>
 
       <section className="flex flex-col gap-12 px-10 pb-30">
@@ -205,6 +197,10 @@ export function ProductPage() {
             When provenance is complete, a cell opens the respondents behind that stub and banner. An incomplete run says so.
           </p>
         </div>
+        <PaperScreen
+          src="/paper/product/4c-evidence.png"
+          caption="Evidence layout. The result callout, quotes, and row figures are omitted."
+        />
       </section>
 
       <section className="flex flex-col gap-12 px-10 pb-30">
