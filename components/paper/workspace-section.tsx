@@ -42,8 +42,9 @@ export function WorkspaceSection() {
         </div>
       </div>
       <div className="flex h-175 pt-10 overflow-clip shrink-0 px-10 bg-[#5E8A74]">
-        <div className="flex [width:100%] h-215 overflow-clip [box-shadow:#14473A40_0px_24px_60px] rounded-t-[12px]">
-          <div className="flex overflow-clip w-full h-full flex-col font-sans pb-3 shrink-0 px-3 bg-[#F1F1EE]">
+        <div className="relative h-[660px] w-full overflow-hidden [box-shadow:#14473A40_0px_24px_60px] rounded-t-[12px]">
+          <div className="absolute top-0 left-0 w-[1680px] origin-top-left" style={{ transform: 'scale(0.7619)' }}>
+          <div className="flex h-[860px] w-[1680px] flex-col overflow-clip pb-3 px-3 bg-[#F1F1EE]">
             <div className="flex flex-col pt-3 pb-2.5 gap-1.5 px-1">
               <div className="flex items-center justify-between h-9 shrink-0">
                 <div className="flex items-center gap-3">
@@ -274,7 +275,7 @@ export function WorkspaceSection() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex items-center flex-nowrap gap-2">
+                  <div className="show-row flex items-center">
                     <div className="w-16 shrink-0 text-[12px] leading-4 text-[#6A6B66]">
                       Show
                     </div>
@@ -341,7 +342,7 @@ export function WorkspaceSection() {
                         T1 · Unaided awareness by region
                       </div>
                       <div className="text-[13px] leading-4 text-[#6A6B66]">
-                        Q3 Which energy suppliers can you think of? · Base: all respondents · Brand: Octavia
+                        Sample table · Base: the rows in the file
                       </div>
                     </div>
                     <div className="flex gap-1.5">
@@ -985,6 +986,7 @@ export function WorkspaceSection() {
                 </div>
               </div>
             </div>
+          </div>
           </div>
         </div>
       </div>

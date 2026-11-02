@@ -1,6 +1,18 @@
 .paper-site {
   font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-weight: 400;
   background: #f9f4eb;
   color: #14473a;
   font-synthesis: none;
+}
+
+/* The Paper export sets the wordmark to 600. Everything else stays 400 or 500. */
+.paper-site .show-row {
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+.paper-site .show-row > * {
+  flex-shrink: 0;
+  white-space: nowrap;
 }

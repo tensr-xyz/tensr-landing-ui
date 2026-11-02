@@ -128,40 +128,42 @@ function HeroPanels() {
   return (
     <section className="grid h-[560px] grid-cols-3">
       <div className="flex flex-col justify-between bg-[#5E8A74] p-5">
-        <div className="flex flex-col items-center">
-          <p className="pt-4 text-center text-[14px] text-[#F9F4EB]/80">
-            Every dot is a person. 9 said price.
+        <div className="flex h-[306px] flex-col items-center justify-between px-5 pt-6">
+          <p className="text-center text-[14px] leading-4 text-[#F9F4EB]">
+            Every dot is a respondent.
           </p>
           <PersonDots />
         </div>
         <div className="flex w-[320px] flex-col gap-2 bg-[#FCFAF5] px-4.5 py-4 text-[#14473A]">
           <p className="text-[14px] leading-4.5">Open-end · coded</p>
-          <p className="text-[18px] leading-6.5">“Bills went up again and nobody explained why.”</p>
-          <p className="text-[14px] leading-4.5">Coded to Price · 31% of switchers</p>
+          <p className="text-[18px] leading-6.5">A verbatim, coded to a theme you can edit.</p>
+          <p className="text-[14px] leading-4.5">Usable as a banner afterwards.</p>
         </div>
       </div>
       <div className="flex flex-col justify-between bg-[#7895A8] p-5">
-        <WaveBars />
-        <div className="flex flex-col gap-2 bg-[#FCFAF5] px-4.5 py-4">
-          <p className="text-[14px] leading-4.5">Unaided awareness · W3 → W4</p>
+        <div className="h-[328px]">
+          <WaveBars />
+        </div>
+        <div className="flex w-[340px] flex-col gap-2 bg-[#FCFAF5] px-4.5 py-4">
+          <p className="text-[14px] leading-4.5">Unaided awareness · wave on wave</p>
           <div className="flex items-center justify-between text-[15px]">
-            <span>Scotland</span>
-            <span>42% A</span>
+            <span>One region</span>
+            <span className="text-[#3D6A5E]">sig letter when it differs</span>
           </div>
           <div className="h-1.5 bg-[#E7E1D4]">
-            <div className="h-full w-[42%] bg-[#14473A]" />
+            <div className="h-full w-[62%] bg-[#14473A]" />
           </div>
           <div className="flex items-center justify-between text-[15px]">
-            <span>North East</span>
-            <span>29%</span>
+            <span>Another region</span>
+            <span className="text-[#3D6A5E]">same weight</span>
           </div>
           <div className="h-1.5 bg-[#E7E1D4]">
-            <div className="h-full w-[29%] bg-[#C9B48F]" />
+            <div className="h-full w-[40%] bg-[#C9B48F]" />
           </div>
         </div>
       </div>
       <div className="flex flex-col justify-between bg-[#C9B48F] p-5">
-        <div className="flex flex-col gap-3.5 px-10 pt-10">
+        <div className="flex h-[270px] flex-col gap-3.5 px-10 pt-10">
           <p className="text-[13px] leading-4 tracking-[0.02em] text-[#14473A]">
             Prolific quotas · coming soon
           </p>
@@ -169,9 +171,9 @@ function HeroPanels() {
         </div>
         <div className="flex w-[300px] flex-col gap-1 bg-[#FCFAF5] px-4.5 py-4">
           <p className="text-[14px] leading-4.5">Prolific · fielding</p>
-          <p className="text-[40px] leading-none tracking-[-0.04em]">312 / 400</p>
+          <p className="text-[40px] leading-none tracking-[-0.04em]">Coming soon</p>
           <div className="mt-1 h-1.5 bg-[#E7E1D4]">
-            <div className="h-full w-[78%] bg-[#14473A]" />
+            <div className="h-full w-0 bg-[#14473A]" />
           </div>
         </div>
       </div>
@@ -330,30 +332,33 @@ export function LandingPage() {
       </section>
 
       <section className="flex flex-col gap-12 px-10 pb-30">
-        <SectionRule left="Case studies" />
+        <SectionRule left="A wave" right="What the product does" />
         <div className="flex h-115 gap-2">
           <div className="flex w-115 shrink-0 flex-col justify-between bg-[#7895A8] p-8 text-[#F9F4EB]">
-            <p className="text-[15px] leading-4.5">[Agency name]</p>
-            <div className="flex flex-col gap-2">
-              <p className="text-[96px] leading-22.5 tracking-[-0.05em]">[X]</p>
-              <p className="text-[18px] leading-6.5">[Headline result, e.g. days saved per wave]</p>
+            <p className="text-[15px] leading-4.5">One project</p>
+            <div className="flex flex-col gap-3">
+              <p className="text-[56px] leading-14.5 tracking-[-0.04em]">File in. Tables out.</p>
+              <p className="text-[18px] leading-6.5">
+                A .sav or spreadsheet, weighted and bannered in the same project. No client name attached.
+              </p>
             </div>
           </div>
-          <div className="flex grow basis-0 flex-col justify-between bg-[#EEE8DC] p-10">
-            <p className="self-start border border-dashed border-[#3D6A5E] px-2.5 py-1 text-[13px] leading-4 text-[#3D6A5E]">
-              Placeholder until a design partner signs off a quote
-            </p>
-            <p className="text-[40px] leading-12 tracking-[-0.025em]">
-              “[Their words on what changed: how long a wave used to take, what they do now.]”
-            </p>
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-[17px] leading-5.5">[Name]</p>
-                <p className="text-[15px] leading-4.5 text-[#3D6A5E]">[Role, agency]</p>
-              </div>
-              <p className="border-b border-[#14473A] pb-0.5 text-[16px] leading-5">Read the case study →</p>
-            </div>
-          </div>
+          <ol className="flex grow basis-0 flex-col justify-between bg-[#EEE8DC] p-10">
+            {[
+              ['01', 'Bring the file in', 'Upload a .sav, .csv, or .xlsx. Labels and missing codes come with a .sav.'],
+              ['02', 'Weight it', 'Rake to targets. A weighted table does not change the dataset.'],
+              ['03', 'Banner it', 'Column percents, nets, and significance letters when a contrast is significant.'],
+              ['04', 'Export it', 'Excel or PowerPoint. Open a cell to see the respondents behind it.'],
+            ].map(([index, title, body]) => (
+              <li key={index} className="flex gap-6">
+                <p className="w-10 shrink-0 text-[15px] leading-5.5 text-[#3D6A5E]">{index}</p>
+                <div>
+                  <p className="text-[22px] leading-7">{title}</p>
+                  <p className="text-[16px] leading-6 text-[#3D6A5E]">{body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
