@@ -7,7 +7,7 @@ import { AskStrip, PaperFooter, PaperNav } from '@/components/paper/shell';
 
 type DocsNode = {
   type: string;
-  name: ReactNode;
+  name?: ReactNode;
   url?: string;
   children?: DocsNode[];
 };

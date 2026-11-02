@@ -155,7 +155,7 @@ export function ProductPage() {
             ['Mode 3', 'Agent', 'Merges, weights, and builds the book, pausing when a choice is yours.', true],
             ['Every mode', 'Shown', 'Each step lists the weight, base, and test it used, so you can check it.', false],
           ].map(([kicker, title, body, dark]) => (
-            <div key={title} className={`flex h-65 grow basis-0 flex-col justify-between p-7 ${dark ? 'bg-[#14473A] text-[#F9F4EB]' : 'bg-[#EEE8DC]'}`}>
+            <div key={String(title)} className={`flex h-65 grow basis-0 flex-col justify-between p-7 ${dark ? 'bg-[#14473A] text-[#F9F4EB]' : 'bg-[#EEE8DC]'}`}>
               <p className={`text-[15px] leading-4.5 ${dark ? 'opacity-80' : 'text-[#3D6A5E]'}`}>{kicker}</p>
               <div className="flex flex-col gap-2.5">
                 <p className="text-[56px] leading-14.5 tracking-[-0.05em]">{title}</p>

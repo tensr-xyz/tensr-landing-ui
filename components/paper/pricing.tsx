@@ -10,6 +10,7 @@ const plans = [
     monthly: 79,
     annual: 63,
     year: 756,
+    perSeat: false,
     lines: ['For one researcher running their own studies.', '1,200 agent runs a month', '300 reports a month', 'Weighted analysis and sig tests', 'Excel and PowerPoint export', 'Full data provenance', '.sav, .dta and CSV import'],
   },
   {
@@ -17,6 +18,7 @@ const plans = [
     monthly: 149,
     annual: 119,
     year: 1428,
+    perSeat: false,
     lines: ['For researchers who lean on the agent every day.', 'Everything in Pro, plus', '5,000 agent runs a month', '1,200 reports a month'],
   },
   {
