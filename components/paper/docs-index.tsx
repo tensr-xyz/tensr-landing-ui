@@ -3,13 +3,13 @@ import type { ReactNode } from 'react';
 
 const guides = [
   ['/docs/quickstart', 'Quickstart', 'A file, a weight, a banner.'],
-  ['/docs/import', 'Import', 'CSV, Excel, .sav, .dta, Triple-S, Parquet.'],
+  ['/docs/import', 'Import', 'Bring the survey file in, labels and all.'],
   ['/docs/merging', 'Merging', 'Join or stack two files. Fuse for three or more.'],
   ['/docs/levelled-data', 'Levelled data', 'Loops such as brands per respondent, at that level.'],
   ['/docs/weights', 'Weights', 'Rake a weight, and keep the file you uploaded.'],
   ['/docs/agent', 'The agent', 'Ask, Plan, and Agent.'],
   ['/docs/significance', 'Significance', 'Letters, the low-base skip, and the people behind a cell.'],
-  ['/docs/export', 'Export', 'Excel, a .sav with its weight syntax, and PowerPoint.'],
+  ['/docs/export', 'Export', 'Excel or PowerPoint, and the file with its weight syntax.'],
   ['/docs/r-script', 'The R script', 'The script for a run, and what the badges mean.'],
   ['/docs/sharing', 'Sharing and comments', 'A session link, and comments on a report.'],
   ['/docs/using-plugins', 'Using plugins', 'Install from the marketplace.'],

@@ -227,30 +227,22 @@ export function AgenciesPage() {
               Respondent-level files are the most sensitive thing an agency holds. Here is what happens to them in Tensr.
             </p>
           </div>
-          <div className="flex gap-2">
-            {[
-              ['Encrypted at rest', 'Uploaded files and outputs are encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East.'],
-              [
-                'Who the agent calls',
-                <>
-                  The current agent calls Anthropic. The earlier agent still calls OpenAI.{' '}
-                  <a className="underline" href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training">
-                    See Anthropic&apos;s policy
-                  </a>
-                  .{' '}
-                  <a className="underline" href="https://developers.openai.com/api/docs/guides/your-data">
-                    See OpenAI&apos;s policy
-                  </a>
-                  .
-                </>,
-              ],
-              ['Where it lives', 'The store today is us-east-1. Ask before you upload if a contract needs somewhere else.'],
-            ].map(([title, body]) => (
-              <div key={title} className="flex grow basis-0 flex-col gap-10 border border-[#F9F4EB33] p-7">
-                <h4 className="text-[24px] leading-7.5 tracking-[-0.02em]">{title}</h4>
-                <p className="text-[16px] leading-6 opacity-80">{body}</p>
-              </div>
-            ))}
+          <div className="flex flex-wrap gap-2">
+            <div className="flex min-w-[260px] grow basis-0 flex-col gap-10 border border-[#F9F4EB33] p-7">
+              <h4 className="text-[24px] leading-7.5 tracking-[-0.02em]">Encrypted at rest</h4>
+              <p className="text-[16px] leading-6 opacity-80">
+                Uploaded files and outputs are encrypted at rest with AES-256 and in transit over HTTPS.
+              </p>
+            </div>
+            <div className="flex min-w-[260px] grow basis-0 flex-col gap-10 border border-[#F9F4EB33] p-7">
+              <h4 className="text-[24px] leading-7.5 tracking-[-0.02em]">Your clients&apos; data stays private</h4>
+              <p className="text-[16px] leading-6 opacity-80">
+                Encrypted at rest and in transit, never used to train models, and private mode keeps respondents&apos; answers away from the AI.{' '}
+                <Link href="/security" className="underline">
+                  Read about security →
+                </Link>
+              </p>
+            </div>
           </div>
         </div>
       </section>
