@@ -4,12 +4,12 @@ Repo: `tensr-landing-ui` pull request #24 (`agent/paper-site`), checkout `tensr-
 Dev server: `http://localhost:3001` (`next dev --port 3001`). Port 3000 is the app and is left alone.
 Paper file: Lucky waterfall `01M59W7RD1PH1ASN75MD4AQQ0W`, page ★ Flow · latest drafts.
 
-Counts: todo 8 · matched 1 · done 0
+Counts: todo 7 · matched 2 · done 0
 
 | Page | Artboard | Route | Status |
 | --- | --- | --- | --- |
 | 0 Landing | 2WD-0 | `/` | matched |
-| 0b Product | 18A5-0 | `/product` | todo |
+| 0b Product | 18A5-0 | `/product` | matched |
 | 0c Integrations | 1CX3-0 | `/integrations` | todo |
 | 0d Agencies | 17UM-0 | `/agencies` | todo |
 | 0e Pricing | 1BZU-0 | `/pricing` | todo |
@@ -38,4 +38,4 @@ Counts: todo 8 · matched 1 · done 0
 - Type on the Paper pages is weight 400, plus 500 where that page’s export uses it. The wordmark and the workspace marks the export sets at 600 stay at 600.
 - A route change shows one Loading state. Loaded sections do not fade in on their own.
 - Landing stays matched rather than done: the honest workflow and the scaled workspace will not pixel-match the placeholder case study or the wrapping Show row.
-- Product artboard export is started (hero, analyses, details, CTA, section headlines). The embedded product screens are not built yet.
+- Product is built at 1440×8158, shorter than the 10236 artboard because the embedded screens are not pasted in. Those screens show live Prolific fielding (312 of 400, a spend figure) and a result narrative (Scotland 31% to 42%). The page uses the artboard’s section order and type, with a sample workspace that prints no cell figures. Choice modelling, Van Westendorp, and Gabor-Granger say coming soon. The count is 83. Plugins are not described as something you can charge for. Levelled data is not claimed. The report does not say a deck updates while fieldwork is open. Notebook copy is R cells and an R script, not a Python terminal.
