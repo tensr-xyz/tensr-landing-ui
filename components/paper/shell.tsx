@@ -5,16 +5,6 @@ import './paper.css';
 
 export const APP_LOGIN = 'https://app.tensr.xyz/login';
 
-const askQuery = encodeURIComponent('What does Tensr (the startup) do?');
-
-export const askLinks = [
-  { label: 'ChatGPT', href: `https://chatgpt.com/?q=${askQuery}` },
-  { label: 'Claude', href: `https://claude.ai/new?q=${askQuery}` },
-  { label: 'Perplexity', href: `https://www.perplexity.ai/search?q=${askQuery}` },
-  { label: 'Google', href: `https://www.google.com/search?q=${askQuery}` },
-  { label: 'Grok', href: `https://x.com/i/grok?text=${askQuery}` },
-];
-
 const nav = [
   ['/product', 'Product'],
   ['/integrations', 'Integrations'],
@@ -155,7 +145,7 @@ export function PaperFooter() {
         </div>
       </div>
       <div className="flex flex-wrap justify-between gap-4 border-t border-[#14473A] pt-4 text-[14px] leading-4.5 text-[#3D6A5E]">
-        <p>© 2026 Tensr · Made in Preston</p>
+        <p>© 2026 Tensr</p>
         <div className="flex gap-6">
           <span>LinkedIn</span>
           <span>X</span>
@@ -166,37 +156,11 @@ export function PaperFooter() {
   );
 }
 
-export function AskStrip() {
-  return (
-    <div className="bg-[#F9F4EB] px-5 pt-10 lg:px-10 mobile:px-5 mobile:pt-6">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-y border-[#14473A] py-5 mobile:flex-col mobile:items-start">
-        <p className="text-[17px] leading-5.5">Ask about Tensr on</p>
-        <div className="flex flex-wrap items-center gap-x-3.5 gap-y-2 text-[17px] leading-5.5">
-          {askLinks.map((link, index) => (
-            <span key={link.label} className="flex items-center gap-3.5">
-              {index > 0 ? <span className="text-[#3D6A5E] mobile:hidden">·</span> : null}
-              <a
-                href={link.href}
-                className="underline decoration-1 underline-offset-2 mobile:inline-flex mobile:min-h-11 mobile:items-center mobile:border mobile:border-[#14473A] mobile:px-3 mobile:no-underline"
-                target="_blank"
-                rel="noreferrer"
-              >
-                {link.label}
-              </a>
-            </span>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-}
-
 export function PaperShell({ children }: { children: ReactNode }) {
   return (
     <div className="paper-site min-h-screen mobile:overflow-x-clip">
       <PaperNav />
       {children}
-      <AskStrip />
       <PaperFooter />
     </div>
   );

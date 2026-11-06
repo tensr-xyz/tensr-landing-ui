@@ -1,0 +1,49 @@
+---
+title: Conjoint
+description: Choice-based conjoint. Part-worths from MNL or individual utilities.
+category: Survey techniques
+---
+
+## When to use it
+
+Use conjoint when each person chose one profile from a set, and each profile is a combination of attributes and levels. The result is a part-worth for each level, and a share for a profile you specify. Best-worst on a list of items, without attributes, is [MaxDiff](/docs/analyses/maxdiff).
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Choice modelling → Conjoint. In chat: “Run conjoint on the choice column.”</Step>
+<Step>Design names each attribute and its levels, then exports a long file and a wide file. Tensr does not host the survey.</Step>
+<Step>Analyse marks the chosen profile. MNL is the default. Individual utilities fit one set of part-worths per person.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    attributes: {
+      type: 'name and levels',
+      description: 'Each attribute, and the levels written as a comma-separated list.',
+    },
+    choice: {
+      type: 'column',
+      description: 'The profile the respondent chose.',
+    },
+    estimate: {
+      type: 'MNL | individual utilities',
+      description: 'MNL is one model for the sample. Individual utilities are one model per person.',
+      default: 'MNL',
+    },
+  }}
+/>
+
+## Reading the output
+
+MNL reports a part-worth for each level. A higher part-worth is the level people picked more often, holding the other attributes as they were shown. Individual utilities are the same part-worths, one respondent at a time. The choice simulator turns a set of profiles into shares.
+
+## Coming from SPSS
+
+SPSS has no conjoint item in the base menus. Tensr’s item is Analyze → Choice modelling → Conjoint. The simulator is a separate item, Choice Simulator, under Techniques.
+
+## Related
+
+[MaxDiff](/docs/analyses/maxdiff) scores items from best and worst. [Van Westendorp and Gabor-Granger](/docs/analyses/van-westendorp) price one product.

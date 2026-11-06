@@ -100,7 +100,7 @@ function WorkspaceFrame() {
           'Tables',
           'Report',
           'Traceability',
-          '83 analyses',
+          '87 analyses',
         ].map((item, index) => (
           <span
             key={item}
@@ -407,13 +407,13 @@ export function ProductPage() {
       </section>
 
       <section className={`flex flex-col gap-12 px-10 pb-30 ${mobile.section}`}>
-        <SectionRule left="83 analyses" right="⌘K or just ask" />
+        <SectionRule left="87 analyses" right="⌘K or just ask" />
         <div className={`flex items-end justify-between gap-10 ${mobile.row}`}>
           <h2 className={`w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em] ${mobile.h2}`}>
             The methods you reach for, without the syntax
           </h2>
           <p className={`w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E] ${mobile.lede}`}>
-            Run any of them from the ⌘K palette, a dialog, or a sentence in chat. The list is the 83
+            Run any of them from the ⌘K palette, a dialog, or a sentence in chat. The list is the 87
             documented analyses.
           </p>
         </div>
@@ -431,7 +431,7 @@ export function ProductPage() {
           <div className="flex w-[calc(25%-6px)] flex-col justify-between gap-3.5 bg-[#14473A] px-7 pb-8 pt-7 text-[#F9F4EB]">
             <p className="text-[15px] leading-4.5 opacity-80">And more</p>
             <div className="flex flex-col gap-1.5">
-              <p className="text-[72px] leading-18 tracking-[-0.05em]">83</p>
+              <p className="text-[72px] leading-18 tracking-[-0.05em]">87</p>
               <p className="text-[16px] leading-6 opacity-85">
                 Weighting, reliability, and the rest of the documented list.
               </p>
@@ -450,7 +450,7 @@ export function ProductPage() {
             <div className="flex min-h-[220px] flex-col justify-between bg-[#14473A] p-5 text-[#F9F4EB]">
               <p className="text-[15px] leading-4.5 opacity-80">And more</p>
               <div>
-                <p className="text-[64px] leading-none tracking-[-0.05em]">83</p>
+                <p className="text-[64px] leading-none tracking-[-0.05em]">87</p>
                 <p className="text-[15px] leading-5 opacity-85">
                   Weighting, reliability, and the rest of the documented list.
                 </p>

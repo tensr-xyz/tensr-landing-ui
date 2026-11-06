@@ -40,7 +40,7 @@ export function DocsIndex({
           {description}
         </p>
       ) : null}
-      <div className="mt-8 flex flex-col gap-4 text-[17px] leading-7 text-[#3D6A5E] [&_a]:text-[#14473A] [&_a]:underline [&_h2]:mt-8 [&_h2]:text-[28px] [&_h2]:leading-9 [&_h2]:tracking-[-0.02em] [&_h2]:text-[#14473A] [&_li]:ml-5 [&_li]:list-disc">
+      <div className="mt-8 flex flex-col gap-4 text-[17px] leading-7 text-[#3D6A5E] [&_a]:text-[#14473A] [&_a]:underline [&_h2]:mt-8 [&_h2]:text-[28px] [&_h2]:leading-9 [&_h2]:tracking-[-0.02em] [&_h2]:text-[#14473A] [&_h2]:no-underline [&_h2_a]:no-underline [&_li]:ml-5 [&_li]:list-disc">
         {body}
       </div>
       <ul className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2">

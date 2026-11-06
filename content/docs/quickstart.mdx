@@ -1,11 +1,13 @@
 ---
 title: Quickstart
-description: Upload a survey file, build one banner, and export the book.
+description: Sign in, add a file on Sources, and build one banner on Tables.
 ---
 
-The first table that matters is one banner on a file you already ship. Everything else can wait.
+After you sign in you are in a project. The tabs are Chat, Details, Sources, Responses, Tables, and Report. The first table that matters is one banner on a file you already ship.
 
-## Import
+## Add the file
+
+Open **Sources** and upload the survey file. Labels stay attached to the codes.
 
 <Tabs items={['SPSS', 'Stata', 'CSV']}>
   <Tab value="SPSS">
@@ -15,26 +17,27 @@ The first table that matters is one banner on a file you already ship. Everythin
     Upload a `.dta`. Stata variable labels and value labels are kept, including missing-value codes.
   </Tab>
   <Tab value="CSV">
-    Upload a CSV with a header row. Add value labels afterwards if the file only has codes.
+    Upload a CSV with a header row. Add value labels afterwards if the file only has codes. Excel is accepted too.
   </Tab>
 </Tabs>
 
-```tsx
-// The file lands as a dataset. Column identities are the original variables.
-const dataset = await workspace.open('wave-12.sav');
-```
+**Responses** is the rows. **Details** is the study. Chat can read the file once Sources has it.
 
 ## Build one banner
 
+Open **Tables**.
+
 <Steps>
   <Step>Choose the weight variable, or leave the table unweighted.</Step>
-  <Step>Drop brands or statements down the side, and age or region across the top.</Step>
+  <Step>Put brands or statements down the side, and age or region across the top.</Step>
   <Step>Turn on column proportions at 95%. Letters appear on cells that differ.</Step>
 </Steps>
 
 <Callout type="warn" title="Low bases">
 Cells under your base cutoff stay in the grid, flagged, so a client can see that a letter was withheld on purpose.
 </Callout>
+
+Save the table. It shows on **Report** with the others from this file.
 
 ## Export
 
