@@ -13,7 +13,7 @@ Use MaxDiff when each person saw a set of items and picked the best and the wors
 <Steps>
 <Step>Analyze → Survey techniques → MaxDiff (counting / MNL). In chat: “Run MaxDiff on best and worst.”</Step>
 <Step>Design exports a long file and a wide file for the survey tool. Tensr does not host the survey.</Step>
-<Step>Analyse marks the best and worst columns. Set columns are the alternatives shown together. Counting is the default. MNL is the logit.</Step>
+<Step>Analyse marks the best and worst columns. Set columns are the alternatives shown together. Counting is the default. MNL is the logit. Individual utilities fit one score per person.</Step>
 </Steps>
 
 ## Options
@@ -33,8 +33,8 @@ Use MaxDiff when each person saw a set of items and picked the best and the wors
       description: 'The alternatives shown together in that task.',
     },
     estimate: {
-      type: 'counting | MNL',
-      description: 'Counting is the default. MNL fits a logit.',
+      type: 'counting | MNL | individual utilities',
+      description: 'Counting is the default. MNL fits a logit. Individual utilities fit one set of scores per person.',
       default: 'counting',
     },
   }}
@@ -42,7 +42,7 @@ Use MaxDiff when each person saw a set of items and picked the best and the wors
 
 ## Reading the output
 
-Counting reports how often each item was chosen best against how often it was shown. MNL reports a utility. Both can be rescaled from 0 to 100 so the top item reads as 100. Individual utilities are a separate estimate, one score per person.
+Counting reports how often each item was chosen best against how often it was shown. MNL reports a utility. Both can be rescaled from 0 to 100 so the top item reads as 100. Individual utilities give one score per item for each person.
 
 ## Coming from SPSS
 

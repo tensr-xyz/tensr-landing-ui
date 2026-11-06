@@ -353,7 +353,7 @@ function PricingQuestions() {
                 className="flex w-full items-center justify-between gap-4 py-4 text-left text-[24px] leading-8 tracking-[-0.02em] text-[#14473A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#14473A] mobile:text-[20px] mobile:leading-7"
                 aria-expanded={expanded}
                 aria-controls={panelId}
-                onClick={() => setOpen(index)}
+                onClick={() => setOpen(expanded ? -1 : index)}
               >
                 <span>{question}</span>
                 <svg

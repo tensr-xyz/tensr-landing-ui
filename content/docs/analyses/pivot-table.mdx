@@ -1,18 +1,18 @@
 ---
 title: Pivot table
-description: Counts, sums, means, and percents, with the same weights and letters as a banner.
+description: Sums, counts, means, medians, min, max, and percents, with the same weights and letters as a banner.
 category: Survey techniques
 ---
 
 ## When to use it
 
-Use a pivot table when the grid is not a stub-and-banner book: you want a count, a sum, a mean, or a percent, with rows, columns, and a filter you drop in yourself. A client banner with letters on column proportions is a [banner table](/docs/analyses/banner-table).
+Use a pivot table when the grid is not a stub-and-banner book: you want a sum, a count, a mean, a median, a min or max, or a percent, with rows, columns, and a filter you drop in yourself. A client banner with letters on column proportions is a [banner table](/docs/analyses/banner-table).
 
 ## Running it in Tensr
 
 <Steps>
 <Step>Analyze → Tables → Pivot table. In chat: “Pivot brand by region, count.”</Step>
-<Step>Drop fields into Rows, Columns, Values, and Filters. A value can be a count, a sum, a mean, or a percent.</Step>
+<Step>Drop fields into Rows, Columns, Values, and Filters. A value is a sum by default. Change it to a count, mean, median, min, max, or a percent of the row, column, or total.</Step>
 <Step>Turn on subtotals and the grand total, or significance when the value supports it. Swap rows and columns if the grid is the wrong way round.</Step>
 </Steps>
 
@@ -30,7 +30,8 @@ Use a pivot table when the grid is not a stub-and-banner book: you want a count,
     },
     values: {
       type: 'column',
-      description: 'What to aggregate. Count, sum, mean, or percent.',
+      description: 'What to aggregate: sum, count, mean, median, min, max, % of row, % of column, or % of total.',
+      default: 'sum',
     },
     filters: {
       type: 'columns',
