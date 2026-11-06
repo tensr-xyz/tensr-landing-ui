@@ -174,7 +174,7 @@ export function AskStrip() {
         <div className="flex flex-wrap items-center gap-x-3.5 gap-y-2 text-[17px] leading-5.5">
           {askLinks.map((link, index) => (
             <span key={link.label} className="flex items-center gap-3.5">
-              {index > 0 ? <span className="text-[#3D6A5E]">·</span> : null}
+              {index > 0 ? <span className="text-[#3D6A5E] mobile:hidden">·</span> : null}
               <a
                 href={link.href}
                 className="underline decoration-1 underline-offset-2 mobile:inline-flex mobile:min-h-11 mobile:items-center"

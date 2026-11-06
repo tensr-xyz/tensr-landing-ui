@@ -1,6 +1,13 @@
 import Link from 'next/link';
+import type { ReactNode } from 'react';
 import { mobile } from '@/components/paper/mobile';
 import { MobileWorkspace } from '@/components/paper/mobile-workspace';
+import {
+  EvidencePhone,
+  ResponsesPhone,
+  TablesPhone,
+  ThemesPhone,
+} from '@/components/paper/mobile-product-screens';
 import { SwipeRow } from '@/components/paper/swipe-row';
 import { APP_LOGIN, Arrow, PaperShell, SectionRule } from '@/components/paper/shell';
 
@@ -52,10 +59,19 @@ const details = [
   ],
 ] as const;
 
-function PaperScreen({ src, caption }: { src: string; caption: string }) {
+function PaperScreen({
+  src,
+  caption,
+  mobile,
+}: {
+  src: string;
+  caption: string;
+  mobile: ReactNode;
+}) {
   return (
     <figure className="overflow-hidden rounded-[12px] border border-[#14473A33] bg-white">
-      <img src={src} alt="" className="block w-full" />
+      <img src={src} alt="" className="block w-full mobile:hidden" />
+      <div className="hidden bg-[#F1F1EE] p-3 mobile:block">{mobile}</div>
       <figcaption className="bg-[#EEE8DC] px-5 py-3 text-[15px] leading-5 text-[#3D6A5E]">
         {caption}
       </figcaption>
@@ -86,7 +102,7 @@ function WorkspaceFrame() {
             key={item}
             className="flex flex-1 items-center justify-center gap-4 mobile:min-h-11 mobile:flex-none"
           >
-            {index > 0 ? <span className="text-[#BFD3C8]">·</span> : null}
+            {index > 0 ? <span className="text-[#BFD3C8] mobile:hidden">·</span> : null}
             {item}
           </span>
         ))}
@@ -205,6 +221,7 @@ export function ProductPage() {
         <PaperScreen
           src="/paper/product/4a-responses.png"
           caption="Responses, in a sample project."
+          mobile={<ResponsesPhone />}
         />
       </section>
 
@@ -219,7 +236,11 @@ export function ProductPage() {
             you can edit, then the themes are ready to cut by any group.
           </p>
         </div>
-        <PaperScreen src="/paper/product/4g-themes.png" caption="Themes, in a sample project." />
+        <PaperScreen
+          src="/paper/product/4g-themes.png"
+          caption="Themes, in a sample project."
+          mobile={<ThemesPhone />}
+        />
       </section>
 
       <section className={`flex flex-col gap-12 px-10 pb-30 ${mobile.section}`}>
@@ -334,7 +355,11 @@ export function ProductPage() {
             next wave&apos;s data. Excel and PowerPoint take the grid you signed off.
           </p>
         </div>
-        <PaperScreen src="/paper/product/5-tables.png" caption="Tables, in a sample project." />
+        <PaperScreen
+          src="/paper/product/5-tables.png"
+          caption="Tables, in a sample project."
+          mobile={<TablesPhone />}
+        />
       </section>
 
       <section className={`flex flex-col gap-12 px-10 pb-30 ${mobile.section}`}>
@@ -363,6 +388,7 @@ export function ProductPage() {
         <PaperScreen
           src="/paper/product/4c-evidence.png"
           caption="Evidence, in a sample project."
+          mobile={<EvidencePhone />}
         />
       </section>
 

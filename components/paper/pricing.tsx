@@ -115,7 +115,7 @@ export function PricingPage() {
                 £0 for 30 days · no card needed
               </p>
             </div>
-            <div className="h-14 w-px bg-[#14473A33]" />
+            <div className="h-14 w-px bg-[#14473A33] mobile:hidden" />
             <div className="flex gap-8 mobile:grid mobile:w-full mobile:grid-cols-2 mobile:gap-4">
               {[
                 ['5 datasets', '100,000 rows each'],
@@ -240,26 +240,24 @@ export function PricingPage() {
           The analysis is the same on every plan. The difference is how much you use the agent, and
           working as a team.
         </p>
-        <div className="border-t border-[#14473A] mobile:overflow-x-auto">
-          <div className="mobile:min-w-[640px]">
-            <div className="grid grid-cols-4 py-3 text-[15px] leading-5 text-[#3D6A5E]">
-              <span />
-              <span>Pro</span>
-              <span>Pro+</span>
-              <span>Teams</span>
-            </div>
-            {rows.map(row => (
-              <div
-                key={row.feature}
-                className="grid grid-cols-4 border-t border-[#14473A33] py-4 text-[16px] leading-6"
-              >
-                <span>{row.feature}</span>
-                <span>{row.pro}</span>
-                <span>{row.plus}</span>
-                <span>{row.teams}</span>
-              </div>
-            ))}
+        <div className="border-t border-[#14473A]">
+          <div className="grid grid-cols-4 py-3 text-[15px] leading-5 text-[#3D6A5E] mobile:grid-cols-[minmax(0,1.35fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_minmax(0,1fr)] mobile:py-2 mobile:text-[12px] mobile:leading-4">
+            <span />
+            <span>Pro</span>
+            <span>Pro+</span>
+            <span>Teams</span>
           </div>
+          {rows.map(row => (
+            <div
+              key={row.feature}
+              className="grid grid-cols-4 border-t border-[#14473A33] py-4 text-[16px] leading-6 mobile:grid-cols-[minmax(0,1.35fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_minmax(0,1fr)] mobile:py-3 mobile:text-[12px] mobile:leading-4"
+            >
+              <span className="mobile:pr-2">{row.feature}</span>
+              <span>{row.pro}</span>
+              <span>{row.plus}</span>
+              <span>{row.teams}</span>
+            </div>
+          ))}
         </div>
       </section>
 

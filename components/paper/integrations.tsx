@@ -189,41 +189,37 @@ export function IntegrationsPage() {
             </div>
           </article>
         </div>
-        <div className="hidden mobile:-mx-5 mobile:block">
-          <SwipeRow>
-            {cards.map(card => (
-              <article
-                key={card.title}
-                className="flex min-h-[260px] flex-col justify-between bg-[#EEE8DC] p-5"
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div
-                    className={`flex size-14 shrink-0 items-center justify-center text-[18px] font-semibold ${card.markClass}`}
-                  >
-                    {card.mark}
-                  </div>
-                  <p className="rounded-[999px] border border-[#14473A] px-2.5 py-1 text-[13px] leading-4">
-                    {card.badge}
-                  </p>
+        <div className="hidden grid-cols-2 gap-2 mobile:grid">
+          {cards.map(card => (
+            <article
+              key={card.title}
+              className="flex flex-col justify-between gap-4 bg-[#EEE8DC] p-4"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <div
+                  className={`flex size-10 shrink-0 items-center justify-center text-[15px] font-semibold ${card.markClass}`}
+                >
+                  {card.mark}
                 </div>
-                <div className="flex flex-col gap-2">
-                  <p className="text-[15px] leading-4.5 text-[#3D6A5E]">{card.kicker}</p>
-                  <h3 className="text-[28px] leading-8 tracking-[-0.02em]">{card.title}</h3>
-                  <p className="text-[15px] leading-5 text-[#3D6A5E]">{card.body}</p>
-                </div>
-              </article>
-            ))}
-            <article className="flex min-h-[260px] flex-col justify-between bg-[#14473A] p-5 text-[#F9F4EB]">
-              <p className="text-[15px] leading-4.5 opacity-80">On the roadmap</p>
-              <div className="flex flex-col gap-2">
-                <h3 className="text-[28px] leading-8 tracking-[-0.02em]">Coming next</h3>
-                <p className="text-[15px] leading-5 opacity-85">
-                  Prolific: coming soon. Live Qualtrics: coming soon. Decipher: coming soon.
-                  Alchemer: coming soon. Tell us which tool you use.
+                <p className="rounded-[999px] border border-[#14473A] px-2 py-1 text-[12px] leading-4">
+                  {card.badge}
                 </p>
               </div>
+              <div className="flex flex-col gap-1.5">
+                <p className="text-[12px] leading-4 text-[#3D6A5E]">{card.kicker}</p>
+                <h3 className="text-[18px] leading-6 tracking-[-0.02em]">{card.title}</h3>
+                <p className="text-[13px] leading-4 text-[#3D6A5E]">{card.body}</p>
+              </div>
             </article>
-          </SwipeRow>
+          ))}
+          <article className="col-span-2 flex flex-col gap-2 bg-[#14473A] p-4 text-[#F9F4EB]">
+            <p className="text-[12px] leading-4 opacity-80">On the roadmap</p>
+            <h3 className="text-[18px] leading-6 tracking-[-0.02em]">Coming next</h3>
+            <p className="text-[13px] leading-4 opacity-85">
+              Prolific: coming soon. Live Qualtrics: coming soon. Decipher: coming soon. Alchemer:
+              coming soon. Tell us which tool you use.
+            </p>
+          </article>
         </div>
       </section>
 
