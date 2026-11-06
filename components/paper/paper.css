@@ -1,5 +1,9 @@
 .paper-site {
-  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
   font-weight: 400;
   background: #f9f4eb;
   color: #14473a;
@@ -15,110 +19,4 @@
 .paper-site .show-row > * {
   flex-shrink: 0;
   white-space: nowrap;
-}
-
-@media (max-width: 800px) {
-  .paper-site h1 {
-    font-size: 2.5rem !important;
-    line-height: 1.1 !important;
-    white-space: normal !important;
-  }
-
-  .paper-site h2 {
-    font-size: 2rem !important;
-    line-height: 1.15 !important;
-    white-space: normal !important;
-    width: auto !important;
-    max-width: 100%;
-  }
-
-  .paper-site section,
-  .paper-site footer,
-  .paper-site [class*='px-10'] {
-    padding-left: 1.25rem !important;
-    padding-right: 1.25rem !important;
-  }
-
-  .paper-site .grid,
-  .paper-site [class*='grid-cols-'] {
-    grid-template-columns: minmax(0, 1fr) !important;
-  }
-
-  .paper-site .grid > *,
-  .paper-site section .flex > * {
-    min-width: 0;
-    max-width: 100%;
-  }
-
-  .paper-site [class*='w-['] {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .paper-site .workspace-scale,
-  .paper-site .workspace-scale [class*='w-['] {
-    width: 1680px;
-    max-width: none;
-  }
-
-  .paper-site .workspace-scale {
-    transform: scale(0.42) !important;
-  }
-
-  .paper-site .workspace-scale-box {
-    height: 380px !important;
-  }
-
-  .paper-site .w-175,
-  .paper-site .w-205,
-  .paper-site .w-180,
-  .paper-site .w-150,
-  .paper-site .w-140,
-  .paper-site .w-130,
-  .paper-site .w-115,
-  .paper-site .w-110,
-  .paper-site .w-105,
-  .paper-site .w-95,
-  .paper-site .w-90,
-  .paper-site .w-80,
-  .paper-site .w-300,
-  .paper-site .w-275,
-  .paper-site .w-225,
-  .paper-site .w-190 {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .paper-site .show-row {
-    flex-wrap: wrap;
-  }
-
-  .paper-site .show-row > * {
-    white-space: normal;
-  }
-
-  .paper-site [class*='h-[560px]'],
-  .paper-site [class*='h-115'],
-  .paper-site [class*='h-130'],
-  .paper-site [class*='h-105'],
-  .paper-site [class*='h-65'] {
-    height: auto !important;
-  }
-
-  .paper-site section.flex,
-  .paper-site section .flex.gap-2,
-  .paper-site section .flex.gap-10,
-  .paper-site section .flex.gap-16 {
-    flex-direction: column;
-  }
-}
-
-@media (max-width: 500px) {
-  .paper-site .workspace-scale {
-    transform: scale(0.2) !important;
-  }
-
-  .paper-site .workspace-scale-box {
-    height: 190px !important;
-  }
 }

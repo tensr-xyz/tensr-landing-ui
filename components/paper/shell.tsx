@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import type { ReactNode } from 'react';
+import { MobileMenu } from '@/components/paper/mobile-menu';
 import './paper.css';
 
 export const APP_LOGIN = 'https://app.tensr.xyz/login';
@@ -46,22 +47,32 @@ export function Arrow({ light = false }: { light?: boolean }) {
 
 export function PaperNav() {
   return (
-    <header className="flex min-h-21 flex-wrap items-center justify-between gap-4 px-5 py-4 lg:px-10">
-      <Link href="/" className="flex items-center gap-2.25" aria-label="Tensr homepage">
+    <header className="flex min-h-21 flex-wrap items-center justify-between gap-4 px-5 py-4 lg:px-10 mobile:h-16 mobile:min-h-16 mobile:flex-nowrap mobile:gap-0 mobile:border-b mobile:border-[#14473A26] mobile:py-0 mobile:pr-3 mobile:pl-5">
+      <Link
+        href="/"
+        className="flex items-center gap-2.25 mobile:[&_svg]:size-6"
+        aria-label="Tensr homepage"
+      >
         <Mark />
-        <span className="text-[28px] leading-7 font-semibold tracking-[-0.04em]">tensr</span>
+        <span className="text-[28px] leading-7 font-semibold tracking-[-0.04em] mobile:text-[22px] mobile:leading-6">
+          tensr
+        </span>
       </Link>
-      <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[16px] leading-5 lg:gap-9">
+      <nav className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[16px] leading-5 lg:gap-9 mobile:hidden">
         {nav.map(([href, label]) => (
           <Link key={href} href={href}>
             {label}
           </Link>
         ))}
         <Link href={APP_LOGIN}>Sign in</Link>
-        <Link href="/demo" className="bg-[#14473A] px-5.5 py-3.75 text-[17px] leading-5.5 text-[#F9F4EB]">
+        <Link
+          href="/demo"
+          className="bg-[#14473A] px-5.5 py-3.75 text-[17px] leading-5.5 text-[#F9F4EB]"
+        >
           Book a demo
         </Link>
       </nav>
+      <MobileMenu />
     </header>
   );
 }
@@ -115,27 +126,33 @@ const footerColumns: { title: string; links: { label: string; href: string }[] }
 
 export function PaperFooter() {
   return (
-    <footer className="flex flex-col gap-16 bg-[#F9F4EB] px-5 pt-16 pb-10 lg:px-10">
-      <div className="flex flex-wrap gap-10">
-        <div className="flex w-full max-w-85 flex-col gap-3.5 sm:w-85">
+    <footer className="flex flex-col gap-16 bg-[#F9F4EB] px-5 pt-16 pb-10 lg:px-10 mobile:gap-10 mobile:px-5 mobile:pt-12 mobile:pb-8">
+      <div className="flex flex-wrap gap-10 mobile:flex-col mobile:gap-8">
+        <div className="flex w-full max-w-85 flex-col gap-3.5 sm:w-85 mobile:max-w-none">
           <Link href="/" className="flex items-center gap-2.25">
             <Mark size={26} />
             <span className="text-[26px] leading-6.5 font-semibold tracking-[-0.04em]">tensr</span>
           </Link>
-          <p className="w-65 text-[15px] leading-5.5 text-[#3D6A5E]">
+          <p className="w-65 text-[15px] leading-5.5 text-[#3D6A5E] mobile:w-auto">
             Survey analysis for people who still care about the base size.
           </p>
         </div>
-        {footerColumns.map(column => (
-          <div key={column.title} className="flex grow basis-0 flex-col gap-2.5">
-            <p className="pb-1 text-[15px] leading-4.5 text-[#3D6A5E]">{column.title}</p>
-            {column.links.map(link => (
-              <Link key={link.label} href={link.href} className="text-[15px] leading-4.5">
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        ))}
+        <div className="contents mobile:grid mobile:w-full mobile:grid-cols-2 mobile:gap-x-4 mobile:gap-y-8">
+          {footerColumns.map(column => (
+            <div key={column.title} className="flex grow basis-0 flex-col gap-2.5">
+              <p className="pb-1 text-[15px] leading-4.5 text-[#3D6A5E]">{column.title}</p>
+              {column.links.map(link => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-[15px] leading-4.5 mobile:inline-flex mobile:min-h-11 mobile:items-center"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
       <div className="flex flex-wrap justify-between gap-4 border-t border-[#14473A] pt-4 text-[14px] leading-4.5 text-[#3D6A5E]">
         <p>© 2026 Tensr · Made in Preston</p>
@@ -151,14 +168,19 @@ export function PaperFooter() {
 
 export function AskStrip() {
   return (
-    <div className="bg-[#F9F4EB] px-5 pt-10 lg:px-10">
-      <div className="flex flex-wrap items-center justify-between gap-4 border-y border-[#14473A] py-5">
+    <div className="bg-[#F9F4EB] px-5 pt-10 lg:px-10 mobile:px-5 mobile:pt-6">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-y border-[#14473A] py-5 mobile:flex-col mobile:items-start">
         <p className="text-[17px] leading-5.5">Ask about Tensr on</p>
         <div className="flex flex-wrap items-center gap-x-3.5 gap-y-2 text-[17px] leading-5.5">
           {askLinks.map((link, index) => (
             <span key={link.label} className="flex items-center gap-3.5">
               {index > 0 ? <span className="text-[#3D6A5E]">·</span> : null}
-              <a href={link.href} className="underline decoration-1 underline-offset-2" target="_blank" rel="noreferrer">
+              <a
+                href={link.href}
+                className="underline decoration-1 underline-offset-2 mobile:inline-flex mobile:min-h-11 mobile:items-center"
+                target="_blank"
+                rel="noreferrer"
+              >
                 {link.label}
               </a>
             </span>
@@ -171,7 +193,7 @@ export function AskStrip() {
 
 export function PaperShell({ children }: { children: ReactNode }) {
   return (
-    <div className="paper-site min-h-screen">
+    <div className="paper-site min-h-screen mobile:overflow-x-clip">
       <PaperNav />
       {children}
       <AskStrip />
@@ -182,9 +204,9 @@ export function PaperShell({ children }: { children: ReactNode }) {
 
 export function SectionRule({ left, right }: { left: string; right?: string }) {
   return (
-    <div className="flex justify-between border-t border-[#14473A] pt-3.5 text-[17px] leading-5.5">
+    <div className="flex justify-between border-t border-[#14473A] pt-3.5 text-[17px] leading-5.5 mobile:text-[15px] mobile:leading-5">
       <p>{left}</p>
-      <p>{right ?? left}</p>
+      <p className="mobile:hidden">{right ?? left}</p>
     </div>
   );
 }

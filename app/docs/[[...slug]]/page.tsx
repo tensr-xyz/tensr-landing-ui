@@ -36,8 +36,14 @@ export default async function Page(props: DocsRouteProps) {
 
   return (
     <article className="max-w-[760px] pb-16">
-      <h1 className="text-[48px] leading-none tracking-[-0.04em]">{page.data.title}</h1>
-      {page.data.description ? <p className="mt-4 text-[18px] leading-7 text-[#3D6A5E]">{page.data.description}</p> : null}
+      <h1 className="text-[48px] leading-none tracking-[-0.04em] mobile:text-[44px] mobile:leading-[46px] mobile:tracking-[-0.045em]">
+        {page.data.title}
+      </h1>
+      {page.data.description ? (
+        <p className="mt-4 text-[18px] leading-7 text-[#3D6A5E] mobile:text-[17px] mobile:leading-[26px]">
+          {page.data.description}
+        </p>
+      ) : null}
       <p className="mt-4 flex flex-wrap gap-4 text-[14px] leading-5 text-[#3D6A5E]">
         <a className="underline" href={markdownUrl}>
           Copy as Markdown
