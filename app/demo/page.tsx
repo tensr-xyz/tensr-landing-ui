@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { mobile } from '@/components/paper/mobile';
-import { APP_LOGIN, PaperShell } from '@/components/paper/shell';
+import { APP_LOGIN, PaperShell, SectionRule } from '@/components/paper/shell';
 
 export const metadata: Metadata = {
   title: { absolute: 'See it on your own data · Tensr' },
@@ -14,6 +14,9 @@ export default function DemoPage() {
         className={`flex items-start gap-16 px-10 pb-24 pt-14 mobile:flex-col mobile:gap-10 mobile:px-5 mobile:pt-8 mobile:pb-16`}
       >
         <div className="flex w-150 shrink-0 flex-col gap-10 mobile:w-full mobile:gap-8">
+          <div className="hidden mobile:block">
+            <SectionRule left="Book a demo" right="30 minutes" />
+          </div>
           <h1
             className={`whitespace-pre-wrap text-[80px] leading-20.5 tracking-[-0.045em] ${mobile.h1}`}
           >
@@ -44,7 +47,9 @@ export default function DemoPage() {
               <li key={index} className="flex gap-6 border-b border-[#14473A33] py-5.5">
                 <span className="w-8 shrink-0 text-[15px] leading-7.5 text-[#3D6A5E]">{index}</span>
                 <span>
-                  <span className="block text-[24px] leading-7.5 tracking-[-0.02em]">{title}</span>
+                  <span className="block text-[24px] leading-7.5 tracking-[-0.02em] mobile:text-[20px] mobile:leading-6">
+                    {title}
+                  </span>
                   <span className="mt-1.5 block text-[16px] leading-6 text-[#3D6A5E]">{body}</span>
                 </span>
               </li>
@@ -62,7 +67,7 @@ export default function DemoPage() {
           action="mailto:help@tensr.xyz"
           method="post"
           encType="text/plain"
-          className="flex grow flex-col gap-6 bg-[#EEE8DC] p-10 mobile:w-full mobile:p-5"
+          className="flex grow flex-col gap-6 bg-[#EEE8DC] p-10 mobile:-mx-5 mobile:w-auto mobile:px-5 mobile:py-8"
         >
           <div>
             <h2 className="text-[30px] leading-9 tracking-[-0.02em]">

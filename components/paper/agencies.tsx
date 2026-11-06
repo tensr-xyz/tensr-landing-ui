@@ -91,7 +91,7 @@ export function AgenciesPage() {
           <div className="flex w-140 shrink-0 mobile:h-auto mobile:w-full flex-col justify-between bg-[#EEE8DC] p-10">
             <p className="text-[15px] leading-4.5 text-[#3D6A5E]">01 · Trackers</p>
             <div className="flex flex-col gap-4.5">
-              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">
+              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em] mobile:text-[28px] mobile:leading-8">
                 The next wave uses the same spec
               </h3>
               <p className="text-[17px] leading-6.5 text-[#3D6A5E]">
@@ -123,7 +123,7 @@ export function AgenciesPage() {
               <p className="text-[18px] leading-5.5">W4 · the file you upload next</p>
               <p className="text-[15px] leading-4.5 text-[#3D6A5E]">Rerun from the spec</p>
             </div>
-            <div className="flex gap-2 pt-3">
+            <div className="flex gap-2 pt-3 mobile:flex-col">
               {['Sig letters', 'Low base', 'Open-end codes'].map(label => (
                 <div
                   key={label}
@@ -137,8 +137,8 @@ export function AgenciesPage() {
           </div>
         </div>
 
-        <div className="flex h-130 gap-2 mobile:h-auto mobile:flex-col">
-          <div className="flex w-[55%] shrink-0 mobile:h-auto mobile:w-full flex-col justify-end gap-4 bg-[#7895A8] p-10 text-[#F9F4EB]">
+        <div className="flex h-130 gap-2 mobile:h-auto mobile:flex-col-reverse">
+          <div className="flex w-[55%] shrink-0 mobile:h-auto mobile:w-full flex-col justify-end gap-4 bg-[#7895A8] p-10 text-[#F9F4EB] mobile:p-4">
             <p className="text-[15px] leading-4.5">What leaves the project</p>
             <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">
               Excel, PowerPoint, and a Word note
@@ -148,10 +148,10 @@ export function AgenciesPage() {
               out to Excel, PowerPoint and Word.
             </p>
           </div>
-          <div className="flex grow flex-col justify-between bg-[#EEE8DC] p-10">
+          <div className="flex grow flex-col justify-between bg-[#EEE8DC] p-10 mobile:p-[22px]">
             <p className="text-[15px] leading-4.5 text-[#3D6A5E]">02 · Banner books</p>
             <div className="flex flex-col gap-4.5">
-              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">
+              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em] mobile:text-[28px] mobile:leading-8">
                 The client changes a cut at 5pm. Fine.
               </h3>
               <p className="text-[17px] leading-6.5 text-[#3D6A5E]">
@@ -173,7 +173,7 @@ export function AgenciesPage() {
           <div className="flex w-140 shrink-0 mobile:h-auto mobile:w-full flex-col justify-between bg-[#EEE8DC] p-10">
             <p className="text-[15px] leading-4.5 text-[#3D6A5E]">03 · Checking</p>
             <div className="flex flex-col gap-4.5">
-              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">
+              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em] mobile:text-[28px] mobile:leading-8">
                 Check the work without redoing it
               </h3>
               <p className="text-[17px] leading-6.5 text-[#3D6A5E]">
@@ -206,7 +206,10 @@ export function AgenciesPage() {
                   ['Weight', 'The weight on the table'],
                   ['Test', 'The letter, when a contrast differs'],
                 ].map(([label, value]) => (
-                  <div key={label} className="flex justify-between">
+                  <div
+                    key={label}
+                    className="flex justify-between gap-3 mobile:flex-col mobile:gap-1"
+                  >
                     <span className="text-[#3D6A5E]">{label}</span>
                     <span>{value}</span>
                   </div>
@@ -219,8 +222,8 @@ export function AgenciesPage() {
           </div>
         </div>
 
-        <div className="flex h-130 gap-2 mobile:h-auto mobile:flex-col">
-          <div className="flex grow items-center justify-center bg-[#5E8A74] p-12">
+        <div className="flex h-130 gap-2 mobile:h-auto mobile:flex-col-reverse">
+          <div className="flex grow items-center justify-center bg-[#5E8A74] p-12 mobile:p-4">
             <div className="w-150 bg-[#FCFAF5] shadow-[0_18px_48px_#14473A40] mobile:w-full">
               <div className="border-b border-[#14473A1F] px-6 py-5">
                 <p className="text-[18px] leading-5.5">Sample project</p>
@@ -240,10 +243,10 @@ export function AgenciesPage() {
               ))}
             </div>
           </div>
-          <div className="flex w-140 shrink-0 mobile:h-auto mobile:w-full flex-col justify-between bg-[#EEE8DC] p-10">
+          <div className="flex w-140 shrink-0 mobile:h-auto mobile:w-full flex-col justify-between bg-[#EEE8DC] p-10 mobile:p-[22px]">
             <p className="text-[15px] leading-4.5 text-[#3D6A5E]">04 · Teams</p>
             <div className="flex flex-col gap-4.5">
-              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">
+              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em] mobile:text-[28px] mobile:leading-8">
                 One project, not three versions of it
               </h3>
               <p className="text-[17px] leading-6.5 text-[#3D6A5E]">
@@ -265,7 +268,7 @@ export function AgenciesPage() {
           <div className={`flex items-end justify-between gap-10 ${mobile.row}`}>
             <div className="flex w-180 shrink-0 flex-col gap-4.5 mobile:w-auto">
               <p className="text-[15px] leading-4.5 opacity-80">05 · Confidentiality</p>
-              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em]">
+              <h3 className="text-[40px] leading-11.5 tracking-[-0.025em] mobile:text-[28px] mobile:leading-8">
                 Your client&apos;s data stays your client&apos;s data
               </h3>
             </div>
@@ -297,14 +300,20 @@ export function AgenciesPage() {
           </div>
           <div className="hidden mobile:-mx-5 mobile:block">
             <SwipeRow tone="cream">
-              <div className="flex min-h-[220px] flex-col justify-between gap-8 border border-[#F9F4EB33] p-5">
+              <div className="flex flex-col gap-3 border border-[#F9F4EB] p-5">
+                <span className="flex size-10 items-center justify-center border border-[#F9F4EB] text-[16px]">
+                  E
+                </span>
                 <h4 className="text-[24px] leading-7 tracking-[-0.02em]">Encrypted at rest</h4>
                 <p className="text-[16px] leading-6 opacity-80">
                   Uploaded files and outputs are encrypted at rest with AES-256 and in transit over
                   HTTPS.
                 </p>
               </div>
-              <div className="flex min-h-[220px] flex-col justify-between gap-8 border border-[#F9F4EB33] p-5">
+              <div className="flex flex-col gap-3 border border-[#F9F4EB] p-5">
+                <span className="flex size-10 items-center justify-center border border-[#F9F4EB] text-[16px]">
+                  P
+                </span>
                 <h4 className="text-[24px] leading-7 tracking-[-0.02em]">
                   Your clients&apos; data stays private
                 </h4>
@@ -349,11 +358,8 @@ export function AgenciesPage() {
               'Excel, PowerPoint, and a Word methodology document come out. Nothing is locked to a private format.',
             ],
           ].map(([index, title, body]) => (
-            <div
-              key={index}
-              className="flex grow basis-0 flex-col gap-3.5 mobile:flex-row mobile:items-start mobile:gap-4"
-            >
-              <p className="text-[88px] leading-22 tracking-[-0.05em] mobile:w-16 mobile:shrink-0 mobile:text-[52px] mobile:leading-none">
+            <div key={index} className="flex grow basis-0 flex-col gap-3.5 mobile:gap-2">
+              <p className="text-[88px] leading-22 tracking-[-0.05em] mobile:text-[60px] mobile:leading-none">
                 {index}
               </p>
               <div className="flex flex-col gap-3.5">
@@ -387,12 +393,12 @@ export function AgenciesPage() {
               Bring a live study, tell us what slows you down, and we&apos;ll build it with you.
             </h2>
             <div className="flex items-center justify-between gap-8 mobile:flex-col mobile:items-start">
-              <p className="text-[16px] leading-5.5 text-[#3D6A5E]">
+              <p className="text-[16px] leading-5.5 text-[#3D6A5E] mobile:text-[22px] mobile:leading-7">
                 A working session on your file, and a direct line when you book the demo.
               </p>
               <Link
                 href="/demo"
-                className="shrink-0 border-b border-[#14473A] pb-0.5 text-[16px] leading-5"
+                className="shrink-0 border-b border-[#14473A] pb-0.5 text-[16px] leading-5 mobile:flex mobile:h-[52px] mobile:w-full mobile:items-center mobile:justify-center mobile:border mobile:border-[#14473A] mobile:pb-0"
               >
                 Apply to join →
               </Link>

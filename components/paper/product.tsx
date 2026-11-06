@@ -63,16 +63,20 @@ function PaperScreen({
   src,
   caption,
   mobile,
+  stage,
 }: {
   src: string;
   caption: string;
   mobile: ReactNode;
+  stage: string;
 }) {
   return (
-    <figure className="overflow-hidden rounded-[12px] border border-[#14473A33] bg-white">
+    <figure className="overflow-hidden rounded-[12px] border border-[#14473A33] bg-white mobile:-mx-5 mobile:rounded-none mobile:border-0">
       <img src={src} alt="" className="block w-full mobile:hidden" />
-      <div className="hidden bg-[#F1F1EE] p-3 mobile:block">{mobile}</div>
-      <figcaption className="bg-[#EEE8DC] px-5 py-3 text-[15px] leading-5 text-[#3D6A5E]">
+      <div className="hidden px-4 py-4 mobile:block" style={{ backgroundColor: stage }}>
+        {mobile}
+      </div>
+      <figcaption className="bg-[#EEE8DC] px-5 py-3 text-[15px] leading-5 text-[#3D6A5E] mobile:hidden">
         {caption}
       </figcaption>
     </figure>
@@ -113,16 +117,18 @@ function WorkspaceFrame() {
 
 function FeatureRow({ items }: { items: readonly [string, string][] }) {
   return (
-    <div className="flex flex-wrap gap-10 mobile:flex-col mobile:gap-8">
+    <div className="flex flex-wrap gap-10 mobile:flex-col mobile:gap-0">
       {items.map(([title, body]) => (
         <div
           key={title}
-          className="flex min-w-[260px] grow basis-0 flex-col gap-3 border-t border-[#14473A33] pt-5 mobile:min-w-0 mobile:basis-auto"
+          className="flex min-w-[260px] grow basis-0 flex-col gap-3 border-t border-[#14473A33] pt-5 mobile:min-w-0 mobile:basis-auto mobile:gap-1 mobile:py-3 mobile:pt-3"
         >
-          <h3 className="text-[30px] leading-9 tracking-[-0.02em] text-[#14473A] mobile:text-[24px] mobile:leading-8">
+          <h3 className="text-[30px] leading-9 tracking-[-0.02em] text-[#14473A] mobile:text-[17px] mobile:leading-6">
             {title}
           </h3>
-          <p className="text-[18px] leading-6.75 text-[#3D6A5E]">{body}</p>
+          <p className="text-[18px] leading-6.75 text-[#3D6A5E] mobile:text-[15px] mobile:leading-5">
+            {body}
+          </p>
         </div>
       ))}
     </div>
@@ -221,6 +227,7 @@ export function ProductPage() {
         <PaperScreen
           src="/paper/product/4a-responses.png"
           caption="Responses, in a sample project."
+          stage="#7895A8"
           mobile={<ResponsesPhone />}
         />
       </section>
@@ -239,6 +246,7 @@ export function ProductPage() {
         <PaperScreen
           src="/paper/product/4g-themes.png"
           caption="Themes, in a sample project."
+          stage="#C9B48F"
           mobile={<ThemesPhone />}
         />
       </section>
@@ -358,6 +366,7 @@ export function ProductPage() {
         <PaperScreen
           src="/paper/product/5-tables.png"
           caption="Tables, in a sample project."
+          stage="#5E8A74"
           mobile={<TablesPhone />}
         />
       </section>
@@ -375,19 +384,24 @@ export function ProductPage() {
         </div>
       </section>
 
-      <section className={`flex flex-col gap-12 px-10 pb-30 ${mobile.section}`}>
+      <section
+        className={`flex flex-col gap-12 px-10 pb-30 mobile:bg-[#14473A] mobile:text-[#F9F4EB] mobile:[&>div:first-child]:border-[#F9F4EB] ${mobile.section}`}
+      >
         <SectionRule left="06 · Traceability" right="Check anything" />
         <div className={`flex items-end justify-between gap-10 ${mobile.row}`}>
           <h2 className={`w-205 shrink-0 text-[56px] leading-14.5 tracking-[-0.04em] ${mobile.h2}`}>
             Open a cell. See the people.
           </h2>
-          <p className={`w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E] ${mobile.lede}`}>
+          <p
+            className={`w-105 shrink-0 text-[18px] leading-6.75 text-[#3D6A5E] mobile:text-[#D5E4DC] ${mobile.lede}`}
+          >
             Click any cell and see the respondents, rows, weight and test that produced it.
           </p>
         </div>
         <PaperScreen
           src="/paper/product/4c-evidence.png"
           caption="Evidence, in a sample project."
+          stage="#0E3329"
           mobile={<EvidencePhone />}
         />
       </section>

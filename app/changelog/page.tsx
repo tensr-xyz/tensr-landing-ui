@@ -50,15 +50,24 @@ export default function ChangelogPage() {
             const MDX = entry.body;
             const slug = changelogSlug(entry);
             return (
-              <li key={slug} id={slug} className="border-t border-[#14473A] py-8">
+              <li
+                key={slug}
+                id={slug}
+                className="relative border-t border-[#14473A] py-8 mobile:ml-3 mobile:border-t-0 mobile:border-l mobile:border-[#14473A33] mobile:py-6 mobile:pl-6"
+              >
+                <span className="absolute top-8 -left-[5px] hidden size-2.5 rounded-full bg-[#14473A] mobile:block" />
                 <p className="text-[15px] leading-5 text-[#3D6A5E]">
                   <time dateTime={entry.date}>{formatDate(entry.date)}</time>
-                  <span className="px-3">·</span>v{entry.version}
+                  <span className="px-3 mobile:hidden">·</span>
+                  <span className="mobile:hidden">v{entry.version}</span>
+                  <span className="ml-3 hidden border border-[#14473A] px-2 py-0.5 font-mono text-[13px] leading-4 text-[#14473A] mobile:inline-flex">
+                    v{entry.version}
+                  </span>
                 </p>
-                <h2 className={`mt-3 text-[32px] leading-10 tracking-[-0.03em] ${mobile.h2}`}>
+                <h2 className="mt-3 text-[32px] leading-10 tracking-[-0.03em] mobile:text-[22px] mobile:leading-7">
                   {entry.title}
                 </h2>
-                <div className="mt-4 max-w-[760px] text-[17px] leading-7 text-[#3D6A5E]">
+                <div className="mt-4 max-w-[760px] text-[17px] leading-7 text-[#3D6A5E] mobile:[&_li]:mt-2 mobile:[&_ul]:list-disc mobile:[&_ul]:space-y-2 mobile:[&_ul]:pl-5">
                   <MDX />
                 </div>
               </li>

@@ -35,7 +35,7 @@ export default async function Page(props: DocsRouteProps) {
   }
 
   return (
-    <article className="max-w-[760px] pb-16">
+    <article className="max-w-[760px] pb-16 mobile:pb-2">
       <h1 className="text-[48px] leading-none tracking-[-0.04em] mobile:text-[44px] mobile:leading-[46px] mobile:tracking-[-0.045em]">
         {page.data.title}
       </h1>
@@ -52,7 +52,7 @@ export default async function Page(props: DocsRouteProps) {
           Edit on GitHub
         </a>
       </p>
-      <div className="mt-8 flex flex-col gap-4 text-[17px] leading-7 text-[#3D6A5E] [&_a]:text-[#14473A] [&_a]:underline [&_h2]:mt-8 [&_h2]:text-[28px] [&_h2]:leading-9 [&_h2]:text-[#14473A] [&_li]:ml-5 [&_li]:list-disc [&_pre]:overflow-auto [&_pre]:bg-[#EEE8DC] [&_pre]:p-4">
+      <div className="mt-8 flex flex-col gap-4 text-[17px] leading-7 text-[#3D6A5E] [&_a]:text-[#14473A] [&_a]:underline [&_h2]:mt-8 [&_h2]:text-[28px] [&_h2]:leading-9 [&_h2]:text-[#14473A] [&_li]:ml-5 [&_li]:list-disc [&_pre]:overflow-auto [&_pre]:bg-[#EEE8DC] [&_pre]:p-4 mobile:[&_h2]:text-[22px] mobile:[&_h2]:leading-7 mobile:[&_h2]:no-underline mobile:[&_pre]:overflow-x-hidden mobile:[&_pre]:bg-[#14473A] mobile:[&_pre]:whitespace-pre-wrap mobile:[&_pre]:text-[#F9F4EB] mobile:[&_pre]:[overflow-wrap:anywhere]">
         <MDX
           components={getMDXComponents({
             a: createRelativeLink(source, page),

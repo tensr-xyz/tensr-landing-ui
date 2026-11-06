@@ -20,3 +20,34 @@
   flex-shrink: 0;
   white-space: nowrap;
 }
+
+@media (max-width: 800px) {
+  .paper-site .fd-steps {
+    margin-inline-start: 18px;
+    border-color: #14473a33;
+  }
+
+  .paper-site .fd-step::before {
+    background: #14473a;
+    color: #f9f4eb;
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .paper-site .fd-step :is(h2, h3) {
+    font-size: 22px;
+    line-height: 28px;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .paper-site div.my-4.rounded-xl.border.bg-fd-card {
+    background: #eee8dc;
+    color: #14473a;
+    border: 0;
+    border-left: 4px solid #c9b48f;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

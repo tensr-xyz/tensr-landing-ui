@@ -348,7 +348,9 @@ export function LandingPage() {
 
       <section className={`flex flex-col gap-14 px-10 pt-10 pb-24 ${mobile.section} mobile:pt-0`}>
         <SectionRule left="Works with your stack" />
-        <h2 className={`text-center text-[52px] leading-14.5 tracking-[-0.035em] ${mobile.h2}`}>
+        <h2
+          className={`text-center text-[52px] leading-14.5 tracking-[-0.035em] mobile:text-left ${mobile.h2}`}
+        >
           Bring your data
           <br />
           from anywhere
@@ -420,7 +422,7 @@ export function LandingPage() {
           {steps.map(([index, title, body]) => (
             <div
               key={index}
-              className="flex grow basis-0 flex-col gap-3.5 mobile:flex-row mobile:items-start mobile:gap-4"
+              className="flex grow basis-0 flex-col gap-3.5 mobile:flex-row mobile:items-start mobile:gap-4 mobile:border-t mobile:border-[#14473A33] mobile:pt-6 mobile:first:border-t-0 mobile:first:pt-0"
             >
               <p className="text-[88px] leading-22 tracking-[-0.05em] mobile:w-16 mobile:shrink-0 mobile:text-[52px] mobile:leading-none">
                 {index}
@@ -478,11 +480,11 @@ export function LandingPage() {
           ].map(([kicker, title, body, card, kickerClass]) => (
             <div
               key={title}
-              className={`flex h-75 grow basis-0 flex-col justify-between p-7 ${card} ${mobile.card}`}
+              className={`flex h-75 grow basis-0 flex-col justify-between p-7 mobile:p-[22px] ${card} ${mobile.card}`}
             >
               <p className={`text-[15px] leading-4.5 ${kickerClass}`}>{kicker}</p>
               <div className="flex flex-col gap-2.5">
-                <p className="text-[72px] leading-18 tracking-[-0.05em] mobile:text-[40px] mobile:leading-none">
+                <p className="text-[72px] leading-18 tracking-[-0.05em] mobile:text-[52px] mobile:leading-none">
                   {title}
                 </p>
                 <p className="text-[16px] leading-5.75">{body}</p>
@@ -506,14 +508,16 @@ export function LandingPage() {
           {uses.map(([index, title, body, dark]) => (
             <div
               key={index}
-              className={`flex w-[calc(33.33%-6px)] flex-col gap-3.5 px-7 pt-7 pb-8 mobile:w-full ${dark ? 'bg-[#14473A] text-[#F9F4EB]' : 'bg-[#EEE8DC]'}`}
+              className={`flex w-[calc(33.33%-6px)] flex-col gap-3.5 px-7 pt-7 pb-8 mobile:w-full mobile:px-5 mobile:pt-5 mobile:pb-[22px] ${dark ? 'bg-[#14473A] text-[#F9F4EB]' : 'bg-[#EEE8DC]'}`}
             >
               <p
                 className={`text-[15px] leading-4.5 ${dark ? 'text-[#F9F4EB]/80' : 'text-[#3D6A5E]'}`}
               >
                 {index}
               </p>
-              <p className="text-[30px] leading-9 tracking-[-0.02em]">{title}</p>
+              <p className="text-[30px] leading-9 tracking-[-0.02em] mobile:text-[24px] mobile:leading-7">
+                {title}
+              </p>
               <p
                 className={`text-[16px] leading-6 ${dark ? 'text-[#F9F4EB]/85' : 'text-[#3D6A5E]'}`}
               >
@@ -557,7 +561,10 @@ export function LandingPage() {
                 'Excel or PowerPoint. Open a cell to see the respondents behind it.',
               ],
             ].map(([index, title, body]) => (
-              <li key={index} className="flex gap-6">
+              <li
+                key={index}
+                className="flex gap-6 mobile:border-t mobile:border-[#14473A33] mobile:pt-4 mobile:first:border-t-0 mobile:first:pt-0"
+              >
                 <p className="w-10 shrink-0 text-[15px] leading-5.5 text-[#3D6A5E]">{index}</p>
                 <div>
                   <p className="text-[22px] leading-7">{title}</p>
@@ -626,26 +633,43 @@ export function LandingPage() {
             </div>
           ))}
         </div>
-        <div className="hidden flex-col mobile:flex">
+        <div className="hidden grid-cols-2 gap-2 mobile:grid">
           {[
-            ['At rest', 'AES-256', 'Every dataset is encrypted where it is stored.'],
-            ['In transit', 'HTTPS', 'Files and results only move over encrypted connections.'],
-            ['Training', 'Private', 'Tensr never trains models on your data.'],
+            [
+              'At rest',
+              'AES-256',
+              'Every dataset is encrypted where it is stored.',
+              'bg-[#14473A] text-[#F9F4EB]',
+              'text-[#F9F4EB]/80',
+            ],
+            [
+              'In transit',
+              'HTTPS',
+              'Files and results only move over encrypted connections.',
+              'bg-[#EEE8DC]',
+              'text-[#3D6A5E]',
+            ],
+            [
+              'Training',
+              'Private',
+              'Tensr never trains models on your data.',
+              'bg-[#EEE8DC]',
+              'text-[#3D6A5E]',
+            ],
             [
               'Team sign-in',
               'By code',
               'Team workspaces sign in with an emailed one-time code, or Google, Microsoft or GitHub. SSO is on the roadmap.',
+              'bg-[#C9B48F]',
+              'text-[#14473A]',
             ],
-          ].map(([kicker, title, body]) => (
-            <div
-              key={title}
-              className="grid grid-cols-[122px_1fr] gap-4 border-t border-[#14473A33] py-4"
-            >
+          ].map(([kicker, title, body, card, kickerClass]) => (
+            <div key={title} className={`flex min-h-[150px] flex-col justify-between p-4 ${card}`}>
+              <p className={`text-[13px] leading-4 ${kickerClass}`}>{kicker}</p>
               <div>
-                <p className="text-[13px] leading-4 text-[#3D6A5E]">{kicker}</p>
-                <p className="text-[22px] leading-7 tracking-[-0.03em]">{title}</p>
+                <p className="text-[26px] leading-8 tracking-[-0.03em]">{title}</p>
+                <p className={`mt-1 text-[14px] leading-5 ${kickerClass}`}>{body}</p>
               </div>
-              <p className="text-[15px] leading-5 text-[#3D6A5E]">{body}</p>
             </div>
           ))}
         </div>
@@ -684,7 +708,7 @@ export function LandingPage() {
           ))}
         </div>
         <div className="hidden mobile:-mx-5 mobile:block">
-          <SwipeRow>
+          <SwipeRow pager={false}>
             {releases.map(([date, version, title, body]) => (
               <Link
                 key={version}
@@ -702,6 +726,12 @@ export function LandingPage() {
               </Link>
             ))}
           </SwipeRow>
+          <Link
+            href="/changelog"
+            className="mx-5 mt-4 flex h-[52px] items-center justify-center border border-[#14473A] text-[17px] leading-5.5"
+          >
+            See all releases
+          </Link>
         </div>
       </section>
 

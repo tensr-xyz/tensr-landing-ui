@@ -195,13 +195,13 @@ export function IntegrationsPage() {
               key={card.title}
               className="flex flex-col justify-between gap-4 bg-[#EEE8DC] p-4"
             >
-              <div className="flex items-start justify-between gap-2">
+              <div className="flex flex-col items-start gap-2">
                 <div
                   className={`flex size-10 shrink-0 items-center justify-center text-[15px] font-semibold ${card.markClass}`}
                 >
                   {card.mark}
                 </div>
-                <p className="rounded-[999px] border border-[#14473A] px-2 py-1 text-[12px] leading-4">
+                <p className="rounded-[999px] border border-[#14473A] px-2 py-1 text-[12px] leading-4 whitespace-nowrap">
                   {card.badge}
                 </p>
               </div>
@@ -311,13 +311,15 @@ export function IntegrationsPage() {
                 'text-[#3D6A5E]',
               ],
             ].map(([kicker, title, body, card, kickerClass, bodyClass]) => (
-              <article
-                key={title}
-                className={`flex min-h-[240px] flex-col justify-between p-5 ${card}`}
-              >
-                <p className={`text-[15px] leading-4.5 ${kickerClass}`}>{kicker}</p>
+              <article key={title} className={`flex flex-col gap-4 p-5 ${card}`}>
+                <span
+                  className={`flex size-10 items-center justify-center border text-[14px] leading-4 ${kickerClass}`}
+                >
+                  {kicker.slice(0, 1)}
+                </span>
                 <div>
-                  <h3 className="text-[28px] leading-8 tracking-[-0.03em]">{title}</h3>
+                  <p className={`text-[15px] leading-4.5 ${kickerClass}`}>{kicker}</p>
+                  <h3 className="mt-2 text-[28px] leading-8 tracking-[-0.03em]">{title}</h3>
                   <p className={`mt-2 text-[15px] leading-5 ${bodyClass}`}>{body}</p>
                 </div>
               </article>

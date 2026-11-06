@@ -101,11 +101,14 @@ export default function SecurityPage() {
         {blocks.map(block => (
           <article
             key={block.kicker}
-            className="grid grid-cols-[280px_1fr] gap-10 border-t border-[#14473A] py-8 mobile:grid-cols-1 mobile:gap-3 mobile:py-6"
+            className="grid grid-cols-[280px_1fr] gap-10 border-t border-[#14473A] py-8 mobile:grid-cols-1 mobile:gap-4 mobile:py-6"
           >
-            <p className="text-[15px] leading-5 text-[#3D6A5E]">{block.kicker}</p>
+            <p className="text-[15px] leading-5 text-[#3D6A5E] mobile:hidden">{block.kicker}</p>
+            <p className="hidden size-11 items-center justify-center border border-[#14473A] text-[16px] mobile:flex">
+              {block.kicker.slice(0, 1)}
+            </p>
             <div>
-              <h2 className={`text-[32px] leading-10 tracking-[-0.03em] ${mobile.h2}`}>
+              <h2 className="text-[32px] leading-10 tracking-[-0.03em] mobile:text-[24px] mobile:leading-8">
                 {block.title}
               </h2>
               <p className="mt-3 max-w-[720px] text-[17px] leading-7 text-[#3D6A5E]">

@@ -226,8 +226,10 @@
   --color-fd-diff-add-symbol: rgb(10, 200, 100);
 }
 
-* {
-  border-color: var(--border-default);
+@layer base {
+  * {
+    border-color: var(--border-default);
+  }
 }
 
 html {

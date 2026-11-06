@@ -35,7 +35,10 @@ export function PaperPage({
   return (
     <div className="min-h-screen bg-[#F9F4EB] text-[#14473A] antialiased">
       <header className="mx-auto flex h-16 max-w-[1120px] items-center justify-between px-8">
-        <Link href="/" className="flex items-center gap-2 text-[22px] font-semibold tracking-[-0.04em]">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-[22px] font-semibold tracking-[-0.04em]"
+        >
           <Mark />
           tensr
         </Link>
@@ -47,7 +50,7 @@ export function PaperPage({
           ))}
         </nav>
         <div className="flex items-center gap-3 text-[14px]">
-          <Link href="/signin">Sign in</Link>
+          <Link href="https://app.tensr.xyz/login">Sign in</Link>
           <Link href="/demo" className="rounded-full bg-[#14473A] px-3 py-1.5 text-[#F9F4EB]">
             Book a demo
           </Link>

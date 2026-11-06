@@ -139,13 +139,13 @@ export function PaperFooter() {
         </div>
         <div className="contents mobile:grid mobile:w-full mobile:grid-cols-2 mobile:gap-x-4 mobile:gap-y-8">
           {footerColumns.map(column => (
-            <div key={column.title} className="flex grow basis-0 flex-col gap-2.5">
+            <div key={column.title} className="flex grow basis-0 flex-col gap-2.5 mobile:gap-0">
               <p className="pb-1 text-[15px] leading-4.5 text-[#3D6A5E]">{column.title}</p>
               {column.links.map(link => (
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="text-[15px] leading-4.5 mobile:inline-flex mobile:min-h-11 mobile:items-center"
+                  className="text-[15px] leading-4.5 mobile:inline-flex mobile:h-8 mobile:items-center"
                 >
                   {link.label}
                 </Link>
@@ -177,7 +177,7 @@ export function AskStrip() {
               {index > 0 ? <span className="text-[#3D6A5E] mobile:hidden">·</span> : null}
               <a
                 href={link.href}
-                className="underline decoration-1 underline-offset-2 mobile:inline-flex mobile:min-h-11 mobile:items-center"
+                className="underline decoration-1 underline-offset-2 mobile:inline-flex mobile:min-h-11 mobile:items-center mobile:border mobile:border-[#14473A] mobile:px-3 mobile:no-underline"
                 target="_blank"
                 rel="noreferrer"
               >
@@ -206,7 +206,7 @@ export function SectionRule({ left, right }: { left: string; right?: string }) {
   return (
     <div className="flex justify-between border-t border-[#14473A] pt-3.5 text-[17px] leading-5.5 mobile:text-[15px] mobile:leading-5">
       <p>{left}</p>
-      <p className="mobile:hidden">{right ?? left}</p>
+      <p className="text-right">{right ?? left}</p>
     </div>
   );
 }

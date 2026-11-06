@@ -1,12 +1,22 @@
 import type { Metadata } from 'next';
-import { CodeForm, PaperStytch } from '@/components/paper/stytch-provider';
+import { redirect } from 'next/navigation';
 
-export const metadata: Metadata = { title: 'Enter code' };
+export const metadata: Metadata = { title: 'Sign in' };
 
-export default function CodePage() {
-  return (
-    <PaperStytch>
-      <CodeForm />
-    </PaperStytch>
-  );
+function queryString(searchParams: Record<string, string | string[] | undefined>) {
+  const query = new URLSearchParams();
+  for (const [key, value] of Object.entries(searchParams)) {
+    if (typeof value === 'string') query.set(key, value);
+    else if (Array.isArray(value)) value.forEach(item => query.append(key, item));
+  }
+  const text = query.toString();
+  return text ? `?${text}` : '';
+}
+
+export default async function SignInCodePage({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>;
+}) {
+  redirect(`https://app.tensr.xyz/login${queryString(await searchParams)}`);
 }
