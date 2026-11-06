@@ -21,6 +21,10 @@ export function SwipeRow({
     const update = () => {
       const slides = Array.from(el.children) as HTMLElement[];
       if (!slides.length) return;
+      if (el.scrollLeft >= el.scrollWidth - el.clientWidth - 2) {
+        setIndex(slides.length - 1);
+        return;
+      }
       const origin = slides[0].offsetLeft;
       let next = 0;
       slides.forEach((slide, i) => {

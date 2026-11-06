@@ -91,7 +91,15 @@ export function DocsFrame({
     <div className="paper-site min-h-screen bg-[#F9F4EB] text-[#14473A] mobile:overflow-x-clip">
       <PaperNav />
       <div className="flex flex-col gap-8 px-5 pb-16 lg:flex-row lg:items-start lg:gap-12 lg:px-10 mobile:px-5">
-        <aside className="max-h-72 overflow-auto border-b border-[#14473A33] pb-4 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:w-64 lg:shrink-0 lg:border-0 lg:pb-0 mobile:max-h-none mobile:overflow-visible">
+        <details className="hidden border-b border-[#14473A33] mobile:block">
+          <summary className="flex min-h-11 cursor-pointer list-none items-center text-[17px] leading-6 [&::-webkit-details-marker]:hidden">
+            Contents
+          </summary>
+          <div className="pb-3">
+            <DocsLinks nodes={tree.children} />
+          </div>
+        </details>
+        <aside className="max-h-72 overflow-auto border-b border-[#14473A33] pb-4 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:w-64 lg:shrink-0 lg:border-0 lg:pb-0 mobile:hidden">
           <p className="px-3 pb-2 text-[13px] leading-4 text-[#3D6A5E]">Docs</p>
           <DocsLinks nodes={tree.children} />
         </aside>
