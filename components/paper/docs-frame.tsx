@@ -90,7 +90,7 @@ export function DocsFrame({
   return (
     <div className="paper-site min-h-screen bg-[#F9F4EB] text-[#14473A] mobile:overflow-x-clip">
       <PaperNav />
-      <div className="flex flex-col gap-8 px-5 pb-16 lg:flex-row lg:items-start lg:gap-12 lg:px-10 mobile:px-5">
+      <div className="flex flex-col gap-8 px-5 pb-16 lg:flex-row lg:items-start lg:gap-12 lg:px-10 mobile:gap-4 mobile:px-5 mobile:pb-2">
         <details className="hidden border-b border-[#14473A33] mobile:block">
           <summary className="flex min-h-11 cursor-pointer list-none items-center text-[17px] leading-6 [&::-webkit-details-marker]:hidden">
             Contents

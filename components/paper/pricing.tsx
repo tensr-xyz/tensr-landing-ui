@@ -109,7 +109,7 @@ export function PricingPage() {
       <section className={`flex flex-col gap-4 px-10 pb-20 ${mobile.section}`}>
         <div className="flex items-center justify-between gap-10 border border-[#14473A] px-9 py-7 mobile:flex-col mobile:items-stretch mobile:gap-6 mobile:px-5">
           <div className="flex items-center gap-10 mobile:flex-col mobile:items-start mobile:gap-5">
-            <div>
+            <div className="mobile:w-full mobile:border-b mobile:border-[#14473A33] mobile:pb-4">
               <p className="text-[30px] leading-9 tracking-[-0.02em]">Trial</p>
               <p className="text-[15px] leading-5 text-[#3D6A5E]">
                 £0 for 30 days · no card needed
@@ -181,30 +181,39 @@ export function PricingPage() {
               return (
                 <article
                   key={plan.name}
-                  className="flex min-h-[420px] flex-col gap-5 bg-[#EEE8DC] p-5"
+                  className={`flex min-h-[420px] w-[324px] max-w-full flex-col gap-4 p-5 ${plan.name === 'Pro+' ? 'bg-[#14473A] text-[#F9F4EB]' : 'bg-[#EEE8DC]'}`}
                 >
                   <div>
                     <h2 className="text-[28px] leading-8 tracking-[-0.02em]">{plan.name}</h2>
                     <p className="mt-3 text-[52px] leading-none tracking-[-0.04em]">
                       £{price}
-                      <span className="text-[16px] tracking-normal text-[#3D6A5E]">
+                      <span
+                        className={`text-[16px] tracking-normal ${plan.name === 'Pro+' ? 'text-[#D5E4DC]' : 'text-[#3D6A5E]'}`}
+                      >
                         {plan.perSeat ? ' / seat' : ''}
                       </span>
                     </p>
-                    <p className="mt-2 text-[15px] leading-5 text-[#3D6A5E]">
+                    <p
+                      className={`mt-2 text-[15px] leading-5 ${plan.name === 'Pro+' ? 'text-[#D5E4DC]' : 'text-[#3D6A5E]'}`}
+                    >
                       {annual
                         ? `£${plan.year}${plan.perSeat ? ' a seat' : ''} billed annually`
                         : 'Billed monthly'}
                     </p>
                   </div>
-                  <ul className="flex flex-col gap-2 text-[15px] leading-5 text-[#3D6A5E]">
+                  <div
+                    className={`border-t ${plan.name === 'Pro+' ? 'border-[#F9F4EB33]' : 'border-[#14473A33]'}`}
+                  />
+                  <ul
+                    className={`flex flex-col gap-2 text-[15px] leading-5 ${plan.name === 'Pro+' ? 'text-[#F9F4EB]' : 'text-[#3D6A5E]'}`}
+                  >
                     {plan.lines.map(line => (
-                      <li key={line}>{line}</li>
+                      <li key={line}>✓ {line}</li>
                     ))}
                   </ul>
                   <Link
                     href={APP_LOGIN}
-                    className="mt-auto flex h-14 items-center justify-center bg-[#14473A] text-[17px] leading-5.5 text-[#F9F4EB]"
+                    className={`mt-auto flex h-14 items-center justify-center border text-[17px] leading-5.5 ${plan.name === 'Pro+' ? 'border-[#F9F4EB] text-[#F9F4EB]' : 'border-[#14473A]'}`}
                   >
                     Get started
                   </Link>
@@ -214,17 +223,17 @@ export function PricingPage() {
           </SwipeRow>
         </div>
 
-        <div className="flex items-center justify-between bg-[#14473A] px-9 py-7 text-[#F9F4EB] mobile:flex-col mobile:items-stretch mobile:gap-5 mobile:px-5">
+        <div className="flex items-center justify-between bg-[#14473A] px-9 py-7 text-[#F9F4EB] mobile:flex-col mobile:items-stretch mobile:gap-5 mobile:bg-[#C9B48F] mobile:px-5 mobile:text-[#14473A]">
           <div>
             <p className="text-[30px] leading-9 tracking-[-0.02em]">Agencies</p>
-            <p className="text-[16px] leading-6 text-[#BFD3C8]">
+            <p className="text-[16px] leading-6 text-[#BFD3C8] mobile:text-[#3D6A5E]">
               Bigger teams, procurement paperwork or questions about data and security. Email
               help@tensr.xyz and we&apos;ll scope it around how you work.
             </p>
           </div>
           <Link
             href="/demo"
-            className="border border-[#F9F4EB] px-6 py-3 text-center text-[17px] leading-5.5 mobile:flex mobile:h-[52px] mobile:items-center mobile:justify-center"
+            className="border border-[#F9F4EB] px-6 py-3 text-center text-[17px] leading-5.5 mobile:flex mobile:h-14 mobile:items-center mobile:justify-center mobile:border-0 mobile:bg-[#14473A] mobile:text-[#F9F4EB]"
           >
             Talk to us
           </Link>
@@ -240,8 +249,8 @@ export function PricingPage() {
           The analysis is the same on every plan. The difference is how much you use the agent, and
           working as a team.
         </p>
-        <div className="border-t border-[#14473A]">
-          <div className="grid grid-cols-4 py-3 text-[15px] leading-5 text-[#3D6A5E] mobile:grid-cols-[minmax(0,1.35fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_minmax(0,1fr)] mobile:py-2 mobile:text-[12px] mobile:leading-4">
+        <div className="border-t border-[#14473A] mobile:hidden">
+          <div className="grid grid-cols-4 py-3 text-[15px] leading-5 text-[#3D6A5E]">
             <span />
             <span>Pro</span>
             <span>Pro+</span>
@@ -250,12 +259,29 @@ export function PricingPage() {
           {rows.map(row => (
             <div
               key={row.feature}
-              className="grid grid-cols-4 border-t border-[#14473A33] py-4 text-[16px] leading-6 mobile:grid-cols-[minmax(0,1.35fr)_minmax(0,0.8fr)_minmax(0,0.8fr)_minmax(0,1fr)] mobile:py-3 mobile:text-[12px] mobile:leading-4"
+              className="grid grid-cols-4 border-t border-[#14473A33] py-4 text-[16px] leading-6"
             >
-              <span className="mobile:pr-2">{row.feature}</span>
+              <span>{row.feature}</span>
               <span>{row.pro}</span>
               <span>{row.plus}</span>
               <span>{row.teams}</span>
+            </div>
+          ))}
+        </div>
+        <div className="hidden border-t border-[#14473A] mobile:block">
+          <div className="grid grid-cols-3 py-3 text-[13px] leading-4 text-[#3D6A5E]">
+            <span>Pro</span>
+            <span>Pro+</span>
+            <span>Teams</span>
+          </div>
+          {rows.map(row => (
+            <div key={row.feature} className="border-t border-[#14473A33] py-3">
+              <p className="mb-2 text-[15px] leading-5">{row.feature}</p>
+              <div className="grid grid-cols-3 text-[15px] leading-5">
+                <span>{row.pro}</span>
+                <span>{row.plus}</span>
+                <span>{row.teams}</span>
+              </div>
             </div>
           ))}
         </div>
@@ -291,7 +317,9 @@ export function PricingPage() {
           ],
         ].map(([q, a]) => (
           <div key={q} className="border-t border-[#14473A] pt-4">
-            <h3 className="text-[24px] leading-8 tracking-[-0.02em]">{q}</h3>
+            <h3 className="text-[24px] leading-8 tracking-[-0.02em] mobile:text-[20px] mobile:leading-7">
+              {q}
+            </h3>
             <p className="mt-2 max-w-[720px] text-[17px] leading-6.5 text-[#3D6A5E]">{a}</p>
           </div>
         ))}

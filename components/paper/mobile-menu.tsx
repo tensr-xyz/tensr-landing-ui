@@ -52,7 +52,7 @@ export function MobileMenu() {
     <>
       <div className="hidden items-center gap-1 mobile:flex">
         <Link
-          href="/signin"
+          href={APP_LOGIN}
           className="inline-flex min-h-11 items-center px-2.5 text-[15px] leading-5"
         >
           Sign in
@@ -126,7 +126,7 @@ export function MobileMenu() {
             </Link>
             <div className="grid grid-cols-2 gap-2">
               <Link
-                href="/signin"
+                href={APP_LOGIN}
                 className="flex h-[52px] items-center justify-center border border-[#14473A] text-[17px] leading-5.5"
               >
                 Sign in

@@ -5,9 +5,11 @@ import { Children, useEffect, useRef, useState, type ReactNode } from 'react';
 export function SwipeRow({
   children,
   tone = 'ink',
+  pager = true,
 }: {
   children: ReactNode;
   tone?: 'ink' | 'cream';
+  pager?: boolean;
 }) {
   const scroller = useRef<HTMLDivElement>(null);
   const items = Children.toArray(children);
@@ -50,21 +52,23 @@ export function SwipeRow({
         style={{ scrollPaddingLeft: 20 }}
       >
         {items.map((item, i) => (
-          <div key={i} className="w-[calc(100%-74px)] shrink-0 snap-start [&>*]:h-full">
+          <div key={i} className="w-[min(316px,calc(100%-44px))] shrink-0 snap-start [&>*]:h-full">
             {item}
           </div>
         ))}
       </div>
-      <div className="mt-4 flex items-center justify-between px-5">
-        <div className="flex items-center gap-1.5" aria-hidden="true">
-          {items.map((_, i) => (
-            <span key={i} className={`h-1 ${i === index ? `w-[22px] ${on}` : `w-2 ${off}`}`} />
-          ))}
+      {pager ? (
+        <div className="mt-4 flex items-center justify-between px-5">
+          <div className="flex items-center gap-1.5" aria-hidden="true">
+            {items.map((_, i) => (
+              <span key={i} className={`h-1 ${i === index ? `w-[22px] ${on}` : `w-2 ${off}`}`} />
+            ))}
+          </div>
+          <p className={`text-[13px] leading-4 ${label}`} aria-live="polite">
+            Swipe · {count === 0 ? 0 : index + 1} of {count}
+          </p>
         </div>
-        <p className={`text-[13px] leading-4 ${label}`} aria-live="polite">
-          Swipe · {count === 0 ? 0 : index + 1} of {count}
-        </p>
-      </div>
+      ) : null}
     </div>
   );
 }

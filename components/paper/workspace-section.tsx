@@ -7,13 +7,15 @@ export function WorkspaceSection() {
         <div className="text-[17px] leading-5.5 text-[#14473A] mobile:text-[15px] mobile:leading-5">
           The workspace
         </div>
-        <div className="text-[17px] leading-5.5 text-[#14473A] mobile:hidden">The workspace</div>
+        <div className="text-[17px] leading-5.5 text-[#14473A] mobile:text-[15px] mobile:leading-5">
+          The workspace
+        </div>
       </div>
       <div className="flex flex-wrap items-end justify-between gap-4 mobile:flex-col mobile:items-stretch">
         <div className="text-[56px] leading-14.5 tracking-[-0.04em] w-180 shrink-0 text-[#14473A] mobile:w-auto mobile:text-[36px] mobile:leading-[40px] mobile:tracking-[-0.035em]">
           Your whole study in one place, from raw data to the client deck.
         </div>
-        <div className="flex flex-wrap gap-1.5 mobile:gap-2">
+        <div className="flex flex-wrap gap-1.5 mobile:flex-nowrap mobile:gap-2 mobile:overflow-x-auto">
           <div className="py-2.25 px-4 mobile:inline-flex mobile:min-h-11 mobile:items-center border border-solid border-[#14473A]">
             <div className="text-[15px] leading-4.5 text-[#14473A]">Chat</div>
           </div>
@@ -31,7 +33,7 @@ export function WorkspaceSection() {
           </div>
         </div>
       </div>
-      <div className="hidden bg-[#5E8A74] px-4 py-4 mobile:block">
+      <div className="hidden bg-[#5E8A74] px-4 py-4 mobile:-mx-5 mobile:block">
         <MobileWorkspace />
       </div>
       <div className="flex h-175 pt-10 overflow-clip shrink-0 px-10 bg-[#5E8A74] mobile:hidden">

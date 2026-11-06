@@ -56,11 +56,11 @@ export function MobileWorkspace() {
           </div>
           <p className="text-[13px] leading-4 text-[#6A6B66]">Live · 2</p>
         </div>
-        <div className="flex gap-1.5 overflow-hidden px-3.5 pb-2">
-          <span className="rounded-full bg-[#1B1C1A] px-2.5 py-1 text-[12px] leading-4 text-white">
+        <div className="flex gap-1.5 overflow-x-auto px-3.5 pb-2">
+          <span className="shrink-0 rounded-full bg-[#1B1C1A] px-2.5 py-1 text-[12px] leading-4 whitespace-nowrap text-white">
             T1 Unaided awareness
           </span>
-          <span className="rounded-full border border-[#E7E6E1] px-2.5 py-1 text-[12px] leading-4 text-[#6A6B66]">
+          <span className="shrink-0 rounded-full border border-[#E7E6E1] px-2.5 py-1 text-[12px] leading-4 whitespace-nowrap text-[#6A6B66]">
             T2 Prompted awareness
           </span>
         </div>
@@ -81,13 +81,18 @@ export function MobileWorkspace() {
           </div>
         </div>
         <div className="space-y-2 border-t border-[#E7E6E1] px-3.5 py-3 text-[13px] leading-5">
-          <p>
-            <span className="text-[#6A6B66]">Stub </span>region ×{' '}
-            <span className="text-[#9A9A93]">+ Drop variable</span>
-          </p>
-          <p>
-            <span className="text-[#6A6B66]">Banner </span>Wave × Gender × Age band ×
-          </p>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-[#6A6B66]">Stub</span>
+            <span className="rounded-full bg-[#F6F6F3] px-2.5 py-1">region</span>
+          </div>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-[#6A6B66]">Banner</span>
+            {['Wave', 'Gender', 'Age band'].map(chip => (
+              <span key={chip} className="rounded-full bg-[#F6F6F3] px-2.5 py-1">
+                {chip}
+              </span>
+            ))}
+          </div>
           <div className="flex flex-wrap gap-1.5 pt-1">
             {['Column %', 'Sig 95% · A/a letters', 'Weight wt_natrep'].map((chip, index) => (
               <span
@@ -99,8 +104,8 @@ export function MobileWorkspace() {
             ))}
           </div>
         </div>
-        <div className="overflow-x-auto border-t border-[#E7E6E1]">
-          <table className="w-[640px] border-collapse text-[13px] leading-4">
+        <div className="max-w-full overflow-x-auto border-t border-[#E7E6E1]">
+          <table className="w-max min-w-full border-collapse text-[13px] leading-4">
             <thead>
               <tr className="text-[#6A6B66]">
                 <th className="px-3 py-2 text-left font-medium">Region</th>
