@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 @import 'fumadocs-ui/css/preset.css';
 
+/* Mobile layout only. Desktop utilities are unchanged at 1440. */
+@custom-variant mobile (@media (max-width: 800px));
+
 @font-face {
   font-family: 'SuisseIntl';
   src: url('/fonts/suisseIntl/SuisseIntl-Light.woff2') format('woff2');

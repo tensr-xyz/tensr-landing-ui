@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
+import { mobile } from '@/components/paper/mobile';
+import { SwipeRow } from '@/components/paper/swipe-row';
 import { APP_LOGIN, Arrow, PaperShell, SectionRule } from '@/components/paper/shell';
 
 const plans = [
@@ -11,7 +13,15 @@ const plans = [
     annual: 63,
     year: 756,
     perSeat: false,
-    lines: ['For one researcher running their own studies.', '1,200 agent runs a month', '300 reports a month', 'Weighted analysis and sig tests', 'Excel and PowerPoint export', 'Full data provenance', '.sav, .dta and CSV import'],
+    lines: [
+      'For one researcher running their own studies.',
+      '1,200 agent runs a month',
+      '300 reports a month',
+      'Weighted analysis and sig tests',
+      'Excel and PowerPoint export',
+      'Full data provenance',
+      '.sav, .dta and CSV import',
+    ],
   },
   {
     name: 'Pro+',
@@ -19,7 +29,12 @@ const plans = [
     annual: 119,
     year: 1428,
     perSeat: false,
-    lines: ['For researchers who lean on the agent every day.', 'Everything in Pro, plus', '5,000 agent runs a month', '1,200 reports a month'],
+    lines: [
+      'For researchers who lean on the agent every day.',
+      'Everything in Pro, plus',
+      '5,000 agent runs a month',
+      '1,200 reports a month',
+    ],
   },
   {
     name: 'Teams',
@@ -27,7 +42,15 @@ const plans = [
     annual: 95,
     year: 1140,
     perSeat: true,
-    lines: ['For research teams sharing workspaces.', 'Everything in Pro+, plus', '10,000 agent runs a month', '3,000 reports a month', 'Organisation billing and shared seats', 'Shared workspaces and presence', '3-seat minimum, £3,420 a year'],
+    lines: [
+      'For research teams sharing workspaces.',
+      'Everything in Pro+, plus',
+      '10,000 agent runs a month',
+      '3,000 reports a month',
+      'Organisation billing and shared seats',
+      'Shared workspaces and presence',
+      '3-seat minimum, £3,420 a year',
+    ],
   },
 ] as const;
 
@@ -45,38 +68,55 @@ export function PricingPage() {
 
   return (
     <PaperShell>
-      <section className="flex flex-col gap-7 px-10 pb-16 pt-14">
-        <p className="w-fit rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">30-day free trial on every plan</p>
-        <div className="flex items-end justify-between gap-10">
-          <div className="flex flex-col gap-7">
-            <h1 className="whitespace-pre-wrap text-[96px] leading-24 tracking-[-0.045em]">
+      <section className={`flex flex-col gap-7 px-10 pb-16 pt-14 ${mobile.hero}`}>
+        <p className="w-fit rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">
+          30-day free trial on every plan
+        </p>
+        <div className={`flex items-end justify-between gap-10 ${mobile.row}`}>
+          <div className="flex flex-col gap-7 mobile:gap-5">
+            <h1
+              className={`whitespace-pre-wrap text-[96px] leading-24 tracking-[-0.045em] ${mobile.h1}`}
+            >
               Pay per researcher,{'\n'}not per table
             </h1>
-            <p className="w-175 text-[22px] leading-8 text-[#3D6A5E]">
-              Every plan gets weighted tables, banner books, sig testing and the agent. Pick the one that matches how much you lean on it. Prices are in pounds.
+            <p className={`w-175 text-[22px] leading-8 text-[#3D6A5E] ${mobile.lede}`}>
+              Every plan gets weighted tables, banner books, sig testing and the agent. Pick the one
+              that matches how much you lean on it. Prices are in pounds.
             </p>
           </div>
-          <div className="flex shrink-0 items-center gap-1 border border-[#14473A] p-1">
-            <button type="button" onClick={() => setAnnual(false)} className={`px-4.5 py-2.5 text-[16px] leading-5 ${annual ? '' : 'bg-[#14473A] text-[#F9F4EB]'}`}>
+          <div className="flex shrink-0 items-center gap-1 border border-[#14473A] p-1 mobile:w-full">
+            <button
+              type="button"
+              onClick={() => setAnnual(false)}
+              className={`px-4.5 py-2.5 text-[16px] leading-5 mobile:min-h-11 mobile:flex-1 ${annual ? '' : 'bg-[#14473A] text-[#F9F4EB]'}`}
+            >
               Monthly
             </button>
-            <button type="button" onClick={() => setAnnual(true)} className={`flex items-center gap-2.5 px-4.5 py-2.5 text-[16px] leading-5 ${annual ? 'bg-[#14473A] text-[#F9F4EB]' : ''}`}>
+            <button
+              type="button"
+              onClick={() => setAnnual(true)}
+              className={`flex items-center gap-2.5 px-4.5 py-2.5 text-[16px] leading-5 mobile:min-h-11 mobile:flex-1 mobile:justify-center ${annual ? 'bg-[#14473A] text-[#F9F4EB]' : ''}`}
+            >
               Annual
-              <span className="bg-[#C9B48F] px-1.75 py-0.5 text-[13px] leading-4 text-[#14473A]">20% off</span>
+              <span className="bg-[#C9B48F] px-1.75 py-0.5 text-[13px] leading-4 text-[#14473A]">
+                20% off
+              </span>
             </button>
           </div>
         </div>
       </section>
 
-      <section className="flex flex-col gap-4 px-10 pb-20">
-        <div className="flex items-center justify-between gap-10 border border-[#14473A] px-9 py-7">
-          <div className="flex items-center gap-10">
+      <section className={`flex flex-col gap-4 px-10 pb-20 ${mobile.section}`}>
+        <div className="flex items-center justify-between gap-10 border border-[#14473A] px-9 py-7 mobile:flex-col mobile:items-stretch mobile:gap-6 mobile:px-5">
+          <div className="flex items-center gap-10 mobile:flex-col mobile:items-start mobile:gap-5">
             <div>
               <p className="text-[30px] leading-9 tracking-[-0.02em]">Trial</p>
-              <p className="text-[15px] leading-5 text-[#3D6A5E]">£0 for 30 days · no card needed</p>
+              <p className="text-[15px] leading-5 text-[#3D6A5E]">
+                £0 for 30 days · no card needed
+              </p>
             </div>
             <div className="h-14 w-px bg-[#14473A33]" />
-            <div className="flex gap-8">
+            <div className="flex gap-8 mobile:grid mobile:w-full mobile:grid-cols-2 mobile:gap-4">
               {[
                 ['5 datasets', '100,000 rows each'],
                 ['150', 'tables a month'],
@@ -91,14 +131,17 @@ export function PricingPage() {
               ))}
             </div>
           </div>
-          <Link href={APP_LOGIN} className="flex h-14 shrink-0 items-center gap-3 border border-[#14473A] px-6 text-[17px] leading-5.5">
+          <Link
+            href={APP_LOGIN}
+            className={`flex h-14 shrink-0 items-center gap-3 border border-[#14473A] px-6 text-[17px] leading-5.5 ${mobile.secondary}`}
+          >
             Start free trial
             <Arrow />
           </Link>
         </div>
 
-        <div className="grid grid-cols-3 gap-2">
-          {plans.map((plan) => {
+        <div className="grid grid-cols-3 gap-2 mobile:hidden">
+          {plans.map(plan => {
             const price = annual ? plan.annual : plan.monthly;
             return (
               <article key={plan.name} className="flex flex-col gap-6 bg-[#EEE8DC] p-8">
@@ -106,68 +149,148 @@ export function PricingPage() {
                   <h2 className="text-[30px] leading-9 tracking-[-0.02em]">{plan.name}</h2>
                   <p className="mt-3 text-[56px] leading-none tracking-[-0.04em]">
                     £{price}
-                    <span className="text-[18px] tracking-normal text-[#3D6A5E]">{plan.perSeat ? ' / seat' : ''}</span>
+                    <span className="text-[18px] tracking-normal text-[#3D6A5E]">
+                      {plan.perSeat ? ' / seat' : ''}
+                    </span>
                   </p>
                   <p className="mt-2 text-[15px] leading-5 text-[#3D6A5E]">
-                    {annual ? `£${plan.year}${plan.perSeat ? ' a seat' : ''} billed annually` : 'Billed monthly'}
+                    {annual
+                      ? `£${plan.year}${plan.perSeat ? ' a seat' : ''} billed annually`
+                      : 'Billed monthly'}
                   </p>
                 </div>
                 <ul className="flex flex-col gap-2 text-[16px] leading-6 text-[#3D6A5E]">
-                  {plan.lines.map((line) => (
+                  {plan.lines.map(line => (
                     <li key={line}>{line}</li>
                   ))}
                 </ul>
-                <Link href={APP_LOGIN} className="mt-auto flex h-14 items-center justify-center bg-[#14473A] text-[17px] leading-5.5 text-[#F9F4EB]">
+                <Link
+                  href={APP_LOGIN}
+                  className="mt-auto flex h-14 items-center justify-center bg-[#14473A] text-[17px] leading-5.5 text-[#F9F4EB]"
+                >
                   Get started
                 </Link>
               </article>
             );
           })}
         </div>
+        <div className="hidden mobile:-mx-5 mobile:block">
+          <SwipeRow>
+            {plans.map(plan => {
+              const price = annual ? plan.annual : plan.monthly;
+              return (
+                <article
+                  key={plan.name}
+                  className="flex min-h-[420px] flex-col gap-5 bg-[#EEE8DC] p-5"
+                >
+                  <div>
+                    <h2 className="text-[28px] leading-8 tracking-[-0.02em]">{plan.name}</h2>
+                    <p className="mt-3 text-[52px] leading-none tracking-[-0.04em]">
+                      £{price}
+                      <span className="text-[16px] tracking-normal text-[#3D6A5E]">
+                        {plan.perSeat ? ' / seat' : ''}
+                      </span>
+                    </p>
+                    <p className="mt-2 text-[15px] leading-5 text-[#3D6A5E]">
+                      {annual
+                        ? `£${plan.year}${plan.perSeat ? ' a seat' : ''} billed annually`
+                        : 'Billed monthly'}
+                    </p>
+                  </div>
+                  <ul className="flex flex-col gap-2 text-[15px] leading-5 text-[#3D6A5E]">
+                    {plan.lines.map(line => (
+                      <li key={line}>{line}</li>
+                    ))}
+                  </ul>
+                  <Link
+                    href={APP_LOGIN}
+                    className="mt-auto flex h-14 items-center justify-center bg-[#14473A] text-[17px] leading-5.5 text-[#F9F4EB]"
+                  >
+                    Get started
+                  </Link>
+                </article>
+              );
+            })}
+          </SwipeRow>
+        </div>
 
-        <div className="flex items-center justify-between bg-[#14473A] px-9 py-7 text-[#F9F4EB]">
+        <div className="flex items-center justify-between bg-[#14473A] px-9 py-7 text-[#F9F4EB] mobile:flex-col mobile:items-stretch mobile:gap-5 mobile:px-5">
           <div>
             <p className="text-[30px] leading-9 tracking-[-0.02em]">Agencies</p>
-            <p className="text-[16px] leading-6 text-[#BFD3C8]">Bigger teams, procurement paperwork or questions about data and security. Email help@tensr.xyz and we&apos;ll scope it around how you work.</p>
+            <p className="text-[16px] leading-6 text-[#BFD3C8]">
+              Bigger teams, procurement paperwork or questions about data and security. Email
+              help@tensr.xyz and we&apos;ll scope it around how you work.
+            </p>
           </div>
-          <Link href="/demo" className="border border-[#F9F4EB] px-6 py-3 text-[17px] leading-5.5">
+          <Link
+            href="/demo"
+            className="border border-[#F9F4EB] px-6 py-3 text-center text-[17px] leading-5.5 mobile:flex mobile:h-[52px] mobile:items-center mobile:justify-center"
+          >
             Talk to us
           </Link>
         </div>
       </section>
 
-      <section className="flex flex-col gap-10 px-10 pb-20">
+      <section className={`flex flex-col gap-10 px-10 pb-20 ${mobile.section}`}>
         <SectionRule left="Compare plans" right="What's in each plan" />
-        <h2 className="text-[56px] leading-14.5 tracking-[-0.04em]">What&apos;s in each plan</h2>
-        <p className="max-w-[720px] text-[18px] leading-7 text-[#3D6A5E]">The analysis is the same on every plan. The difference is how much you use the agent, and working as a team.</p>
-        <div className="border-t border-[#14473A]">
-          <div className="grid grid-cols-4 py-3 text-[15px] leading-5 text-[#3D6A5E]">
-            <span />
-            <span>Pro</span>
-            <span>Pro+</span>
-            <span>Teams</span>
-          </div>
-          {rows.map((row) => (
-            <div key={row.feature} className="grid grid-cols-4 border-t border-[#14473A33] py-4 text-[16px] leading-6">
-              <span>{row.feature}</span>
-              <span>{row.pro}</span>
-              <span>{row.plus}</span>
-              <span>{row.teams}</span>
+        <h2 className={`text-[56px] leading-14.5 tracking-[-0.04em] ${mobile.h2}`}>
+          What&apos;s in each plan
+        </h2>
+        <p className={`max-w-[720px] text-[18px] leading-7 text-[#3D6A5E] ${mobile.lede}`}>
+          The analysis is the same on every plan. The difference is how much you use the agent, and
+          working as a team.
+        </p>
+        <div className="border-t border-[#14473A] mobile:overflow-x-auto">
+          <div className="mobile:min-w-[640px]">
+            <div className="grid grid-cols-4 py-3 text-[15px] leading-5 text-[#3D6A5E]">
+              <span />
+              <span>Pro</span>
+              <span>Pro+</span>
+              <span>Teams</span>
             </div>
-          ))}
+            {rows.map(row => (
+              <div
+                key={row.feature}
+                className="grid grid-cols-4 border-t border-[#14473A33] py-4 text-[16px] leading-6"
+              >
+                <span>{row.feature}</span>
+                <span>{row.pro}</span>
+                <span>{row.plus}</span>
+                <span>{row.teams}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="flex flex-col gap-8 px-10 pb-24">
+      <section className={`flex flex-col gap-8 px-10 pb-24 ${mobile.section}`}>
         <SectionRule left="Questions" right="Pricing questions" />
         {[
-          ['What\'s the difference between the plans?', 'The analysis is the same on every plan. Pro includes 300 reports a month. Pro+ raises that to 1,200 reports and 5,000 agent runs. Teams adds organisation billing, shared seats, shared workspaces and real-time collaboration, with 3,000 reports and 10,000 agent runs.'],
-          ['What is an agent run?', 'One task you hand to the agent in chat, like building a banner book or running a driver analysis. Pro includes 1,200 a month, Pro+ 5,000 and Teams 10,000.'],
+          [
+            "What's the difference between the plans?",
+            'The analysis is the same on every plan. Pro includes 300 reports a month. Pro+ raises that to 1,200 reports and 5,000 agent runs. Teams adds organisation billing, shared seats, shared workspaces and real-time collaboration, with 3,000 reports and 10,000 agent runs.',
+          ],
+          [
+            'What is an agent run?',
+            'One task you hand to the agent in chat, like building a banner book or running a driver analysis. Pro includes 1,200 a month, Pro+ 5,000 and Teams 10,000.',
+          ],
           ['Can I switch between monthly and annual?', 'Yes. Annual is 20% off the monthly price.'],
-          ['How does Teams seat pricing work?', 'Teams is £119 per seat a month, or £95 per seat a month billed annually (£1,140 per seat a year). There\'s a 3-seat minimum, so the smallest team is £3,420 a year.'],
-          ['Is there a free plan?', 'There\'s a 30-day trial with no card needed. You get 5 datasets of up to 100,000 rows, 150 tables, 150 agent runs and 150 reports.'],
-          ['Where is my data stored, and is it secure?', 'Your data is encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Tensr never trains models on it, and private mode keeps respondents\' answers away from the AI entirely.'],
-          ['Do you offer academic or non-profit pricing?', 'Ask us at help@tensr.xyz and tell us a bit about what you\'re working on.'],
+          [
+            'How does Teams seat pricing work?',
+            "Teams is £119 per seat a month, or £95 per seat a month billed annually (£1,140 per seat a year). There's a 3-seat minimum, so the smallest team is £3,420 a year.",
+          ],
+          [
+            'Is there a free plan?',
+            "There's a 30-day trial with no card needed. You get 5 datasets of up to 100,000 rows, 150 tables, 150 agent runs and 150 reports.",
+          ],
+          [
+            'Where is my data stored, and is it secure?',
+            "Your data is encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Tensr never trains models on it, and private mode keeps respondents' answers away from the AI entirely.",
+          ],
+          [
+            'Do you offer academic or non-profit pricing?',
+            "Ask us at help@tensr.xyz and tell us a bit about what you're working on.",
+          ],
         ].map(([q, a]) => (
           <div key={q} className="border-t border-[#14473A] pt-4">
             <h3 className="text-[24px] leading-8 tracking-[-0.02em]">{q}</h3>
@@ -176,9 +299,14 @@ export function PricingPage() {
         ))}
       </section>
 
-      <section className="flex flex-col gap-10 bg-[#14473A] px-10 pb-26 pt-24 text-[#F9F4EB]">
-        <h2 className="text-[96px] leading-24 tracking-[-0.045em]">Bring a .sav. Leave with the tables.</h2>
-        <Link href="/demo" className="w-fit bg-[#F9F4EB] px-6 py-4 text-[17px] leading-5.5 text-[#14473A]">
+      <section className="flex flex-col gap-10 bg-[#14473A] px-10 pb-26 pt-24 text-[#F9F4EB] mobile:gap-8 mobile:px-5 mobile:pt-12 mobile:pb-16">
+        <h2 className={`text-[96px] leading-24 tracking-[-0.045em] ${mobile.display}`}>
+          Bring a .sav. Leave with the tables.
+        </h2>
+        <Link
+          href="/demo"
+          className={`w-fit bg-[#F9F4EB] px-6 py-4 text-[17px] leading-5.5 text-[#14473A] ${mobile.primary}`}
+        >
           Book a demo →
         </Link>
       </section>

@@ -33,26 +33,43 @@ function SignShell({
   children: ReactNode;
 }) {
   return (
-    <div className="flex min-h-screen flex-col justify-between bg-[#F9F4EB] px-10 pb-8 pt-7 text-[#14473A]">
-      <div className="flex h-7 items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 text-[28px] font-semibold leading-7 tracking-[-0.04em]">
+    <div className="flex min-h-screen flex-col justify-between bg-[#F9F4EB] px-10 pb-8 pt-7 text-[#14473A] mobile:px-5 mobile:pt-0 mobile:pb-4">
+      <div className="flex h-7 items-center justify-between mobile:h-16">
+        <Link
+          href="/"
+          className="flex items-center gap-2 text-[28px] font-semibold leading-7 tracking-[-0.04em] mobile:text-[22px] mobile:leading-6 mobile:[&_svg]:size-6"
+        >
           <Mark />
           tensr
         </Link>
-        <Link href="/" className="text-[16px]">
+        <Link
+          href="/"
+          className="text-[16px] mobile:inline-flex mobile:min-h-11 mobile:items-center"
+        >
           Back to site
         </Link>
       </div>
-      <div className="flex justify-center">
-        <div className="flex w-[520px] max-w-full flex-col gap-6 bg-[#EEE8DC] px-10 pb-10 pt-11">
+      <div className="flex justify-center mobile:items-start mobile:pt-6">
+        <div className="flex w-[520px] max-w-full flex-col gap-6 bg-[#EEE8DC] px-10 pb-10 pt-11 mobile:w-full mobile:bg-transparent mobile:px-0 mobile:py-0">
           <div className="flex flex-col gap-3 pb-2">
-            <h1 className="text-[48px] leading-[52px] tracking-[-0.04em]">{title}</h1>
-            <p className="text-[18px] leading-[27px] text-[#3D6A5E]">{lede}</p>
+            <h1 className="text-[48px] leading-[52px] tracking-[-0.04em] mobile:text-[44px] mobile:leading-[46px] mobile:tracking-[-0.045em]">
+              {title}
+            </h1>
+            <p className="text-[18px] leading-[27px] text-[#3D6A5E] mobile:text-[17px] mobile:leading-[26px]">
+              {lede}
+            </p>
           </div>
           {children}
         </div>
       </div>
-      <div />
+      <div className="mobile:hidden" />
+      <footer className="hidden items-center justify-between gap-3 border-t border-[#14473A33] py-4 text-[13px] leading-4 text-[#3D6A5E] mobile:flex">
+        <p>© 2026 Tensr · Made in Preston</p>
+        <div className="flex gap-4">
+          <a href="https://tensr-1.gitbook.io/tensr/legal-policies/terms-of-service">Terms</a>
+          <a href="https://tensr-1.gitbook.io/tensr/legal-policies/privacy-policy">Privacy</a>
+        </div>
+      </footer>
     </div>
   );
 }
@@ -84,7 +101,7 @@ function OAuthButtons() {
         <button
           key={provider}
           type="button"
-          className="flex h-14 items-center gap-3 border border-[#14473A] bg-[#FCFAF5] pl-8 text-[17px]"
+          className="flex h-14 w-full items-center gap-3 border border-[#14473A] bg-[#FCFAF5] pl-8 text-[17px]"
           onClick={() => start(provider)}
         >
           <span className="flex size-6 items-center justify-center rounded-full border-[1.5px] border-[#14473A] text-[12px] font-semibold">
@@ -127,7 +144,10 @@ export function SignInForm() {
   };
 
   return (
-    <SignShell title="Sign in to Tensr" lede="Pick up where you left off. No password, we'll send you a code.">
+    <SignShell
+      title="Sign in to Tensr"
+      lede="Pick up where you left off. No password, we'll send you a code."
+    >
       <OAuthButtons />
       <div className="flex items-center gap-3 text-[15px] text-[#3D6A5E]">
         <span className="h-px flex-1 bg-[#14473A] opacity-20" />
@@ -148,7 +168,11 @@ export function SignInForm() {
           placeholder="Your email address"
         />
         {error ? <p className="text-[14px] text-[#A15C12]">{error}</p> : null}
-        <button type="submit" disabled={busy} className="h-14 bg-[#14473A] text-[17px] text-[#F9F4EB]">
+        <button
+          type="submit"
+          disabled={busy}
+          className="h-14 bg-[#14473A] text-[17px] text-[#F9F4EB]"
+        >
           {busy ? 'Sending…' : 'Continue'}
         </button>
       </form>
@@ -176,7 +200,7 @@ export function CodeForm() {
     setBusy(true);
     setError('');
     try {
-      const response = await stytch.otps.authenticate(code.trim(), methodId, {
+      const response = await stytch.otps.authenticate(code.replace(/\s/g, ''), methodId, {
         session_duration_minutes: SESSION_MINUTES,
       });
       if (!response.session_token) throw new Error('That code did not start a session');
@@ -188,7 +212,10 @@ export function CodeForm() {
   };
 
   return (
-    <SignShell title="Enter your code" lede={email ? `We sent a code to ${email}.` : 'Enter the code from your email.'}>
+    <SignShell
+      title="Enter your code"
+      lede={email ? `We sent a code to ${email}.` : 'Enter the code from your email.'}
+    >
       <form className="flex flex-col gap-2" onSubmit={event => void submit(event)}>
         <label className="text-[14px]" htmlFor="code">
           Code
@@ -199,14 +226,52 @@ export function CodeForm() {
           autoComplete="one-time-code"
           value={code}
           onChange={event => setCode(event.target.value)}
-          className="h-14 border border-[#14473A] bg-[#FCFAF5] px-4 text-[17px] tracking-[0.3em]"
+          className="h-14 border border-[#14473A] bg-[#FCFAF5] px-4 text-[17px] tracking-[0.3em] mobile:hidden"
         />
+        <div className="hidden grid-cols-6 gap-2 mobile:grid">
+          {Array.from({ length: 6 }, (_, index) => (
+            <input
+              key={index}
+              inputMode="numeric"
+              autoComplete={index === 0 ? 'one-time-code' : 'off'}
+              aria-label={`Code digit ${index + 1}`}
+              maxLength={1}
+              value={code[index] && code[index] !== ' ' ? code[index] : ''}
+              className="h-14 w-full border border-[#14473A] bg-[#FCFAF5] text-center text-[20px]"
+              onChange={event => {
+                const digit = event.target.value.replace(/\D/g, '').slice(-1);
+                const chars = Array.from({ length: 6 }, (_, place) =>
+                  code[place] && code[place] !== ' ' ? code[place] : ' '
+                );
+                chars[index] = digit || ' ';
+                setCode(chars.join('').trimEnd());
+                const sibling = event.currentTarget.parentElement?.children[
+                  index + (digit ? 1 : -1)
+                ] as HTMLInputElement | undefined;
+                if (digit && sibling) sibling.focus();
+              }}
+              onPaste={event => {
+                const pasted = event.clipboardData.getData('text').replace(/\D/g, '').slice(0, 6);
+                if (!pasted) return;
+                event.preventDefault();
+                setCode(pasted);
+              }}
+            />
+          ))}
+        </div>
         {error ? <p className="text-[14px] text-[#A15C12]">{error}</p> : null}
-        <button type="submit" disabled={busy} className="h-14 bg-[#14473A] text-[17px] text-[#F9F4EB]">
+        <button
+          type="submit"
+          disabled={busy}
+          className="h-14 bg-[#14473A] text-[17px] text-[#F9F4EB]"
+        >
           {busy ? 'Checking…' : 'Continue'}
         </button>
       </form>
-      <Link href="/signin" className="text-[15px] text-[#3D6A5E]">
+      <Link
+        href="/signin"
+        className="text-[15px] text-[#3D6A5E] mobile:inline-flex mobile:min-h-11 mobile:items-center"
+      >
         Use a different email
       </Link>
     </SignShell>

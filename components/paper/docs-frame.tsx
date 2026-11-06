@@ -20,7 +20,10 @@ function DocsLinks({ nodes, depth = 0 }: { nodes: DocsNode[]; depth?: number }) 
       {nodes.map((node, index) => {
         if (node.type === 'separator') {
           return (
-            <li key={`sep-${index}`} className="px-3 pb-1 pt-5 text-[13px] leading-4 text-[#3D6A5E]">
+            <li
+              key={`sep-${index}`}
+              className="px-3 pb-1 pt-5 text-[13px] leading-4 text-[#3D6A5E]"
+            >
               {node.name}
             </li>
           );
@@ -68,7 +71,7 @@ function DocsLink({
   return (
     <Link
       href={href}
-      className={`block py-1.5 pr-3 text-[15px] leading-5 ${active ? 'text-[#14473A]' : 'text-[#3D6A5E] hover:text-[#14473A]'}`}
+      className={`block py-1.5 pr-3 text-[15px] leading-5 mobile:flex mobile:min-h-11 mobile:items-center ${active ? 'text-[#14473A]' : 'text-[#3D6A5E] hover:text-[#14473A]'}`}
       style={{ paddingLeft: 12 + depth * 12 }}
       aria-current={active ? 'page' : undefined}
     >
@@ -85,10 +88,10 @@ export function DocsFrame({
   children: ReactNode;
 }) {
   return (
-    <div className="paper-site min-h-screen bg-[#F9F4EB] text-[#14473A]">
+    <div className="paper-site min-h-screen bg-[#F9F4EB] text-[#14473A] mobile:overflow-x-clip">
       <PaperNav />
-      <div className="flex flex-col gap-8 px-5 pb-16 lg:flex-row lg:items-start lg:gap-12 lg:px-10">
-        <aside className="max-h-72 overflow-auto border-b border-[#14473A33] pb-4 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:w-64 lg:shrink-0 lg:border-0 lg:pb-0">
+      <div className="flex flex-col gap-8 px-5 pb-16 lg:flex-row lg:items-start lg:gap-12 lg:px-10 mobile:px-5">
+        <aside className="max-h-72 overflow-auto border-b border-[#14473A33] pb-4 lg:sticky lg:top-6 lg:max-h-[calc(100vh-3rem)] lg:w-64 lg:shrink-0 lg:border-0 lg:pb-0 mobile:max-h-none mobile:overflow-visible">
           <p className="px-3 pb-2 text-[13px] leading-4 text-[#3D6A5E]">Docs</p>
           <DocsLinks nodes={tree.children} />
         </aside>

@@ -8,7 +8,11 @@ const guides = [
   ['/docs/levelled-data', 'Levelled data', 'Loops such as brands per respondent, at that level.'],
   ['/docs/weights', 'Weights', 'Rake a weight, and keep the file you uploaded.'],
   ['/docs/agent', 'The agent', 'Ask, Plan, and Agent.'],
-  ['/docs/significance', 'Significance', 'Letters, the low-base skip, and the people behind a cell.'],
+  [
+    '/docs/significance',
+    'Significance',
+    'Letters, the low-base skip, and the people behind a cell.',
+  ],
   ['/docs/export', 'Export', 'Excel or PowerPoint, and the file with its weight syntax.'],
   ['/docs/r-script', 'The R script', 'The script for a run, and what the badges mean.'],
   ['/docs/sharing', 'Sharing and comments', 'A session link, and comments on a report.'],
@@ -28,8 +32,14 @@ export function DocsIndex({
 }) {
   return (
     <article className="max-w-[760px] pb-8">
-      <h1 className="text-[56px] leading-none tracking-[-0.04em]">{title}</h1>
-      {description ? <p className="mt-5 text-[20px] leading-7 text-[#3D6A5E]">{description}</p> : null}
+      <h1 className="text-[56px] leading-none tracking-[-0.04em] mobile:text-[44px] mobile:leading-[46px] mobile:tracking-[-0.045em]">
+        {title}
+      </h1>
+      {description ? (
+        <p className="mt-5 text-[20px] leading-7 text-[#3D6A5E] mobile:text-[17px] mobile:leading-[26px]">
+          {description}
+        </p>
+      ) : null}
       <div className="mt-8 flex flex-col gap-4 text-[17px] leading-7 text-[#3D6A5E] [&_a]:text-[#14473A] [&_a]:underline [&_h2]:mt-8 [&_h2]:text-[28px] [&_h2]:leading-9 [&_h2]:tracking-[-0.02em] [&_h2]:text-[#14473A] [&_li]:ml-5 [&_li]:list-disc">
         {body}
       </div>
