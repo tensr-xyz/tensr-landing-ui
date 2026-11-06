@@ -1,0 +1,66 @@
+---
+title: Van Westendorp and Gabor-Granger
+description: A price from four acceptability questions, or from buy-at-a-price.
+category: Survey techniques
+---
+
+## When to use it
+
+Use Van Westendorp when each person gave four prices: too cheap, cheap, expensive, and too expensive. The crossings of those curves are the range people accept. Use Gabor-Granger when each person was offered prices and said whether they would buy. A multi-attribute choice is [conjoint](/docs/analyses/conjoint).
+
+## Van Westendorp
+
+<Steps>
+<Step>Analyze → Survey techniques → Van Westendorp. In chat: “Run Van Westendorp on the four price columns.”</Step>
+<Step>Map Too cheap, Cheap, Expensive, and Too expensive to the four columns.</Step>
+</Steps>
+
+The plot is the share of people who find the price too cheap, cheap, expensive, or too expensive, at each price. The point where “too cheap” crosses “expensive”, and where “too expensive” crosses “cheap”, bound the prices the sample will accept. An indifference price is where “cheap” crosses “expensive”.
+
+## Gabor-Granger
+
+<Steps>
+<Step>Analyze → Survey techniques → Gabor-Granger. In chat: “Run Gabor-Granger on price and buy.”</Step>
+<Step>Price is the price that was offered. Buy is whether they said they would purchase.</Step>
+</Steps>
+
+<TypeTable
+  type={{
+    too_cheap: {
+      type: 'column',
+      description: 'Van Westendorp. The price that would be too cheap to trust.',
+    },
+    cheap: {
+      type: 'column',
+      description: 'Van Westendorp. A bargain, still acceptable.',
+    },
+    expensive: {
+      type: 'column',
+      description: 'Van Westendorp. Dear, still acceptable.',
+    },
+    too_expensive: {
+      type: 'column',
+      description: 'Van Westendorp. The price they would not pay.',
+    },
+    price_column: {
+      type: 'column',
+      description: 'Gabor-Granger. The price offered.',
+    },
+    buy_column: {
+      type: 'column',
+      description: 'Gabor-Granger. Whether they would buy at that price.',
+    },
+  }}
+/>
+
+## Reading the output
+
+Van Westendorp is four cumulative curves. Read the crossings, not a single mean price. Gabor-Granger is the share who would buy at each offered price, so the curve falls as the price rises. Neither replaces a [conjoint](/docs/analyses/conjoint) when price is one attribute among several.
+
+## Coming from SPSS
+
+SPSS has neither item. Tensr lists both under Analyze → Survey techniques, next to NPS and the brand funnel.
+
+## Related
+
+[Conjoint](/docs/analyses/conjoint) prices a profile from part-worths. [MaxDiff](/docs/analyses/maxdiff) ranks items, not prices.

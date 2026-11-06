@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import type { ReactNode } from 'react';
-import { AskStrip, PaperFooter, PaperNav } from '@/components/paper/shell';
+import { PaperFooter, PaperNav } from '@/components/paper/shell';
 
 type DocsNode = {
   type: string;
@@ -105,7 +105,6 @@ export function DocsFrame({
         </aside>
         <div className="min-w-0 flex-1">{children}</div>
       </div>
-      <AskStrip />
       <PaperFooter />
     </div>
   );

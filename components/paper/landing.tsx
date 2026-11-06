@@ -3,6 +3,7 @@ import { mobile } from '@/components/paper/mobile';
 import { SwipeRow } from '@/components/paper/swipe-row';
 import { APP_LOGIN, Arrow, PaperShell, SectionRule } from '@/components/paper/shell';
 import { WorkspaceSection } from '@/components/paper/workspace-section';
+import { getChangelogEntries } from '@/lib/source';
 
 function PersonDots() {
   return (
@@ -282,28 +283,38 @@ const uses = [
   ],
 ] as const;
 
-const releases = [
-  [
-    '20 Oct 2026',
-    'v0.5.1',
-    'Filters, comparisons, and stacking',
-    'A filter stays on that run. Stack and append find Merge Datasets.',
-  ],
-  [
-    '19 Oct 2026',
-    'v0.5.0',
-    'The new agent is on for every workspace',
-    'Microsoft sign-in now asks for your email only once.',
-  ],
-  [
-    '18 Oct 2026',
-    'v0.4.9',
-    'Tables, nets, and the columns you named',
-    'Nets hold on re-run and tables keep your column names.',
-  ],
-];
+function releaseDate(iso: string) {
+  return new Date(`${iso}T00:00:00Z`).toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    timeZone: 'UTC',
+  });
+}
 
-export function LandingPage() {
+function releaseBlurb(markdown: string) {
+  const body = markdown.replace(/^---[\s\S]*?---\s*/, '');
+  const line = body
+    .split('\n')
+    .map(row => row.trim())
+    .find(row => row && !row.startsWith('-') && !row.startsWith('#'));
+  if (!line) return '';
+  const sentence = line.match(/^.*?[.!?](?:\s|$)/);
+  return (sentence?.[0] ?? line).trim();
+}
+
+export async function LandingPage() {
+  const releases = await Promise.all(
+    getChangelogEntries()
+      .slice(0, 3)
+      .map(async entry => ({
+        version: `v${entry.version}`,
+        date: releaseDate(entry.date),
+        title: entry.title,
+        body: releaseBlurb(await entry.getText('raw')),
+      }))
+  );
+
   return (
     <PaperShell>
       <section className={`flex flex-col items-start gap-7 px-10 pt-14 pb-12 ${mobile.hero}`}>
@@ -373,7 +384,7 @@ export function LandingPage() {
               ))}
             </div>
             <div className="flex grow-2 basis-0 flex-col justify-end gap-2 bg-[#EEE8DC] p-9">
-              <p className="text-[120px] leading-27.5 tracking-[-0.05em]">83</p>
+              <p className="text-[120px] leading-27.5 tracking-[-0.05em]">87</p>
               <p className="text-[20px] leading-6">
                 analyses, from crosstabs and nets to regression and SEM
               </p>
@@ -394,7 +405,7 @@ export function LandingPage() {
         </div>
         <div className="hidden flex-col gap-2 mobile:flex">
           <div className="flex flex-col justify-end gap-2 bg-[#EEE8DC] p-6">
-            <p className="text-[88px] leading-none tracking-[-0.05em]">83</p>
+            <p className="text-[88px] leading-none tracking-[-0.05em]">87</p>
             <p className="text-[17px] leading-6">
               analyses, from crosstabs and nets to regression and SEM
             </p>
@@ -683,14 +694,14 @@ export function LandingPage() {
           </h2>
           <Link
             href="/changelog"
-            className="flex items-center gap-2 pb-2 text-[17px] leading-5.5 underline mobile:min-h-11 mobile:pb-0"
+            className="flex items-center gap-2 pb-2 text-[17px] leading-5.5 underline mobile:hidden"
           >
             See all releases
             <Arrow />
           </Link>
         </div>
         <div className="flex gap-2 mobile:hidden">
-          {releases.map(([date, version, title, body]) => (
+          {releases.map(({ date, version, title, body }) => (
             <Link
               key={version}
               href="/changelog"
@@ -709,7 +720,7 @@ export function LandingPage() {
         </div>
         <div className="hidden mobile:-mx-5 mobile:block">
           <SwipeRow pager={false}>
-            {releases.map(([date, version, title, body]) => (
+            {releases.map(({ date, version, title, body }) => (
               <Link
                 key={version}
                 href="/changelog"

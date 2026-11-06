@@ -191,12 +191,12 @@ export function AgenciesPage() {
           </div>
           <div className="flex grow items-center justify-center bg-[#C9B48F] p-12">
             <div className="w-140 bg-[#FCFAF5] shadow-[0_18px_48px_#14473A30] mobile:w-full">
-              <div className="flex items-center justify-between border-b border-[#14473A1F] px-6 py-5">
+              <div className="flex items-center justify-between gap-4 border-b border-[#14473A1F] px-6 py-5 mobile:flex-col mobile:items-start mobile:gap-3">
                 <div>
                   <p className="text-[13px] leading-4 text-[#3D6A5E]">A cell</p>
                   <p className="text-[32px] leading-9 tracking-[-0.03em]">The rows behind it</p>
                 </div>
-                <p className="bg-[#E3ECE6] px-2.5 py-1.5 text-[13px] leading-4">
+                <p className="shrink-0 bg-[#E3ECE6] px-2.5 py-1.5 text-[13px] leading-4">
                   When provenance is complete
                 </p>
               </div>
@@ -389,7 +389,7 @@ export function AgenciesPage() {
           </div>
           <div className="flex grow flex-col justify-between bg-[#EEE8DC] p-10">
             <p className="text-[15px] leading-4.5 text-[#3D6A5E]">Join as a design partner</p>
-            <h2 className={`w-190 text-[40px] leading-12 tracking-[-0.025em] ${mobile.h2}`}>
+            <h2 className="w-190 text-[40px] leading-12 tracking-[-0.025em] mobile:w-auto mobile:text-[22px] mobile:leading-7">
               Bring a live study, tell us what slows you down, and we&apos;ll build it with you.
             </h2>
             <div className="flex items-center justify-between gap-8 mobile:flex-col mobile:items-start">

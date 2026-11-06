@@ -1,0 +1,67 @@
+---
+title: Pivot table
+description: Counts, sums, means, and percents, with the same weights and letters as a banner.
+category: Survey techniques
+---
+
+## When to use it
+
+Use a pivot table when the grid is not a stub-and-banner book: you want a count, a sum, a mean, or a percent, with rows, columns, and a filter you drop in yourself. A client banner with letters on column proportions is a [banner table](/docs/analyses/banner-table).
+
+## Running it in Tensr
+
+<Steps>
+<Step>Analyze → Tables → Pivot table. In chat: “Pivot brand by region, count.”</Step>
+<Step>Drop fields into Rows, Columns, Values, and Filters. A value can be a count, a sum, a mean, or a percent.</Step>
+<Step>Turn on subtotals and the grand total, or significance when the value supports it. Swap rows and columns if the grid is the wrong way round.</Step>
+</Steps>
+
+## Options
+
+<TypeTable
+  type={{
+    rows: {
+      type: 'columns',
+      description: 'Fields down the side.',
+    },
+    columns: {
+      type: 'columns',
+      description: 'Fields across the top.',
+    },
+    values: {
+      type: 'column',
+      description: 'What to aggregate. Count, sum, mean, or percent.',
+    },
+    filters: {
+      type: 'columns',
+      description: 'Keep one value of a field.',
+    },
+    significance: {
+      type: 'boolean',
+      description: 'Letters, when the value aggregation supports them.',
+      default: 'false',
+    },
+    show_subtotals: {
+      type: 'boolean',
+      description: 'A subtotal for each group.',
+      default: 'true',
+    },
+    show_grand_total: {
+      type: 'boolean',
+      description: 'A grand total.',
+      default: 'true',
+    },
+  }}
+/>
+
+## Reading the output
+
+The grid is the pivot: each cell is the aggregation you chose, weighted the same way as a banner when a weight is on the table. Significance letters appear only when that aggregation supports them. The on-screen grid shows a window of rows. Export includes the full table, as CSV or Excel.
+
+## Coming from SPSS
+
+SPSS is Analyze → Tables → Custom Tables, or a pivot in Excel. Tensr’s item is Analyze → Tables → Pivot table, next to Custom Tables and the banner book.
+
+## Related
+
+[Banner table](/docs/analyses/banner-table) is the stub, the break, and the letters a client already reads.

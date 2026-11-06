@@ -289,40 +289,7 @@ export function PricingPage() {
 
       <section className={`flex flex-col gap-8 px-10 pb-24 ${mobile.section}`}>
         <SectionRule left="Questions" right="Pricing questions" />
-        {[
-          [
-            "What's the difference between the plans?",
-            'The analysis is the same on every plan. Pro includes 300 reports a month. Pro+ raises that to 1,200 reports and 5,000 agent runs. Teams adds organisation billing, shared seats, shared workspaces and real-time collaboration, with 3,000 reports and 10,000 agent runs.',
-          ],
-          [
-            'What is an agent run?',
-            'One task you hand to the agent in chat, like building a banner book or running a driver analysis. Pro includes 1,200 a month, Pro+ 5,000 and Teams 10,000.',
-          ],
-          ['Can I switch between monthly and annual?', 'Yes. Annual is 20% off the monthly price.'],
-          [
-            'How does Teams seat pricing work?',
-            "Teams is £119 per seat a month, or £95 per seat a month billed annually (£1,140 per seat a year). There's a 3-seat minimum, so the smallest team is £3,420 a year.",
-          ],
-          [
-            'Is there a free plan?',
-            "There's a 30-day trial with no card needed. You get 5 datasets of up to 100,000 rows, 150 tables, 150 agent runs and 150 reports.",
-          ],
-          [
-            'Where is my data stored, and is it secure?',
-            "Your data is encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Tensr never trains models on it, and private mode keeps respondents' answers away from the AI entirely.",
-          ],
-          [
-            'Do you offer academic or non-profit pricing?',
-            "Ask us at help@tensr.xyz and tell us a bit about what you're working on.",
-          ],
-        ].map(([q, a]) => (
-          <div key={q} className="border-t border-[#14473A] pt-4">
-            <h3 className="text-[24px] leading-8 tracking-[-0.02em] mobile:text-[20px] mobile:leading-7">
-              {q}
-            </h3>
-            <p className="mt-2 max-w-[720px] text-[17px] leading-6.5 text-[#3D6A5E]">{a}</p>
-          </div>
-        ))}
+        <PricingQuestions />
       </section>
 
       <section className="flex flex-col gap-10 bg-[#14473A] px-10 pb-26 pt-24 text-[#F9F4EB] mobile:gap-8 mobile:px-5 mobile:pt-12 mobile:pb-16">
@@ -337,5 +304,75 @@ export function PricingPage() {
         </Link>
       </section>
     </PaperShell>
+  );
+}
+
+const pricingQuestions = [
+  [
+    "What's the difference between the plans?",
+    'The analysis is the same on every plan. Pro includes 300 reports a month. Pro+ raises that to 1,200 reports and 5,000 agent runs. Teams adds organisation billing, shared seats, shared workspaces and real-time collaboration, with 3,000 reports and 10,000 agent runs.',
+  ],
+  [
+    'What is an agent run?',
+    'One task you hand to the agent in chat, like building a banner book or running a driver analysis. Pro includes 1,200 a month, Pro+ 5,000 and Teams 10,000.',
+  ],
+  ['Can I switch between monthly and annual?', 'Yes. Annual is 20% off the monthly price.'],
+  [
+    'How does Teams seat pricing work?',
+    "Teams is £119 per seat a month, or £95 per seat a month billed annually (£1,140 per seat a year). There's a 3-seat minimum, so the smallest team is £3,420 a year.",
+  ],
+  [
+    'Is there a free plan?',
+    "There's a 30-day trial with no card needed. You get 5 datasets of up to 100,000 rows, 150 tables, 150 agent runs and 150 reports.",
+  ],
+  [
+    'Where is my data stored, and is it secure?',
+    "Your data is encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East. Tensr never trains models on it, and private mode keeps respondents' answers away from the AI entirely.",
+  ],
+  [
+    'Do you offer academic or non-profit pricing?',
+    "Ask us at help@tensr.xyz and tell us a bit about what you're working on.",
+  ],
+] as const;
+
+function PricingQuestions() {
+  const [open, setOpen] = useState(0);
+
+  return (
+    <div className="border-b border-[#14473A]">
+      {pricingQuestions.map(([question, answer], index) => {
+        const expanded = open === index;
+        const buttonId = `pricing-question-${index}`;
+        const panelId = `pricing-answer-${index}`;
+        return (
+          <div key={question} className="border-t border-[#14473A]">
+            <h3>
+              <button
+                id={buttonId}
+                type="button"
+                className="flex w-full items-center justify-between gap-4 py-4 text-left text-[24px] leading-8 tracking-[-0.02em] text-[#14473A] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#14473A] mobile:text-[20px] mobile:leading-7"
+                aria-expanded={expanded}
+                aria-controls={panelId}
+                onClick={() => setOpen(index)}
+              >
+                <span>{question}</span>
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 16 16"
+                  aria-hidden="true"
+                  className={`shrink-0 transition-transform ${expanded ? 'rotate-180' : ''}`}
+                >
+                  <path d="M3 6l5 5 5-5" fill="none" stroke="#14473A" strokeWidth="1.5" />
+                </svg>
+              </button>
+            </h3>
+            <div id={panelId} role="region" aria-labelledby={buttonId} hidden={!expanded}>
+              <p className="max-w-[720px] pb-4 text-[17px] leading-6.5 text-[#3D6A5E]">{answer}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
   );
 }
