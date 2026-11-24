@@ -42,7 +42,7 @@ export const Header = ({ extra }: { extra?: ReactNode }) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
       if (e.key.toLowerCase() === 'l' && !e.metaKey && !e.ctrlKey) {
         captureLandingCta('keyboard', 'Login');
-        window.open('https://app.tensr.xyz', '_blank');
+        window.open('https://app.tensr.xyz/login', '_blank');
       }
       if (e.key.toLowerCase() === 'd' && !e.metaKey && !e.ctrlKey) {
         window.location.href = 'mailto:help@tensr.xyz?subject=Demo%20request';
@@ -80,7 +80,7 @@ export const Header = ({ extra }: { extra?: ReactNode }) => {
 
           <div className="flex items-center gap-2">
             <AppCtaLink
-              href="https://app.tensr.xyz"
+              href="https://app.tensr.xyz/login"
               location="header"
               label="Login"
               target="_blank"
@@ -148,7 +148,7 @@ export const Header = ({ extra }: { extra?: ReactNode }) => {
             ))}
             <li>
               <AppCtaLink
-                href="https://app.tensr.xyz"
+                href="https://app.tensr.xyz/login"
                 location="header_mobile"
                 label="Login"
                 target="_blank"

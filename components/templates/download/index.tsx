@@ -25,7 +25,7 @@ export const DownloadTemplate = () => {
               </div>
               <div className="divide-border flex-1 divide-y">
                 <AppCtaLink
-                  href="https://app.tensr.xyz"
+                  href="https://app.tensr.xyz/login"
                   location="download"
                   label="Access Web Platform"
                   target="_blank"
@@ -61,7 +61,7 @@ export const DownloadTemplate = () => {
                   </div>
                 </Link>
                 <AppCtaLink
-                  href="https://app.tensr.xyz"
+                  href="https://app.tensr.xyz/login"
                   location="download"
                   label="Get API Key"
                   target="_blank"
@@ -165,7 +165,7 @@ export const DownloadTemplate = () => {
                 <div className="space-y-3">
                   <div className="hidden md:block">
                     <AppCtaLink
-                      href="https://app.tensr.xyz"
+                      href="https://app.tensr.xyz/login"
                       location="download_hero"
                       label="Access Web Platform"
                       target="_blank"
@@ -178,7 +178,7 @@ export const DownloadTemplate = () => {
                   </div>
                   <div className="block md:hidden">
                     <AppCtaLink
-                      href="https://app.tensr.xyz"
+                      href="https://app.tensr.xyz/login"
                       location="download_hero"
                       label="Get Started"
                       target="_blank"

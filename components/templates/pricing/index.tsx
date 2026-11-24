@@ -15,7 +15,7 @@ const plans = [
     annualTotal: 0,
     note: 'No card required',
     cta: 'Start free trial',
-    href: 'https://app.tensr.xyz',
+    href: 'https://app.tensr.xyz/login',
     featured: false,
     trial: true,
     features: [
@@ -36,7 +36,7 @@ const plans = [
     annualTotal: 756,
     note: 'Per user · cancel any time',
     cta: 'Get started',
-    href: 'https://app.tensr.xyz',
+    href: 'https://app.tensr.xyz/login',
     featured: false,
     features: [
       'Spreadsheet, charts, and notebook',
@@ -56,7 +56,7 @@ const plans = [
     annualTotal: 1428,
     note: 'Per user · cancel any time',
     cta: 'Get started',
-    href: 'https://app.tensr.xyz',
+    href: 'https://app.tensr.xyz/login',
     featured: true,
     features: [
       'Everything in Pro, plus',
@@ -76,7 +76,7 @@ const plans = [
     annualTotal: 1140,
     note: 'Per seat · 3 seats minimum · billed to your organisation',
     cta: 'Get started',
-    href: 'https://app.tensr.xyz',
+    href: 'https://app.tensr.xyz/login',
     featured: false,
     perSeat: true,
     features: [

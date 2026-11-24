@@ -50,8 +50,7 @@ export const EnterpriseTemplate = () => {
     {
       id: 'q8',
       question: 'How can I track usage across my organization?',
-      answer:
-        'Plan caps are the Trial, Pro, Pro+ and Teams limits on the pricing page.',
+      answer: 'Plan caps are the Trial, Pro, Pro+ and Teams limits on the pricing page.',
     },
   ];
 
@@ -102,11 +101,17 @@ export const EnterpriseTemplate = () => {
                     <p>
                       Datasets stay in your account so you can reopen them. The data-trust note says
                       Tensr does not train models on customer data.{' '}
-                      <a className="underline" href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training">
+                      <a
+                        className="underline"
+                        href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training"
+                      >
                         See Anthropic&apos;s policy
                       </a>
                       .{' '}
-                      <a className="underline" href="https://developers.openai.com/api/docs/guides/your-data">
+                      <a
+                        className="underline"
+                        href="https://developers.openai.com/api/docs/guides/your-data"
+                      >
                         See OpenAI&apos;s policy
                       </a>
                       .
@@ -118,7 +123,10 @@ export const EnterpriseTemplate = () => {
                 <div className="flex-grow">
                   <h2 className="text-base font-medium mb-2">Sign-in</h2>
                   <div className="text-muted-foreground">
-                    <p>Sign in with an emailed code, or Google, Microsoft or GitHub. SSO is on the roadmap.</p>
+                    <p>
+                      Sign in with an emailed code, or Google, Microsoft or GitHub. SSO is on the
+                      roadmap.
+                    </p>
                   </div>
                 </div>
               </div>
@@ -150,7 +158,10 @@ export const EnterpriseTemplate = () => {
                 <div className="flex-grow">
                   <h2 className="text-base font-medium mb-2">Encryption</h2>
                   <div className="text-muted-foreground">
-                    <p>Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US East.</p>
+                    <p>
+                      Encrypted at rest with AES-256 and in transit over HTTPS, hosted in AWS US
+                      East.
+                    </p>
                   </div>
                 </div>
               </div>

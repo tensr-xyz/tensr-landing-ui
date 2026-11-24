@@ -115,7 +115,7 @@ export const HomeTemplate = () => {
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <AppCtaLink
-                  href="https://app.tensr.xyz"
+                  href="https://app.tensr.xyz/login"
                   location="home_hero"
                   label="Start 30-day trial"
                   target="_blank"
@@ -344,13 +344,19 @@ export const HomeTemplate = () => {
                   Encrypted by default
                 </h4>
                 <p className="text-[15px] leading-relaxed text-text-muted">
-                  Datasets are encrypted at rest (S3 AES-256) and in transit (HTTPS). The data-trust note
-                  says Tensr does not train models on customer data.{' '}
-                  <a className="underline" href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training">
+                  Datasets are encrypted at rest (S3 AES-256) and in transit (HTTPS). The data-trust
+                  note says Tensr does not train models on customer data.{' '}
+                  <a
+                    className="underline"
+                    href="https://privacy.claude.com/en/articles/7996868-is-my-data-used-for-model-training"
+                  >
                     See Anthropic&apos;s policy
                   </a>
                   .{' '}
-                  <a className="underline" href="https://developers.openai.com/api/docs/guides/your-data">
+                  <a
+                    className="underline"
+                    href="https://developers.openai.com/api/docs/guides/your-data"
+                  >
                     See OpenAI&apos;s policy
                   </a>
                   .
@@ -376,7 +382,8 @@ export const HomeTemplate = () => {
                 </div>
                 <h4 className="mb-2 text-base font-medium text-text-primary">Team workspaces</h4>
                 <p className="text-[15px] leading-relaxed text-text-muted">
-                  Organisation owners invite members and group them into teams. Sign in with an email code.
+                  Organisation owners invite members and group them into teams. Sign in with an
+                  email code.
                 </p>
               </div>
             </div>

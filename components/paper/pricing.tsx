@@ -63,14 +63,35 @@ const rows: { feature: string; pro: string; plus: string; teams: string }[] = [
   { feature: 'Seats', pro: '1', plus: '1', teams: '3 minimum' },
 ];
 
+/** Dark pill on light cards; light pill on the dark Pro+ card. */
+function FoundingPriceNote({ onDark }: { onDark?: boolean }) {
+  return (
+    <div className="mt-1.5 flex flex-wrap items-center gap-2">
+      <span
+        className={`rounded-[999px] px-2.5 py-[3px] text-[13px] leading-[18px] ${
+          onDark ? 'bg-[#F9F4EB] text-[#14473A]' : 'bg-[#14473A] text-[#F9F4EB]'
+        }`}
+      >
+        Founding price
+      </span>
+      <span
+        className={`text-[14px] leading-[18px] ${onDark ? 'text-[#F9F4EB]/75' : 'text-[#3D6A5E]'}`}
+      >
+        Kept while you stay subscribed
+      </span>
+    </div>
+  );
+}
+
 export function PricingPage() {
   const [annual, setAnnual] = useState(true);
 
   return (
     <PaperShell>
       <section className={`flex flex-col gap-7 px-10 pb-16 pt-14 ${mobile.hero}`}>
-        <p className="w-fit rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5">
-          30-day free trial on every plan
+        <p className="w-fit rounded-[999px] border border-[#14473A] px-3.5 py-1.5 text-[16px] leading-5 text-[#14473A] mobile:text-[15px]">
+          <span className="mobile:hidden">Founding prices · 30-day free trial on every plan</span>
+          <span className="hidden mobile:inline">Founding prices · 30-day free trial</span>
         </p>
         <div className={`flex items-end justify-between gap-10 ${mobile.row}`}>
           <div className="flex flex-col gap-7 mobile:gap-5">
@@ -143,30 +164,45 @@ export function PricingPage() {
         <div className="grid grid-cols-3 gap-2 mobile:hidden">
           {plans.map(plan => {
             const price = annual ? plan.annual : plan.monthly;
+            const onDark = plan.name === 'Pro+';
             return (
-              <article key={plan.name} className="flex flex-col gap-6 bg-[#EEE8DC] p-8">
+              <article
+                key={plan.name}
+                className={`flex flex-col gap-6 p-8 ${onDark ? 'bg-[#14473A] text-[#F9F4EB]' : 'bg-[#EEE8DC]'}`}
+              >
                 <div>
                   <h2 className="text-[30px] leading-9 tracking-[-0.02em]">{plan.name}</h2>
                   <p className="mt-3 text-[56px] leading-none tracking-[-0.04em]">
                     £{price}
-                    <span className="text-[18px] tracking-normal text-[#3D6A5E]">
+                    <span
+                      className={`text-[18px] tracking-normal ${onDark ? 'text-[#D5E4DC]' : 'text-[#3D6A5E]'}`}
+                    >
                       {plan.perSeat ? ' / seat' : ''}
                     </span>
                   </p>
-                  <p className="mt-2 text-[15px] leading-5 text-[#3D6A5E]">
+                  <p
+                    className={`mt-2 text-[15px] leading-5 ${onDark ? 'text-[#D5E4DC]' : 'text-[#3D6A5E]'}`}
+                  >
                     {annual
                       ? `£${plan.year}${plan.perSeat ? ' a seat' : ''} billed annually`
                       : 'Billed monthly'}
                   </p>
+                  <FoundingPriceNote onDark={onDark} />
                 </div>
-                <ul className="flex flex-col gap-2 text-[16px] leading-6 text-[#3D6A5E]">
+                <ul
+                  className={`flex flex-col gap-2 text-[16px] leading-6 ${onDark ? 'text-[#F9F4EB]' : 'text-[#3D6A5E]'}`}
+                >
                   {plan.lines.map(line => (
                     <li key={line}>{line}</li>
                   ))}
                 </ul>
                 <Link
                   href={APP_LOGIN}
-                  className="mt-auto flex h-14 items-center justify-center bg-[#14473A] text-[17px] leading-5.5 text-[#F9F4EB]"
+                  className={`mt-auto flex h-14 items-center justify-center text-[17px] leading-5.5 ${
+                    onDark
+                      ? 'border border-[#F9F4EB] text-[#F9F4EB]'
+                      : 'bg-[#14473A] text-[#F9F4EB]'
+                  }`}
                 >
                   Get started
                 </Link>
@@ -178,34 +214,36 @@ export function PricingPage() {
           <SwipeRow>
             {plans.map(plan => {
               const price = annual ? plan.annual : plan.monthly;
+              const onDark = plan.name === 'Pro+';
               return (
                 <article
                   key={plan.name}
-                  className={`flex min-h-[420px] w-[324px] max-w-full flex-col gap-4 p-5 ${plan.name === 'Pro+' ? 'bg-[#14473A] text-[#F9F4EB]' : 'bg-[#EEE8DC]'}`}
+                  className={`flex min-h-[420px] w-[324px] max-w-full flex-col gap-4 p-5 ${onDark ? 'bg-[#14473A] text-[#F9F4EB]' : 'bg-[#EEE8DC]'}`}
                 >
                   <div>
                     <h2 className="text-[28px] leading-8 tracking-[-0.02em]">{plan.name}</h2>
                     <p className="mt-3 text-[52px] leading-none tracking-[-0.04em]">
                       £{price}
                       <span
-                        className={`text-[16px] tracking-normal ${plan.name === 'Pro+' ? 'text-[#D5E4DC]' : 'text-[#3D6A5E]'}`}
+                        className={`text-[16px] tracking-normal ${onDark ? 'text-[#D5E4DC]' : 'text-[#3D6A5E]'}`}
                       >
                         {plan.perSeat ? ' / seat' : ''}
                       </span>
                     </p>
                     <p
-                      className={`mt-2 text-[15px] leading-5 ${plan.name === 'Pro+' ? 'text-[#D5E4DC]' : 'text-[#3D6A5E]'}`}
+                      className={`mt-2 text-[15px] leading-5 ${onDark ? 'text-[#D5E4DC]' : 'text-[#3D6A5E]'}`}
                     >
                       {annual
                         ? `£${plan.year}${plan.perSeat ? ' a seat' : ''} billed annually`
                         : 'Billed monthly'}
                     </p>
+                    <FoundingPriceNote onDark={onDark} />
                   </div>
                   <div
-                    className={`border-t ${plan.name === 'Pro+' ? 'border-[#F9F4EB33]' : 'border-[#14473A33]'}`}
+                    className={`border-t ${onDark ? 'border-[#F9F4EB33]' : 'border-[#14473A33]'}`}
                   />
                   <ul
-                    className={`flex flex-col gap-2 text-[15px] leading-5 ${plan.name === 'Pro+' ? 'text-[#F9F4EB]' : 'text-[#3D6A5E]'}`}
+                    className={`flex flex-col gap-2 text-[15px] leading-5 ${onDark ? 'text-[#F9F4EB]' : 'text-[#3D6A5E]'}`}
                   >
                     {plan.lines.map(line => (
                       <li key={line}>✓ {line}</li>
@@ -213,7 +251,7 @@ export function PricingPage() {
                   </ul>
                   <Link
                     href={APP_LOGIN}
-                    className={`mt-auto flex h-14 items-center justify-center border text-[17px] leading-5.5 ${plan.name === 'Pro+' ? 'border-[#F9F4EB] text-[#F9F4EB]' : 'border-[#14473A]'}`}
+                    className={`mt-auto flex h-14 items-center justify-center border text-[17px] leading-5.5 ${onDark ? 'border-[#F9F4EB] text-[#F9F4EB]' : 'border-[#14473A]'}`}
                   >
                     Get started
                   </Link>
@@ -311,6 +349,10 @@ const pricingQuestions = [
   [
     "What's the difference between the plans?",
     'The analysis is the same on every plan. Pro includes 300 reports a month. Pro+ raises that to 1,200 reports and 5,000 agent runs. Teams adds organisation billing, shared seats, shared workspaces and real-time collaboration, with 3,000 reports and 10,000 agent runs.',
+  ],
+  [
+    "What's a founding price?",
+    'These are our launch prices. If you subscribe now you keep your price for as long as you stay subscribed, even if list prices go up later. New features land on every plan at no extra cost.',
   ],
   [
     'What is an agent run?',
