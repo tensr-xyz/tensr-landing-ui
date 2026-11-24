@@ -316,7 +316,7 @@ export const FeaturesTemplate = () => {
               </p>
               <div className="flex flex-wrap items-center gap-3">
                 <AppCtaLink
-                  href="https://app.tensr.xyz"
+                  href="https://app.tensr.xyz/login"
                   location="features_hero"
                   label="Start 30-day trial"
                   target="_blank"

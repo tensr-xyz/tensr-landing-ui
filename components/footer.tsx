@@ -120,7 +120,7 @@ export const Footer = () => {
             </h2>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <AppCtaLink
-                href="https://app.tensr.xyz"
+                href="https://app.tensr.xyz/login"
                 location="footer"
                 label="Get started"
                 target="_blank"
